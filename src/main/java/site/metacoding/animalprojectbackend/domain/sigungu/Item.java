@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class Item {
     
     private String uprCd; // 상위 시도 코드
-    private String orgCd; // 시군구 코드
-    private String orgdownNm; // 시군구 이름
+    private String orgCd; // 시군구 이름
+    private String orgdownNm; // 시군구 코드
 }
