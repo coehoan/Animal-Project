@@ -1,8 +1,8 @@
 package site.metacoding.animalprojectbackend.service;
 
-import org.springframework.stereotype.Service;
+// import org.springframework.stereotype.Service;
 
-@Service
+// @Service
 public class PostService {
 
 }

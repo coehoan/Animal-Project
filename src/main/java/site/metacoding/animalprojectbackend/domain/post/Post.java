@@ -1,8 +1,8 @@
 package site.metacoding.animalprojectbackend.domain.post;
 
-import javax.persistence.Entity;
+//import javax.persistence.Entity;
 
-// @Entity
+//@Entity
 public class Post {
 
 }

@@ -11,14 +11,14 @@ spring:
   mustache:
     expose-session-attributes: true
   datasource: 
-      url: jdbc:mariadb://localhost:3306/animaldb
+      url: jdbc:mariadb://localhost:3306/greendb
       driver-class-name: org.mariadb.jdbc.Driver
-      username: animal
-      password: password
+      username: green
+      password: green1234
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
