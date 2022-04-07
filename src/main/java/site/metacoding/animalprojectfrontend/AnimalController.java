@@ -20,4 +20,9 @@ public class AnimalController {
     public String login() {
         return "/main/loginForm";
     }
+
+    @GetMapping("/animalList")
+    public String animal() {
+        return "/animal/animalList";
+    }
 }
