@@ -10,4 +10,14 @@ public class AnimalController {
     public String main() {
         return "/main/mainForm";
     }
+
+    @GetMapping("/main/joinForm")
+    public String join() {
+        return "/main/joinForm";
+    }
+
+    @GetMapping("/main/loginForm")
+    public String login() {
+        return "/main/loginForm";
+    }
 }
