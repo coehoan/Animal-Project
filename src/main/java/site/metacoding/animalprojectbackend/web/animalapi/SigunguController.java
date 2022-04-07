@@ -25,4 +25,24 @@ public class SigunguController {
 
         return "/api/sigunguDownload";
     }
+
+    @GetMapping("/sigungu/deagu")
+    public String deagu(SigunguDto sigunguDto, Model model) {
+        
+        List<SigunguDto> sigunguEntity = sigunguService.대구다운로드(sigunguDto);
+
+        model.addAttribute("deagulist", sigunguEntity);
+
+        return "/api/sigunguDownload";
+    }
+
+    @GetMapping("/sigungu/incheon")
+    public String incheon(SigunguDto sigunguDto, Model model) {
+        
+        List<SigunguDto> sigunguEntity = sigunguService.인천다운로드(sigunguDto);
+
+        model.addAttribute("incheonlist", sigunguEntity);
+
+        return "/api/sigunguDownload";
+    }
 }

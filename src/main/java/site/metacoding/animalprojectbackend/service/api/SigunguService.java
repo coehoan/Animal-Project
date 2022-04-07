@@ -94,32 +94,95 @@ public class SigunguService {
             String gwangju = "6290000";
             String seajong = "5690000";
 
-            StringBuffer uri = new StringBuffer();
-            uri.append("https://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?");
-            uri.append("serviceKey=" + key);
-            uri.append("&upr_cd=");
-            uri.append(deagu);
-            uri.append("&_type=JSON");
+            StringBuffer urisb = new StringBuffer();
+            urisb.append("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?");
+            urisb.append("serviceKey=" + key);
+            urisb.append("&upr_cd=");
+            urisb.append(deagu);
+            urisb.append("&_type=JSON");
+
+            URI uri = new URI(urisb.toString());
 
             RestTemplate restTemplate = new RestTemplate();
 
-            ResponseDto response = restTemplate.getForObject(uri.toString(), ResponseDto.class);
+            ResponseDto response = restTemplate.getForObject(uri, ResponseDto.class);
 
             System.out.println(response);
 
-            List<ResponseDto> sidoList = new ArrayList<>();
+            List<ResponseDto> sigunguList = new ArrayList<>();
 
             for (int i = 0; i < response.getResponse().getBody().getItems().getItem().size(); i++) {
-                sidoList.add(response);
+                sigunguList.add(response);
             }
 
-            System.out.println(sidoList);
+            System.out.println(sigunguList);
 
-            for (int i = 0; i < sidoList.size(); i++) {
+            for (int i = 0; i < sigunguList.size(); i++) {
                 SigunguDto result = new SigunguDto(i,
-                        sidoList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
-                        sidoList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
-                        sidoList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
+                sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
+                sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
+                sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
+
+                lists.add(result);
+            }
+
+            System.out.println(lists);
+
+            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+
+            return sigunguEntity;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Transactional
+    public List<SigunguDto> 인천다운로드(SigunguDto sigunguDto) {
+
+        List<SigunguDto> lists = new ArrayList<>();
+
+        try {
+            // 서비스키
+            String key = "jDqHGG%2BaNG47ijh6s3XzB%2BuF8fJOeovccnw%2FZtc9wLQUaKJumPo%2Frl1a2ygZ68dv9L0PD7drvpjPAeTnnB9f%2FQ%3D%3D";
+
+            // 시도 코드에 따른 변수들
+            String busan = "6260000";
+            String deagu = "6270000";
+            String incheon = "6280000";
+            String gwangju = "6290000";
+            String seajong = "5690000";
+
+            StringBuffer urisb = new StringBuffer();
+            urisb.append("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?");
+            urisb.append("serviceKey=" + key);
+            urisb.append("&upr_cd=");
+            urisb.append(incheon);
+            urisb.append("&_type=JSON");
+
+            URI uri = new URI(urisb.toString());
+
+            RestTemplate restTemplate = new RestTemplate();
+
+            ResponseDto response = restTemplate.getForObject(uri, ResponseDto.class);
+
+            System.out.println(response);
+
+            List<ResponseDto> sigunguList = new ArrayList<>();
+
+            for (int i = 0; i < response.getResponse().getBody().getItems().getItem().size(); i++) {
+                sigunguList.add(response);
+            }
+
+            System.out.println(sigunguList);
+
+            for (int i = 0; i < sigunguList.size(); i++) {
+                SigunguDto result = new SigunguDto(i,
+                sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
+                sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
+                sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
 
                 lists.add(result);
             }
