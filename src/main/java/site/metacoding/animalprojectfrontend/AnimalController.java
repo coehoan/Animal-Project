@@ -21,8 +21,18 @@ public class AnimalController {
         return "/main/loginForm";
     }
 
-    @GetMapping("/animalList")
+    @GetMapping("/animal/animalList")
     public String animal() {
         return "/animal/animalList";
+    }
+
+    @GetMapping("/animal/shelterList")
+    public String shelterList() {
+        return "/animal/shelterList";
+    }
+
+    @GetMapping("/blog")
+    public String blog() {
+        return "/blog/blogMain";
     }
 }
