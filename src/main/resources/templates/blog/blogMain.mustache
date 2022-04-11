@@ -1,3 +1,128 @@
 {{>/layout/header}}
+<!-- 블로그 상단바 시작 -->
+<div class="m-padding-medium">
+  <nav class="navbar navbar-expand-lg navbar-mainbg">
+    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <div class="hori-selector">
+          <div class="left"></div>
+          <div class="right"></div>
+        </div>
+        <li class="nav-item active">
+          <a id="main" class="nav-link" href="javascript:void(0);">Main</a>
+        </li>
+        <li class="nav-item">
+          <a id="adopt" class="nav-link" href="javascript:void(0);">입양후기</a>
+        </li>
+        <li class="nav-item">
+          <a id="region" class="nav-link" href="javascript:void(0);">지역별게시판</a>
+        </li>
+        <li class="nav-item">
+          <a id="free" class="nav-link" href="javascript:void(0);">전체게시판</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<!-- 블로그 상단바 끝 -->
+<!-- 게시판 시작 -->
+<div class="m-padding-medium">
+  <div id="boardPage">
+    <div id="mainboard">
+      <div id="adopt-sub" class="d-flex position-relative container shadow mb-4">
+        <img src="image/dog1.png" height="220" width="220" class="flex-shrink-0 me-3">
+        <div>
+          <h2 class="mt-0">입양후기</h2>
+          <a href="javascript:void(0);" class="stretched-link nav-link"></a>
+        </div>
+      </div>
+      <div id="region-sub" class="d-flex position-relative container shadow mb-4">
+        <img src="image/dog1.png" height="220" width="220" class="flex-shrink-0 me-3">
+        <div>
+          <h2 class="mt-0">지역별게시판</h2>
+          <a href="javascript:void(0);" class="stretched-link"></a>
+        </div>
+      </div>
+      <div id="free-sub" class="d-flex position-relative container shadow mb-4">
+        <img src="image/dog1.png" height="220" width="220" class="flex-shrink-0 me-3">
+        <div>
+          <h2 class="mt-0">자유게시판</h2>
+          <a href="javascript:void(0);" class="stretched-link"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="display:none;">
+  <div id="adoptboard">입양후기</div>
+  <div id="regionboard">지역별게시판</div>
+  <div id="freeboard">전체게시판</div>
+</div>
+<!-- 게시판 끝 -->
+<!-- 하단 배너 클릭시 페이지 전환기능 추가해야함 -->
+<script>
+  $("#main").click(function () {
+    $("#boardPage").load(location.href + " #mainboard");
+  });
+  $("#adopt").click(function () {
+    $("#boardPage").load(location.href + " #adoptboard");
+  });
+  $("#region").click(function () {
+    $("#boardPage").load(location.href + " #regionboard");
+  });
+  $("#free").click(function () {
+    $("#boardPage").load(location.href + " #freeboard");
+  });
+
+  $("#adopt-sub").click(function () {
+    $("#adopt").trigger("click");
+  });
+  $("#region-sub").click(function () {
+    $("#region").trigger("click");
+  });
+  $("#free-sub").click(function () {
+    $("#free").trigger("click");
+  });
+
+  function test() {
+    var tabsNewAnim = $('#navbarSupportedContent');
+    var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+    var activeItemNewAnim = tabsNewAnim.find('.active');
+    var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+    var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+    var itemPosNewAnimTop = activeItemNewAnim.position();
+    var itemPosNewAnimLeft = activeItemNewAnim.position();
+    $(".hori-selector").css({
+      "top": itemPosNewAnimTop.top + "px",
+      "left": itemPosNewAnimLeft.left + "px",
+      "height": activeWidthNewAnimHeight + "px",
+      "width": activeWidthNewAnimWidth + "px"
+    });
+    $("#navbarSupportedContent").on("click", "li", function (e) {
+      $('#navbarSupportedContent ul li').removeClass("active");
+      $(this).addClass('active');
+      var activeWidthNewAnimHeight = $(this).innerHeight();
+      var activeWidthNewAnimWidth = $(this).innerWidth();
+      var itemPosNewAnimTop = $(this).position();
+      var itemPosNewAnimLeft = $(this).position();
+      $(".hori-selector").css({
+        "top": itemPosNewAnimTop.top + "px",
+        "left": itemPosNewAnimLeft.left + "px",
+        "height": activeWidthNewAnimHeight + "px",
+        "width": activeWidthNewAnimWidth + "px"
+      });
+    });
+  }
+
+  $(document).ready(function () {
+    setTimeout(function () { test(); });
+  });
+  $(window).on('resize', function () {
+    setTimeout(function () { test(); }, 500);
+  });
+  $(".navbar-toggler").click(function () {
+    setTimeout(function () { test(); });
+  });
+</script>
 
 {{>/layout/footer}}
