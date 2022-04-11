@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.animalprojectbackend.domain.sigungu.SigunguDto;
 import site.metacoding.animalprojectbackend.service.api.SigunguService;
+import site.metacoding.animalprojectbackend.service.api.TestService;
 
 @RequiredArgsConstructor
 @Controller
 public class SigunguController {
 
     private final SigunguService sigunguService;
+    private final TestService testService;
     
     @GetMapping("/sigungu/busan")
     public String download(SigunguDto sigunguDto, Model model) {
@@ -154,6 +156,16 @@ public class SigunguController {
         model.addAttribute("choongbooklist", sigunguEntity);
 
         return "/api/sigunguDownload";
+    }
+
+    @GetMapping("/sigungu/test")
+    public String test(SigunguDto sigunguDto, Model model) {
+
+        List<SigunguDto> sigunguEntity = testService.테스트(sigunguDto);
+
+        model.addAttribute("testlist", sigunguEntity);
+
+        return "/api/test";
     }
     
 }

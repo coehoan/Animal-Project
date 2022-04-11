@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.animalprojectbackend.domain.sido.SidoDto;
 import site.metacoding.animalprojectbackend.domain.sigungu.ResponseDto;
 import site.metacoding.animalprojectbackend.domain.sigungu.SigunguDto;
 import site.metacoding.animalprojectbackend.domain.sigungu.SigunguRepository;
@@ -200,11 +201,13 @@ public class SigunguService {
             // 시도 코드에 따른 변수들
             String gwangju = "6290000";
 
+            SidoDto sidoEntity = new SidoDto();
+            
             StringBuffer urisb = new StringBuffer();
             urisb.append("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?");
             urisb.append("serviceKey=" + key);
             urisb.append("&upr_cd=");
-            urisb.append(gwangju);
+            urisb.append(sidoEntity.getOrgCd());
             urisb.append("&_type=JSON");
 
             URI uri = new URI(urisb.toString());

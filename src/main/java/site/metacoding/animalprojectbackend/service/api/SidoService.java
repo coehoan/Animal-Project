@@ -31,6 +31,8 @@ public class SidoService {
             URI uri = new URI(
                     "http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sido?serviceKey=" + key
                             + "&numOfRows=3&pageNo=1&_type=JSON");
+
+            System.err.println(uri.toString());
             RestTemplate restTemplate = new RestTemplate();
 
             ResponseDto response = restTemplate.getForObject(uri, ResponseDto.class);
@@ -70,7 +72,7 @@ public class SidoService {
 
             return sidoEntity;
 
-        } catch (URISyntaxException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
