@@ -1,0 +1,136 @@
+{{>/layout/header}}
+<!--지도 시작-->
+<div class="d-flex justify-content-center mt-5">
+  <img src="/image/map.jpg">
+</div>
+<!--지도 종료-->
+<!--메인검색버튼 시작-->
+<div class="m-padding-medium">
+  <h2 class="m-text-align">전체검색</h2>
+  <hr>
+  <div class="m-padding-small d-flex flex-column">
+    <div class="container-fluid">
+      <form class="d-flex flex-fill">
+        <input class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!--메인검색버튼 끝-->
+
+<!--상세검색버튼 시작-->
+<div class="m-padding-medium">
+  <h2 class="m-text-align">상세검색</h2>
+  <hr>
+  <div class="mt-5 d-flex">
+    <div class="container-fluid">
+      <form class="d-flex flex-fill">
+        <!--
+          https://www.jqueryscript.net/form/Dynamic-jQuery-Cascading-Dropdown-Lists-Plugin.html
+          스크립트 사용법 공부 후 지역 Ajax 처리
+        -->
+        <div id="example1" class="bs-docs-example d-flex">
+          <select class="step1 me-2 animallist-select-box" onchange="boardSelect(this.value);">
+            <option selected disabled>지역</option>
+            <option value="seoul">서울</option>
+            <option value="busan">부산</option>
+            <option value="gyeongnam">경남</option>
+          </select>
+          <select class="step2 me-2 animallist-select-box">
+            <option selected disabled>시/군/구</option>
+            <option>강남구</option>
+            <option>서초구</option>
+            <option>광진구</option>
+          </select>
+          <select class="step3 me-2 animallist-select-box">
+            <option selected disabled>동/읍/면</option>
+            <option>청담동</option>
+            <option>압구정동</option>
+            <option>신사동</option>
+            <option>논현동</option>
+          </select>
+        </div>
+        <select class="me-2 animallist-select-box">
+          <option selected disabled>종류</option>
+          <option>강아지</option>
+          <option>고양이</option>
+          <option>기타</option>
+        </select>
+        <select class="me-2 animallist-select-box">
+          <option selected disabled>품종</option>
+          <option>말티즈</option>
+          <option>치와와</option>
+          <option>진돗개</option>
+        </select>
+        <div style="width: 100px;" class="d-flex align-items-center">주말운영</div>
+        <label class="form-switch">
+          <input type="checkbox">
+          <i></i>
+        </label>
+        <input class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!--상세검색버튼 끝-->
+
+<!--검색결과테이블 시작-->
+<div class="m-padding-medium d-flex flex-column">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">지역</th>
+        <th scope="col">보호소명</th>
+        <th scope="col">주소</th>
+        <th scope="col">운영시간</th>
+        <th scope="col">주말운영여부</th>
+        <th scope="col">전화번호</th>
+        <th scope="col">구조대상동물</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <div class="d-flex m-text-align">
+          <th scope="row" style="vertical-align: middle;">1</th>
+          <td style="vertical-align: middle;">부산</td>
+          <td style="vertical-align: middle;">누렁이보호소</td>
+          <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1001</td>
+          <td style="vertical-align: middle;">09:00~18:00</td>
+          <td style="vertical-align: middle;">O</td>
+          <td style="vertical-align: middle;">051-888-1001</td>
+          <td style="vertical-align: middle;">누렁이만보호</td>
+        </div>
+      </tr>
+      <tr>
+        <th scope="row" style="vertical-align: middle;">2</th>
+        <td style="vertical-align: middle;">부산</td>
+        <td style="vertical-align: middle;">백구보호소</td>
+        <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1002</td>
+        <td style="vertical-align: middle;">09:00~18:00</td>
+        <td style="vertical-align: middle;">X</td>
+        <td style="vertical-align: middle;">051-888-1002</td>
+        <td style="vertical-align: middle;">백구만보호</td>
+      </tr>
+      <tr>
+        <th scope="row" style="vertical-align: middle;">3</th>
+        <td style="vertical-align: middle;">부산</td>
+        <td style="vertical-align: middle;">고양이보호소</td>
+        <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1003</td>
+        <td style="vertical-align: middle;">09:00~18:00</td>
+        <td style="vertical-align: middle;">O</td>
+        <td style="vertical-align: middle;">051-888-1003</td>
+        <td style="vertical-align: middle;">고양이만보호</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!--검색결과테이블 끝-->
+<script>
+  $(function () {
+    $('input[type=checkbox]').switchify();
+  });
+</script>
+{{>/layout/footer}}
