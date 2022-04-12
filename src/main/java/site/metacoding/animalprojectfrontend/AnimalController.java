@@ -35,4 +35,20 @@ public class AnimalController {
     public String blog() {
         return "/blog/blogMain";
     }
+
+    @GetMapping("/blog/adoptboard/post/1")
+    public String adoptboardPost() {
+        return "/blog/post/adoptPost";
+    }
+
+    @GetMapping("/blog/regionboard/post/1")
+    public String regionboardPost() {
+        return "/blog/post/regionPost";
+    }
+
+    @GetMapping("/blog/freeboard/post/1")
+    public String freeboardPost() {
+        return "/blog/post/freePost";
+    }
+
 }
