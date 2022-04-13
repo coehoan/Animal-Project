@@ -19,6 +19,18 @@
     align-items: center;
 }
 
+.m_div_flex_between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.m_div_flex_column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .m_text_align_center {
     text-align: center;
 }
@@ -36,4 +48,13 @@
 .m_text_link:hover {
     text-decoration: underline;
     color: black;
+}
+
+.m_border_bottom {
+    border-bottom: 1px solid black;
+    width: 60vh;
+}
+
+.m_div_display_none {
+    display: none;
 }

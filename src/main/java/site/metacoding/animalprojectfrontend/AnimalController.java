@@ -36,6 +36,11 @@ public class AnimalController {
         return "/blog/blogMain";
     }
 
+    @GetMapping("/blog/writeForm")
+    public String writeForm() {
+        return "/blog/writeForm";
+    }
+
     @GetMapping("/blog/adoptboard/post/1")
     public String adoptboardPost() {
         return "/blog/post/adoptPost";
@@ -49,6 +54,16 @@ public class AnimalController {
     @GetMapping("/blog/freeboard/post/1")
     public String freeboardPost() {
         return "/blog/post/freePost";
+    }
+
+    @GetMapping("/withus/doctor")
+    public String withDoctor() {
+        return "/withus/doctor";
+    }
+
+    @GetMapping("/withus/kara")
+    public String kara() {
+        return "/withus/kara";
     }
 
 }
