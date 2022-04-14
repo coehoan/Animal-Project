@@ -2,8 +2,7 @@
     display: inline-block;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    padding-left: 0.5rem;
-    margin-top: 7px;
+    padding: 0px;
 }
 
 .form-switch i {

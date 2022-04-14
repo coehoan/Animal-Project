@@ -6,67 +6,68 @@
   <!--메인검색버튼 시작-->
   <h2 class="m_sub_title m_mt_5">전체검색</h2>
   <hr>
-  <div class="m_padding_small d-flex flex-column">
-    <div class="container-fluid">
-      <form class="d-flex flex-fill">
-        <input class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+  <div class="m_padding_small">
+    <div class="container-fluid d-flex">
+      <input id="search-input" class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
+      <button id="search-btn" class="btn btn-outline-success" type="submit" onclick="addrSearch()">Search</button>
+
     </div>
   </div>
   <!--메인검색버튼 끝-->
 
   <!--상세검색버튼 시작-->
-  <h2 class="m_sub_title mt-5">상세검색</h2>
-  <hr>
-  <div class="mt-5 d-flex">
-    <div class="container-fluid">
-      <form class="d-flex flex-fill">
-        <!--
+  <div>
+    <h2 class="m_sub_title mt-5">상세검색</h2>
+    <hr>
+    <div class="mt-5 d-flex">
+      <div class="container-fluid">
+        <form class="flex-fill m_div_flex_center">
+          <!--
           https://www.jqueryscript.net/form/Dynamic-jQuery-Cascading-Dropdown-Lists-Plugin.html
           스크립트 사용법 공부 후 지역 Ajax 처리
         -->
-        <div id="example1" class="bs-docs-example d-flex">
-          <select class="step1 me-2 animallist-select-box" onchange="boardSelect(this.value);">
-            <option selected disabled>지역</option>
-            <option value="seoul">서울</option>
-            <option value="busan">부산</option>
-            <option value="gyeongnam">경남</option>
+          <div id="example1" class="bs-docs-example d-flex">
+            <select class="step1 me-2 animallist-select-box" onchange="boardSelect(this.value);">
+              <option selected disabled>지역</option>
+              <option value="seoul">서울</option>
+              <option value="busan">부산</option>
+              <option value="gyeongnam">경남</option>
+            </select>
+            <select class="step2 me-2 animallist-select-box">
+              <option selected disabled>시/군/구</option>
+              <option>강남구</option>
+              <option>서초구</option>
+              <option>광진구</option>
+            </select>
+            <select class="step3 me-2 animallist-select-box">
+              <option selected disabled>동/읍/면</option>
+              <option>청담동</option>
+              <option>압구정동</option>
+              <option>신사동</option>
+              <option>논현동</option>
+            </select>
+          </div>
+          <select class="me-2 animallist-select-box">
+            <option selected disabled>종류</option>
+            <option>강아지</option>
+            <option>고양이</option>
+            <option>기타</option>
           </select>
-          <select class="step2 me-2 animallist-select-box">
-            <option selected disabled>시/군/구</option>
-            <option>강남구</option>
-            <option>서초구</option>
-            <option>광진구</option>
+          <select class="me-2 animallist-select-box">
+            <option selected disabled>품종</option>
+            <option>말티즈</option>
+            <option>치와와</option>
+            <option>진돗개</option>
           </select>
-          <select class="step3 me-2 animallist-select-box">
-            <option selected disabled>동/읍/면</option>
-            <option>청담동</option>
-            <option>압구정동</option>
-            <option>신사동</option>
-            <option>논현동</option>
-          </select>
-        </div>
-        <select class="me-2 animallist-select-box">
-          <option selected disabled>종류</option>
-          <option>강아지</option>
-          <option>고양이</option>
-          <option>기타</option>
-        </select>
-        <select class="me-2 animallist-select-box">
-          <option selected disabled>품종</option>
-          <option>말티즈</option>
-          <option>치와와</option>
-          <option>진돗개</option>
-        </select>
-        <div style="width: 100px;" class="d-flex align-items-center">주말운영</div>
-        <label class="form-switch">
-          <input type="checkbox">
-          <i></i>
-        </label>
-        <input class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+          <div style="width: 170px;" class="d-flex">주말운영</div>
+          <label class="form-switch">
+            <input type="checkbox">
+            <i></i>
+          </label>
+          <input class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
     </div>
   </div>
   <!--상세검색버튼 끝-->
@@ -123,19 +124,52 @@
     </table>
   </div>
   <!--검색결과테이블 끝-->
+
   <script>
-    $(function () {
-      // 주말운영여부 체크버튼
-      $('input[type=checkbox]').switchify();
+    // 지도
+    let x = 37.3595704;
+    let y = 127.105399;
+
+    let map = new naver.maps.Map('map', {
+      center: new naver.maps.LatLng(x, y),
+      zoom: 12
     });
 
-    // 지도
-    var mapOptions = {
-      center: new naver.maps.LatLng(37.3595704, 127.105399),
-      zoom: 10
-    };
+    // 마커
+    let marker = new naver.maps.Marker({
+      map: map,
+      position: new naver.maps.LatLng(x, y)
+    });
 
-    var map = new naver.maps.Map('map', mapOptions);
+    // 전체검색
+    function addrSearch() {
+      let addr = $("#search-input").val();
+      naver.maps.Service.geocode({
+        address: addr
+      }, function (status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+          return alert('Something wrong!');
+        }
 
+        let responseParse = response.result; // 검색 결과의 배열
+        console.log(responseParse);
+
+        let x = responseParse.items[0].point.x;
+        let y = responseParse.items[0].point.y;
+        // do Something
+        console.log(x);
+        console.log(y);
+
+        let map = new naver.maps.Map('map', {
+          center: new naver.maps.LatLng(x, y),
+          zoom: 12
+        });
+        let marker = new naver.maps.Marker({
+          map: map,
+          position: new naver.maps.LatLng(x, y)
+        });
+      });
+    }
   </script>
+
   {{>/layout/footer}}
