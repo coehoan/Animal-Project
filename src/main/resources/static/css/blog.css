@@ -74,3 +74,9 @@
     padding: 0 20px;
     border-radius: 4px;
 }
+
+.m_blog_writeForm_select {
+    border: 1px solid rgba(128, 128, 128, 0.267);
+    border-radius: 4px;
+    margin: 0 5px 10px 0;
+}

@@ -4,7 +4,7 @@
   <img src="/image/dog1.png">
 </div>
 <div class="m_padding_medium">
-  <h2 class="m_text_align_center">전체검색</h2>
+  <h2 class="m_sub_title">전체검색</h2>
   <hr>
   <div class="m_padding_small d-flex flex-column">
     <div class="container-fluid">
@@ -19,13 +19,13 @@
 
 <!--상세검색버튼 시작-->
 <div class="m_padding_medium">
-  <h2 class="m_text_align_center">상세검색</h2>
+  <h2 class="m_sub_title">상세검색</h2>
   <hr>
   <div class="mt-5 d-flex">
     <div class="container-fluid">
       <form class="d-flex flex-fill">
         <input class="form-control me-2" type="date" placeholder="날짜" aria-label="Search">
-        ~
+        <i class="me-2">~</i>
         <input class="form-control me-2" type="date" placeholder="날짜" aria-label="Search">
         <!--
         https://www.jqueryscript.net/form/Dynamic-jQuery-Cascading-Dropdown-Lists-Plugin.html
@@ -43,13 +43,6 @@
             <option>강남구</option>
             <option>서초구</option>
             <option>광진구</option>
-          </select>
-          <select class="step3 me-2 animallist-select-box">
-            <option selected disabled>동/읍/면</option>
-            <option>청담동</option>
-            <option>압구정동</option>
-            <option>신사동</option>
-            <option>논현동</option>
           </select>
         </div>
         <select class="me-2 animallist-select-box">
@@ -76,7 +69,7 @@
 <div class="m_padding_medium d-flex flex-column">
   <table class="table">
     <thead>
-      <tr>
+      <tr class="m_text_align_center">
         <th scope="col">No</th>
         <th scope="col">종류</th>
         <th scope="col">사진</th>
@@ -88,21 +81,29 @@
         <th scope="col">자세히보기</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="m_text_align_center">
+      <tr id="animalList">
+        <th scope="row" style="vertical-align: middle;">1</th>
+        <td style="vertical-align: middle;">강아지</td>
+        <td width="110"><img src="/image/dog1.png" width="100" height="100"></td>
+        <td style="vertical-align: middle;">
+          부산
+
+        </td>
+        <td style="vertical-align: middle;">시고르자브종</td>
+        <td style="vertical-align: middle;">누렁이</td>
+        <td style="vertical-align: middle;">3살</td>
+        <td style="vertical-align: middle;">누렁이보호소</td>
+        <td style="vertical-align: middle;" width="100">
+          <button id="showDetail" class="m_button" onclick="show()">자세히</button>
+        </td>
+      </tr>
       <tr>
-        <div class="d-flex m_text_align_center">
-          <th scope="row" style="vertical-align: middle;">1</th>
-          <td style="vertical-align: middle;">강아지</td>
-          <td width="110"><img src="/image/dog1.png" width="100" height="100"></td>
-          <td style="vertical-align: middle;" class="m_text_align_center">부산</td>
-          <td style="vertical-align: middle;">시고르자브종</td>
-          <td style="vertical-align: middle;">누렁이</td>
-          <td style="vertical-align: middle;">3살</td>
-          <td style="vertical-align: middle;">누렁이보호소</td>
-          <td style="vertical-align: middle;" width="100">
-            <a class="btn btn-outline-success" href="shelterList" role="button">자세히</a>
-          </td>
-        </div>
+        <td colspan="9" id="detail" class="m_div_display_none">
+          <div class="m_sub_content">
+            #3살 #누렁이색 #8kg #남 #중성화O #뚱땡이 #누렁이보호소 #051-333-3333 #신민경 담당자 #010-7799-6426
+          </div>
+        </td>
       </tr>
       <tr>
         <th scope="row" style="vertical-align: middle;">2</th>
@@ -114,9 +115,8 @@
         <td style="vertical-align: middle;">3살</td>
         <td style="vertical-align: middle;">누렁이보호소</td>
         <td style="vertical-align: middle;" width="100">
-          <a class="btn btn-outline-success" href="shelterList" role="button">자세히</a>
+          <button id="showDetail" class="m_button" onclick="show()">자세히</button>
         </td>
-
       </tr>
       <tr>
         <div class="d-flex m_text_align_center">
@@ -129,7 +129,7 @@
           <td style="vertical-align: middle;">2살</td>
           <td style="vertical-align: middle;">누렁이보호소</td>
           <td style="vertical-align: middle;" width="100">
-            <a class="btn btn-outline-success" href="shelterList" role="button">자세히</a>
+            <button id="showDetail" class="m_button" onclick="show()">자세히</button>
           </td>
         </div>
       </tr>
@@ -137,5 +137,21 @@
   </table>
 </div>
 <!--검색결과테이블 끝-->
+
+<!-- 자세히보기 div 시작 -->
+<div>
+
+</div>
+<!-- 자세히보기 div 끝 -->
+
+<script>
+  function show() {
+    if ($("#detail").css("display") == "none") {
+      $("#detail").removeClass("m_div_display_none");
+    } else {
+      $("#detail").addClass("m_div_display_none");
+    }
+  }
+</script>
 
 {{>/layout/footer}}

@@ -1,5 +1,34 @@
 {{>/layout/header}}
 <div class="m_padding_medium">
+  <!-- select -->
+  <div class="d-flex">
+    <div>
+      <select class="m_blog_writeForm_select" id="board-select" onchange="boardSelect(this.value)">
+        <option selected disabled>게시판선택</option>
+        <option value="adopt">입양후기</option>
+        <option value="region">지역별게시판</option>
+        <option value="free">자유게시판</option>
+      </select>
+    </div>
+    <div id="category-region" class="m_div_display_none">
+      <select class="m_blog_writeForm_select">
+        <option value="">지역</option>
+        <option value="">서울</option>
+        <option value="">부산</option>
+        <option value="">대구</option>
+      </select>
+    </div>
+    <div id="category-adopt" class="m_div_display_none">
+      <select class="m_blog_writeForm_select">
+        <option value="">품종</option>
+        <option value="">강아지</option>
+        <option value="">고양이</option>
+        <option value="">기타</option>
+      </select>
+    </div>
+  </div>
+  <!-- select -->
+
   <!-- title -->
   <div>
     <input class="m_blog_writeForm_title" type="text">
@@ -24,5 +53,22 @@
     previewStyle: 'vertical'
   });
   editor.getMarkdown();
+
+  function boardSelect(value) {
+
+    if (value == "adopt") {
+      console.log("adopt 탐");
+      $("#category-region").removeClass("m_div_display_none");
+      $("#category-adopt").removeClass("m_div_display_none");
+    } else if (value == "region") {
+      console.log("region 탐");
+      $("#category-region").removeClass("m_div_display_none");
+      $("#category-adopt").addClass("m_div_display_none");
+    } else {
+      $("#category-region").addClass("m_div_display_none");
+      $("#category-adopt").addClass("m_div_display_none");
+    }
+
+  }
 </script>
 {{>/layout/footer}}

@@ -10,11 +10,14 @@
     margin-right: 50px;
 }
 
+.m_mt_5 {
+    margin-top: 50px;
+}
+
 .m_pr_5 {
     float: right;
     padding-right: 10%;
 }
-
 
 .m_padding_small {
     padding-left: 25%;

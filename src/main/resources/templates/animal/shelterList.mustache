@@ -1,12 +1,10 @@
 {{>/layout/header}}
 <!--지도 시작-->
-<div class="d-flex justify-content-center mt-5">
-  <img src="/image/map.jpg">
-</div>
-<!--지도 종료-->
-<!--메인검색버튼 시작-->
 <div class="m_padding_medium">
-  <h2 class="m_text_align_center">전체검색</h2>
+  <div id="map" style="width:100%;height:400px;"></div>
+  <!--지도 종료-->
+  <!--메인검색버튼 시작-->
+  <h2 class="m_sub_title m_mt_5">전체검색</h2>
   <hr>
   <div class="m_padding_small d-flex flex-column">
     <div class="container-fluid">
@@ -16,12 +14,10 @@
       </form>
     </div>
   </div>
-</div>
-<!--메인검색버튼 끝-->
+  <!--메인검색버튼 끝-->
 
-<!--상세검색버튼 시작-->
-<div class="m_padding_medium">
-  <h2 class="m_text_align_center">상세검색</h2>
+  <!--상세검색버튼 시작-->
+  <h2 class="m_sub_title mt-5">상세검색</h2>
   <hr>
   <div class="mt-5 d-flex">
     <div class="container-fluid">
@@ -73,64 +69,73 @@
       </form>
     </div>
   </div>
-</div>
-<!--상세검색버튼 끝-->
+  <!--상세검색버튼 끝-->
 
-<!--검색결과테이블 시작-->
-<div class="m_padding_medium d-flex flex-column">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">지역</th>
-        <th scope="col">보호소명</th>
-        <th scope="col">주소</th>
-        <th scope="col">운영시간</th>
-        <th scope="col">주말운영여부</th>
-        <th scope="col">전화번호</th>
-        <th scope="col">구조대상동물</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <div class="d-flex m_text_align_center">
-          <th scope="row" style="vertical-align: middle;">1</th>
+  <!--검색결과테이블 시작-->
+  <div class="d-flex flex-column m_mt_5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">지역</th>
+          <th scope="col">보호소명</th>
+          <th scope="col">주소</th>
+          <th scope="col">운영시간</th>
+          <th scope="col">주말운영여부</th>
+          <th scope="col">전화번호</th>
+          <th scope="col">구조대상동물</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <div class="d-flex m_text_align_center">
+            <th scope="row" style="vertical-align: middle;">1</th>
+            <td style="vertical-align: middle;">부산</td>
+            <td style="vertical-align: middle;">누렁이보호소</td>
+            <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1001</td>
+            <td style="vertical-align: middle;">09:00~18:00</td>
+            <td style="vertical-align: middle;">O</td>
+            <td style="vertical-align: middle;">051-888-1001</td>
+            <td style="vertical-align: middle;">누렁이만보호</td>
+          </div>
+        </tr>
+        <tr>
+          <th scope="row" style="vertical-align: middle;">2</th>
           <td style="vertical-align: middle;">부산</td>
-          <td style="vertical-align: middle;">누렁이보호소</td>
-          <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1001</td>
+          <td style="vertical-align: middle;">백구보호소</td>
+          <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1002</td>
+          <td style="vertical-align: middle;">09:00~18:00</td>
+          <td style="vertical-align: middle;">X</td>
+          <td style="vertical-align: middle;">051-888-1002</td>
+          <td style="vertical-align: middle;">백구만보호</td>
+        </tr>
+        <tr>
+          <th scope="row" style="vertical-align: middle;">3</th>
+          <td style="vertical-align: middle;">부산</td>
+          <td style="vertical-align: middle;">고양이보호소</td>
+          <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1003</td>
           <td style="vertical-align: middle;">09:00~18:00</td>
           <td style="vertical-align: middle;">O</td>
-          <td style="vertical-align: middle;">051-888-1001</td>
-          <td style="vertical-align: middle;">누렁이만보호</td>
-        </div>
-      </tr>
-      <tr>
-        <th scope="row" style="vertical-align: middle;">2</th>
-        <td style="vertical-align: middle;">부산</td>
-        <td style="vertical-align: middle;">백구보호소</td>
-        <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1002</td>
-        <td style="vertical-align: middle;">09:00~18:00</td>
-        <td style="vertical-align: middle;">X</td>
-        <td style="vertical-align: middle;">051-888-1002</td>
-        <td style="vertical-align: middle;">백구만보호</td>
-      </tr>
-      <tr>
-        <th scope="row" style="vertical-align: middle;">3</th>
-        <td style="vertical-align: middle;">부산</td>
-        <td style="vertical-align: middle;">고양이보호소</td>
-        <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1003</td>
-        <td style="vertical-align: middle;">09:00~18:00</td>
-        <td style="vertical-align: middle;">O</td>
-        <td style="vertical-align: middle;">051-888-1003</td>
-        <td style="vertical-align: middle;">고양이만보호</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<!--검색결과테이블 끝-->
-<script>
-  $(function () {
-    $('input[type=checkbox]').switchify();
-  });
-</script>
-{{>/layout/footer}}
+          <td style="vertical-align: middle;">051-888-1003</td>
+          <td style="vertical-align: middle;">고양이만보호</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--검색결과테이블 끝-->
+  <script>
+    $(function () {
+      // 주말운영여부 체크버튼
+      $('input[type=checkbox]').switchify();
+    });
+
+    // 지도
+    var mapOptions = {
+      center: new naver.maps.LatLng(37.3595704, 127.105399),
+      zoom: 10
+    };
+
+    var map = new naver.maps.Map('map', mapOptions);
+
+  </script>
+  {{>/layout/footer}}
