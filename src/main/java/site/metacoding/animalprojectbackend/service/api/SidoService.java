@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectbackend.domain.sido.ResponseDto;
-import site.metacoding.animalprojectbackend.domain.sido.SidoDto;
+import site.metacoding.animalprojectbackend.domain.sido.Sido;
 import site.metacoding.animalprojectbackend.domain.sido.SidoRepository;
+import site.metacoding.animalprojectbackend.domain.sido.dto.ResponseDto;
 
 @RequiredArgsConstructor
 @Service
@@ -21,10 +21,10 @@ public class SidoService {
     private final SidoRepository sidoRepository;
 
     @Transactional
-    public List<SidoDto> 다운로드(SidoDto sidoDto) {
+    public List<Sido> 다운로드(Sido sidoDto) {
 
 
-        List<SidoDto> lists = new ArrayList<>();
+        List<Sido> lists = new ArrayList<>();
 
         try {
             String key = "jDqHGG%2BaNG47ijh6s3XzB%2BuF8fJOeovccnw%2FZtc9wLQUaKJumPo%2Frl1a2ygZ68dv9L0PD7drvpjPAeTnnB9f%2FQ%3D%3D";
@@ -59,16 +59,17 @@ public class SidoService {
             System.out.println(sidoList);
 
             for (int i = 0; i < sidoList.size(); i++) {
-                SidoDto result = new SidoDto(i,
-                        sidoList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
-                        sidoList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm());
+                Sido result = Sido.builder()
+                .orgCd(sidoList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd())
+                .orgdownNm(sidoList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm())
+                .build();
 
                 lists.add(result);
             }
 
             System.out.println(lists);
 
-            List<SidoDto> sidoEntity = sidoRepository.saveAll(lists);
+            List<Sido> sidoEntity = sidoRepository.saveAll(lists);
 
             return sidoEntity;
 

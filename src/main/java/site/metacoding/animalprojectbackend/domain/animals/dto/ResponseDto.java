@@ -1,4 +1,4 @@
-package site.metacoding.animalprojectbackend.domain.sigungu;
+package site.metacoding.animalprojectbackend.domain.animals.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Body {
-    
-    private Items items;
+public class ResponseDto {
+
+    private Response response;
 }

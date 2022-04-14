@@ -1,7 +1,4 @@
-package site.metacoding.animalprojectbackend.domain.sido;
-
-import java.util.List;
-
+package site.metacoding.animalprojectbackend.domain.shelter.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Items {
-    private List<Item> item;
+public class Body {
+    
+    private Items items;
 }

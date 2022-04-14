@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectbackend.domain.sigungu.SigunguDto;
+import site.metacoding.animalprojectbackend.domain.sigungu.Sigungu;
 import site.metacoding.animalprojectbackend.service.api.SigunguService;
 import site.metacoding.animalprojectbackend.service.api.TestService;
 
@@ -19,9 +19,9 @@ public class SigunguController {
     private final TestService testService;
     
     @GetMapping("/sigungu/busan")
-    public String download(SigunguDto sigunguDto, Model model) {
+    public String download(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.부산다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.부산다운로드(sigunguDto);
 
         model.addAttribute("busanlist", sigunguEntity);
 
@@ -29,9 +29,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/deagu")
-    public String deagu(SigunguDto sigunguDto, Model model) {
+    public String deagu(Sigungu sigunguDto, Model model) {
         
-        List<SigunguDto> sigunguEntity = sigunguService.대구다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.대구다운로드(sigunguDto);
 
         model.addAttribute("deagulist", sigunguEntity);
 
@@ -39,9 +39,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/incheon")
-    public String incheon(SigunguDto sigunguDto, Model model) {
+    public String incheon(Sigungu sigunguDto, Model model) {
         
-        List<SigunguDto> sigunguEntity = sigunguService.인천다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.인천다운로드(sigunguDto);
 
         model.addAttribute("incheonlist", sigunguEntity);
 
@@ -49,9 +49,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/gwangju")
-    public String gwangju(SigunguDto sigunguDto, Model model) {
+    public String gwangju(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.광주다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.광주다운로드(sigunguDto);
 
         model.addAttribute("gwangjulist", sigunguEntity);
 
@@ -59,9 +59,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/seajong")
-    public String seajong(SigunguDto sigunguDto, Model model) {
+    public String seajong(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.세종다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.세종다운로드(sigunguDto);
 
         model.addAttribute("seajonglist", sigunguEntity);
 
@@ -69,9 +69,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/jeonla")
-    public String jeonla(SigunguDto sigunguDto, Model model) {
+    public String jeonla(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.전라남도다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.전라남도다운로드(sigunguDto);
 
         model.addAttribute("jeonlalist", sigunguEntity);
 
@@ -79,9 +79,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/jeonbook")
-    public String jeonbook(SigunguDto sigunguDto, Model model) {
+    public String jeonbook(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.전라북도다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.전라북도다운로드(sigunguDto);
 
         model.addAttribute("jeonbooklist", sigunguEntity);
 
@@ -89,9 +89,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/jeju")
-    public String jeju(SigunguDto sigunguDto, Model model) {
+    public String jeju(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.제주다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.제주다운로드(sigunguDto);
 
         model.addAttribute("jejulist", sigunguEntity);
 
@@ -99,9 +99,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/gangweon")
-    public String gangweon(SigunguDto sigunguDto, Model model) {
+    public String gangweon(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.강원도다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.강원도다운로드(sigunguDto);
 
         model.addAttribute("gangweonlist", sigunguEntity);
 
@@ -109,9 +109,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/gyeongi")
-    public String gyeongi(SigunguDto sigunguDto, Model model) {
+    public String gyeongi(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.경기도다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.경기도다운로드(sigunguDto);
 
         model.addAttribute("gyeongilist", sigunguEntity);
 
@@ -119,9 +119,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/gyeongsang")
-    public String gyeongsang(SigunguDto sigunguDto, Model model) {
+    public String gyeongsang(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.경상남도다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.경상남도다운로드(sigunguDto);
 
         model.addAttribute("gyeongsanglist", sigunguEntity);
 
@@ -129,9 +129,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/ulsan")
-    public String ulsan(SigunguDto sigunguDto, Model model) {
+    public String ulsan(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.울산다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.울산다운로드(sigunguDto);
 
         model.addAttribute("ulsanlist", sigunguEntity);
 
@@ -139,9 +139,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/choongnam")
-    public String choongnam(SigunguDto sigunguDto, Model model) {
+    public String choongnam(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.충청남도다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.충청남도다운로드(sigunguDto);
 
         model.addAttribute("choongnamlist", sigunguEntity);
 
@@ -149,9 +149,9 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/choongbook")
-    public String choongbook(SigunguDto sigunguDto, Model model) {
+    public String choongbook(Sigungu sigunguDto, Model model) {
 
-        List<SigunguDto> sigunguEntity = sigunguService.충청북도다운로드(sigunguDto);
+        List<Sigungu> sigunguEntity = sigunguService.충청북도다운로드(sigunguDto);
 
         model.addAttribute("choongbooklist", sigunguEntity);
 
@@ -159,9 +159,15 @@ public class SigunguController {
     }
 
     @GetMapping("/sigungu/test")
+<<<<<<< HEAD
+    public String test(Sigungu sigungu, Model model) {
+
+        List<Sigungu> sigunguEntity = testService.테스트(sigungu);
+=======
     public String test(SigunguDto sigunguDto, Model model) {
 
         List<SigunguDto> sigunguEntity = testService.테스트(sigunguDto);
+>>>>>>> e21804325a7de08ba7ba48eea59beaed37b53497
 
         model.addAttribute("testlist", sigunguEntity);
 

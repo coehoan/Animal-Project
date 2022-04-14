@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectbackend.domain.sido.SidoDto;
+import site.metacoding.animalprojectbackend.domain.sido.Sido;
 import site.metacoding.animalprojectbackend.service.api.SidoService;
 
 @RequiredArgsConstructor
@@ -17,9 +17,9 @@ public class SidoController {
     private final SidoService sidoService;
 
     @GetMapping("/sido")
-    public String download(SidoDto sidoDto, Model model) {
+    public String download(Sido sidoDto, Model model) {
 
-        List<SidoDto> sidoEntity = sidoService.다운로드(sidoDto);
+        List<Sido> sidoEntity = sidoService.다운로드(sidoDto);
 
         model.addAttribute("sidolist", sidoEntity);
 

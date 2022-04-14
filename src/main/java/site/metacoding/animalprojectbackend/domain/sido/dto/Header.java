@@ -1,4 +1,4 @@
-package site.metacoding.animalprojectbackend.domain.sigungu;
+package site.metacoding.animalprojectbackend.domain.sido.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

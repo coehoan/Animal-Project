@@ -27,7 +27,7 @@ public class KindService {
             String key = "jDqHGG%2BaNG47ijh6s3XzB%2BuF8fJOeovccnw%2FZtc9wLQUaKJumPo%2Frl1a2ygZ68dv9L0PD7drvpjPAeTnnB9f%2FQ%3D%3D";
             URI uri = new URI(
                     "http://apis.data.go.kr/1543061/abandonmentPublicSrvc/kind?serviceKey="
-                            + key + "&up_kind_cd=417000&_type=json");
+                            + key + "&up_kind_cd=429900&_type=json");
             // 개 : 417000, 고양이 : 422400, 기타 : 429900
             RestTemplate restTemplate = new RestTemplate();
 

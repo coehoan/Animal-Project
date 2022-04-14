@@ -1,5 +1,18 @@
-SELECT * FROM SidoDto;
-SELECT * FROM SigunguDto;
+SELECT * FROM Sido;
+SELECT * FROM Sigungu;
+SELECT * FROM Shelter;
 
-SELECT sg.id, sg.uprCd, sg.orgCd, sg.orgdownNm FROM SidoDto sd
-INNER JOIN SigunguDto sg ON sd.orgCd = sg.orgdownNm;
+DROP TABLE Shelter;
+DROP TABLE Sido;
+DROP TABLE Sigungu;
+
+SELECT sg.id, sg.uprCd, sg.orgCd, sg.orgdownNm FROM Sido sd
+INNER JOIN Sigungu sg ON sd.orgCd = sg.uprCd;
+
+SELECT * FROM Sido sd
+INNER JOIN Sigungu sg ON sd.orgCd = sg.orgCd
+WHERE sd.id=1;
+
+SELECT * FROM Sido WHERE orgCd;
+
+SELECT * FROM Sido WHERE orgCd;

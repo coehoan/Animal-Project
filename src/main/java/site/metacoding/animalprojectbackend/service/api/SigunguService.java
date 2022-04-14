@@ -9,10 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectbackend.domain.sido.SidoDto;
-import site.metacoding.animalprojectbackend.domain.sigungu.ResponseDto;
-import site.metacoding.animalprojectbackend.domain.sigungu.SigunguDto;
+import site.metacoding.animalprojectbackend.domain.sido.Sido;
+import site.metacoding.animalprojectbackend.domain.sigungu.Sigungu;
 import site.metacoding.animalprojectbackend.domain.sigungu.SigunguRepository;
+import site.metacoding.animalprojectbackend.domain.sigungu.dto.ResponseDto;
 
 @RequiredArgsConstructor
 @Service
@@ -20,8 +20,8 @@ public class SigunguService {
 
     private final SigunguRepository sigunguRepository;
 
-    public List<SigunguDto> 부산다운로드(SigunguDto sigunguDto) {
-        List<SigunguDto> lists = new ArrayList<>();
+    public List<Sigungu> 부산다운로드(Sigungu sigunguDto) {
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -55,7 +55,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -65,7 +65,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -76,9 +76,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 대구다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 대구다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -111,7 +111,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -121,7 +121,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -133,9 +133,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 인천다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 인천다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -168,7 +168,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -178,7 +178,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -190,9 +190,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 광주다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 광주다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -201,7 +201,7 @@ public class SigunguService {
             // 시도 코드에 따른 변수들
             String gwangju = "6290000";
 
-            SidoDto sidoEntity = new SidoDto();
+            Sido sidoEntity = new Sido();
             
             StringBuffer urisb = new StringBuffer();
             urisb.append("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?");
@@ -227,7 +227,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -237,7 +237,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -249,9 +249,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 세종다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 세종다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -284,7 +284,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -294,7 +294,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -306,9 +306,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 대전다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 대전다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -341,7 +341,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -351,7 +351,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -363,9 +363,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 제주다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 제주다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -398,7 +398,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -408,7 +408,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -420,9 +420,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 경상남도다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 경상남도다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -455,7 +455,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -465,7 +465,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -477,9 +477,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 경상북도다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 경상북도다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -512,7 +512,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -522,7 +522,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -534,9 +534,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 전라남도다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 전라남도다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -569,7 +569,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -579,7 +579,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -591,9 +591,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 전라북도다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 전라북도다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -626,7 +626,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -636,7 +636,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -648,9 +648,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 충청남도다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 충청남도다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -683,7 +683,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -693,7 +693,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -705,9 +705,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 울산다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 울산다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -740,7 +740,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -750,7 +750,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -762,9 +762,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 경기도다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 경기도다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -797,7 +797,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -807,7 +807,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -819,9 +819,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 강원도다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 강원도다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -854,7 +854,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -864,7 +864,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 
@@ -876,9 +876,9 @@ public class SigunguService {
     }
 
     @Transactional
-    public List<SigunguDto> 충청북도다운로드(SigunguDto sigunguDto) {
+    public List<Sigungu> 충청북도다운로드(Sigungu sigunguDto) {
 
-        List<SigunguDto> lists = new ArrayList<>();
+        List<Sigungu> lists = new ArrayList<>();
 
         try {
             // 서비스키
@@ -911,7 +911,7 @@ public class SigunguService {
             System.out.println(sigunguList);
 
             for (int i = 0; i < sigunguList.size(); i++) {
-                SigunguDto result = new SigunguDto(i,
+                Sigungu result = new Sigungu(i,
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgCd(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getOrgdownNm(),
                         sigunguList.get(i).getResponse().getBody().getItems().getItem().get(i).getUprCd());
@@ -921,7 +921,7 @@ public class SigunguService {
 
             System.out.println(lists);
 
-            List<SigunguDto> sigunguEntity = sigunguRepository.saveAll(lists);
+            List<Sigungu> sigunguEntity = sigunguRepository.saveAll(lists);
 
             return sigunguEntity;
 

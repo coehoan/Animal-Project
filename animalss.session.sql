@@ -1,0 +1,7 @@
+SELECT * FROM Shelter;
+SELECT * FROM KindDto;
+
+SELECT * FROM Sido;
+SELECT * FROM Sigungu;
+
+SELECT DISTINCT careNm FROM Shelter;
