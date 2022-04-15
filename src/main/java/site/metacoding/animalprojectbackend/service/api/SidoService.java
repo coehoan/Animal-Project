@@ -1,7 +1,6 @@
 package site.metacoding.animalprojectbackend.service.api;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 

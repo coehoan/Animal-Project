@@ -199,7 +199,7 @@ public class SigunguService {
             String key = "jDqHGG%2BaNG47ijh6s3XzB%2BuF8fJOeovccnw%2FZtc9wLQUaKJumPo%2Frl1a2ygZ68dv9L0PD7drvpjPAeTnnB9f%2FQ%3D%3D";
 
             // 시도 코드에 따른 변수들
-            String gwangju = "6290000";
+            //String gwangju = "6290000";
 
             Sido sidoEntity = new Sido();
             

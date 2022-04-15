@@ -4,8 +4,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -20,13 +18,13 @@ import site.metacoding.animalprojectbackend.domain.sigungu.dto.ResponseDto;
 
 @RequiredArgsConstructor
 @Service
-public class TestService {
+public class SigunguAllService {
 
     private final SidoRepository sidoRepository;
     private final SigunguRepository sigunguRepository;
 
     @Transactional
-    public List<Sigungu> 테스트(Sigungu sigungu) {
+    public List<Sigungu> 다운로드(Sigungu sigungu) {
 
         List<Sido> sidoRepo = sidoRepository.findCd(); // 시도 코드만 찾기
         // List<SidoDto> sidoEntity = sidoRepository.findAll(); // 시도 모두 찾기
@@ -42,9 +40,7 @@ public class TestService {
         // String busan = "6260000";
 
         // for (int i = 0; i < sidoEntity.size(); i++) { // 시도 사이즈만큼 반복
-
         //List<ResponseDto> sigunguList = new ArrayList<>();
-
         List<Sigungu> lists = new ArrayList<>();
         List<Sigungu> sigunguEntity = new ArrayList<>();
 
@@ -102,51 +98,8 @@ public class TestService {
         } catch (Exception e) {
             e.printStackTrace();
 
-            // try {
-            // ResponseDto response = new ResponseDto();
-            // for (int p = 0; p < sidoRepo.size(); p++) {
-            // StringBuffer urisb = new StringBuffer();
-            // urisb.append("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/sigungu?");
-            // urisb.append("serviceKey=" + key);
-            // urisb.append("&upr_cd=");
-            // urisb.append(sidoRepo.get(p).getOrgCd());
-            // urisb.append("&_type=JSON");
-
-            // System.out.println(urisb.toString());
-
-            // URI uri = new URI(urisb.toString());
-
-            // response = restTemplate.getForObject(uri, ResponseDto.class);
-
-            // List<Item> itemList = response.getResponse().getBody().getItems().getItem();
-
-            // sigunguList.add(response);
-
-            // System.out.println("두 번째로 다운로드 받은 것 =======" + response); // 여기에서 null 떠서 캐치로
-            // 감
-
-            // for (int i = 0; i < itemList.size(); i++) {
-            // Sigungu sigungus = new Sigungu(i, itemList.get(i).getUprCd(),
-            // itemList.get(i).getOrgCd(),
-            // itemList.get(i).getOrgdownNm());
-
-            // lists.add(sigungus);
-            // }
-            // }
-
-            // // System.out.println("스택 빠져나왔을 때 response========" + response);
-
-            // } catch (Exception o) {
-            // o.printStackTrace();
-
-            // }
-            // System.out.println("다운로드 받은 것 ========" + sigunguList);
-
         }
         return null;
 
     }
 }
-
-// 한 대여섯번 반복하지만 일단 다 나오긴 함(근데 다운이 안되네...;;)
-

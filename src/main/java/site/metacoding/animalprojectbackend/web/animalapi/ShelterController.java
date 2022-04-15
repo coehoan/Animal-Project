@@ -16,10 +16,12 @@ public class ShelterController {
     
     private final ShelterService shelterService;
 
-    @GetMapping("/shelter/test")
-    public String download(Shelter shelterDto, Model model) {
 
-        List<Shelter> shelterEntity = shelterService.다운로드(shelterDto);
+    @GetMapping("/shelter")
+    public String download(Shelter shelter, Model model) {
+
+        List<Shelter> shelterEntity = shelterService.다운로드(shelter);
+
 
         model.addAttribute("shelterlist", shelterEntity);
         return "/api/shelterDownload";

@@ -27,7 +27,9 @@ public class ShelterService {
     private final SigunguRepository sigunguRepository;
     private final EntityManager entityManager; // entity를 관리하는 클래스
 
-    public List<Shelter> 다운로드(Shelter shelterDto) {
+
+    public List<Shelter> 다운로드(Shelter shelter) {
+
 
         StringBuffer sb = new StringBuffer(); // 쿼리문 짜기
         sb.append("SELECT sg.id, sg.uprCd, sg.orgCd, sg.orgdownNm ");
@@ -44,7 +46,9 @@ public class ShelterService {
         List<Sigungu> sigunguEntity = sigunguRepository.findAll();
 
 
-        List<ResponseDto> shelterList = new ArrayList<>();
+
+        //List<ResponseDto> shelterList = new ArrayList<>();
+
 
 
 
@@ -78,7 +82,9 @@ public class ShelterService {
                     List<Item> itemList = response.getResponse().getBody().getItems().getItem();
 
                     for (int o = 0; o < itemList.size(); o++) {
-                        Shelter shelter = Shelter.builder()
+
+                        Shelter shelters = Shelter.builder()
+
                         .careNm(itemList.get(o).getCareNm())
                         .careRegNo(itemList.get(o).getCareRegNo())
                         .build();
@@ -86,7 +92,9 @@ public class ShelterService {
                         // shelter.setCareNm(itemList.get(o).getCareNm());
                         // shelter.setCareRegNo(itemList.get(o).getCareRegNo());
 
-                        lists.add(shelter);
+
+                        lists.add(shelters);
+
 
                         shelterEntity = shelterRepository.saveAllAndFlush(lists);
 

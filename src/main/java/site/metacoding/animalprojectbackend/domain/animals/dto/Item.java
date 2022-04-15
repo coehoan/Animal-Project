@@ -8,8 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Item {
-    
+   
     private String desertionNo; // 유기번호
+    private String filename; // 섬네일
+
     private String happenDt; // 접수일
     private String happenPlace; // 발견장소
     private String kindCd; // 품종
