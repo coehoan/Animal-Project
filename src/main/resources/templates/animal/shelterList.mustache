@@ -127,18 +127,15 @@
 
   <script>
     // 지도
-    let x = 37.3595704;
-    let y = 127.105399;
-
     let map = new naver.maps.Map('map', {
-      center: new naver.maps.LatLng(x, y),
-      zoom: 12
+      center: new naver.maps.LatLng(37.3595704, 127.105399),
+      zoom: 13
     });
 
-    // 마커
+    //마커
     let marker = new naver.maps.Marker({
       map: map,
-      position: new naver.maps.LatLng(x, y)
+      position: new naver.maps.LatLng(37.3595704, 127.105399)
     });
 
     // 전체검색
@@ -156,18 +153,15 @@
 
         let x = responseParse.items[0].point.x;
         let y = responseParse.items[0].point.y;
-        // do Something
-        console.log(x);
-        console.log(y);
 
-        let map = new naver.maps.Map('map', {
-          center: new naver.maps.LatLng(x, y),
-          zoom: 12
-        });
-        let marker = new naver.maps.Marker({
-          map: map,
-          position: new naver.maps.LatLng(x, y)
-        });
+        console.log(x + "+" + y);
+
+        let point = new naver.maps.Point(x, y);
+        let coor = new naver.maps.Point(x, y);
+
+        map.setCenter(point);
+        marker.setPosition(coor);
+
       });
     }
   </script>
