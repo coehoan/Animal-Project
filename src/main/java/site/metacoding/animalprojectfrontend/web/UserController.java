@@ -1,5 +1,7 @@
 package site.metacoding.animalprojectfrontend.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,6 +12,13 @@ import site.metacoding.animalprojectfrontend.service.UserService;
 @Controller
 public class UserController {
     private final UserService userService;
+    private final HttpSession session;
+
+    @GetMapping("/logout")
+    public String logout() {
+        session.invalidate();
+        return "redirect:/";
+    }
 
     @GetMapping("/main/joinForm")
     public String join() {
