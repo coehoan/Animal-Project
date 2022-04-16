@@ -9,7 +9,7 @@
   <div class="m_padding_small">
     <div class="container-fluid d-flex">
       <input id="search-input" class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
-      <button id="search-btn" class="btn btn-outline-success" type="submit" onclick="addrSearch()">Search</button>
+      <button class="btn btn-outline-success" type="submit" onclick="addrSearch()">Search</button>
 
     </div>
   </div>
@@ -20,7 +20,7 @@
     <h2 class="m_sub_title mt-5">상세검색</h2>
     <hr>
     <div class="mt-5 d-flex">
-      <div class="container-fluid">
+      <div class="container-fluid d-flex">
         <form class="flex-fill m_div_flex_center">
           <!--
           https://www.jqueryscript.net/form/Dynamic-jQuery-Cascading-Dropdown-Lists-Plugin.html
@@ -65,8 +65,8 @@
             <i></i>
           </label>
           <input class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+        <button class="btn btn-outline-success" onclick="detailSearch()">Search</button>
       </div>
     </div>
   </div>
@@ -93,7 +93,7 @@
             <th scope="row" style="vertical-align: middle;">1</th>
             <td style="vertical-align: middle;">부산</td>
             <td style="vertical-align: middle;">누렁이보호소</td>
-            <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1001</td>
+            <td id="detail-addr-1" style="vertical-align: middle;">부산광역시 부산진구 시민공원로 30 부산진구청</td>
             <td style="vertical-align: middle;">09:00~18:00</td>
             <td style="vertical-align: middle;">O</td>
             <td style="vertical-align: middle;">051-888-1001</td>
@@ -104,7 +104,7 @@
           <th scope="row" style="vertical-align: middle;">2</th>
           <td style="vertical-align: middle;">부산</td>
           <td style="vertical-align: middle;">백구보호소</td>
-          <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1002</td>
+          <td id="detail-addr-2" style="vertical-align: middle;">부산광역시 부산진구 중앙대로 749</td>
           <td style="vertical-align: middle;">09:00~18:00</td>
           <td style="vertical-align: middle;">X</td>
           <td style="vertical-align: middle;">051-888-1002</td>
@@ -114,7 +114,7 @@
           <th scope="row" style="vertical-align: middle;">3</th>
           <td style="vertical-align: middle;">부산</td>
           <td style="vertical-align: middle;">고양이보호소</td>
-          <td style="vertical-align: middle;">부산광역시 연제구 중앙대로 1003</td>
+          <td id="detail-addr-3" style="vertical-align: middle;">부산광역시 사상구 학감대로 242 사상구청</td>
           <td style="vertical-align: middle;">09:00~18:00</td>
           <td style="vertical-align: middle;">O</td>
           <td style="vertical-align: middle;">051-888-1003</td>
@@ -126,13 +126,13 @@
   <!--검색결과테이블 끝-->
 
   <script>
-    // 지도
+    // 지도 초기값
     let map = new naver.maps.Map('map', {
       center: new naver.maps.LatLng(37.3595704, 127.105399),
       zoom: 13
     });
 
-    //마커
+    // 마커 초기값
     let marker = new naver.maps.Marker({
       map: map,
       position: new naver.maps.LatLng(37.3595704, 127.105399)
@@ -154,16 +154,60 @@
         let x = responseParse.items[0].point.x;
         let y = responseParse.items[0].point.y;
 
-        console.log(x + "+" + y);
-
         let point = new naver.maps.Point(x, y);
-        let coor = new naver.maps.Point(x, y);
 
         map.setCenter(point);
-        marker.setPosition(coor);
+        marker.setPosition(point);
 
       });
     }
+
+    // 상세검색 전체결과 지도에 표시
+    function detailSearch() {
+      let addr1 = $("#detail-addr-1").text();
+      let addr2 = $("#detail-addr-2").text();
+      let addr3 = $("#detail-addr-3").text();
+      let arry = new Array();
+      let addrList = new Array();
+      addrList.push(addr1);
+      addrList.push(addr2);
+      addrList.push(addr3);
+      // 기존 마커 초기화
+      marker.setMap(null);
+      for (let i = 0; i < addrList.length; i++) {
+        //alert(addrList[i]);
+        naver.maps.Service.geocode({
+          query: addrList[i]
+        }, function (status, response) {
+          if (status != naver.maps.Service.Status.OK) {
+            return alert('Something wrong!');
+          }
+
+          // 검색 결과의 배열
+          let responseParse = response.v2.addresses;
+
+          // 주소를 좌표로 변환시킨값을 x, y로 잡아줌
+          let x = responseParse[0].x;
+          let y = responseParse[0].y;
+
+          // x,y 좌표를 point로 담고 배열에 push
+          let point = new naver.maps.Point(x, y);
+          arry.unshift([x, y]);
+
+          // 마커 생성
+          let marker = new naver.maps.Marker({
+            map: map,
+            position: new naver.maps.LatLng(point)
+          });
+
+
+          console.log(arry[i][0]);
+          // 지도 이동
+          map.setCenter(arry[0]);
+        });
+      }
+    }
+
   </script>
 
   {{>/layout/footer}}
