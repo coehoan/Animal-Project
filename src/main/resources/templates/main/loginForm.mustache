@@ -8,11 +8,11 @@
   <form class="m_auth_box" novalidate>
     <div class="form-group">
       <label>아이디</label>
-      <input type="text" class="form-control mt-3" required>
+      <input id="username" type="text" class="form-control mt-3" required>
     </div>
     <div class="form-group mt-3">
       <label for="password">비밀번호</label>
-      <input type="password" name="password" class="form-control mt-3" id="password" title="password" required>
+      <input id="password" type="password" name="password" class="form-control mt-3" title="password" required>
     </div>
     <div class="form-check mt-3">
       <label class="form-check-label">
@@ -20,12 +20,43 @@
       </label>
     </div>
     <div class="form-group mt-3">
-      <input type="submit" class="btn bg-success text-light" value="로그인">
+      <input id="btn-login"type="submit" class="btn bg-success text-light" value="로그인">
     </div>
   </form>
   <!-- 로그인 폼 끝 -->
 
 </div>
+<script>
+  $("#btn-login").click(() => {
+    login();
+});
 
+
+async function login() {
+  let checked = $('#remember').is(':checked');
+  let loginDto = {
+      username: $("#username").val(),
+      password: $("#password").val(),
+      remember: checked ? "on" : "off"
+  }
+
+  let response = await fetch("/api/login", {
+      method: "POST",
+      body: JSON.stringify(loginDto),
+      headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+      },
+  });
+  let responseParse = await response.json();
+  console.log(responseParse);
+
+  if (responseParse.code == 1) {
+      alert("로그인완료");
+      location.href = "/";
+  } else {
+      alert('로그인실패');
+  }
+}
+</script>
 <!-- 컨테이너 끝 -->
 {{>/layout/footer}}
