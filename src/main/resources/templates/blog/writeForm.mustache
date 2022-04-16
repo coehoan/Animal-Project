@@ -13,17 +13,17 @@
     <div id="category-region" class="m_div_display_none">
       <select class="m_blog_writeForm_select">
         <option value="">지역</option>
-        <option value="">서울</option>
-        <option value="">부산</option>
-        <option value="">대구</option>
+        <option id="otp-seoul" value="서울">서울</option>
+        <option id="otp-busan" value="부산">부산</option>
+        <option id="otp-deagu" value="대구">대구</option>
       </select>
     </div>
     <div id="category-adopt" class="m_div_display_none">
       <select class="m_blog_writeForm_select">
         <option value="">품종</option>
-        <option value="">강아지</option>
-        <option value="">고양이</option>
-        <option value="">기타</option>
+        <option id="opt-dog" value="강아지">강아지</option>
+        <option id="opt-cat" value="고양이">고양이</option>
+        <option id="opt-ect" value="기타">기타</option>
       </select>
     </div>
   </div>
@@ -69,6 +69,12 @@
       $("#category-adopt").addClass("m_div_display_none");
     }
 
+  }
+</script>
+
+<script>
+  function choose() {
+    
   }
 </script>
 {{>/layout/footer}}
