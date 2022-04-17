@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
+import site.metacoding.animalprojectfrontend.domain.user.User;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,13 +16,14 @@ public class WriteDto {
     private String region;
     private String type;
 
-    public Post toEntity() {
+    public Post toEntity(User principal) {
         Post post = new Post();
         post.setTitle(title);
         post.setContent(content);
         post.setBoard(board);
         post.setRegion(region);
         post.setType(type);
+        post.setUser(principal);
         return post;
     }
 }

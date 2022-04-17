@@ -34,7 +34,7 @@ public class AnimalController {
 
     @GetMapping("/blog")
     public String blog() {
-        return "/blog/blogMain";
+        return "blog/blogMain";
     }
 
     @GetMapping("/blog/writeForm")
