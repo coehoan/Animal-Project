@@ -8,4 +8,3 @@ DROP TABLE SigunguDtoHash;
 
 
 SELECT * FROM Sido WHERE orgCd;
-

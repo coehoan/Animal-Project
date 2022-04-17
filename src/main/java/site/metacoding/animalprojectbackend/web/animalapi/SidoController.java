@@ -17,11 +17,9 @@ public class SidoController {
     private final SidoService sidoService;
 
     @GetMapping("/sido")
-
     public String download(Sido sido, Model model) {
 
         List<Sido> sidoEntity = sidoService.다운로드(sido);
-
 
         model.addAttribute("sidolist", sidoEntity);
 

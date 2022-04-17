@@ -1,12 +1,10 @@
 
 SELECT * FROM Shelter WHERE careNm LIKE "%대구%";
-
+SELECT * FROM KindDto;
 
 SELECT * FROM Sido;
 SELECT * FROM Sigungu;
 
-
-SELECT DISTINCT careNm FROM Shelter;
 
 SELECT kindCd FROM KindDto;
 
@@ -33,3 +31,4 @@ SELECT * FROM KindDto WHERE kindCd;
 DROP TABLE Shelter;
 
 DROP TABLE Animals;
+

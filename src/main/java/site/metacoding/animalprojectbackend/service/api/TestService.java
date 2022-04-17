@@ -3,9 +3,6 @@ package site.metacoding.animalprojectbackend.service.api;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-
-
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -44,7 +41,6 @@ public class TestService {
         // for (int i = 0; i < sidoEntity.size(); i++) { // 시도 사이즈만큼 반복
 
         //List<ResponseDto> sigunguList = new ArrayList<>();
-
         List<Sigungu> lists = new ArrayList<>();
         List<Sigungu> sigunguEntity = new ArrayList<>();
 
@@ -147,6 +143,3 @@ public class TestService {
 
     }
 }
-
-// 한 대여섯번 반복하지만 일단 다 나오긴 함(근데 다운이 안되네...;;)
-
