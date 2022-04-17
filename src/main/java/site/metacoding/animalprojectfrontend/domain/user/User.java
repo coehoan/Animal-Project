@@ -26,25 +26,26 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id; // pk
 
-    @Column(unique = true, nullable = false, length = 30)
-    private String username;
+    @Column(unique = true, nullable = false, length = 12)
+    private String username;// 회원가입, 로그인
+
+    @Column(nullable = false, length = 12)
+    private String password;// 회원가입, 로그인
 
     @Column(nullable = false, length = 30)
-    private String password;
+    private String email; // 회원가입
 
     @Column(nullable = false, length = 30)
-    private String email;
-
-    @Column(nullable = true, length = 30)
-    private String sex;
+    private String male; // 회원가입 성별
 
     @Column(nullable = false, length = 300)
-    private String addr; // API 주소 라이브러리 사용할 예정
+    private String addr; // 이건 필요하려나?
 
     @CreatedDate
-    private LocalDateTime createDate;
+    private LocalDateTime createDate;// DB
     @LastModifiedDate
-    private LocalDateTime updateDate;
+    private LocalDateTime updateDate;// DB
+
 }

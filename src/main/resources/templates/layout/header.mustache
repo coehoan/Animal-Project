@@ -31,6 +31,7 @@
 </head>
 
 <body>
+  
   <div class="d-flex justify-content-center">
     <div class="border w-75 bg-success">
       <div class="d-flex justify-content-around mt-4 mb-4">
@@ -48,7 +49,34 @@
         <div class="d-flex justify-content-center align-content-center">
           <!--메뉴 시작-->
           <div class="d-flex align-items-center">
+            {{#log}}
             <ul class="nav justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link active text-light m_main_font_lg" aria-current="page" href="/logout">로그아웃</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link text-light m_main_font_lg" href="/blog">Blog</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light m_main_font_lg" data-bs-toggle="dropdown" href="#"
+                  role="button" aria-expanded="false">유기동물 현황</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/animal/animalList">유기동물 조회</a></li>
+                  <li><a class="dropdown-item" href="/animal/shelterList">보호소 조회</a></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light m_main_font_lg" data-bs-toggle="dropdown" href="#"
+                  role="button" aria-expanded="false">함께하는 이들</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/withus/doctor">수의사</a></li>
+                  <li><a class="dropdown-item" href="/withus/kara">카라</a></li>
+                </ul>
+              </li>
+            </ul>
+            {{/log}}
+            {{^log}}
+                        <ul class="nav justify-content-end">
               <li class="nav-item">
                 <a class="nav-link active text-light m_main_font_lg" aria-current="page" href="/main/loginForm">로그인</a>
               </li>
@@ -75,6 +103,7 @@
                 </ul>
               </li>
             </ul>
+            {{/log}}
           </div>
           <!--메뉴 끝-->
         </div>
