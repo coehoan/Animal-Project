@@ -1,6 +1,6 @@
 {{>/layout/header}}
 <div class="m_padding_medium">
-  <!-- select -->
+  <!-- 게시판 선택 버튼 시작 -->
   <div class="d-flex">
     <div>
       <select class="m_blog_writeForm_select" id="board-select" onchange="boardSelect(this.value)">
@@ -27,20 +27,26 @@
       </select>
     </div>
   </div>
-  <!-- select -->
+  <!-- 게시판 선택 버튼 끝 -->
 
-  <!-- title -->
+  <!-- 제목 시작 -->
   <div>
-    <input class="m_blog_writeForm_title" type="text">
+    <input id="title" class="m_blog_writeForm_title" type="text">
   </div>
-  <!-- title -->
+  <!-- 제목 끝 -->
 
-  <!-- content -->
+  <!-- 내용 시작 -->
 
   <div id="editor" class="mt-3"></div>
 
+  <!-- 글쓰기 버튼 -->
+  <div class="form-group mt-3 m_div_flex_end">
+    <input id="btn-write" type="submit" class="btn bg-success text-light" value="글쓰기">
+  </div>
+  <!-- 글쓰기 버튼 -->
+
+  <!-- 내용 끝 -->
 </div>
-<!-- content -->
 
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
@@ -54,6 +60,11 @@
   });
   editor.getMarkdown();
 
+  let selectedBoard;
+  let selectedRegion;
+  let selectedType;
+
+  // 게시판 선택
   function boardSelect(value) {
 
     if (value == "adopt") {
@@ -266,6 +277,27 @@
       });
     }
 
+    // console.log("제목 : " + title);
+    // console.log("내용 : " + content);
+    // console.log("어떤 게시판 : " + selectedBoard);
+    // console.log("어떤 지역 : " + selectedRegion);
+    // console.log("어떤 종류 : " + selectedType);
+
+    let response = await fetch("/blog/write", {
+      method: "POST",
+      body: JSON.stringify(writeDto),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      }
+    });
+    let responseParse = await response.json();
+
+    if (responseParse.code == 1) {
+      alert("글쓰기 완료");
+      location.href = "/blog";
+    } else {
+      alert("글쓰기 실패");
+    }
   }
 </script>
 {{>/layout/footer}}
