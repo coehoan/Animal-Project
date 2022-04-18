@@ -35,7 +35,7 @@ public class UserApiController {
         if (loginDto.getRemember().equals("on")) {
             response.addHeader("Set-Cookie", "remember=" + loginDto.getUsername() + "; path=/");
         }
-        session.setAttribute("principal", userEntity);
+        session.setAttribute("log", userEntity);
         return new ResponseDto<String>(1, "로그인성공", null);
     }
 }

@@ -29,4 +29,11 @@ public class UserController {
     public String login() {
         return "/main/loginForm";
     }
+
+    // 보호소 정보
+    @GetMapping("/animal/shelterList")
+    public String shelterList() {
+        return "/animal/shelterList";
+    }
+    // 보호소 정보 끝
 }

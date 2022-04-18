@@ -39,10 +39,10 @@ async function login() {
   console.log(responseParse);
 
   if (responseParse.code == 1) {
-      alert("로그인완료");
+    //   alert("로그인완료");
       location.href = "/";
   } else {
-      alert('로그인실패');
+      alert('아이디 혹은 비밀번호가 틀렸습니다.');
   }
 }
 //회원가입

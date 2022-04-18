@@ -89,36 +89,18 @@
       </thead>
       <tbody>
         <tr>
+          {{#shelter}}
           <div class="d-flex m_text_align_center">
-            <th scope="row" style="vertical-align: middle;">1</th>
-            <td style="vertical-align: middle;">부산</td>
-            <td style="vertical-align: middle;">누렁이보호소</td>
-            <td id="detail-addr-1" style="vertical-align: middle;">부산광역시 부산진구 시민공원로 30 부산진구청</td>
-            <td style="vertical-align: middle;">09:00~18:00</td>
-            <td style="vertical-align: middle;">O</td>
-            <td style="vertical-align: middle;">051-888-1001</td>
-            <td style="vertical-align: middle;">누렁이만보호</td>
+            <th>{{#id}}{{id}}{{/id}}{{^id}}none{{/id}} </th>
+            <td>{{#orgNm}}{{orgNm}}{{/orgNm}}{{^orgNm}}none{{/orgNm}}</th>
+            <td>{{#careNm}}{{careNm}}{{/careNm}}{{^careNm}}none{{/careNm}}</th>
+            <td>{{#jibunAddr}}{{jibunAddr}}{{/jibunAddr}}{{^jibunAddr}}none{{/jibunAddr}}</th>
+            <td>{{#weekOprStime}}{{weekOprStime}}~{{weekOprEtime}} {{/weekOprStime}}{{^weekOprStime}}none{{/weekOprStime}}</th>
+            <td>{{#closeDay}}{{closeDay}}{{/closeDay}}{{^closeDay}}none{{/closeDay}}</th>
+            <td>{{#careTel}}{{careTel}}{{/careTel}}{{^careTel}}none{{/careTel}}</th>
+            <td>{{#saveTrgtAnimal}}{{saveTrgtAnimal}}{{/saveTrgtAnimal}}{{^saveTrgtAnimal}}none{{/saveTrgtAnimal}}</th>
           </div>
-        </tr>
-        <tr>
-          <th scope="row" style="vertical-align: middle;">2</th>
-          <td style="vertical-align: middle;">부산</td>
-          <td style="vertical-align: middle;">백구보호소</td>
-          <td id="detail-addr-2" style="vertical-align: middle;">부산광역시 부산진구 중앙대로 749</td>
-          <td style="vertical-align: middle;">09:00~18:00</td>
-          <td style="vertical-align: middle;">X</td>
-          <td style="vertical-align: middle;">051-888-1002</td>
-          <td style="vertical-align: middle;">백구만보호</td>
-        </tr>
-        <tr>
-          <th scope="row" style="vertical-align: middle;">3</th>
-          <td style="vertical-align: middle;">부산</td>
-          <td style="vertical-align: middle;">고양이보호소</td>
-          <td id="detail-addr-3" style="vertical-align: middle;">부산광역시 사상구 학감대로 242 사상구청</td>
-          <td style="vertical-align: middle;">09:00~18:00</td>
-          <td style="vertical-align: middle;">O</td>
-          <td style="vertical-align: middle;">051-888-1003</td>
-          <td style="vertical-align: middle;">고양이만보호</td>
+          {{/shelter}}
         </tr>
       </tbody>
     </table>
