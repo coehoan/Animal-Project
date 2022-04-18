@@ -14,8 +14,22 @@
       <select class="m_blog_writeForm_select" onchange="regionSelect(this.value)">
         <option selected disabled>지역</option>
         <option value="seoul">서울</option>
-        <option value="busan">부산</option>
+        <option value="gyeonggi">경기</option>
+        <option value="incheon">인천</option>
+        <option value="gangwon">강원</option>
+        <option value="sejong">세종</option>
+        <option value="chungbuk">충북</option>
+        <option value="chungnam">충남</option>
+        <option value="daejeon">대전</option>
+        <option value="jeonbuk">전북</option>
+        <option value="jeonnam">전남</option>
+        <option value="gwangju">광주</option>
+        <option value="gyeongbuk">경북</option>
         <option value="daegu">대구</option>
+        <option value="gyeongnam">경남</option>
+        <option value="ulsan">울산</option>
+        <option value="busan">부산</option>
+        <option value="jeju">제주</option>
       </select>
     </div>
     <div id="category-type" class="m_div_display_none">
@@ -26,18 +40,26 @@
         <option value="etc">기타</option>
       </select>
     </div>
+    <div id="category-category" class="m_div_display_none">
+      <select class="m_blog_writeForm_select" onchange="categorySelect(this.value)">
+        <option selected disabled>분류</option>
+        <option value="ask">질문</option>
+        <option value="info">정보</option>
+        <option value="food">맛집</option>
+      </select>
+    </div>
   </div>
   <!-- 게시판 선택 버튼 끝 -->
 
   <!-- 제목 시작 -->
   <div>
-    <input id="title" class="m_blog_writeForm_title" type="text">
+    <input id="title" class="m_blog_writeForm_title" type="text" required>
   </div>
   <!-- 제목 끝 -->
 
   <!-- 내용 시작 -->
-
-  <div id="editor" class="mt-3"></div>
+  <div id="editor" class="mt-3" required></div>
+  <!-- 내용 끝 -->
 
   <!-- 글쓰기 버튼 -->
   <div class="form-group mt-3 m_div_flex_end">
@@ -45,7 +67,6 @@
   </div>
   <!-- 글쓰기 버튼 -->
 
-  <!-- 내용 끝 -->
 </div>
 
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
@@ -62,7 +83,8 @@
 
   let selectedBoard;
   let selectedRegion;
-  let selectedType;
+  let selectedType; // 품종
+  let selectedCategory;
 
   // 게시판 선택
   function boardSelect(value) {
@@ -70,19 +92,24 @@
     if (value == "adopt") {
       $("#category-region").removeClass("m_div_display_none");
       $("#category-type").removeClass("m_div_display_none");
+      $("#category-category").addClass("m_div_display_none");
       selectedBoard = value;
+      selectedCategory = null;
 
     } else if (value == "region") {
       $("#category-region").removeClass("m_div_display_none");
       $("#category-type").addClass("m_div_display_none");
+      $("#category-category").removeClass("m_div_display_none");
       selectedBoard = value;
       selectedType = null;
     } else {
       $("#category-region").addClass("m_div_display_none");
       $("#category-type").addClass("m_div_display_none");
+      $("#category-category").addClass("m_div_display_none");
       selectedBoard = value;
       selectedType = null;
       selectedRegion = null;
+      selectedCategory = null;
     }
   }
   // 지역 선택
@@ -93,10 +120,23 @@
   function typeSelect(value) {
     selectedType = value;
   }
+  // 지역별 게시판 종류 선택
+  function categorySelect(value) {
+    selectedCategory = value;
+  }
 
   // 글쓰기 버튼 클릭
   $("#btn-write").click(() => {
-    write();
+    let value = $("#board-select").val();
+    let title = $("#title").val().trim();
+    let content = editor.getHTML().trim();
+
+    if (value == "adopt" && (selectedRegion == null || selectedType == null)) alert("지역과 품종을 선택해주세요.");
+    else if (value == "region" && (selectedRegion == null || selectedCategory == null)) alert("지역과 분류를 선택해주세요.");
+    else if (value == null) alert("게시판이 선택되지 않았습니다.");
+    else if (!title) alert("제목을 입력하세요.");
+    else if (content === "<p><br></p>") alert("내용을 입력하세요.");
+    else write();
   })
 
   async function write() {
@@ -105,14 +145,9 @@
       content: editor.getHTML(),
       board: selectedBoard,
       region: selectedRegion,
-      type: selectedType
+      type: selectedType,
+      category: selectedCategory
     }
-
-    // console.log("제목 : " + title);
-    // console.log("내용 : " + content);
-    // console.log("어떤 게시판 : " + selectedBoard);
-    // console.log("어떤 지역 : " + selectedRegion);
-    // console.log("어떤 종류 : " + selectedType);
 
     let response = await fetch("/s/blog/write", {
       method: "POST",
@@ -121,8 +156,8 @@
         "Content-Type": "application/json; charset=utf-8"
       }
     });
-    let responseParse = await response.json();
 
+    let responseParse = await response.json();
 
     if (responseParse.code == 1) {
       alert("글쓰기 완료");
@@ -132,7 +167,7 @@
       location.href = "/main/loginForm";
     } else {
       console.log(responseParse);
-      alert("글쓰기 실패");
+      alert("글쓰기에 실패했습니다. \n관리자에게 문의해주세요.");
     }
   }
 </script>

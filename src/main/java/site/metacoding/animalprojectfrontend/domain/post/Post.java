@@ -52,6 +52,9 @@ public class Post {
     @Column(length = 15, nullable = true)
     private String type;
 
+    @Column(length = 15, nullable = true)
+    private String category;
+
     @CreatedDate // insert
     private LocalDateTime createDate;
     @LastModifiedDate // insert, update

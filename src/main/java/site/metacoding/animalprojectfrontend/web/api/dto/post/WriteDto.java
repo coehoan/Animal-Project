@@ -15,6 +15,7 @@ public class WriteDto {
     private String board;
     private String region;
     private String type;
+    private String category;
 
     public Post toEntity(User principal) {
         Post post = new Post();
@@ -23,6 +24,7 @@ public class WriteDto {
         post.setBoard(board);
         post.setRegion(region);
         post.setType(type);
+        post.setCategory(category);
         post.setUser(principal);
         return post;
     }
