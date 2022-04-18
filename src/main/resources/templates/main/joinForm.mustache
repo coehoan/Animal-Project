@@ -1,39 +1,45 @@
-{{> /layout/header}}
+{{>/layout/header}}
 
 <!-- 컨테이너 시작 -->
-<div class="container mt-3">
+<div class="m_padding_medium mt-3 m_content_wrap">
 
-    <!-- 회원가입 폼 시작 -->
-    <form class="m_auth_box" novalidate>
+  <h1>회원가입</h1>
+  <hr>
+  <!-- 회원가입 폼 시작 -->
+  <form class="m_auth_box" novalidate>
     <div class="form-group">
       <label>아이디</label>
       <input id="username" type="text" class="form-control mt-3" placeholder="username" required>
     </div>
-        <div class="form-group mt-3">
+    <div class="form-group mt-3">
       <label>비밀번호</label>
-      <input id="password" type="password" name="password" class="form-control"  title="password" required>
+      <input id="password" type="password" name="password" class="form-control mt-3" title="password" required>
+    </div>
     <div class="form-group mt-3">
       <label>이메일</label>
-      <input id="email" type="email" class="form-control" placeholder="name@example.com" required>
+      <input id="email" type="email" class="form-control mt-3" placeholder="name@example.com" required>
+    </div>
     <div class="form-group mt-3">
       <label>성별</label>
-      <select id="male" class="form-select" required>
+      <select id="male" class="form-select mt-3" required>
         <option selected>성별</option>
         <option value="male">남자</option>
         <option value="female">여자</option>
         <option value="female">선택안함</option>
       </select>
     </div>
-        <div class="form-group mt-3">
+    <div class="form-group mt-3">
       <label>주소</label>
-      <input id="addr" type="text" class="form-control" minlength="10" data-v-message="Please enter minimum 10 characters"
-        required>
+      <input id="addr" type="text" class="form-control mt-3" minlength="10"
+        data-v-message="Please enter minimum 10 characters" required>
+      <div class="form-group mt-5">
+        <input id="btn-join" type="submit" class="btn bg-success text-light" value="회원가입">
+      </div>
     </div>
-        <input id="btn-join" type="button" class="btn btn-primary" value="회원가입">
-    </form>
-    <!-- 회원가입 폼 끝 -->
-
+  </form>
+  <!-- 회원가입 폼 끝 -->
 </div>
-  <script src="/js/user.js"></script>
+
+<script src="/js/user.js"></script>
 <!-- 컨테이너 끝 -->
-{{> /layout/footer}}
+{{>/layout/footer}}

@@ -20,15 +20,13 @@ public class PostApiController {
     private final PostService postService;
     private final HttpSession session;
 
-    @PostMapping("/blog/write")
+    @PostMapping("/s/blog/write")
     public ResponseDto<?> write(@RequestBody WriteDto writeDto) {
 
-        System.out.println("컨트롤러 접근");
         User principal = (User) session.getAttribute("principal");
         Post post = writeDto.toEntity(principal);
 
         postService.글쓰기(post);
-        System.out.println("컨트롤러 끝");
         return new ResponseDto<>(1, "성공", null);
     }
 }

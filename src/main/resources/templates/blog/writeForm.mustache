@@ -114,7 +114,7 @@
     // console.log("어떤 지역 : " + selectedRegion);
     // console.log("어떤 종류 : " + selectedType);
 
-    let response = await fetch("/blog/write", {
+    let response = await fetch("/s/blog/write", {
       method: "POST",
       body: JSON.stringify(writeDto),
       headers: {
@@ -123,10 +123,15 @@
     });
     let responseParse = await response.json();
 
+
     if (responseParse.code == 1) {
       alert("글쓰기 완료");
       location.href = "/blog";
+    } else if (responseParse.data == "인증되지 않았습니다.") {
+      alert("로그인 정보가 없습니다.");
+      location.href = "/main/loginForm";
     } else {
+      console.log(responseParse);
       alert("글쓰기 실패");
     }
   }
