@@ -1,6 +1,6 @@
 {{>/layout/header}}
 <div class="m_padding_medium">
-  <!-- select -->
+  <!-- 게시판 선택 버튼 시작 -->
   <div class="d-flex">
     <div>
       <select class="m_blog_writeForm_select" id="board-select" onchange="boardSelect(this.value)">
@@ -27,20 +27,26 @@
       </select>
     </div>
   </div>
-  <!-- select -->
+  <!-- 게시판 선택 버튼 끝 -->
 
-  <!-- title -->
+  <!-- 제목 시작 -->
   <div>
-    <input class="m_blog_writeForm_title" type="text">
+    <input id="title" class="m_blog_writeForm_title" type="text">
   </div>
-  <!-- title -->
+  <!-- 제목 끝 -->
 
-  <!-- content -->
+  <!-- 내용 시작 -->
 
   <div id="editor" class="mt-3"></div>
 
+  <!-- 글쓰기 버튼 -->
+  <div class="form-group mt-3 m_div_flex_end">
+    <input id="btn-write" type="submit" class="btn bg-success text-light" value="글쓰기">
+  </div>
+  <!-- 글쓰기 버튼 -->
+
+  <!-- 내용 끝 -->
 </div>
-<!-- content -->
 
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
@@ -54,6 +60,11 @@
   });
   editor.getMarkdown();
 
+  let selectedBoard;
+  let selectedRegion;
+  let selectedType;
+
+  // 게시판 선택
   function boardSelect(value) {
 
     if (value == "adopt") {
@@ -155,7 +166,7 @@
   let free = {
     kind: $("#opt-free").val()
   }
-  
+
 
 
   // 입양게시판 로직
@@ -165,19 +176,25 @@
       let chooseKindOfWirte = await fetch("주소", { // JSON 오브젝트로 보내고 DB에 저장하기
         method: "POST",
         body: JSON.stringify(adouptOfDogAndSeoul),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     } else if (value == "adopt" && value == "서울" && value == "고양이") {
       let chooseKindOfWirte = await fetch("주소", {
         method: "POST",
         body: JSON.stringify(adouptOfCatAndSeoul),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     } else if (value == "adopt" && value == "서울" && value == "기타") {
       let chooseKindOfWirte = await fetch("주소", {
         method: "POST",
         body: JSON.stringify(adouptOfEctAndSeoul),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     }
   }
@@ -188,19 +205,25 @@
       let chooseKindOfWirte = await fetch("주소", { // JSON 오브젝트로 보내고 DB에 저장하기
         method: "POST",
         body: JSON.stringify(aduoptOfDogAndBusan),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     } else if (value == "adopt" && value == "부산" && value == "고양이") {
       let chooseKindOfWirte = await fetch("주소", {
         method: "POST",
         body: JSON.stringify(aduoptOfCatAndBusan),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     } else if (value == "adopt" && value == "부산" && value == "기타") {
       let chooseKindOfWirte = await fetch("주소", {
         method: "POST",
         body: JSON.stringify(aduoptOfEctAndBusan),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     }
 
@@ -212,19 +235,25 @@
       let chooseKindOfWirte = await fetch("주소", { // JSON 오브젝트로 보내고 DB에 저장하기
         method: "POST",
         body: JSON.stringify(aduoptOfDogAndDeagu),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     } else if (value == "adopt" && value == "대구" && value == "고양이") {
       let chooseKindOfWirte = await fetch("주소", {
         method: "POST",
         body: JSON.stringify(aduoptOfCatAndDeagu),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     } else if (value == "adopt" && value == "대구" && value == "기타") {
       let chooseKindOfWirte = await fetch("주소", {
         method: "POST",
         body: JSON.stringify(aduoptOfEctAndDeagu),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     }
 
@@ -237,19 +266,25 @@
       let chooseKindOfWirte = await fetch("주소", { // JSON 오브젝트로 보내고 DB에 저장하기
         method: "POST",
         body: JSON.stringify(regionOfSeoul),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     } else if (value == "region" && value == "부산") {
       let chooseKindOfWirte = await fetch("주소", {
         method: "POST",
         body: JSON.stringify(regionOfBusan),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     } else if (value == "region" && value == "대구") {
       let chooseKindOfWirte = await fetch("주소", {
         method: "POST",
         body: JSON.stringify(regionOfDeagu),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
     }
 
@@ -258,14 +293,75 @@
   // 자유 게시판 로직
   async function chooseFree() {
 
-    if (value == "free" && value == "서울") { // 조건에 맞춰서
+    if (value == "free") { // 조건에 맞춰서
       let chooseKindOfWirte = await fetch("주소", { // JSON 오브젝트로 보내고 DB에 저장하기
         method: "POST",
         body: JSON.stringify(free),
-        headers: "",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        },
       });
+      $("#category-region").removeClass("m_div_display_none");
+      $("#category-type").removeClass("m_div_display_none");
+      selectedBoard = value;
+
+    } else if (value == "region") {
+      $("#category-region").removeClass("m_div_display_none");
+      $("#category-type").addClass("m_div_display_none");
+      selectedBoard = value;
+      selectedType = null;
+    } else if (value == ""){
+      $("#category-region").addClass("m_div_display_none");
+      $("#category-type").addClass("m_div_display_none");
+      selectedBoard = value;
+      selectedType = null;
+      selectedRegion = null;
+    }
+  }
+  // 지역 선택
+  function regionSelect(value) {
+    selectedRegion = value;
+  }
+  // 동물 종류 선택
+  function typeSelect(value) {
+    selectedType = value;
+  }
+
+  // 글쓰기 버튼 클릭
+  $("#btn-write").click(() => {
+    write();
+  })
+
+  async function write() {
+    let writeDto = {
+      title: $("#title").val(),
+      content: editor.getHTML(),
+      board: selectedBoard,
+      region: selectedRegion,
+      type: selectedType
     }
 
+    // console.log("제목 : " + title);
+    // console.log("내용 : " + content);
+    // console.log("어떤 게시판 : " + selectedBoard);
+    // console.log("어떤 지역 : " + selectedRegion);
+    // console.log("어떤 종류 : " + selectedType);
+
+    let response = await fetch("/blog/write", {
+      method: "POST",
+      body: JSON.stringify(writeDto),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      }
+    });
+    let responseParse = await response.json();
+
+    if (responseParse.code == 1) {
+      alert("글쓰기 완료");
+      location.href = "/blog";
+    } else {
+      alert("글쓰기 실패");
+    }
   }
 </script>
 {{>/layout/footer}}
