@@ -1,0 +1,118 @@
+{{>/layout/header}}
+<div class="m_padding_small d-flex flex-column">
+
+  <!--바로 가기 네비게이션 시작-->
+  <div class="">
+    <nav class="navbar navbar-light">
+      <div class="container-fluid">
+        <form class="d-flex flex-fill">
+          <input class="form-control me-2" type="search" placeholder="바로 가기 검색" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </div>
+  <hr>
+  <!--바로 가기 네비게이션 끝-->
+
+  <!--소개카드 시작-->
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="card border-light bg-dark text-white">
+          <div class="size main-bc-green">
+          </div>
+          <div class="card-img-overlay">
+            <h5 class="card-title">리퍼블릭 애니멀은...</h5>
+            <p class="card-text">모든 유기동물의 해방을 기원합니다.</p>
+            <p class="card-text">리퍼블릭 애니멀</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="card border-light bg-dark text-white">
+          <div class="size main-bc-blue">
+          </div>
+          <div class="card-img-overlay">
+            <h5 class="card-title">유기동물의 현실</h5>
+            <p class="card-text">현실의 유기동물은...어쩌구 저쩌구</p>
+            <p class="card-text">리퍼블릭 애니멀</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="card border-light bg-dark text-white">
+          <div class="size main-bc-pink">
+          </div>
+          <div class="card-img-overlay">
+            <h5 class="card-title">리퍼블릭 애니멀 전용 블로그</h5>
+            <p class="card-text">블로그를 적을 수 있습니다.</p>
+            <p class="card-text">리퍼블릭 애니멀</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!--소개카드 끝-->
+
+  <!--현황 메뉴카드 시작-->
+  <div class="card mb-3">
+    <img src="/image/cat3.jpeg" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title">유기동물 현황</h5>
+      <p class="card-text">실시간 유기동물 현황을 확인해보세요.</p>
+      <a href="animal/animalList">
+        <button type="button" class="btn btn-success btn-sm">바로 가기</button>
+      </a>
+    </div>
+  </div>
+  <!--현황 메뉴카드 끝-->
+
+  <!--블로그 메뉴카드 시작-->
+  <div class="d-flex">
+    <!--블로그 바로가기 메뉴 시작-->
+    <div class="card flex-shrink-1" style="width: 10rem;">
+      <div class="card-footer">
+        바로 가기
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">입양 후기 목록 보기</li>
+        <li class="list-group-item">전체 게시판 보기</li>
+        <li class="list-group-item">글쓰기</li>
+      </ul>
+    </div>
+    <!--블로그 바로가기 메뉴 끝-->
+    <!--블로그 메뉴카드 시작-->
+    <div class="card flex-fill">
+      <div class="card-header">
+        리퍼블릭 블로그
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">블로그에서 입양 후기와 유기동물 정보를 공유해주세요.</h5>
+        <p class="card-text">전용 블로그로 인해서 커뮤니티를 형성해 보세요.</p>
+        <button type="button" class="btn btn-success btn-sm">바로 가기</button>
+      </div>
+    </div>
+  </div>
+  <!--블로그 메뉴카드 끝-->
+</div>
+
+{{>/layout/footer}}

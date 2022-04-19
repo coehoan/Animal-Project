@@ -13,35 +13,35 @@
     
     동물보호센터명 : {{careNm}}
     <br/>
-    관리기관명 : {{orgNm}}
+    관리기관명 : {{#orgNm}}{{orgNm}}{{/orgNm}}{{^orgNm}}:{{/orgNm}}
     <br/>
-    동물보호센터유형 : {{divisionNm}}
+    동물보호센터유형 : {{#divisionNm}}{{divisionNm}}{{/divisionNm}}{{^divisionNm}}:{{/divisionNm}}
     <br/>
-    소재지 도로명 주소 : {{careAddr}}
+    소재지 도로명 주소 : {{#careAddr}}{{careAddr}}{{/careAddr}}{{^careAddr}}:{{/careAddr}}
     <br/>
-    소재지 지번 주소 : {{jibunAddr}}
+    소재지 지번 주소 : {{#jibunAddr}}{{jibunAddr}}{{/jibunAddr}}{{^jibunAddr}}:{{/jibunAddr}}
     <br/>
-    구조대상동물 : {{#saveTrgtAnimal}}{{saveTrgtAnimal}}{{/saveTrgtAnimal}}{{^saveTrgtAnimal}}정보없음{{/saveTrgtAnimal}}
+    구조대상동물 : {{#saveTrgtAnimal}}{{saveTrgtAnimal}}{{/saveTrgtAnimal}}{{^saveTrgtAnimal}}:{{/saveTrgtAnimal}}
     <br/>
-    평일운영시작시각 :{{#weekOprStime}}{{weekOprStime}}{{/weekOprStime}}{{^weekOprStime}}정보없음{{/weekOprStime}}
+    평일운영시작시각 :{{#weekOprStime}}{{weekOprStime}}{{/weekOprStime}}{{^weekOprStime}}:{{/weekOprStime}}
     <br/>
-    평일운영종료시각 : {{#weekOprEtime}}{{weekOprEtime}}{{/weekOprEtime}}{{^weekOprEtime}}정보없음{{/weekOprEtime}}
+    평일운영종료시각 : {{#weekOprEtime}}{{weekOprEtime}}{{/weekOprEtime}}{{^weekOprEtime}}:{{/weekOprEtime}}
     <br/>
-    평일분양시작시각 : {{#weekCellStime}}{{weekCellStime}}{{/weekCellStime}}{{^weekCellStime}}정보없음{{/weekCellStime}}
+    평일분양시작시각 : {{#weekCellStime}}{{weekCellStime}}{{/weekCellStime}}{{^weekCellStime}}:{{/weekCellStime}}
     <br/>
-    평일분양종료시각 : {{#weekCellEtime}}{{weekCellEtime}}{{/weekCellEtime}}{{^weekCellEtime}}정보없음{{/weekCellEtime}}
+    평일분양종료시각 : {{#weekCellEtime}}{{weekCellEtime}}{{/weekCellEtime}}{{^weekCellEtime}}:{{/weekCellEtime}}
     <br/>
-    주말운영시작시각 : {{#weekendCellStime}}{{weekendCellStime}}{{/weekendCellStime}}{{^weekendCellStime}}정보없음{{/weekendCellStime}}
+    주말운영시작시각 : {{#weekendCellStime}}{{weekendCellStime}}{{/weekendCellStime}}{{^weekendCellStime}}:{{/weekendCellStime}}
     <br/>
-    주말운영종료시각 : {{#weekendCellEtime}}{{weekendCellEtime}}{{/weekendCellEtime}}{{^weekendCellEtime}}정보없음{{/weekendCellEtime}}
+    주말운영종료시각 : {{#weekendCellEtime}}{{weekendCellEtime}}{{/weekendCellEtime}}{{^weekendCellEtime}}:{{/weekendCellEtime}}
     <br/>
-    주말분양시작시각 : {{#weekendOprStime}}{{weekendOprStime}}{{/weekendOprStime}}{{^weekendOprStime}}정보없음{{/weekendOprStime}}
+    주말분양시작시각 : {{#weekendOprStime}}{{weekendOprStime}}{{/weekendOprStime}}{{^weekendOprStime}}:{{/weekendOprStime}}
     <br/>
-    주말분양종료시각 : {{#weekendOprEtime}}{{weekendOprEtime}}{{/weekendOprEtime}}{{^weekendOprEtime}}정보없음{{/weekendOprEtime}}
+    주말분양종료시각 : {{#weekendOprEtime}}{{weekendOprEtime}}{{/weekendOprEtime}}{{^weekendOprEtime}}:{{/weekendOprEtime}}
     <br/>
-    휴무일 : {{#closeDay}}{{closeDay}}{{/closeDay}}{{^closeDay}}정보없음{{/closeDay}}
+    휴무일 : {{#closeDay}}{{closeDay}}{{/closeDay}}{{^closeDay}}:{{/closeDay}}
     <br/>
-    전화번호 :{{careTel}}정보없음
+    전화번호 :{{#careTel}}{{careTel}}{{/careTel}}{{^careTel}}:{{/careTel}}
     <hr />
     {{/shelterlist}}
 </body>

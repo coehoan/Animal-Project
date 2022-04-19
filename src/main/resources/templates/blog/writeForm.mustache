@@ -1,0 +1,134 @@
+{{>/layout/header}}
+<div class="m_padding_medium">
+  <!-- 게시판 선택 버튼 시작 -->
+  <div class="d-flex">
+    <div>
+      <select class="m_blog_writeForm_select" id="board-select" onchange="boardSelect(this.value)">
+        <option selected disabled>게시판선택</option>
+        <option value="adopt">입양후기</option>
+        <option value="region">지역별게시판</option>
+        <option value="free">자유게시판</option>
+      </select>
+    </div>
+    <div id="category-region" class="m_div_display_none">
+      <select class="m_blog_writeForm_select" onchange="regionSelect(this.value)">
+        <option selected disabled>지역</option>
+        <option value="seoul">서울</option>
+        <option value="busan">부산</option>
+        <option value="daegu">대구</option>
+      </select>
+    </div>
+    <div id="category-type" class="m_div_display_none">
+      <select class="m_blog_writeForm_select" onchange="typeSelect(this.value)">
+        <option selected disabled>품종</option>
+        <option value="dog">강아지</option>
+        <option value="cat">고양이</option>
+        <option value="etc">기타</option>
+      </select>
+    </div>
+  </div>
+  <!-- 게시판 선택 버튼 끝 -->
+
+  <!-- 제목 시작 -->
+  <div>
+    <input id="title" class="m_blog_writeForm_title" type="text">
+  </div>
+  <!-- 제목 끝 -->
+
+  <!-- 내용 시작 -->
+
+  <div id="editor" class="mt-3"></div>
+
+  <!-- 글쓰기 버튼 -->
+  <div class="form-group mt-3 m_div_flex_end">
+    <input id="btn-write" type="submit" class="btn bg-success text-light" value="글쓰기">
+  </div>
+  <!-- 글쓰기 버튼 -->
+
+  <!-- 내용 끝 -->
+</div>
+
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
+<script>
+  const Editor = toastui.Editor;
+  const editor = new Editor({
+    el: document.querySelector('#editor'),
+    height: '500px',
+    initialEditType: 'wysiwyg',
+    previewStyle: 'vertical'
+  });
+  editor.getMarkdown();
+
+  let selectedBoard;
+  let selectedRegion;
+  let selectedType;
+
+  // 게시판 선택
+  function boardSelect(value) {
+
+    if (value == "adopt") {
+      $("#category-region").removeClass("m_div_display_none");
+      $("#category-type").removeClass("m_div_display_none");
+      selectedBoard = value;
+
+    } else if (value == "region") {
+      $("#category-region").removeClass("m_div_display_none");
+      $("#category-type").addClass("m_div_display_none");
+      selectedBoard = value;
+      selectedType = null;
+    } else {
+      $("#category-region").addClass("m_div_display_none");
+      $("#category-type").addClass("m_div_display_none");
+      selectedBoard = value;
+      selectedType = null;
+      selectedRegion = null;
+    }
+  }
+  // 지역 선택
+  function regionSelect(value) {
+    selectedRegion = value;
+  }
+  // 동물 종류 선택
+  function typeSelect(value) {
+    selectedType = value;
+  }
+
+  // 글쓰기 버튼 클릭
+  $("#btn-write").click(() => {
+    write();
+  })
+
+  async function write() {
+    let writeDto = {
+      title: $("#title").val(),
+      content: editor.getHTML(),
+      board: selectedBoard,
+      region: selectedRegion,
+      type: selectedType
+    }
+
+    // console.log("제목 : " + title);
+    // console.log("내용 : " + content);
+    // console.log("어떤 게시판 : " + selectedBoard);
+    // console.log("어떤 지역 : " + selectedRegion);
+    // console.log("어떤 종류 : " + selectedType);
+
+    let response = await fetch("/blog/write", {
+      method: "POST",
+      body: JSON.stringify(writeDto),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      }
+    });
+    let responseParse = await response.json();
+
+    if (responseParse.code == 1) {
+      alert("글쓰기 완료");
+      location.href = "/blog";
+    } else {
+      alert("글쓰기 실패");
+    }
+  }
+</script>
+{{>/layout/footer}}

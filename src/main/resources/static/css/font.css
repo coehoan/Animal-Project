@@ -1,0 +1,28 @@
+.m_main_font_lg {
+    font-family: 'Jua', sans-serif;
+    font-size: 20px;
+}
+
+.m_main_font {
+    font-family: 'Jua', sans-serif;
+    font-size: 17px;
+}
+
+.m_sub_title {
+    font-size: 25px;
+    margin-left: 30px;
+}
+
+.m_content_title_font {
+    font-size: 30px;
+}
+
+.m_text_align_center {
+    text-align: center;
+}
+
+.m_sub_content {
+    text-align: left;
+    color: #919191;
+    font-size: 13px;
+}

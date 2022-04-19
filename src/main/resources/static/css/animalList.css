@@ -1,0 +1,24 @@
+.animallist-select-box {
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    width: 130px;
+}
+
+.m_button {
+    display: inline-block;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #198754;
+    cursor: pointer;
+    color: #198754;
+    text-decoration: none;
+    background-color: white;
+}
+
+.m_button:hover {
+    color: white;
+    background-color: #198754;
+}

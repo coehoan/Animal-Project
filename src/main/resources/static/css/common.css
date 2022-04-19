@@ -1,0 +1,56 @@
+.m_auth_box {
+    padding: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 500px;
+    border: 1px solid rgba(128, 128, 128, 0.267);
+    border-radius: 15px;
+}
+
+.m_div_flex_end {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.m_div_flex_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.m_div_flex_between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.m_div_flex_column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.m_search_icon {
+    border: 0px;
+    background-color: white;
+}
+
+.m_text_link {
+    text-decoration: none;
+    color: black;
+}
+
+.m_text_link:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+.m_border_bottom {
+    border-bottom: 1px solid black;
+    width: 60vh;
+}
+
+.m_div_display_none {
+    display: none;
+}

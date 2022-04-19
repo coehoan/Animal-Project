@@ -1,0 +1,157 @@
+{{>/layout/header}}
+<!--메인검색버튼 시작-->
+<div class="d-flex justify-content-center">
+  <img src="/image/dog1.png">
+</div>
+<div class="m_padding_medium">
+  <h2 class="m_sub_title">전체검색</h2>
+  <hr>
+  <div class="m_padding_small d-flex flex-column">
+    <div class="container-fluid">
+      <form class="d-flex flex-fill">
+        <input class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!--메인검색버튼 끝-->
+
+<!--상세검색버튼 시작-->
+<div class="m_padding_medium">
+  <h2 class="m_sub_title">상세검색</h2>
+  <hr>
+  <div class="mt-5 d-flex">
+    <div class="container-fluid">
+      <form class="d-flex flex-fill">
+        <input class="form-control me-2" type="date" placeholder="날짜" aria-label="Search">
+        <i class="me-2">~</i>
+        <input class="form-control me-2" type="date" placeholder="날짜" aria-label="Search">
+        <!--
+        https://www.jqueryscript.net/form/Dynamic-jQuery-Cascading-Dropdown-Lists-Plugin.html
+        스크립트 사용법 공부 후 지역 Ajax 처리
+      -->
+        <div id="example1" class="bs-docs-example d-flex">
+          <select class="step1 me-2 animallist-select-box" onchange="boardSelect(this.value);">
+            <option selected disabled>지역</option>
+            <option value="seoul">서울</option>
+            <option value="busan">부산</option>
+            <option value="gyeongnam">경남</option>
+          </select>
+          <select class="step2 me-2 animallist-select-box">
+            <option selected disabled>시/군/구</option>
+            <option>강남구</option>
+            <option>서초구</option>
+            <option>광진구</option>
+          </select>
+        </div>
+        <select class="me-2 animallist-select-box">
+          <option selected disabled>종류</option>
+          <option>강아지</option>
+          <option>고양이</option>
+          <option>기타</option>
+        </select>
+        <select class="me-2 animallist-select-box">
+          <option selected disabled>품종</option>
+          <option>말티즈</option>
+          <option>치와와</option>
+          <option>진돗개</option>
+        </select>
+        <input class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!--상세검색버튼 끝-->
+
+<!--검색결과테이블 시작-->
+<div class="m_padding_medium d-flex flex-column">
+  <table class="table">
+    <thead>
+      <tr class="m_text_align_center">
+        <th scope="col">No</th>
+        <th scope="col">종류</th>
+        <th scope="col">사진</th>
+        <th scope="col">지역</th>
+        <th scope="col">품종</th>
+        <th scope="col">이름</th>
+        <th scope="col">나이</th>
+        <th scope="col">보호소이름</th>
+        <th scope="col">자세히보기</th>
+      </tr>
+    </thead>
+    <tbody class="m_text_align_center">
+      <tr id="animalList">
+        <th scope="row" style="vertical-align: middle;">1</th>
+        <td style="vertical-align: middle;">강아지</td>
+        <td width="110"><img src="/image/dog1.png" width="100" height="100"></td>
+        <td style="vertical-align: middle;">
+          부산
+
+        </td>
+        <td style="vertical-align: middle;">시고르자브종</td>
+        <td style="vertical-align: middle;">누렁이</td>
+        <td style="vertical-align: middle;">3살</td>
+        <td style="vertical-align: middle;">누렁이보호소</td>
+        <td style="vertical-align: middle;" width="100">
+          <button id="showDetail" class="m_button" onclick="show()">자세히</button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="9" id="detail" class="m_div_display_none">
+          <div class="m_sub_content">
+            #3살 #누렁이색 #8kg #남 #중성화O #뚱땡이 #누렁이보호소 #051-333-3333 #신민경 담당자 #010-7799-6426
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row" style="vertical-align: middle;">2</th>
+        <td style="vertical-align: middle;" width="70">강아지</td>
+        <td><img src="/image/dog1.png" width="100" height="100"></td>
+        <td style="vertical-align: middle;">부산</td>
+        <td style="vertical-align: middle;">시고르자브종</td>
+        <td style="vertical-align: middle;">누렁이친구</td>
+        <td style="vertical-align: middle;">3살</td>
+        <td style="vertical-align: middle;">누렁이보호소</td>
+        <td style="vertical-align: middle;" width="100">
+          <button id="showDetail" class="m_button" onclick="show()">자세히</button>
+        </td>
+      </tr>
+      <tr>
+        <div class="d-flex m_text_align_center">
+          <th scope="row" style="vertical-align: middle;">3</th>
+          <td style="vertical-align: middle;">강아지</td>
+          <td><img src="/image/dog1.png" width="100" height="100"></td>
+          <td style="vertical-align: middle;">김해</td>
+          <td style="vertical-align: middle;">시고르자브종</td>
+          <td style="vertical-align: middle;">누렁이동생</td>
+          <td style="vertical-align: middle;">2살</td>
+          <td style="vertical-align: middle;">누렁이보호소</td>
+          <td style="vertical-align: middle;" width="100">
+            <button id="showDetail" class="m_button" onclick="show()">자세히</button>
+          </td>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!--검색결과테이블 끝-->
+
+<!-- 자세히보기 div 시작 -->
+<div>
+
+</div>
+<!-- 자세히보기 div 끝 -->
+
+<script>
+  function show() {
+    if ($("#detail").css("display") == "none") {
+      $("#detail").removeClass("m_div_display_none");
+    } else {
+      $("#detail").addClass("m_div_display_none");
+    }
+  }
+</script>
+
+{{>/layout/footer}}

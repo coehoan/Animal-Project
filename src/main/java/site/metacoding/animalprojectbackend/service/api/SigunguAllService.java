@@ -40,7 +40,7 @@ public class SigunguAllService {
         // String busan = "6260000";
 
         // for (int i = 0; i < sidoEntity.size(); i++) { // 시도 사이즈만큼 반복
-        //List<ResponseDto> sigunguList = new ArrayList<>();
+        // List<ResponseDto> sigunguList = new ArrayList<>();
         List<Sigungu> lists = new ArrayList<>();
         List<Sigungu> sigunguEntity = new ArrayList<>();
 
@@ -71,10 +71,10 @@ public class SigunguAllService {
 
                         System.out.println("아이템 사이즈 확인 =====" + itemList.size());
                         Sigungu sigungus = Sigungu.builder()
-                        .orgCd(itemList.get(i).getOrgCd())
-                        .orgdownNm(itemList.get(i).getOrgdownNm())
-                        .uprCd(itemList.get(i).getUprCd())
-                        .build();
+                                .orgCd(itemList.get(i).getOrgCd())
+                                .orgdownNm(itemList.get(i).getOrgdownNm())
+                                .uprCd(itemList.get(i).getUprCd())
+                                .build();
                         // sigungus.setId(i);
                         // sigungus.setOrgCd(itemList.get(i).getOrgCd());
                         // sigungus.setOrgdownNm(itemList.get(i).getOrgdownNm());
@@ -85,11 +85,8 @@ public class SigunguAllService {
                         sigunguEntity = sigunguRepository.saveAllAndFlush(lists);
 
                         System.out.println("엔티티에 들어간 것 확인 ======" + lists);
-
                     }
-
                 }
-
             }
             return sigunguEntity;
 

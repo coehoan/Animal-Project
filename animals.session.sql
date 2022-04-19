@@ -15,5 +15,4 @@ WHERE sd.id=1;
 
 SELECT * FROM Sido WHERE orgCd;
 
-
 SELECT * FROM Sido WHERE orgCd;

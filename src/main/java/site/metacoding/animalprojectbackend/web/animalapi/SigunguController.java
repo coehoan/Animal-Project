@@ -19,6 +19,7 @@ public class SigunguController {
     private final SigunguService sigunguService;
 
     private final SigunguAllService sigunguAllService;
+    private final TestService testService;
 
     @GetMapping("/sigungu")
     public String sigunguAll(Sigungu sigungu, Model model) {
@@ -30,8 +31,8 @@ public class SigunguController {
         return "/api/sigunguAllDownload";
     }
 
+    ///////////////////////////////////////// 이건 사용하지 마세요!!
 
-    /////////////////////////////////////////이건 사용하지 마세요!!
     @GetMapping("/sigungu/busan")
     public String download(Sigungu sigunguDto, Model model) {
 
@@ -172,7 +173,6 @@ public class SigunguController {
         return "/api/sigunguDownload";
     }
 
-
     @GetMapping("/sigungu/test")
 
     public String test(Sigungu sigungu, Model model) {
@@ -183,7 +183,5 @@ public class SigunguController {
 
         return "/api/test";
     }
-    
-
 
 }

@@ -1,0 +1,195 @@
+{{>/layout/header}}
+<!--지도 시작-->
+<div class="m_padding_medium">
+  <div id="map" style="width:100%;height:400px;"></div>
+  <!--지도 종료-->
+  <!--메인검색버튼 시작-->
+  <h2 class="m_sub_title m_mt_5">전체검색</h2>
+  <hr>
+  <div class="m_padding_small">
+    <div class="container-fluid d-flex">
+      <input id="search-input" class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit" onclick="addrSearch()">Search</button>
+
+    </div>
+  </div>
+  <!--메인검색버튼 끝-->
+
+  <!--상세검색버튼 시작-->
+  <div>
+    <h2 class="m_sub_title mt-5">상세검색</h2>
+    <hr>
+    <div class="mt-5 d-flex">
+      <div class="container-fluid d-flex">
+        <form class="flex-fill m_div_flex_center">
+          <!--
+          https://www.jqueryscript.net/form/Dynamic-jQuery-Cascading-Dropdown-Lists-Plugin.html
+          스크립트 사용법 공부 후 지역 Ajax 처리
+        -->
+          <div id="example1" class="bs-docs-example d-flex">
+            <select class="step1 me-2 animallist-select-box" onchange="boardSelect(this.value);">
+              <option selected disabled>지역</option>
+              <option value="seoul">서울</option>
+              <option value="busan">부산</option>
+              <option value="gyeongnam">경남</option>
+            </select>
+            <select class="step2 me-2 animallist-select-box">
+              <option selected disabled>시/군/구</option>
+              <option>강남구</option>
+              <option>서초구</option>
+              <option>광진구</option>
+            </select>
+            <select class="step3 me-2 animallist-select-box">
+              <option selected disabled>동/읍/면</option>
+              <option>청담동</option>
+              <option>압구정동</option>
+              <option>신사동</option>
+              <option>논현동</option>
+            </select>
+          </div>
+          <select class="me-2 animallist-select-box">
+            <option selected disabled>종류</option>
+            <option>강아지</option>
+            <option>고양이</option>
+            <option>기타</option>
+          </select>
+          <select class="me-2 animallist-select-box">
+            <option selected disabled>품종</option>
+            <option>말티즈</option>
+            <option>치와와</option>
+            <option>진돗개</option>
+          </select>
+          <div style="width: 170px;" class="d-flex">주말운영</div>
+          <label class="form-switch">
+            <input type="checkbox">
+            <i></i>
+          </label>
+          <input class="form-control me-2" type="search" placeholder="검색" aria-label="Search">
+        </form>
+        <button class="btn btn-outline-success" onclick="detailSearch()">Search</button>
+      </div>
+    </div>
+  </div>
+  <!--상세검색버튼 끝-->
+
+  <!--검색결과테이블 시작-->
+  <div class="d-flex flex-column m_mt_5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">지역</th>
+          <th scope="col">보호소명</th>
+          <th scope="col">주소</th>
+          <th scope="col">운영시간</th>
+          <th scope="col">주말운영여부</th>
+          <th scope="col">전화번호</th>
+          <th scope="col">구조대상동물</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {{#shelter}}
+          <div class="d-flex m_text_align_center">
+            <th>{{#id}}{{id}}{{/id}}{{^id}}none{{/id}} </th>
+            <td>{{#orgNm}}{{orgNm}}{{/orgNm}}{{^orgNm}}none{{/orgNm}}</th>
+            <td>{{#careNm}}{{careNm}}{{/careNm}}{{^careNm}}none{{/careNm}}</th>
+            <td>{{#jibunAddr}}{{jibunAddr}}{{/jibunAddr}}{{^jibunAddr}}none{{/jibunAddr}}</th>
+            <td>{{#weekOprStime}}{{weekOprStime}}~{{weekOprEtime}} {{/weekOprStime}}{{^weekOprStime}}none{{/weekOprStime}}</th>
+            <td>{{#closeDay}}{{closeDay}}{{/closeDay}}{{^closeDay}}none{{/closeDay}}</th>
+            <td>{{#careTel}}{{careTel}}{{/careTel}}{{^careTel}}none{{/careTel}}</th>
+            <td>{{#saveTrgtAnimal}}{{saveTrgtAnimal}}{{/saveTrgtAnimal}}{{^saveTrgtAnimal}}none{{/saveTrgtAnimal}}</th>
+          </div>
+          {{/shelter}}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--검색결과테이블 끝-->
+
+  <script>
+    // 지도 초기값
+    let map = new naver.maps.Map('map', {
+      center: new naver.maps.LatLng(37.3595704, 127.105399),
+      zoom: 13
+    });
+
+    // 마커 초기값
+    let marker = new naver.maps.Marker({
+      map: map,
+      position: new naver.maps.LatLng(37.3595704, 127.105399)
+    });
+
+    // 전체검색
+    function addrSearch() {
+      let addr = $("#search-input").val();
+      naver.maps.Service.geocode({
+        address: addr
+      }, function (status, response) {
+        if (status !== naver.maps.Service.Status.OK) {
+          return alert('Something wrong!');
+        }
+
+        let responseParse = response.result; // 검색 결과의 배열
+        console.log(responseParse);
+
+        let x = responseParse.items[0].point.x;
+        let y = responseParse.items[0].point.y;
+
+        let point = new naver.maps.Point(x, y);
+
+        map.setCenter(point);
+        marker.setPosition(point);
+
+      });
+    }
+
+    // 상세검색 전체결과 지도에 표시
+    function detailSearch() {
+      let addr1 = $("#detail-addr-1").text();
+      let addr2 = $("#detail-addr-2").text();
+      let addr3 = $("#detail-addr-3").text();
+      let arry = new Array();
+      let addrList = new Array();
+      addrList.push(addr1);
+      addrList.push(addr2);
+      addrList.push(addr3);
+      // 기존 마커 초기화
+      marker.setMap(null);
+      for (let i = 0; i < addrList.length; i++) {
+        //alert(addrList[i]);
+        naver.maps.Service.geocode({
+          query: addrList[i]
+        }, function (status, response) {
+          if (status != naver.maps.Service.Status.OK) {
+            return alert('Something wrong!');
+          }
+
+          // 검색 결과의 배열
+          let responseParse = response.v2.addresses;
+
+          // 주소를 좌표로 변환시킨값을 x, y로 잡아줌
+          let x = responseParse[0].x;
+          let y = responseParse[0].y;
+
+          // x,y 좌표를 point로 담고 배열에 push
+          let point = new naver.maps.Point(x, y);
+          arry.unshift([x, y]);
+
+          // 마커 생성
+          let marker = new naver.maps.Marker({
+            map: map,
+            position: new naver.maps.LatLng(point)
+          });
+
+
+          console.log(arry[i][0]);
+          // 지도 이동
+          map.setCenter(arry[0]);
+        });
+      }
+    }
+
+  </script>
+
+  {{>/layout/footer}}

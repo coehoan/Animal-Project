@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.animalprojectbackend.animalkind.modeling.Item;
+import site.metacoding.animalprojectbackend.animalkind.modeling.Kind;
 import site.metacoding.animalprojectbackend.animalkind.modeling.KindDto;
 import site.metacoding.animalprojectbackend.animalkind.modeling.KindRepository;
 import site.metacoding.animalprojectbackend.animalkind.modeling.ResponseDto;
@@ -19,42 +21,50 @@ public class KindService {
     private final KindRepository kindRepository;
 
     @Transactional
-    public List<KindDto> 다운로드(KindDto kindDto) {
+    public List<Kind> 다운로드(KindDto kindDto) {
+        String key = "jDqHGG%2BaNG47ijh6s3XzB%2BuF8fJOeovccnw%2FZtc9wLQUaKJumPo%2Frl1a2ygZ68dv9L0PD7drvpjPAeTnnB9f%2FQ%3D%3D";
+        RestTemplate restTemplate = new RestTemplate();
 
-        List<KindDto> lists = new ArrayList<>();
-
+        List<Kind> lists = new ArrayList<>();
+        List<Kind> kindEntity = new ArrayList<>();
+        ArrayList<String> kindLists = new ArrayList<String>();
+        kindLists.add("417000");
+        kindLists.add("422400");
+        kindLists.add("429900");
         try {
-            String key = "jDqHGG%2BaNG47ijh6s3XzB%2BuF8fJOeovccnw%2FZtc9wLQUaKJumPo%2Frl1a2ygZ68dv9L0PD7drvpjPAeTnnB9f%2FQ%3D%3D";
-            URI uri = new URI(
-                    "http://apis.data.go.kr/1543061/abandonmentPublicSrvc/kind?serviceKey="
+            for (String str : kindLists) {
+                StringBuffer urisb = new StringBuffer();
+                urisb.append(
+                        "http://apis.data.go.kr/1543061/abandonmentPublicSrvc/kind?");
+                urisb.append("serviceKey=" + key);
+                urisb.append("&up_kind_cd=" + str);
+                urisb.append("&_type=json");
 
-                            + key + "&up_kind_cd=422400&_type=json");
+                URI uri = new URI(urisb.toString());
+                // 개 : 417000, 고양이 : 422400, 기타 : 429900
 
-            // 개 : 417000, 고양이 : 422400, 기타 : 429900
-            RestTemplate restTemplate = new RestTemplate();
+                ResponseDto response = restTemplate.getForObject(uri, ResponseDto.class);
 
-            ResponseDto response = restTemplate.getForObject(uri, ResponseDto.class);
+                System.out.println(response);
+                if (response.getResponse().getBody().getItems().getItem() != null) {
+                    List<Item> itemList = response.getResponse().getBody().getItems().getItem();
+                    System.out.println(itemList);
 
-            System.out.println(response);
+                    for (int i = 0; i < itemList.size(); i++) {
+                        Kind result = Kind.builder()
+                                .KNm(itemList.get(i).getKNm())
+                                .kindCd(itemList.get(i).getKindCd())
+                                .build();
 
-            List<ResponseDto> kindList = new ArrayList<>();
+                        lists.add(result);
 
-            for (int i = 0; i < response.getResponse().getBody().getItems().getItem().size(); i++) {
-                kindList.add(response);
+                        kindEntity = kindRepository.saveAllAndFlush(lists);
+
+                        System.out.println(lists);
+
+                    }
+                }
             }
-            System.out.println(kindList);
-
-            for (int i = 0; i < kindList.size(); i++) {
-                KindDto result = new KindDto(i,
-                        kindList.get(i).getResponse().getBody().getItems().getItem().get(i).getKindCd(),
-                        kindList.get(i).getResponse().getBody().getItems().getItem().get(i).getKNm());
-                lists.add(result);
-            }
-
-            System.out.println(lists);
-
-            List<KindDto> kindEntity = kindRepository.saveAll(lists);
-
             return kindEntity;
         } catch (Exception e) {
             e.printStackTrace();
