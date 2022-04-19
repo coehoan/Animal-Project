@@ -11,6 +11,7 @@ spring:
   mustache:
     expose-session-attributes: true
   datasource: 
+
       url: jdbc:mariadb://localhost:3306/Shelters
       driver-class-name: org.mariadb.jdbc.Driver
       username: animal
