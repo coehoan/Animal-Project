@@ -43,7 +43,7 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @Column(length = 30, nullable = true)
+    @Column(length = 30, nullable = false)
     private String board;
 
     @Column(length = 15, nullable = true)
