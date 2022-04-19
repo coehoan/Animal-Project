@@ -1,13 +1,12 @@
 package site.metacoding.animalprojectfrontend.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectfrontend.domain.post.Post;
-import site.metacoding.animalprojectfrontend.domain.post.PostRepository;
+import site.metacoding.animalprojectfrontend.config.post.Post;
+import site.metacoding.animalprojectfrontend.config.post.PostRepository;
 
 @RequiredArgsConstructor
 @Service

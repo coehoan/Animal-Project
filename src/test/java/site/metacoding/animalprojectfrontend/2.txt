@@ -1,0 +1,69 @@
+
+private Integer id;
+private String orgNm;
+private String careNm;
+private String jibunAddr;
+private String weekOprStime;
+private String closeDay;
+private String careTel;
+private String saveTrgtAnimal ;
+
+@Param("id") Integer id,
+@Param("orgnm") String orgNm,
+@Param("carenm") String careNm,
+@Param("jibunnm") String jibunAddr,
+@Param("weekoprstime") String weekOprStime,
+@Param("weekopretime") String closeDay,
+@Param("caretel") String careTel,
+@Param("savetrgtanimal") String saveTrgtAnimal;
+
+ 
+
+{{id}}
+{{orgNm}}
+{{careNm}}
+{{jibunAddr}}
+{{weekOprStime}}
+{{closeDay}}
+{{careTel}}
+{{saveTrgtAnimal}}
+
+{{#id}}{{id}}{{/id}}{{^id}}정보없음{{/id}}
+{{#orgNm}}{{orgNm}}{{/orgNm}}{{^orgNm}}정보없음{{/orgNm}}
+{{#careNm}}{{careNm}}{{/careNm}}{{^careNm}}정보없음{{/careNm}}
+{{#jibunAddr}}{{jibunAddr}}{{/jibunAddr}}{{^jibunAddr}}정보없음{{/jibunAddr}}
+{{#weekOprStime}}{{weekOprStime}}~{{weekOprEtime}}{{/weekOprStime}}{{^weekOprStime}}정보없음{{/weekOprStime}}
+{{#closeDay}}{{closeDay}}{{/closeDay}}{{^closeDay}}정보없음{{/closeDay}}
+{{#careTel}}{{careTel}}{{/careTel}}{{^careTel}}정보없음{{/careTel}}
+{{#saveTrgtAnimal}}{{saveTrgtAnimal}}{{/saveTrgtAnimal}}{{^saveTrgtAnimal}}정보없음{{/saveTrgtAnimal}}
+
+id
+orgNm
+careNm
+jibunAddr
+weekOprStime
+closeDay
+careTel
+saveTrgtAnimal 
+
+
+id
+orgNm
+careNm
+jibunAddr
+weekOprStime
+closeDay
+careTel
+saveTrgtAnimal 
+
+
+id
+orgNm
+careNm
+jibunAddr
+weekOprStime
+closeDay
+careTel
+saveTrgtAnimal 
+
+

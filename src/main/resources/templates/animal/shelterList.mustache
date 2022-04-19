@@ -88,126 +88,109 @@
         </tr>
       </thead>
       <tbody>
+        {{#shelterlistPage.content}}
         <tr>
           <div class="d-flex m_text_align_center">
-            <th scope="row" style="vertical-align: middle;">1</th>
-            <td style="vertical-align: middle;">부산</td>
-            <td style="vertical-align: middle;">누렁이보호소</td>
-            <td id="detail-addr-1" style="vertical-align: middle;">부산광역시 부산진구 시민공원로 30 부산진구청</td>
-            <td style="vertical-align: middle;">09:00~18:00</td>
-            <td style="vertical-align: middle;">O</td>
-            <td style="vertical-align: middle;">051-888-1001</td>
-            <td style="vertical-align: middle;">누렁이만보호</td>
+            <th scope="row" style="vertical-align: middle;">{{#id}}{{id}}{{/id}}{{^id}}정보없음{{/id}}</th>
+            <td style="vertical-align: middle;">{{#orgNm}}{{orgNm}}{{/orgNm}}{{^orgNm}}정보없음{{/orgNm}}</td>
+            <td style="vertical-align: middle;">{{#careNm}}{{careNm}}{{/careNm}}{{^careNm}}정보없음{{/careNm}}</td>
+            <td style="vertical-align: middle;">{{#jibunAddr}}{{jibunAddr}}{{/jibunAddr}}{{^jibunAddr}}정보없음{{/jibunAddr}}</td>
+            <td style="vertical-align: middle;">{{#weekOprStime}}{{weekOprStime}}~{{weekOprEtime}}{{/weekOprStime}}{{^weekOprStime}}정보없음{{/weekOprStime}}</td>
+            <td style="vertical-align: middle;">{{#closeDay}}{{closeDay}}{{/closeDay}}{{^closeDay}}0{{/closeDay}}</td>
+            <td style="vertical-align: middle;">{{#careTel}}{{careTel}}{{/careTel}}{{^careTel}}***********{{/careTel}}</td>
+            <td style="vertical-align: middle;">{{#saveTrgtAnimal}}{{saveTrgtAnimal}}{{/saveTrgtAnimal}}{{^saveTrgtAnimal}}정보없음{{/saveTrgtAnimal}}</td>
           </div>
         </tr>
-        <tr>
-          <th scope="row" style="vertical-align: middle;">2</th>
-          <td style="vertical-align: middle;">부산</td>
-          <td style="vertical-align: middle;">백구보호소</td>
-          <td id="detail-addr-2" style="vertical-align: middle;">부산광역시 부산진구 중앙대로 749</td>
-          <td style="vertical-align: middle;">09:00~18:00</td>
-          <td style="vertical-align: middle;">X</td>
-          <td style="vertical-align: middle;">051-888-1002</td>
-          <td style="vertical-align: middle;">백구만보호</td>
-        </tr>
-        <tr>
-          <th scope="row" style="vertical-align: middle;">3</th>
-          <td style="vertical-align: middle;">부산</td>
-          <td style="vertical-align: middle;">고양이보호소</td>
-          <td id="detail-addr-3" style="vertical-align: middle;">부산광역시 사상구 학감대로 242 사상구청</td>
-          <td style="vertical-align: middle;">09:00~18:00</td>
-          <td style="vertical-align: middle;">O</td>
-          <td style="vertical-align: middle;">051-888-1003</td>
-          <td style="vertical-align: middle;">고양이만보호</td>
-        </tr>
+        {{/shelterlistPage.content}}
       </tbody>
     </table>
   </div>
-  <!--검색결과테이블 끝-->
+</div>
+<!--검색결과테이블 끝-->
 
-  <script>
-    // 지도 초기값
-    let map = new naver.maps.Map('map', {
-      center: new naver.maps.LatLng(37.3595704, 127.105399),
-      zoom: 13
+<script>
+  // 지도 초기값
+  let map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 13
+  });
+
+  // 마커 초기값
+  let marker = new naver.maps.Marker({
+    map: map,
+    position: new naver.maps.LatLng(37.3595704, 127.105399)
+  });
+
+  // 전체검색
+  function addrSearch() {
+    let addr = $("#search-input").val();
+    naver.maps.Service.geocode({
+      address: addr
+    }, function (status, response) {
+      if (status !== naver.maps.Service.Status.OK) {
+        return alert('Something wrong!');
+      }
+
+      let responseParse = response.result; // 검색 결과의 배열
+      console.log(responseParse);
+
+      let x = responseParse.items[0].point.x;
+      let y = responseParse.items[0].point.y;
+
+      let point = new naver.maps.Point(x, y);
+
+      map.setCenter(point);
+      marker.setPosition(point);
+
     });
+  }
 
-    // 마커 초기값
-    let marker = new naver.maps.Marker({
-      map: map,
-      position: new naver.maps.LatLng(37.3595704, 127.105399)
-    });
-
-    // 전체검색
-    function addrSearch() {
-      let addr = $("#search-input").val();
+  // 상세검색 전체결과 지도에 표시
+  function detailSearch() {
+    let addr1 = $("#detail-addr-1").text();
+    let addr2 = $("#detail-addr-2").text();
+    let addr3 = $("#detail-addr-3").text();
+    let arry = new Array();
+    let addrList = new Array();
+    addrList.push(addr1);
+    addrList.push(addr2);
+    addrList.push(addr3);
+    // 기존 마커 초기화
+    marker.setMap(null);
+    for (let i = 0; i < addrList.length; i++) {
+      //alert(addrList[i]);
       naver.maps.Service.geocode({
-        address: addr
+        query: addrList[i]
       }, function (status, response) {
-        if (status !== naver.maps.Service.Status.OK) {
+        if (status != naver.maps.Service.Status.OK) {
           return alert('Something wrong!');
         }
 
-        let responseParse = response.result; // 검색 결과의 배열
-        console.log(responseParse);
+        // 검색 결과의 배열
+        let responseParse = response.v2.addresses;
 
-        let x = responseParse.items[0].point.x;
-        let y = responseParse.items[0].point.y;
+        // 주소를 좌표로 변환시킨값을 x, y로 잡아줌
+        let x = responseParse[0].x;
+        let y = responseParse[0].y;
 
+        // x,y 좌표를 point로 담고 배열에 push
         let point = new naver.maps.Point(x, y);
+        arry.unshift([x, y]);
 
-        map.setCenter(point);
-        marker.setPosition(point);
+        // 마커 생성
+        let marker = new naver.maps.Marker({
+          map: map,
+          position: new naver.maps.LatLng(point)
+        });
 
+
+        console.log(arry[i][0]);
+        // 지도 이동
+        map.setCenter(arry[0]);
       });
     }
+  }
 
-    // 상세검색 전체결과 지도에 표시
-    function detailSearch() {
-      let addr1 = $("#detail-addr-1").text();
-      let addr2 = $("#detail-addr-2").text();
-      let addr3 = $("#detail-addr-3").text();
-      let arry = new Array();
-      let addrList = new Array();
-      addrList.push(addr1);
-      addrList.push(addr2);
-      addrList.push(addr3);
-      // 기존 마커 초기화
-      marker.setMap(null);
-      for (let i = 0; i < addrList.length; i++) {
-        //alert(addrList[i]);
-        naver.maps.Service.geocode({
-          query: addrList[i]
-        }, function (status, response) {
-          if (status != naver.maps.Service.Status.OK) {
-            return alert('Something wrong!');
-          }
+</script>
 
-          // 검색 결과의 배열
-          let responseParse = response.v2.addresses;
-
-          // 주소를 좌표로 변환시킨값을 x, y로 잡아줌
-          let x = responseParse[0].x;
-          let y = responseParse[0].y;
-
-          // x,y 좌표를 point로 담고 배열에 push
-          let point = new naver.maps.Point(x, y);
-          arry.unshift([x, y]);
-
-          // 마커 생성
-          let marker = new naver.maps.Marker({
-            map: map,
-            position: new naver.maps.LatLng(point)
-          });
-
-
-          console.log(arry[i][0]);
-          // 지도 이동
-          map.setCenter(arry[0]);
-        });
-      }
-    }
-
-  </script>
-
-  {{>/layout/footer}}
+{{>/layout/footer}}

@@ -1,4 +1,4 @@
-package site.metacoding.animalprojectfrontend.domain.post;
+package site.metacoding.animalprojectfrontend.config.post;
 
 import java.util.List;
 
