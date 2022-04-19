@@ -32,7 +32,7 @@
         스크립트 사용법 공부 후 지역 Ajax 처리
       -->
         <div id="example1" class="bs-docs-example d-flex">
-          <select id="sido" class="step1 me-2 animallist-select-box">
+          <select id="sido" class="step1 me-2 animallist-select-box" onchange="optionChange()">
             <option selected disabled>지역</option>
             <option id="seoul" value="seoul">서울</option>
             <option id="busan" value="busan">부산</option>
@@ -53,259 +53,8 @@
             <option id="jeju" value="jeju">제주</option>
           </select>
           <select id="sigungu" class="step2 me-2 animallist-select-box">
-            <option selected disabled>시/군/구</option>
-            <!--서울-->
-            <option class="seoul" value="seoul-sigungu">가정보호</option>
-            <option value="seoul-sigungu">서울특별시</option>
-            <option value="seoul-sigungu">강남구</option>
-            <option value="seoul-sigungu">강동구</option>
-            <option value="seoul-sigungu">강북구</option>
-            <option value="seoul-sigungu">강서구</option>
-            <option value="seoul-sigungu">관악구</option>
-            <option value="seoul-sigungu">광진구</option>
-            <option value="seoul-sigungu">구로구</option>
-            <option value="seoul-sigungu">금천구</option>
-            <option value="seoul-sigungu">노원구</option>
-            <option value="seoul-sigungu">도봉구</option>
-            <option value="seoul-sigungu">동대문구</option>
-            <option value="seoul-sigungu">동작구</option>
-            <option value="seoul-sigungu">마포구</option>
-            <option value="seoul-sigungu">서대문구</option>
-            <option value="seoul-sigungu">서초구</option>
-            <option value="seoul-sigungu">성동구</option>
-            <option value="seoul-sigungu">성북구</option>
-            <option value="seoul-sigungu">송파구</option>
-            <option value="seoul-sigungu">양천구</option>
-            <option value="seoul-sigungu">영등포구</option>
-            <option value="seoul-sigungu">용산구</option>
-            <option value="seoul-sigungu">은평구</option>
-            <option value="seoul-sigungu">종로구</option>
-            <option value="seoul-sigungu">중구</option>
-            <option value="seoul-sigungu">중랑구</option>
-            <!--부산-->
-            <option class="busan" value="busan-sigungu">강서구</option>
-            <option value="busan-sigungu">금정구</option>
-            <option value="busan-sigungu">기장군</option>
-            <option value="busan-sigungu">남구</option>
-            <option value="busan-sigungu">동구</option>
-            <option value="busan-sigungu">동래구</option>
-            <option value="busan-sigungu">부산진구</option>
-            <option value="busan-sigungu">북구</option>
-            <option value="busan-sigungu">사상구</option>
-            <option value="busan-sigungu">사하구</option>
-            <option value="busan-sigungu">서구</option>
-            <option value="busan-sigungu">수영구</option>
-            <option value="busan-sigungu">연제구</option>
-            <option value="busan-sigungu">영도구</option>
-            <option value="busan-sigungu">중구</option>
-            <option value="busan-sigungu">해운대구</option>
-            <!--대구-->
-            <option value="deagu-sigungu">남구</option>
-            <option value="deagu-sigungu">달서구</option>
-            <option value="deagu-sigungu">달성군</option>
-            <option value="deagu-sigungu">동구</option>
-            <option value="deagu-sigungu">북구</option>
-            <option value="deagu-sigungu">서구</option>
-            <option value="deagu-sigungu">수성구</option>
-            <option value="deagu-sigungu">중구</option>
-            <!--인천-->
-            <option value="incheon-sigungu">강화군</option>
-            <option value="incheon-sigungu">계양구</option>
-            <option value="incheon-sigungu">남동구</option>
-            <option value="incheon-sigungu">동구</option>
-            <option value="incheon-sigungu">미추홀구</option>
-            <option value="incheon-sigungu">부평구</option>
-            <option value="incheon-sigungu">서구</option>
-            <option value="incheon-sigungu">연수구</option>
-            <option value="incheon-sigungu">응진군</option>
-            <option value="incheon-sigungu">중구</option>
-            <!--광주-->
-            <option value="gwangju-sigungu">광산구</option>
-            <option value="gwangju-sigungu">남구</option>
-            <option value="gwangju-sigungu">동구</option>
-            <option value="gwangju-sigungu">북구</option>
-            <option value="gwangju-sigungu">서구</option>
-            <option value="gwangju-sigungu">대덕구</option>
-            <option value="gwangju-sigungu">동구</option>
-            <option value="gwangju-sigungu">서구</option>
-            <option value="gwangju-sigungu">유성구</option>
-            <option value="gwangju-sigungu">중구</option>
-            <!--울산-->
-            <option value="ulsan-sigungu">남구</option>
-            <option value="ulsan-sigungu">동구</option>
-            <option value="ulsan-sigungu">북구</option>
-            <option value="ulsan-sigungu">울주군</option>
-            <option value="ulsan-sigungu">중구</option>
-            <!--경기도-->
-            <option value="gyeongi-sigungu">가평군</option>
-            <option value="gyeongi-sigungu">고양시</option>
-            <option value="gyeongi-sigungu">과천시</option>
-            <option value="gyeongi-sigungu">광명시</option>
-            <option value="gyeongi-sigungu">광주시</option>
-            <option value="gyeongi-sigungu">구리시</option>
-            <option value="gyeongi-sigungu">군포시</option>
-            <option value="gyeongi-sigungu">김포시</option>
-            <option value="gyeongi-sigungu">남양주시</option>
-            <option value="gyeongi-sigungu">동두천시</option>
-            <option value="gyeongi-sigungu">부천시</option>
-            <option value="gyeongi-sigungu">성남시</option>
-            <option value="gyeongi-sigungu">수원시</option>
-            <option value="gyeongi-sigungu">시흥시</option>
-            <option value="gyeongi-sigungu">안산시</option>
-            <option value="gyeongi-sigungu">안성시</option>
-            <option value="gyeongi-sigungu">안양시</option>
-            <option value="gyeongi-sigungu">양주시</option>
-            <option value="gyeongi-sigungu">양평군</option>
-            <option value="gyeongi-sigungu">여주시</option>
-            <option value="gyeongi-sigungu">연천군</option>
-            <option value="gyeongi-sigungu">오산시</option>
-            <option value="gyeongi-sigungu">용인시</option>
-            <option value="gyeongi-sigungu">용인시 기흥구</option>
-            <option value="gyeongi-sigungu">의왕시</option>
-            <option value="gyeongi-sigungu">의정부시</option>
-            <option value="gyeongi-sigungu">이천시</option>
-            <option value="gyeongi-sigungu">파주시</option>
-            <option value="gyeongi-sigungu">평택시</option>
-            <option value="gyeongi-sigungu">포천시</option>
-            <option value="gyeongi-sigungu">하남시</option>
-            <option value="gyeongi-sigungu">화성시</option>
-            <!--강원도-->
-            <option value="gangwon-sigungu">강릉시</option>
-            <option value="gangwon-sigungu">고성군</option>
-            <option value="gangwon-sigungu">동해시</option>
-            <option value="gangwon-sigungu">삼척시</option>
-            <option value="gangwon-sigungu">속초시</option>
-            <option value="gangwon-sigungu">양구군</option>
-            <option value="gangwon-sigungu">양양군</option>
-            <option value="gangwon-sigungu">영월군</option>
-            <option value="gangwon-sigungu">원주시</option>
-            <option value="gangwon-sigungu">인제군</option>
-            <option value="gangwon-sigungu">정성군</option>
-            <option value="gangwon-sigungu">철원군</option>
-            <option value="gangwon-sigungu">춘천시</option>
-            <option value="gangwon-sigungu">태백시</option>
-            <option value="gangwon-sigungu">평창군</option>
-            <option value="gangwon-sigungu">홍천군</option>
-            <option value="gangwon-sigungu">화천군</option>
-            <option value="gangwon-sigungu">횡성군</option>
-            <!--충청북도-->
-            <option value="choongbook-sigungu">괴산군</option>
-            <option value="choongbook-sigungu">단양군</option>
-            <option value="choongbook-sigungu">보은군</option>
-            <option value="choongbook-sigungu">영동군</option>
-            <option value="choongbook-sigungu">옥천군</option>
-            <option value="choongbook-sigungu">음성군</option>
-            <option value="choongbook-sigungu">제천시</option>
-            <option value="choongbook-sigungu">증평군</option>
-            <option value="choongbook-sigungu">진천군</option>
-            <option value="choongbook-sigungu">청주시</option>
-            <option value="choongbook-sigungu">충주시</option>
-            <!--충청남도-->
-            <option value="choognam-sigungu">계룡시</option>
-            <option value="choognam-sigungu">공주시</option>
-            <option value="choognam-sigungu">금산군</option>
-            <option value="choognam-sigungu">논산시</option>
-            <option value="choognam-sigungu">당진시</option>
-            <option value="choognam-sigungu">보령시</option>
-            <option value="choognam-sigungu">부여군</option>
-            <option value="choognam-sigungu">서산시</option>
-            <option value="choognam-sigungu">서천군</option>
-            <option value="choognam-sigungu">아산시</option>
-            <option value="choognam-sigungu">연기군</option>
-            <option value="choognam-sigungu">예산군</option>
-            <option value="choognam-sigungu">천안시</option>
-            <option value="choognam-sigungu">청양군</option>
-            <option value="choognam-sigungu">태안군</option>
-            <option value="choognam-sigungu">홍성군</option>
-            <!--전라북도-->
-            <option value="jeonbook-sigungu">고창군</option>
-            <option value="jeonbook-sigungu">군산시</option>
-            <option value="jeonbook-sigungu">김제시</option>
-            <option value="jeonbook-sigungu">남원시</option>
-            <option value="jeonbook-sigungu">무주군</option>
-            <option value="jeonbook-sigungu">부안군</option>
-            <option value="jeonbook-sigungu">순창군</option>
-            <option value="jeonbook-sigungu">완주군</option>
-            <option value="jeonbook-sigungu">익산시</option>
-            <option value="jeonbook-sigungu">임실군</option>
-            <option value="jeonbook-sigungu">장수군</option>
-            <option value="jeonbook-sigungu">전주시</option>
-            <option value="jeonbook-sigungu">정읍시</option>
-            <option value="jeonbook-sigungu">진안군</option>
-            <!--전라남도-->
-            <option value="jeonam-sigungu">강진군</option>
-            <option value="jeonam-sigungu">고흥군</option>
-            <option value="jeonam-sigungu">곡성군</option>
-            <option value="jeonam-sigungu">광양시</option>
-            <option value="jeonam-sigungu">구례군</option>
-            <option value="jeonam-sigungu">나주시</option>
-            <option value="jeonam-sigungu">담양군</option>
-            <option value="jeonam-sigungu">목포시</option>
-            <option value="jeonam-sigungu">무안군</option>
-            <option value="jeonam-sigungu">보성군</option>
-            <option value="jeonam-sigungu">순천시</option>
-            <option value="jeonam-sigungu">신안군</option>
-            <option value="jeonam-sigungu">여수시</option>
-            <option value="jeonam-sigungu">영광군</option>
-            <option value="jeonam-sigungu">영암군</option>
-            <option value="jeonam-sigungu">완도군</option>
-            <option value="jeonam-sigungu">장성군</option>
-            <option value="jeonam-sigungu">장흥군</option>
-            <option value="jeonam-sigungu">진도군</option>
-            <option value="jeonam-sigungu">함평군</option>
-            <option value="jeonam-sigungu">해남군</option>
-            <option value="jeonam-sigungu">화순군</option>
-            <!--경상북도-->
-            <option value="gyeongbook-sigungu">경상북도</option>
-            <option value="gyeongbook-sigungu">경산시</option>
-            <option value="gyeongbook-sigungu">경주시</option>
-            <option value="gyeongbook-sigungu">고령군</option>
-            <option value="gyeongbook-sigungu">구미시</option>
-            <option value="gyeongbook-sigungu">군위군</option>
-            <option value="gyeongbook-sigungu">김천시</option>
-            <option value="gyeongbook-sigungu">문경시</option>
-            <option value="gyeongbook-sigungu">봉화군</option>
-            <option value="gyeongbook-sigungu">상주시</option>
-            <option value="gyeongbook-sigungu">성주군</option>
-            <option value="gyeongbook-sigungu">안동시</option>
-            <option value="gyeongbook-sigungu">영덕군</option>
-            <option value="gyeongbook-sigungu">영양군</option>
-            <option value="gyeongbook-sigungu">영주시</option>
-            <option value="gyeongbook-sigungu">영천시</option>
-            <option value="gyeongbook-sigungu">예천군</option>
-            <option value="gyeongbook-sigungu">울릉군</option>
-            <option value="gyeongbook-sigungu">울진군</option>
-            <option value="gyeongbook-sigungu">의성군</option>
-            <option value="gyeongbook-sigungu">청도군</option>
-            <option value="gyeongbook-sigungu">청송군</option>
-            <option value="gyeongbook-sigungu">칠곡군</option>
-            <option value="gyeongbook-sigungu">포항시</option>
-            <!--경상남도-->
-            <option value="gyeongnam-sigungu">경상남도</option>
-            <option value="gyeongnam-sigungu">거제시</option>
-            <option value="gyeongnam-sigungu">거창군</option>
-            <option value="gyeongnam-sigungu">고성군</option>
-            <option value="gyeongnam-sigungu">김해시</option>
-            <option value="gyeongnam-sigungu">남해군</option>
-            <option value="gyeongnam-sigungu">밀양시</option>
-            <option value="gyeongnam-sigungu">사천시</option>
-            <option value="gyeongnam-sigungu">산청군</option>
-            <option value="gyeongnam-sigungu">양산시</option>
-            <option value="gyeongnam-sigungu">의령군</option>
-            <option value="gyeongnam-sigungu">진주시</option>
-            <option value="gyeongnam-sigungu">창녕군</option>
-            <option value="gyeongnam-sigungu">창원 마산합포회원구</option>
-            <option value="gyeongnam-sigungu">창원 의창성산구</option>
-            <option value="gyeongnam-sigungu">창원 진해구</option>
-            <option value="gyeongnam-sigungu">통영시</option>
-            <option value="gyeongnam-sigungu">하동군</option>
-            <option value="gyeongnam-sigungu">함안군</option>
-            <option value="gyeongnam-sigungu">함양군</option>
-            <option value="gyeongnam-sigungu">합천군</option>
-            <!--제주시-->
-            <option value="jeju-sigungu">서귀포시</option>
-            <option value="jeju-sigungu">제주시</option>
-            <option value="jeju-sigungu">제주특별자치도</option>
+            <option>시/군/구</option>
+            <option></option>
           </select>
         </div>
         <select class="me-2 animallist-select-box">
@@ -418,216 +167,270 @@
 </script>
 
 <script>
-  // selectSeoul();
-  // selectBusan();
-  // selectDeagu();
-  // selectIncheon();
-  // selectChoongbook();
-  // selectGwangju();
-  // selectChoognam();
-  // selectJeonbook();
-  // selectJeonam();
-  // selectGyeongbook();
-  // selectGyeongnam();
-  // selectJeju();
-</script>
+  function optionChange() {
+    // 시군구들 옵션에 넣을 값
+    let seoulSigungu = ["관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"];
+    let busanSigungu = ["동구", "동래구",	"부산진구",	"북구",	"사상구",	"사하구",	"서구",	"수영구",	"연제구",	"영도구",	"중구",	"해운대구"];
+    let deaguSigungu = ["남구",	"달서구",	"달성군",	"동구",	"북구",	"서구",	"수성구",	"중구"];
+    let incheonSigungu = ["강화군", "계양구", "남동구", "동구",  "미추홀구", "부평구", "서구", "연수구", "옹진군", "중구"];
+    let gwangjuSigungu = ["광산구",	"남구",	"동구",	"북구",	"서구"];
+    let deajeonSigungu = ["대덕구", "동구", "서구", "유성구", "중구"];
+    let ulsanSigungu = ["남구", "동구", "북구", "울주군", "중구"];
+    let gyeongiSigungu = ["동두천시", "부천시", "성남시", "수원시", "시흥시", "안산시", "안성시", "안양시", "양주시", "양평군", "여주시", "연천군", "오산시", "용인시", "용인시", "기흥구", "의왕시", "의정부시", "이천시", "파주시", "평택시", "포천시", "하남시", "화성시"];
+    let gangwonSigungu = ["강릉시", "고성군", "동해시", "삼척시", "속초시", "양구군", "양양군", "영월군", "원주시", "인제군", "정선군", "철원군", "춘천시", "태백시", "평창군", "홍천군", "화천군", "횡성군"];
+    let choongbookSigungu = ["괴산군", "단양군", "보은군", "영동군", "옥천군", "음성군", "제천시", "증평군", "진천군", "청주시", "충주시"];
+    let choongnamSigungu = ["계룡시", "공주시", "금산군", "논산시", "당진시", "보령시", "부여군", "서산시", "서천군", "아산시", "연기군", "예산군", "천안시", "청양군", "태안군", "홍성군"];
+    let jeonbookSigungu = ["고창군", "군산시", "김제시", "남원시", "무주군", "부안군", "순창군", "완주군", "익산시", "임실군", "장수군", "전주시", "정읍시", "진안군"];
+    let jeonamSigungu = ["영광군", "영암군", "완도군", "장성군", "장흥군", "진도군", "함평군", "해남군", "화순군"];
+    let gyeongbookSigungu = ["김천시", "문경시", "봉화군", "상주시", "성주군", "안동시", "영덕군", "영양군", "영주시", "영천시", "예천군", "울릉군", "울진군", "의성군", "청도군", "청송군", "칠곡군", "포항시"];
+    let gyeongsangSigungu = ["거제시",	"거창군",	"경상남도", "고성군",	"김해시",	"남해군",	"밀양시",	"사천시",	"산청군",	"양산시",	"의령군",	"진주시",	"창녕군",	"창원 마산합포회원구",	"창원 의창성산구", "창원 진해구",	"통영시",	"하동군",	"함안군",	"함양군",	"합천군"];
+    let jejuSigungu = ["서귀포시", "제주시", "제주특별자치도"];
+    
+    // 시도 값
+    let sido = $("#sido").val();
+    console.log(sido);
+    // 시군구 변수에 값을 넣음
+    let sigungu;
 
-<script>
-  if ($("#seoul option").val == "seoul") {
-    function selectSeoul() {
-      $("#seoul option").select(function () {
-        console.log("선택됨")
-        $("select#sigungu option[value='busan-sigungu']").remove();
-        $("select#sigungu option[value='deagu-sigungu'").remove();
-        $("select#sigungu option[value='incheon-sigungu'").remove();
-        $("select#sigungu option[value='gwangju-sigungu'").remove();
-        $("select#sigungu option[value='choongbook-sigungu'").remove();
-        $("select#sigungu option[value='choognam-sigungu'").remove();
-        $("select#sigungu option[value='jeonbook-sigungu'").remove();
-        $("select#sigungu option[value='jeonam-sigungu'").remove();
-        $("select#sigungu option[value='gyeongbook-sigungu'").remove();
-        $("select#sigungu option[value='gyeongnam-sigungu'").remove();
-        $("select#sigungu option[value='jeju-sigungu'").remove();
-      });
+    // 시도에 따라서 시군구 값 넣기
+    if(sido == "seoul") {
+      sigungu = seoulSigungu;
+    } else if (sido == "busan") {
+      sigungu = busanSigungu;
+    } else if (sido == "deagu") {
+      sigungu = deaguSigungu;
+    } else if (sido == "incheon") {
+      sigungu = incheonSigungu;
+    } else if (sido == "gwangju") {
+      sigungu = gwangjuSigungu;
+    } else if (sido == "deajeon") {
+      sigungu = deaguSigungu;
+    } else if (sido == "ulsan") {
+      sigungu = ulsanSigungu;
+    } else if (sido == "gyeongi") {
+      sigungu = gyeongiSigungu;
+    } else if (sido == "gangwon") {
+      sigungu = gangwonSigungu;
+    } else if (sido == "choongbook") {
+      sigungu = choongbookSigungu;
+    } else if (sido == "choongnam") {
+      sigungu = choongnamSigungu;
+    } else if (sido == "jeonam") {
+      sigungu = jeonamSigungu;
+    } else if (sido == "jeonbook") {
+      sigungu = jeonbookSigungu;
+    } else if (sido == "gyeongnam") {
+      sigungu = gyeongsangSigungu;
+    } else if (sido == "jeju") {
+      sigungu = jejuSigungu;
+    } else {
+      sigungu = [];
     }
-  }
+
+    $("#sigungu").empty(); // 시군구가 비어있으면
+    $("#sigungu").append('<option></option>'); // 옵션 추가
+      for(let i = 0; i < sigungu.length; i++) {
+        $("#sigungu").append('<option>' + sigungu[i] + '</option>');
+      }
+
+  };
+  // if ($("#seoul option").select == true) {
+  //   new selectSeoul();
+
+  //   function selectSeoul() {
+  //     $("#seoul option").select(function () {
+  //       console.log("선택됨")
+  //       $("select#sigungu option[value='busan-sigungu']").remove();
+  //       $("select#sigungu option[value='deagu-sigungu'").remove();
+  //       $("select#sigungu option[value='incheon-sigungu'").remove();
+  //       $("select#sigungu option[value='gwangju-sigungu'").remove();
+  //       $("select#sigungu option[value='choongbook-sigungu'").remove();
+  //       $("select#sigungu option[value='choognam-sigungu'").remove();
+  //       $("select#sigungu option[value='jeonbook-sigungu'").remove();
+  //       $("select#sigungu option[value='jeonam-sigungu'").remove();
+  //       $("select#sigungu option[value='gyeongbook-sigungu'").remove();
+  //       $("select#sigungu option[value='gyeongnam-sigungu'").remove();
+  //       $("select#sigungu option[value='jeju-sigungu'").remove();
+  //     });
+  //   }
+  // }
 
 
-  function selectBusan() {
-    $("#busan").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("deagu-sigungu").addClass("m_option_display_none");
-      $("incheon-sigungu").addClass("m_option_display_none");
-      $("gwangju-sigungu").addClass("m_option_display_none");
-      $("choongbook-sigungu").addClass("m_option_display_none");
-      $("choognam-sigungu").addClass("m_option_display_none");
-      $("jeonbook-sigungu").addClass("m_option_display_none");
-      $("jeonam-sigungu").addClass("m_option_display_none");
-      $("gyeongbook-sigungu").addClass("m_option_display_none");
-      $("gyeongnam-sigungu").addClass("m_option_display_none");
-      $("jeju-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectBusan() {
+  //   $("#busan").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("deagu-sigungu").addClass("m_option_display_none");
+  //     $("incheon-sigungu").addClass("m_option_display_none");
+  //     $("gwangju-sigungu").addClass("m_option_display_none");
+  //     $("choongbook-sigungu").addClass("m_option_display_none");
+  //     $("choognam-sigungu").addClass("m_option_display_none");
+  //     $("jeonbook-sigungu").addClass("m_option_display_none");
+  //     $("jeonam-sigungu").addClass("m_option_display_none");
+  //     $("gyeongbook-sigungu").addClass("m_option_display_none");
+  //     $("gyeongnam-sigungu").addClass("m_option_display_none");
+  //     $("jeju-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 
-  function selectDeagu() {
-    $("#deagu").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("busan-sigungu").addClass("m_option_display_none");
-      $("incheon-sigungu").addClass("m_option_display_none");
-      $("gwangju-sigungu").addClass("m_option_display_none");
-      $("choongbook-sigungu").addClass("m_option_display_none");
-      $("choognam-sigungu").addClass("m_option_display_none");
-      $("jeonbook-sigungu").addClass("m_option_display_none");
-      $("jeonam-sigungu").addClass("m_option_display_none");
-      $("gyeongbook-sigungu").addClass("m_option_display_none");
-      $("gyeongnam-sigungu").addClass("m_option_display_none");
-      $("jeju-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectDeagu() {
+  //   $("#deagu").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("busan-sigungu").addClass("m_option_display_none");
+  //     $("incheon-sigungu").addClass("m_option_display_none");
+  //     $("gwangju-sigungu").addClass("m_option_display_none");
+  //     $("choongbook-sigungu").addClass("m_option_display_none");
+  //     $("choognam-sigungu").addClass("m_option_display_none");
+  //     $("jeonbook-sigungu").addClass("m_option_display_none");
+  //     $("jeonam-sigungu").addClass("m_option_display_none");
+  //     $("gyeongbook-sigungu").addClass("m_option_display_none");
+  //     $("gyeongnam-sigungu").addClass("m_option_display_none");
+  //     $("jeju-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 
-  function selectIncheon() {
-    $("#incheon").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("busan-sigungu").addClass("m_option_display_none");
-      $("deagu-sigungu").addClass("m_option_display_none");
-      $("gwangju-sigungu").addClass("m_option_display_none");
-      $("choongbook-sigungu").addClass("m_option_display_none");
-      $("choognam-sigungu").addClass("m_option_display_none");
-      $("jeonbook-sigungu").addClass("m_option_display_none");
-      $("jeonam-sigungu").addClass("m_option_display_none");
-      $("gyeongbook-sigungu").addClass("m_option_display_none");
-      $("gyeongnam-sigungu").addClass("m_option_display_none");
-      $("jeju-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectIncheon() {
+  //   $("#incheon").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("busan-sigungu").addClass("m_option_display_none");
+  //     $("deagu-sigungu").addClass("m_option_display_none");
+  //     $("gwangju-sigungu").addClass("m_option_display_none");
+  //     $("choongbook-sigungu").addClass("m_option_display_none");
+  //     $("choognam-sigungu").addClass("m_option_display_none");
+  //     $("jeonbook-sigungu").addClass("m_option_display_none");
+  //     $("jeonam-sigungu").addClass("m_option_display_none");
+  //     $("gyeongbook-sigungu").addClass("m_option_display_none");
+  //     $("gyeongnam-sigungu").addClass("m_option_display_none");
+  //     $("jeju-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 
-  function selectGwangju() {
-    $("#gwangju").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("busan-sigungu").addClass("m_option_display_none");
-      $("deagu-sigungu").addClass("m_option_display_none");
-      $("incheon-sigungu").addClass("m_option_display_none");
-      $("choongbook-sigungu").addClass("m_option_display_none");
-      $("choognam-sigungu").addClass("m_option_display_none");
-      $("jeonbook-sigungu").addClass("m_option_display_none");
-      $("jeonam-sigungu").addClass("m_option_display_none");
-      $("gyeongbook-sigungu").addClass("m_option_display_none");
-      $("gyeongnam-sigungu").addClass("m_option_display_none");
-      $("jeju-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectGwangju() {
+  //   $("#gwangju").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("busan-sigungu").addClass("m_option_display_none");
+  //     $("deagu-sigungu").addClass("m_option_display_none");
+  //     $("incheon-sigungu").addClass("m_option_display_none");
+  //     $("choongbook-sigungu").addClass("m_option_display_none");
+  //     $("choognam-sigungu").addClass("m_option_display_none");
+  //     $("jeonbook-sigungu").addClass("m_option_display_none");
+  //     $("jeonam-sigungu").addClass("m_option_display_none");
+  //     $("gyeongbook-sigungu").addClass("m_option_display_none");
+  //     $("gyeongnam-sigungu").addClass("m_option_display_none");
+  //     $("jeju-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 
-  function selectChoongbook() {
-    $("#choongbook").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("busan-sigungu").addClass("m_option_display_none");
-      $("deagu-sigungu").addClass("m_option_display_none");
-      $("incheon-sigungu").addClass("m_option_display_none");
-      $("gwangju-sigungu").addClass("m_option_display_none");
-      $("choognam-sigungu").addClass("m_option_display_none");
-      $("jeonbook-sigungu").addClass("m_option_display_none");
-      $("jeonam-sigungu").addClass("m_option_display_none");
-      $("gyeongbook-sigungu").addClass("m_option_display_none");
-      $("gyeongnam-sigungu").addClass("m_option_display_none");
-      $("jeju-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectChoongbook() {
+  //   $("#choongbook").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("busan-sigungu").addClass("m_option_display_none");
+  //     $("deagu-sigungu").addClass("m_option_display_none");
+  //     $("incheon-sigungu").addClass("m_option_display_none");
+  //     $("gwangju-sigungu").addClass("m_option_display_none");
+  //     $("choognam-sigungu").addClass("m_option_display_none");
+  //     $("jeonbook-sigungu").addClass("m_option_display_none");
+  //     $("jeonam-sigungu").addClass("m_option_display_none");
+  //     $("gyeongbook-sigungu").addClass("m_option_display_none");
+  //     $("gyeongnam-sigungu").addClass("m_option_display_none");
+  //     $("jeju-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 
-  function selectChoognam() {
-    $("#choognam").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("busan-sigungu").addClass("m_option_display_none");
-      $("deagu-sigungu").addClass("m_option_display_none");
-      $("incheon-sigungu").addClass("m_option_display_none");
-      $("gwangju-sigungu").addClass("m_option_display_none");
-      $("choongbook-sigungu").addClass("m_option_display_none");
-      $("jeonbook-sigungu").addClass("m_option_display_none");
-      $("jeonam-sigungu").addClass("m_option_display_none");
-      $("gyeongbook-sigungu").addClass("m_option_display_none");
-      $("gyeongnam-sigungu").addClass("m_option_display_none");
-      $("jeju-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectChoognam() {
+  //   $("#choognam").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("busan-sigungu").addClass("m_option_display_none");
+  //     $("deagu-sigungu").addClass("m_option_display_none");
+  //     $("incheon-sigungu").addClass("m_option_display_none");
+  //     $("gwangju-sigungu").addClass("m_option_display_none");
+  //     $("choongbook-sigungu").addClass("m_option_display_none");
+  //     $("jeonbook-sigungu").addClass("m_option_display_none");
+  //     $("jeonam-sigungu").addClass("m_option_display_none");
+  //     $("gyeongbook-sigungu").addClass("m_option_display_none");
+  //     $("gyeongnam-sigungu").addClass("m_option_display_none");
+  //     $("jeju-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 
-  function selectJeonbook() {
-    $("#jeonbook").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("busan-sigungu").addClass("m_option_display_none");
-      $("deagu-sigungu").addClass("m_option_display_none");
-      $("incheon-sigungu").addClass("m_option_display_none");
-      $("gwangju-sigungu").addClass("m_option_display_none");
-      $("choongbook-sigungu").addClass("m_option_display_none");
-      $("choognam-sigungu").addClass("m_option_display_none");
-      $("jeonam-sigungu").addClass("m_option_display_none");
-      $("gyeongbook-sigungu").addClass("m_option_display_none");
-      $("gyeongnam-sigungu").addClass("m_option_display_none");
-      $("jeju-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectJeonbook() {
+  //   $("#jeonbook").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("busan-sigungu").addClass("m_option_display_none");
+  //     $("deagu-sigungu").addClass("m_option_display_none");
+  //     $("incheon-sigungu").addClass("m_option_display_none");
+  //     $("gwangju-sigungu").addClass("m_option_display_none");
+  //     $("choongbook-sigungu").addClass("m_option_display_none");
+  //     $("choognam-sigungu").addClass("m_option_display_none");
+  //     $("jeonam-sigungu").addClass("m_option_display_none");
+  //     $("gyeongbook-sigungu").addClass("m_option_display_none");
+  //     $("gyeongnam-sigungu").addClass("m_option_display_none");
+  //     $("jeju-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 
-  function selectJeonam() {
-    $("#jeonam").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("busan-sigungu").addClass("m_option_display_none");
-      $("deagu-sigungu").addClass("m_option_display_none");
-      $("incheon-sigungu").addClass("m_option_display_none");
-      $("gwangju-sigungu").addClass("m_option_display_none");
-      $("choongbook-sigungu").addClass("m_option_display_none");
-      $("choognam-sigungu").addClass("m_option_display_none");
-      $("jeonbook-sigungu").addClass("m_option_display_none");
-      $("gyeongbook-sigungu").addClass("m_option_display_none");
-      $("gyeongnam-sigungu").addClass("m_option_display_none");
-      $("jeju-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectJeonam() {
+  //   $("#jeonam").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("busan-sigungu").addClass("m_option_display_none");
+  //     $("deagu-sigungu").addClass("m_option_display_none");
+  //     $("incheon-sigungu").addClass("m_option_display_none");
+  //     $("gwangju-sigungu").addClass("m_option_display_none");
+  //     $("choongbook-sigungu").addClass("m_option_display_none");
+  //     $("choognam-sigungu").addClass("m_option_display_none");
+  //     $("jeonbook-sigungu").addClass("m_option_display_none");
+  //     $("gyeongbook-sigungu").addClass("m_option_display_none");
+  //     $("gyeongnam-sigungu").addClass("m_option_display_none");
+  //     $("jeju-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 
-  function selectGyeongbook() {
-    $("#gyeongbook").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("busan-sigungu").addClass("m_option_display_none");
-      $("deagu-sigungu").addClass("m_option_display_none");
-      $("incheon-sigungu").addClass("m_option_display_none");
-      $("gwangju-sigungu").addClass("m_option_display_none");
-      $("choongbook-sigungu").addClass("m_option_display_none");
-      $("choognam-sigungu").addClass("m_option_display_none");
-      $("jeonbook-sigungu").addClass("m_option_display_none");
-      $("jeonam-sigungu").addClass("m_option_display_none");
-      $("gyeongnam-sigungu").addClass("m_option_display_none");
-      $("jeju-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectGyeongbook() {
+  //   $("#gyeongbook").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("busan-sigungu").addClass("m_option_display_none");
+  //     $("deagu-sigungu").addClass("m_option_display_none");
+  //     $("incheon-sigungu").addClass("m_option_display_none");
+  //     $("gwangju-sigungu").addClass("m_option_display_none");
+  //     $("choongbook-sigungu").addClass("m_option_display_none");
+  //     $("choognam-sigungu").addClass("m_option_display_none");
+  //     $("jeonbook-sigungu").addClass("m_option_display_none");
+  //     $("jeonam-sigungu").addClass("m_option_display_none");
+  //     $("gyeongnam-sigungu").addClass("m_option_display_none");
+  //     $("jeju-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 
-  function selectGyeongnam() {
-    $("#gyeongnam").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("busan-sigungu").addClass("m_option_display_none");
-      $("deagu-sigungu").addClass("m_option_display_none");
-      $("incheon-sigungu").addClass("m_option_display_none");
-      $("gwangju-sigungu").addClass("m_option_display_none");
-      $("choongbook-sigungu").addClass("m_option_display_none");
-      $("choognam-sigungu").addClass("m_option_display_none");
-      $("jeonbook-sigungu").addClass("m_option_display_none");
-      $("jeonam-sigungu").addClass("m_option_display_none");
-      $("gyeongbook-sigungu").addClass("m_option_display_none");
-      $("jeju-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectGyeongnam() {
+  //   $("#gyeongnam").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("busan-sigungu").addClass("m_option_display_none");
+  //     $("deagu-sigungu").addClass("m_option_display_none");
+  //     $("incheon-sigungu").addClass("m_option_display_none");
+  //     $("gwangju-sigungu").addClass("m_option_display_none");
+  //     $("choongbook-sigungu").addClass("m_option_display_none");
+  //     $("choognam-sigungu").addClass("m_option_display_none");
+  //     $("jeonbook-sigungu").addClass("m_option_display_none");
+  //     $("jeonam-sigungu").addClass("m_option_display_none");
+  //     $("gyeongbook-sigungu").addClass("m_option_display_none");
+  //     $("jeju-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 
-  function selectJeju() {
-    $("#jeju").click(() => {
-      $("seoul-sigungu").addClass("m_option_display_none");
-      $("busan-sigungu").addClass("m_option_display_none");
-      $("deagu-sigungu").addClass("m_option_display_none");
-      $("incheon-sigungu").addClass("m_option_display_none");
-      $("gwangju-sigungu").addClass("m_option_display_none");
-      $("choongbook-sigungu").addClass("m_option_display_none");
-      $("choognam-sigungu").addClass("m_option_display_none");
-      $("jeonbook-sigungu").addClass("m_option_display_none");
-      $("jeonam-sigungu").addClass("m_option_display_none");
-      $("gyeongbook-sigungu").addClass("m_option_display_none");
-      $("gyeongnam-sigungu").addClass("m_option_display_none");
-    });
-  }
+  // function selectJeju() {
+  //   $("#jeju").click(() => {
+  //     $("seoul-sigungu").addClass("m_option_display_none");
+  //     $("busan-sigungu").addClass("m_option_display_none");
+  //     $("deagu-sigungu").addClass("m_option_display_none");
+  //     $("incheon-sigungu").addClass("m_option_display_none");
+  //     $("gwangju-sigungu").addClass("m_option_display_none");
+  //     $("choongbook-sigungu").addClass("m_option_display_none");
+  //     $("choognam-sigungu").addClass("m_option_display_none");
+  //     $("jeonbook-sigungu").addClass("m_option_display_none");
+  //     $("jeonam-sigungu").addClass("m_option_display_none");
+  //     $("gyeongbook-sigungu").addClass("m_option_display_none");
+  //     $("gyeongnam-sigungu").addClass("m_option_display_none");
+  //   });
+  // }
 </script>
 
 {{>/layout/footer}}
