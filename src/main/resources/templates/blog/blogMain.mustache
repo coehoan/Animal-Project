@@ -8,24 +8,90 @@
       <div class="d-flex container shadow mb-4">
         <img src="image/dog1.png" height="220" width="220" class="me-3">
         <div style="width: 100%;">
-          <h5>인기게시글</h5>
+          <h4 class="mt-2">인기게시글</h4>
           <hr>
+          <table class="table m_text_align_center">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#adopts}}
+              <tr id="test">
+                <td>{{id}}</td>
+                <td>
+                  <a href="/blog/adoptboard/post/1" class="m_text_link">{{title}}</a>
+                </td>
+                <td>{{username}}</td>
+                <td>{{createDate}}</td>
+              </tr>
+              {{/adopts}}
+            </tbody>
+          </table>
         </div>
       </div>
       <h2 class="mt-0">지역별게시판</h2>
       <div class="d-flex container shadow mb-4">
         <img src="image/dog1.png" height="220" width="220" class="me-3">
         <div style="width: 100%;">
-          <h5>인기게시글</h5>
+          <h4 class="mt-2">인기게시글</h4>
           <hr>
+          <table class="table m_text_align_center">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#regions}}
+              <tr id="test">
+                <td>{{id}}</td>
+                <td>
+                  <a href="/blog/adoptboard/post/1" class="m_text_link">{{title}}</a>
+                </td>
+                <td>{{username}}</td>
+                <td>{{createDate}}</td>
+              </tr>
+              {{/regions}}
+            </tbody>
+          </table>
         </div>
       </div>
       <h2 class="mt-0">자유게시판</h2>
       <div class="d-flex container shadow mb-4">
         <img src="image/dog1.png" height="220" width="220" class="me-3">
         <div style="width: 100%;">
-          <h5>인기게시글</h5>
+          <h4 class="mt-2">인기게시글</h4>
           <hr>
+          <table class="table m_text_align_center">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#frees}}
+              <tr id="test">
+                <td>{{id}}</td>
+                <td>
+                  <a href="/blog/adoptboard/post/1" class="m_text_link">{{title}}</a>
+                </td>
+                <td>{{username}}</td>
+                <td>{{createDate}}</td>
+              </tr>
+              {{/frees}}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

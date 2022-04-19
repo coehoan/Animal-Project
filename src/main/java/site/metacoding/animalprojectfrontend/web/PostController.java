@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
 import site.metacoding.animalprojectfrontend.service.PostService;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.FreePostRespDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.MainPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.RegionPostRespDto;
 
 @RequiredArgsConstructor
@@ -18,6 +20,43 @@ import site.metacoding.animalprojectfrontend.web.api.dto.post.RegionPostRespDto;
 public class PostController {
 
     private final PostService postService;
+
+    // 블로그 메인 게시판
+    @GetMapping("/blog")
+    public String blog(Model model) {
+        List<String> board = new ArrayList<>();
+        board.add("adopt");
+        board.add("region");
+        board.add("free");
+        for (String postList : board) {
+            List<MainPostRespDto> mainPostRespDtoList = new ArrayList<MainPostRespDto>();
+            List<Post> posts = postService.인기글보기(postList);
+            if (posts.size() != 3)
+                throw new RuntimeException("사이즈 오류");
+
+            for (Post postLists : posts) {
+                MainPostRespDto postRespDto = new MainPostRespDto();
+                postRespDto.setId(postLists.getId());
+                postRespDto.setTitle(postLists.getTitle());
+                postRespDto.setUsername(postLists.getUser().getUsername());
+                postRespDto.setCreateDate(postLists.getCreateDate());
+                mainPostRespDtoList.add(postRespDto);
+            }
+            if (mainPostRespDtoList.size() != 3)
+                continue;
+
+            if (mainPostRespDtoList != null && posts != null) {
+                if (posts.stream().filter(x -> x.getBoard().equals("adopt")).count() > 0) {
+                    model.addAttribute("adopts", mainPostRespDtoList);
+                } else if (posts.stream().filter(x -> x.getBoard().equals("region")).count() > 0) {
+                    model.addAttribute("regions", mainPostRespDtoList);
+                } else if (posts.stream().filter(x -> x.getBoard().equals("free")).count() > 0) {
+                    model.addAttribute("frees", mainPostRespDtoList);
+                }
+            }
+        }
+        return "blog/blogMain";
+    }
 
     // 입양후기 게시판
     @GetMapping("/blog/adopt")
@@ -161,7 +200,26 @@ public class PostController {
 
     // 자유게시판
     @GetMapping("/blog/free")
-    public String freePage() {
+    public String freePage(Model model) {
+        String board = "free";
+        List<Post> posts = postService.글목록보기(board);
+        List<FreePostRespDto> freePostRespDtoList = new ArrayList<FreePostRespDto>();
+
+        for (Post postList : posts) {
+            FreePostRespDto postRespDto = new FreePostRespDto();
+
+            postRespDto.setId(postList.getId());
+            postRespDto.setTitle(postList.getTitle());
+            postRespDto.setUsername(postList.getUser().getUsername());
+            postRespDto.setCreateDate(postList.getCreateDate());
+            postRespDto.setView(postList.getView());
+            postRespDto.setRecommended(postList.getRecommended());
+            freePostRespDtoList.add(postRespDto);
+        }
+
+        // System.out.println("======" + posts);
+        // System.out.println("======**" + posts.get(0).getUser().getUsername());
+        model.addAttribute("posts", freePostRespDtoList);
         return "blog/freeboard";
     }
 

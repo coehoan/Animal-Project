@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class RegionPostRespDto {
     private Integer id;
-    private String content;
     private LocalDateTime createDate;
     private String region;
     private String title;

@@ -19,7 +19,12 @@ public class PostService {
     }
 
     public List<Post> 글목록보기(String board) {
-        List<Post> postOp = postRepository.findByBoard(board);
-        return postOp;
+        List<Post> postEntity = postRepository.findByBoard(board);
+        return postEntity;
+    }
+
+    public List<Post> 인기글보기(String board) {
+        List<Post> postEntity = postRepository.findHotPost(board);
+        return postEntity;
     }
 }

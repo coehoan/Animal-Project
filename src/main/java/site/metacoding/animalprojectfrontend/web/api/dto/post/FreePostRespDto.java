@@ -10,15 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AdoptPostRespDto {
+public class FreePostRespDto {
     private Integer id;
     private LocalDateTime createDate;
-    private String region;
     private String title;
-    private String type;
     private String username;
     private Integer view;
     private Integer recommended;
 
-    private List<AdoptPostRespDto> adoptpostRespDtos;
+    private List<FreePostRespDto> freePostRespDtos;
 }

@@ -52,36 +52,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
+        {{#posts}}
+        <tr id="test">
+          <td>{{id}}</td>
           <td>
-            <a href="/blog/freeboard/post/1" class="m_text_link">안녕</a>
+            <a href="/blog/adoptboard/post/1" class="m_text_link">{{title}}</a>
           </td>
-          <td>누렁이아빠</td>
-          <td>2022.04.11</td>
-          <td>15</td>
-          <td>3</td>
+          <td>{{username}}</td>
+          <td>{{createDate}}</td>
+          <td>{{view}}</td>
+          <td>{{recommended}}</td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>
-            <a href="/blog/freeboard/post/2" class="m_text_link">내가 2번째</a>
-          </td>
-          <td>하얀마음</td>
-          <td>2022.04.09</td>
-          <td>6</td>
-          <td>1</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>
-            <a href="/blog/freeboard/post/3" class="m_text_link">자유게시판 첫 글</a>
-          </td>
-          <td>줍줍</td>
-          <td>2022.04.06</td>
-          <td>22</td>
-          <td>5</td>
-        </tr>
+        {{/posts}}
       </tbody>
     </table>
   </div>

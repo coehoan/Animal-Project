@@ -32,11 +32,6 @@ public class AnimalController {
         return "/animal/shelterList";
     }
 
-    @GetMapping("/blog")
-    public String blog() {
-        return "blog/blogMain";
-    }
-
     @GetMapping("/blog/writeForm")
     public String writeForm() {
         return "/blog/writeForm";
