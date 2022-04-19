@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
 import site.metacoding.animalprojectfrontend.service.PostService;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.RegionPostRespDto;
 
 @RequiredArgsConstructor
 @Controller
@@ -23,7 +24,7 @@ public class PostController {
     public String adoptPage(Model model) {
         String board = "adopt";
         List<Post> posts = postService.글목록보기(board);
-        List<AdoptPostRespDto> postRespDtoList = new ArrayList<AdoptPostRespDto>();
+        List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
 
         for (Post postList : posts) {
             AdoptPostRespDto postRespDto = new AdoptPostRespDto();
@@ -79,18 +80,82 @@ public class PostController {
             postRespDto.setCreateDate(postList.getCreateDate());
             postRespDto.setView(postList.getView());
             postRespDto.setRecommended(postList.getRecommended());
-            postRespDtoList.add(postRespDto);
+            adoptPostRespDtoList.add(postRespDto);
         }
 
         // System.out.println("======" + posts);
         // System.out.println("======**" + posts.get(0).getUser().getUsername());
-        model.addAttribute("posts", postRespDtoList);
+        model.addAttribute("posts", adoptPostRespDtoList);
         return "blog/adoptboard";
     }
 
     // 지역별 게시판
     @GetMapping("/blog/region")
-    public String regionPage() {
+    public String regionPage(Model model) {
+        String board = "region";
+        List<Post> posts = postService.글목록보기(board);
+        List<RegionPostRespDto> regionPostRespDtoList = new ArrayList<RegionPostRespDto>();
+
+        for (Post postList : posts) {
+            RegionPostRespDto postRespDto = new RegionPostRespDto();
+            String region = postList.getRegion();
+            if (region.equals("seoul"))
+                region = "서울";
+            else if (region.equals("gyeonggi"))
+                region = "경기";
+            else if (region.equals("incheon"))
+                region = "인천";
+            else if (region.equals("gangwon"))
+                region = "강원";
+            else if (region.equals("sejong"))
+                region = "세종";
+            else if (region.equals("chungbuk"))
+                region = "충북";
+            else if (region.equals("chungnam"))
+                region = "충남";
+            else if (region.equals("daejeon"))
+                region = "대전";
+            else if (region.equals("jeonbuk"))
+                region = "전북";
+            else if (region.equals("jeonnam"))
+                region = "전남";
+            else if (region.equals("gwangju"))
+                region = "광주";
+            else if (region.equals("gyeongbuk"))
+                region = "경북";
+            else if (region.equals("daegu"))
+                region = "대구";
+            else if (region.equals("gyeongnam"))
+                region = "경남";
+            else if (region.equals("ulsan"))
+                region = "울산";
+            else if (region.equals("busan"))
+                region = "부산";
+            else if (region.equals("jeju"))
+                region = "제주";
+
+            String category = postList.getCategory();
+            if (category.equals("ask"))
+                category = "질문";
+            else if (category.equals("food"))
+                category = "맛집";
+            else if (category.equals("info"))
+                category = "정보";
+
+            postRespDto.setId(postList.getId());
+            postRespDto.setRegion(region);
+            postRespDto.setCategory(category);
+            postRespDto.setTitle(postList.getTitle());
+            postRespDto.setUsername(postList.getUser().getUsername());
+            postRespDto.setCreateDate(postList.getCreateDate());
+            postRespDto.setView(postList.getView());
+            postRespDto.setRecommended(postList.getRecommended());
+            regionPostRespDtoList.add(postRespDto);
+        }
+
+        // System.out.println("======" + posts);
+        // System.out.println("======**" + posts.get(0).getUser().getUsername());
+        model.addAttribute("posts", regionPostRespDtoList);
         return "blog/regionboard";
     }
 

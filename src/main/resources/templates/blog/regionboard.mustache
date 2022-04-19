@@ -94,42 +94,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>부산</td>
-          <td>질문</td>
+        {{#posts}}
+        <tr id="test">
+          <td>{{id}}</td>
+          <td>{{region}}</td>
+          <td>{{category}}</td>
           <td>
-            <a href="/blog/regionboard/post/1" class="m_text_link">누렁이는 뭐 좋아하나요?</a>
+            <a href="/blog/adoptboard/post/1" class="m_text_link">{{title}}</a>
           </td>
-          <td>누렁이아빠</td>
-          <td>2022.04.11</td>
-          <td>3</td>
-          <td>1</td>
+          <td>{{username}}</td>
+          <td>{{createDate}}</td>
+          <td>{{view}}</td>
+          <td>{{recommended}}</td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>서울</td>
-          <td>정보</td>
-          <td>
-            <a href="/blog/regionboard/post/2" class="m_text_link">수제간식 할인정보</a>
-          </td>
-          <td>하얀마음</td>
-          <td>2022.04.09</td>
-          <td>30</td>
-          <td>17</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>대구</td>
-          <td>맛집</td>
-          <td>
-            <a href="/blog/regionboard/post/3" class="m_text_link">애견동반 카페 후기</a>
-          </td>
-          <td>줍줍</td>
-          <td>2022.04.06</td>
-          <td>21</td>
-          <td>9</td>
-        </tr>
+        {{/posts}}
       </tbody>
     </table>
   </div>
