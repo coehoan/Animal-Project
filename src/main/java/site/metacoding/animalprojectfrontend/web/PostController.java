@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
@@ -13,6 +14,7 @@ import site.metacoding.animalprojectfrontend.service.PostService;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.FreePostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.MainPostRespDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.PostDetailRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.RegionPostRespDto;
 
 @RequiredArgsConstructor
@@ -221,6 +223,28 @@ public class PostController {
         // System.out.println("======**" + posts.get(0).getUser().getUsername());
         model.addAttribute("posts", freePostRespDtoList);
         return "blog/freeboard";
+    }
+
+    @GetMapping("/blog/adoptboard/post/{id}")
+    public String adoptboardPost(@PathVariable Integer id, Model model) {
+
+        Post postOp = postService.글상세보기(id);
+
+        Integer updateView = postOp.getView() + 1;
+
+        PostDetailRespDto postDetailRespDto = new PostDetailRespDto();
+        postDetailRespDto.setTitle(postOp.getTitle());
+        postDetailRespDto.setContent(postOp.getContent());
+        postDetailRespDto.setCreateDate(postOp.getCreateDate());
+        postDetailRespDto.setUser(postOp.getUser());
+        postDetailRespDto.setView(updateView);
+        postDetailRespDto.setRecommended(postOp.getRecommended());
+
+        postService.조회수증가(updateView, id);
+
+        model.addAttribute("posts", postDetailRespDto);
+
+        return "/blog/post/adoptPost";
     }
 
 }

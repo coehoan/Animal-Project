@@ -14,4 +14,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query(value = "SELECT * FROM post WHERE board =:board ORDER BY view DESC LIMIT 3", nativeQuery = true)
     List<Post> findHotPost(@Param("board") String board);
 
+    @Query(value = "UPDATE post SET view =:view WHERE id =:id", nativeQuery = true)
+    Post viewCount(@Param("view") Integer view, @Param("id") Integer id);
+
 }

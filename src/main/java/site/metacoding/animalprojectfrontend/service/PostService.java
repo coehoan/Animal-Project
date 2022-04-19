@@ -27,4 +27,17 @@ public class PostService {
         List<Post> postEntity = postRepository.findHotPost(board);
         return postEntity;
     }
+
+    public Post 글상세보기(Integer id) {
+        Optional<Post> postOp = postRepository.findById(id);
+        if (postOp.isPresent()) {
+            Post postEntity = postOp.get();
+            return postEntity;
+        } else
+            throw new RuntimeException("게시글이 없습니다.");
+    }
+
+    public void 조회수증가(Integer updateView, Integer id) {
+        postRepository.viewCount(updateView, id);
+    }
 }

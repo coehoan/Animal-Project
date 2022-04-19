@@ -4,17 +4,21 @@
   <div class="m_blog_post">
     <div class="m_blog_post_title">
       <div>
-        <b class="m_content_title_font">누렁이 입양후기</b>
+        <b class="m_content_title_font">{{posts.title}}</b>
       </div>
       <div style="flex-direction: column;">
-        <h5>작성자 : 누렁이아빠</h5>
-        <h5>작성일 : 2022.04.11</h5>
+        <h5>작성자 : {{posts.user.username}}</h5>
+        <h5>작성일 : {{posts.createDate}}</h5>
       </div>
     </div>
     <div class="m_blog_post_content">
-      <p></p>
+      {{{posts.content}}}
     </div>
   </div>
+</div>
+<div class="m_div_display_none">
+  <div>{{posts.view}}</div>
+  <div>{{posts.recommended}}</div>
 </div>
 <!-- 게시글 보기 끝 -->
 {{>/layout/footer}}

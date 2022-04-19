@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.springframework.data.annotation.CreatedDate;
@@ -29,6 +31,7 @@ import site.metacoding.animalprojectfrontend.domain.user.User;
 @NoArgsConstructor
 @Data
 @EntityListeners(AuditingEntityListener.class)
+@DynamicInsert
 @Entity
 public class Post {
     @Id
@@ -77,4 +80,10 @@ public class Post {
     private LocalDateTime createDate;
     @LastModifiedDate // insert, update
     private LocalDateTime updateDate;
+
+    @PrePersist
+    public void prePersist() {
+        this.view = this.view == null ? 0 : this.view;
+        this.recommended = this.recommended == null ? 0 : this.recommended;
+    }
 }
