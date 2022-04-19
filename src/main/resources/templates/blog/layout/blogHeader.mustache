@@ -4,58 +4,32 @@
     <ul class="navbar-nav">
       <li class="nav-item">
         <div>
-          <a id="main" class="m_blog_nav_btn m_main_font" href="javascript:void(0)">Main</a>
+          <a id="main" class="m_blog_nav_btn m_main_font" href="/blog">Main</a>
         </div>
       </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
         <div>
-          <a id="adopt" class="m_blog_nav_btn m_main_font" href="javascript:void(0)">입양후기</a>
+          <a id="adopt" class="m_blog_nav_btn m_main_font" href="/blog/adopt">입양후기</a>
         </div>
       </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
         <div>
-          <a id="region" class="m_blog_nav_btn m_main_font" href="javascript:void(0)">지역별게시판</a>
+          <a id="region" class="m_blog_nav_btn m_main_font" href="/blog/region">지역별게시판</a>
         </div>
       </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
         <div>
-          <a id="free" class="m_blog_nav_btn m_main_font" href="javascript:void(0)">자유게시판</a>
+          <a id="free" class="m_blog_nav_btn m_main_font" href="/blog/free">자유게시판</a>
         </div>
       </li>
     </ul>
   </nav>
 </div>
+
 <!-- 블로그 상단바 끝 -->
-
-<div class="m_div_display_none">
-  <div id="adoptboard">
-    {{>/blog/adoptboard}}
-  </div>
-  <div id="regionboard">
-    {{>/blog/regionboard}}
-  </div>
-  <div id="freeboard">
-    {{>/blog/freeboard}}
-  </div>
-</div>
-
-<script>
-  $("#main").click(() => {
-    $("#boardPage").load(location.href + " #mainboard");
-  });
-  $("#adopt").click(() => {
-    $("#boardPage").load(location.href + " #adoptboard");
-  });
-  $("#region").click(() => {
-    $("#boardPage").load(location.href + " #regionboard");
-  });
-  $("#free").click(() => {
-    $("#boardPage").load(location.href + " #freeboard");
-  });
-</script>

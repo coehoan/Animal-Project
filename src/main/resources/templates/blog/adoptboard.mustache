@@ -1,139 +1,124 @@
-<!-- 검색버튼 시작 -->
-<div class="m_blog_search">
-  <div class="d-flex">
-    <div class="m_blog_search_detail">
-      <form>
-        <select class="form-select">
-          <option>지역</option>
-          <option value="seoul">서울</option>
-          <option value="gyeonggi">경기</option>
-          <option value="incheon">인천</option>
-          <option value="gangwon">강원</option>
-          <option value="sejong">세종</option>
-          <option value="chungbuk">충북</option>
-          <option value="chungnam">충남</option>
-          <option value="daejeon">대전</option>
-          <option value="jeonbuk">전북</option>
-          <option value="jeonnam">전남</option>
-          <option value="gwangju">광주</option>
-          <option value="gyeongbuk">경북</option>
-          <option value="daegu">대구</option>
-          <option value="gyeongnam">경남</option>
-          <option value="ulsan">울산</option>
-          <option value="busan">부산</option>
-          <option value="jeju">제주</option>
-        </select>
-      </form>
+{{>/layout/header}}
+{{>/blog/layout/blogHeader}}
+<!-- 게시판 시작 -->
+<div class="m_padding_medium">
+  <div class="m_blog_search">
+    <div class="d-flex">
+      <div class="m_blog_search_detail">
+        <form>
+          <select class="form-select">
+            <option>지역</option>
+            <option value="seoul">서울</option>
+            <option value="gyeonggi">경기</option>
+            <option value="incheon">인천</option>
+            <option value="gangwon">강원</option>
+            <option value="sejong">세종</option>
+            <option value="chungbuk">충북</option>
+            <option value="chungnam">충남</option>
+            <option value="daejeon">대전</option>
+            <option value="jeonbuk">전북</option>
+            <option value="jeonnam">전남</option>
+            <option value="gwangju">광주</option>
+            <option value="gyeongbuk">경북</option>
+            <option value="daegu">대구</option>
+            <option value="gyeongnam">경남</option>
+            <option value="ulsan">울산</option>
+            <option value="busan">부산</option>
+            <option value="jeju">제주</option>
+          </select>
+        </form>
+      </div>
+      <div class="m_blog_search_detail">
+        <form>
+          <select class="form-select">
+            <option>품종</option>
+            <option>강아지</option>
+            <option>고양이</option>
+            <option>기타</option>
+          </select>
+        </form>
+      </div>
     </div>
-    <div class="m_blog_search_detail">
-      <form>
-        <select class="form-select">
-          <option>품종</option>
-          <option>강아지</option>
-          <option>고양이</option>
-          <option>기타</option>
-        </select>
-      </form>
+    <div class="d-flex">
+      <div class="me-3">
+        <form>
+          <select class="form-select">
+            <option>제목</option>
+            <option>내용</option>
+            <option>작성자</option>
+          </select>
+        </form>
+      </div>
+      <div class="m_blog_search_detail_icon">
+        <input type="text" placeholder="검색">
+        <button class="m_search_icon">
+          <svg style="height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+            <path
+              d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
+          </svg>
+        </button>
+
+      </div>
     </div>
   </div>
-  <div class="d-flex">
-    <div class="me-3">
-      <form>
-        <select class="form-select">
-          <option>제목</option>
-          <option>내용</option>
-          <option>작성자</option>
-        </select>
-      </form>
-    </div>
-    <div class="m_blog_search_detail_icon">
-      <input type="text" placeholder="검색">
-      <button class="m_search_icon">
-        <svg style="height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-          <path
-            d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
-        </svg>
-      </button>
+  <!-- 검색버튼 끝 -->
 
-    </div>
+  <!-- 정렬 시작 -->
+  <div class=" m_blog_btn" style="margin-top: 70px;">
+    <form>
+      <select class="form-select">
+        <option>최신순</option>
+        <option>조회순</option>
+        <option>추천순</option>
+      </select>
+    </form>
   </div>
-</div>
-<!-- 검색버튼 끝 -->
+  <!-- 정렬 끝 -->
 
-<!-- 정렬 시작 -->
-<div class=" m_blog_btn" style="margin-top: 70px;">
-  <form>
-    <select class="form-select">
-      <option>최신순</option>
-      <option>조회순</option>
-      <option>추천순</option>
-    </select>
-  </form>
-</div>
-<!-- 정렬 끝 -->
+  <!-- 글목록 시작 -->
+  <div class="container mt-3">
+    <table class="table m_text_align_center">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>지역</th>
+          <th>품종</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+          <th>조회수</th>
+          <th>추천</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#posts}}
+        <tr id="test">
+          <td>{{id}}</td>
+          <td>{{region}}</td>
+          <td>{{type}}</td>
+          <td>
+            <a href="/blog/adoptboard/post/1" class="m_text_link">{{title}}</a>
+          </td>
+          <td>{{username}}</td>
+          <td>{{createDate}}</td>
+          <td>{{view}}</td>
+          <td>{{recommended}}</td>
+        </tr>
+        {{/posts}}
+      </tbody>
+    </table>
+  </div>
+  <!-- 글목록 끝 -->
 
-<!-- 글목록 시작 -->
-<div class="container mt-3">
-  <table class="table m_text_align_center">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>지역</th>
-        <th>품종</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-        <th>조회수</th>
-        <th>추천</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>부산</td>
-        <td>강아지</td>
-        <td>
-          <a href="/blog/adoptboard/post/1" class="m_text_link">누렁이 입양후기</a>
-        </td>
-        <td>누렁이아빠</td>
-        <td>2022.04.11</td>
-        <td>15</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>부산</td>
-        <td>강아지</td>
-        <td>
-          <a href="/blog/adoptboard/post/2" class="m_text_link">백구를 입양했어요</a>
-        </td>
-        <td>하얀마음</td>
-        <td>2022.04.09</td>
-        <td>6</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>서울</td>
-        <td>고양이</td>
-        <td>
-          <a href="/blog/adoptboard/post/3" class="m_text_link">길냥이를 데리고 왔어요</a>
-        </td>
-        <td>줍줍</td>
-        <td>2022.04.06</td>
-        <td>2</td>
-        <td>5</td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- 글쓰기버튼 시작 -->
+  <div class="m_blog_btn">
+    <a href="/blog/writeForm">
+      <button class="btn bg-success text-light">글쓰기</button>
+    </a>
+  </div>
+  <!-- 글쓰기버튼 끝 -->
 </div>
-<!-- 글목록 끝 -->
+<!-- 게시판 끝 -->
 
-<!-- 글쓰기버튼 시작 -->
-<div class="m_blog_btn">
-  <a href="/blog/writeForm">
-    <button class="btn bg-success text-light">글쓰기</button>
-  </a>
-</div>
-<!-- 글쓰기버튼 끝 -->
+<script src="/js/blogPost.js"></script>
