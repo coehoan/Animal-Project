@@ -1,4 +1,4 @@
-package site.metacoding.animalprojectfrontend.config.post;
+package site.metacoding.animalprojectfrontend.domain.post;
 
 import java.time.LocalDateTime;
 

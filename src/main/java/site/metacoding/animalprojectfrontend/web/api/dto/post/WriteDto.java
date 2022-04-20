@@ -3,7 +3,7 @@ package site.metacoding.animalprojectfrontend.web.api.dto.post;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import site.metacoding.animalprojectfrontend.config.post.Post;
+import site.metacoding.animalprojectfrontend.domain.post.Post;
 import site.metacoding.animalprojectfrontend.domain.user.User;
 
 @NoArgsConstructor

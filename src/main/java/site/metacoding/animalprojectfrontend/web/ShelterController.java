@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectfrontend.domain.user.shelterde.ShelterDe;
+import site.metacoding.animalprojectfrontend.domain.shelterde.ShelterDe;
 import site.metacoding.animalprojectfrontend.service.ShelterDeService;
 
 @RequiredArgsConstructor

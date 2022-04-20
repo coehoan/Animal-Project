@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectfrontend.config.post.Post;
+import site.metacoding.animalprojectfrontend.domain.post.Post;
 import site.metacoding.animalprojectfrontend.service.PostService;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.FreePostRespDto;

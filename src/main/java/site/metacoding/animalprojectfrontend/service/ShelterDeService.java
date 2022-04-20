@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectfrontend.domain.user.shelterde.ShelterDe;
-import site.metacoding.animalprojectfrontend.domain.user.shelterde.ShelterDeRepository;
+import site.metacoding.animalprojectfrontend.domain.shelterde.ShelterDe;
+import site.metacoding.animalprojectfrontend.domain.shelterde.ShelterDeRepository;
 import site.metacoding.animalprojectfrontend.web.api.dto.shelterde.ShelterDeResponseDto;
 
 @RequiredArgsConstructor
@@ -71,9 +71,11 @@ public class ShelterDeService {
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getSaveTrgtAnimal(),
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getCareAddr(),
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getJibunAddr(),
-                        // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getLat(),
-                        // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getLng(),
-                        // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getDsignationDate(),
+
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getLat(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getLng(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getDsignationDate(),
+
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getWeekOprEtime(),
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getWeekOprStime(),
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getWeekCellEtime(),
@@ -83,16 +85,16 @@ public class ShelterDeService {
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getWeekendCellEtime(),
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getWeekendCellStime(),
                         shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getCloseDay(),
-                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getCareTel()
-                // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getMedicalCnt(),
-                // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getQuarabtineCnt(),
-                // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getFeedCnt(),
-                // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getTransCarCnt(),
-                // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getDataStdDt(),
-                // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getVetPersonCnt(),
-                // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getSpecsPersonCnt(),
-                // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getBreedCnt(),
-                // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getRnum()
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getCareTel(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getMedicalCnt(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getQuarabtineCnt(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getFeedCnt(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getTransCarCnt(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getDataStdDt(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getVetPersonCnt(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getSpecsPersonCnt(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getBreedCnt(),
+                        shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).getRnum()
                 // shelterList.get(i).getResponse().getBody().getItems().getItem().get(i).get()
                 );
                 lists.add(result);
