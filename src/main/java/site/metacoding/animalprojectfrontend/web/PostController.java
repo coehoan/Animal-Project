@@ -3,6 +3,8 @@ package site.metacoding.animalprojectfrontend.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
+import site.metacoding.animalprojectfrontend.domain.user.User;
 import site.metacoding.animalprojectfrontend.service.PostService;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.FreePostRespDto;
@@ -22,6 +25,7 @@ import site.metacoding.animalprojectfrontend.web.api.dto.post.RegionPostRespDto;
 public class PostController {
 
     private final PostService postService;
+    private final HttpSession session;
 
     // 블로그 메인 게시판
     @GetMapping("/blog")
@@ -225,6 +229,7 @@ public class PostController {
         return "blog/freeboard";
     }
 
+    // 상세보기
     @GetMapping("/blog/adoptboard/post/{id}")
     public String adoptboardPost(@PathVariable Integer id, Model model) {
 
@@ -233,6 +238,7 @@ public class PostController {
         Integer updateView = postOp.getView() + 1;
 
         PostDetailRespDto postDetailRespDto = new PostDetailRespDto();
+        postDetailRespDto.setId(postOp.getId());
         postDetailRespDto.setTitle(postOp.getTitle());
         postDetailRespDto.setContent(postOp.getContent());
         postDetailRespDto.setCreateDate(postOp.getCreateDate());
@@ -242,7 +248,10 @@ public class PostController {
 
         postService.조회수증가(updateView, id);
 
+        // User principal = (User) session.getAttribute("principal");
+
         model.addAttribute("posts", postDetailRespDto);
+        // model.addAttribute("principal", principal.getId());
 
         return "/blog/post/adoptPost";
     }

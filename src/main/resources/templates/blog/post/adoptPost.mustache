@@ -14,11 +14,87 @@
     <div class="m_blog_post_content">
       {{{posts.content}}}
     </div>
+    <!-- 따봉버튼 시작-->
+    <div id="thumb-up" class="d-flex justify-content-center none">
+      <div class="m_thumbUp_btn">
+        <img id="thumb-up-img" src="/image/thumb-up-before.png" width="50px" height="50px">
+      </div>
+    </div>
+    <!-- 따봉버튼 끝-->
+  </div>
+  <!-- 조회수랑 추천수 받아오기 -->
+  <div class="m_div_display_none">
+    <div>{{posts.view}}</div>
+    <div id="postId">{{posts.id}}</div>
+    <div id="recommended">{{posts.recommended}}</div>
+    <div id="principal"></div>
   </div>
 </div>
-<div class="m_div_display_none">
-  <div>{{posts.view}}</div>
-  <div>{{posts.recommended}}</div>
-</div>
 <!-- 게시글 보기 끝 -->
+
+<script>
+  let recommend;
+  let postId;
+
+  $("#thumb-up").click(() => {
+    recommend = parseInt($("#recommended").text());
+    let id = parseInt($("#principal").text());
+    let user
+    // 이미 추천 눌렀을 때
+    if ($("#thumb-up").hasClass("up")) {
+      $("#thumb-up").removeClass("up");
+      $("#thumb-up").addClass("down"); // 추천 취소
+      recommend -= 1;
+    }
+    // 추천 취소했을 때
+    else if ($("#thumb-up").hasClass("down")) {
+      $("#thumb-up").removeClass("down");
+      $("#thumb-up").addClass("up"); // 다시 추천
+      recommend += 1;
+    }
+    // 아무것도 안했을 때
+    else if ($("#thumb-up").hasClass("down") === false && $("#thumb-up").hasClass("up") === false) {
+      $("#thumb-up").addClass("up"); // 추천
+      recommend += 1;
+    }
+    // console.log(recommend);
+    updateRecommend(recommend);
+  });
+
+  // 추천수 증감 함수
+  async function updateRecommend(recommend) {
+    let recommendDto = {
+      id: parseInt($("#postId").text()),
+      recommended: recommend
+    }
+    console.log(recommendDto);
+    let response = await fetch(`/s/post/${recommendDto.id}`, {
+      method: "POST",
+      body: JSON.stringify(recommendDto),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      }
+    });
+
+    let responseParse = await response.json();
+
+    if (responseParse.code == 1) {
+      if ($("#thumb-up").hasClass("up")) {
+        $("#thumb-up-img").attr("src", "/image/thumb-up-after.png");
+      }
+      else if ($("#thumb-up").hasClass("down")) {
+        $("#thumb-up-img").attr("src", "/image/thumb-up-before.png");
+      }
+      else if ($("#thumb-up").hasClass("down") === false && $("#thumb-up").hasClass("up") === false) {
+        $("#thumb-up-img").attr("src", "/image/thumb-up-after.png");
+      }
+    }
+
+    if (responseParse.data == "인증되지 않았습니다.") {
+      alert("추천 기능은 로그인이 필요합니다.");
+    }
+  }
+
+</script>
+
 {{>/layout/footer}}

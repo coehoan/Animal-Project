@@ -11,6 +11,7 @@ import site.metacoding.animalprojectfrontend.domain.user.User;
 @AllArgsConstructor
 @Data
 public class PostDetailRespDto {
+    private Integer id;
     private String title;
     private String content;
     private LocalDateTime createDate;

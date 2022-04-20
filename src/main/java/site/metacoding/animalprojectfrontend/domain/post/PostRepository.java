@@ -17,4 +17,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query(value = "UPDATE post SET view =:view WHERE id =:id", nativeQuery = true)
     Post viewCount(@Param("view") Integer view, @Param("id") Integer id);
 
+    @Query(value = "UPDATE post SET recommended =:recommended WHERE id =:id", nativeQuery = true)
+    Post recCount(@Param("recommended") Integer recommended, @Param("id") Integer id);
+
 }

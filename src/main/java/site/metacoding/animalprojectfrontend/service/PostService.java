@@ -40,4 +40,9 @@ public class PostService {
     public void 조회수증가(Integer updateView, Integer id) {
         postRepository.viewCount(updateView, id);
     }
+
+    public void 추천수증감(Integer recommended, Integer id) {
+        System.out.println("글 아이디 --> " + id + "추천수 --> " + recommended);
+        postRepository.recCount(recommended, id);
+    }
 }
