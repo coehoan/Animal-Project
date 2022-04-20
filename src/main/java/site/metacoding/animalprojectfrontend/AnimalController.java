@@ -1,11 +1,27 @@
 package site.metacoding.animalprojectfrontend;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import java.util.List;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import lombok.RequiredArgsConstructor;
+import site.metacoding.animalprojectfrontend.domain.animals.Animals;
+import site.metacoding.animalprojectfrontend.service.api.AnimalsService;
+import site.metacoding.animalprojectfrontend.web.api.dto.animals.PostRegionDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.animals.ResponseDto;
+
+@RequiredArgsConstructor
 @Controller
 public class AnimalController {
+
+    private final AnimalsService animalsService;
 
     @GetMapping("/")
     public String main() {
@@ -40,6 +56,38 @@ public class AnimalController {
     @GetMapping("/blog/writeForm")
     public String writeForm() {
         return "/blog/writeForm";
+    }
+
+    @CrossOrigin
+    @PostMapping("/search/animals/region")
+    public @ResponseBody ResponseDto<?> getRegion(@RequestBody PostRegionDto keywordOfRegion, Model model) {
+        System.out.println("타나?");
+        System.out.println("받은 쿼리스트링 ====" + keywordOfRegion.getSido() + keywordOfRegion.getSigungu() + keywordOfRegion);
+        
+        if(animalsService.지역검색(keywordOfRegion.getSido(), keywordOfRegion.getSigungu()) != null) {
+            List<Animals> animalsEntity = animalsService.지역검색(keywordOfRegion.getSido(), keywordOfRegion.getSigungu());
+            model.addAttribute("regionlist", animalsEntity);
+            
+            return new ResponseDto<>(1, "검색 성공", animalsEntity);
+        } else {
+            return new ResponseDto<>(1, "검색 실패", null);
+        }
+    }
+
+    @CrossOrigin
+    @GetMapping("/animals/region")
+    public String regionList(Model model) {
+
+        return "/animal/animalsRegionList";
+    }
+
+    @GetMapping("/download")
+    public String download(Animals animals, Model model) {
+
+        List<Animals> animailEntity = animalsService.다운로드(animals);
+        model.addAttribute("animalslist", animailEntity);
+
+        return "/animal/animalsDownload";
     }
 
     @GetMapping("/blog/adoptboard/post/1")

@@ -23,17 +23,19 @@
     <hr>
     <div class="mt-5 d-flex">
         <div class="container-fluid">
-            <form class="d-flex flex-fill" enctype="application/x-www-form-urlencoded">
-                <input class="form-control me-2" name="firstdate" type="date" placeholder="날짜" aria-label="Search">
+            <form class="d-flex flex-fill" cenctype="application/x-www-form-urlencoded">
+                <input class="form-control me-2" name="firstdate" type="date" placeholder="날짜" aria-label="Search"
+                    required="false">
                 <i class="me-2">~</i>
-                <input class="form-control me-2" name="lastdate" type="date" placeholder="날짜" aria-label="Search">
+                <input class="form-control me-2" name="lastdate" type="date" placeholder="날짜" aria-label="Search"
+                    required="false">
                 <!--
         https://www.jqueryscript.net/form/Dynamic-jQuery-Cascading-Dropdown-Lists-Plugin.html
         스크립트 사용법 공부 후 지역 Ajax 처리
       -->
                 <div id="example1" class="bs-docs-example d-flex">
                     <select id="sido" name="sido" class="step1 me-2 animallist-select-box"
-                        onchange="sidoSelected(this.value), RegionOptionChange()">
+                        onchange="sidoSelected(this.value), RegionOptionChange()" required="false">
                         <option selected disabled>지역</option>
                         <option id="seoul" value="서울특별시">서울특별시</option>
                         <option id="busan" value="부산광역시">부산광역시</option>
@@ -54,25 +56,26 @@
                         <option id="jeju" value="제주특별자치도">제주특별자치도</option>
                     </select>
                     <select id="sigungu" name="sigungu" class="step2 me-2 animallist-select-box"
-                        onchange="sigunguSelected(this.value)">
+                        onchange="sigunguSelected(this.value)" required="false">
                         <option>시/군/구</option>
                         <option></option>
                     </select>
                 </div>
                 <select id="kind" name="kind" onchange="kindSelected(this.value), kindOprionChange()"
-                    class="me-2 animallist-select-box">
+                    class="me-2 animallist-select-box" required="false">
                     <option>종류</option>
                     <option value="강아지">강아지</option>
                     <option value="고양이">고양이</option>
                     <option value="기타">기타</option>
                 </select>
                 <select id="kind-of" name="kindOf" class="me-2 animallist-select-box"
-                    onchange="kindOfSelected(this.value)">
+                    onchange="kindOfSelected(this.value)" required="false">
                     <option>품종</option>
                     <option></option>
                 </select>
-                <input class="form-control me-2" name="keyword" type="search" placeholder="검색" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit" onchange="toRegion()">Search</button>
+                <input class="form-control me-2" name="keyword" type="search" placeholder="검색" aria-label="Search"
+                    required="false">
+                <button onclick="toRegion()" class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </div>
@@ -95,9 +98,10 @@
             </tr>
         </thead>
 
-        {{#animalslist}}
+        <!--지역 검색-->
         <tbody id="regionlist" class="m_text_align_center m_div_display_none">
             <!--유기동물 현황 조회 API 사용 시작-->
+            {{#regionlist}}
             <tr>
                 <th scope="row" style="vertical-align: middle;">{{#id}}{{id}}{{/id}}{{^id}}없음{{/id}}</th>
                 <!--id-->
@@ -134,8 +138,9 @@
                     </div>
                 </td>
             </tr>
+            {{/regionlist}}
         </tbody>
-        {{/animalslist}}
+        
     </table>
 </div>
 <!--검색결과테이블 끝-->
@@ -297,39 +302,39 @@
 </script>
 
 <script>
-    //스프링한테 옵션 선택한 값 오브젝트로 fetch 요청하기
+    // 스프링한테 옵션 선택한 값 오브젝트로 fetch 요청하기
 
-    async function toRegion() {
-        let keywordOfRegion = {
-            sido: selectedSido,
-            sigungu: selectedSigungu
-        }
-        console.log(keywordOfRegion);
-        if ($("#sido").val() && $("#sigungu").val() != null) {
-            let response = await fetch("/search/animals/region", {
-                method: "POST",
-                body: JSON.stringify(keywordOfRegion),
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8",
-                },
-            });
+    // async function toRegion() {
+    //     let keywordOfRegion = {
+    //         sido: selectedSido,
+    //         sigungu: selectedSigungu
+    //     }
+    //     console.log(keywordOfRegion);
+    //     if ($("#sido").val() && $("#sigungu").val() != null) {
+    //         let response = await fetch(`/search/animals/region`, {
+    //             method: "POST",
+    //             body: JSON.stringify(keywordOfRegion),
+    //             headers: {
+    //                 "Content-Type": "application/json; charset=utf-8",
+    //             },
+    //         });
 
-            console.log(response);
+    //         console.log(response);
 
-            let reseponseParse = await response.json();
-            console.log(reseponseParse);
+    //         let reseponseParse = await response.json();
+    //         console.log(reseponseParse);
 
-            if (reseponseParse.code == 1) {
-                alert("검색 성공");
-                location.href = "/animals/region"
-            } else {
-                alert("검색 실패");
-            }
+    //         if (reseponseParse.code == 1) {
+    //             alert("검색 성공");
+    //             location.href = "/animals/region";
+    //         } else {
+    //             alert("검색 실패");
+    //         }
 
-            return keywordOfRegion;
-        }
+    //         return keywordOfRegion;
+    //     }
 
-    }
+    // }
 
 </script>
 
