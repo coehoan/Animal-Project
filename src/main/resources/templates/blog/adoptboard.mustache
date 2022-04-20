@@ -111,6 +111,39 @@
   </div>
   <!-- 글목록 끝 -->
 
+  <!-- 페이징 시작 -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      {{#pages.hasPrevious}}
+      <li class="page-item">
+        <a class="page-link" href="?page={{prevPage}}">이전</a>
+      </li>
+      {{/pages.hasPrevious}}
+      {{^pages.hasPrevious}}
+      <li class="page-item disabled">
+        <a class="page-link" href="?page={{prevPage}}">이전</a>
+      </li>
+      {{/pages.hasPrevious}}
+
+      {{#pages.total}}
+      <li class="page-item"><a class="page-link" href="?page={{.}}" id="paging">{{.}}</a></li>
+      {{/pages.total}}
+
+      {{#pages.hasNext}}
+      <li class="page-item">
+        <a class="page-link" href="?page={{nextPage}}">다음</a>
+      </li>
+      {{/pages.hasNext}}
+      {{^pages.hasNext}}
+      <li class="page-item disabled">
+        <a class="page-link" href="?page={{nextPage}}">다음</a>
+      </li>
+      {{/pages.hasNext}}
+    </ul>
+  </nav>
+  <!-- 페이징 끝 -->
+
+
   <!-- 글쓰기버튼 시작 -->
   <div class="m_blog_btn">
     <a href="/blog/writeForm">

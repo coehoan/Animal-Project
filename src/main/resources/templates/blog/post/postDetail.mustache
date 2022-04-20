@@ -35,7 +35,6 @@
 <script>
   let recommend;
   let postId;
-
   $("#thumb-up").click(() => {
     recommend = parseInt($("#recommended").text());
     let id = parseInt($("#principal").text());
@@ -60,7 +59,6 @@
     // console.log(recommend);
     updateRecommend(recommend);
   });
-
   // 추천수 증감 함수
   async function updateRecommend(recommend) {
     let recommendDto = {
@@ -75,9 +73,7 @@
         'Content-Type': 'application/json; charset=utf-8'
       }
     });
-
     let responseParse = await response.json();
-
     if (responseParse.code == 1) {
       if ($("#thumb-up").hasClass("up")) {
         $("#thumb-up-img").attr("src", "/image/thumb-up-after.png");
@@ -89,12 +85,10 @@
         $("#thumb-up-img").attr("src", "/image/thumb-up-after.png");
       }
     }
-
     if (responseParse.data == "인증되지 않았습니다.") {
       alert("추천 기능은 로그인이 필요합니다.");
     }
   }
-
 </script>
 
 {{>/layout/footer}}

@@ -47,7 +47,7 @@
         <div class="d-flex justify-content-center align-content-center">
           <!--메뉴 시작-->
           <div class="d-flex align-items-center">
-            {{#log}}
+            {{#principal}}
             <ul class="nav justify-content-end">
               <li class="nav-item">
                 <a class="nav-link active text-light m_main_font_lg" aria-current="page" href="/logout">로그아웃</a>
@@ -72,9 +72,9 @@
                 </ul>
               </li>
             </ul>
-            {{/log}}
-            {{^log}}
-                        <ul class="nav justify-content-end">
+            {{/principal}}
+            {{^principal}}
+            <ul class="nav justify-content-end">
               <li class="nav-item">
                 <a class="nav-link active text-light m_main_font_lg" aria-current="page" href="/main/loginForm">로그인</a>
               </li>
@@ -101,7 +101,7 @@
                 </ul>
               </li>
             </ul>
-            {{/log}}
+            {{/principal}}
           </div>
           <!--메뉴 끝-->
         </div>

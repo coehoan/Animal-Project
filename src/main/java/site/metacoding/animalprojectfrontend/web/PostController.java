@@ -5,10 +5,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
@@ -17,6 +23,7 @@ import site.metacoding.animalprojectfrontend.service.PostService;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.FreePostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.MainPostRespDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.PageRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.PostDetailRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.RegionPostRespDto;
 
@@ -66,9 +73,11 @@ public class PostController {
 
     // 입양후기 게시판
     @GetMapping("/blog/adopt")
-    public String adoptPage(Model model) {
+    public String adoptPage(@RequestParam(defaultValue = "0") Integer page, Model model, Pageable pageable) {
         String board = "adopt";
-        List<Post> posts = postService.글목록보기(board);
+        PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+
+        Page<Post> posts = postService.글목록보기(board, pr);
         List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
 
         for (Post postList : posts) {
@@ -128,17 +137,30 @@ public class PostController {
             adoptPostRespDtoList.add(postRespDto);
         }
 
-        // System.out.println("======" + posts);
-        // System.out.println("======**" + posts.get(0).getUser().getUsername());
+        List<Integer> pageList = new ArrayList<>();
+        for (int i = 0; i < posts.getTotalPages(); i++) {
+            pageList.add(i);
+        }
+
+        PageRespDto pageRespDto = new PageRespDto();
+        pageRespDto.setTotal(pageList);
+        pageRespDto.setHasNext(posts.hasNext());
+        pageRespDto.setHasPrevious(posts.hasPrevious());
+
         model.addAttribute("posts", adoptPostRespDtoList);
+        model.addAttribute("pages", pageRespDto);
+        model.addAttribute("prevPage", page - 1);
+        model.addAttribute("nextPage", page + 1);
         return "blog/adoptboard";
     }
 
     // 지역별 게시판
     @GetMapping("/blog/region")
-    public String regionPage(Model model) {
+    public String regionPage(@RequestParam(defaultValue = "0") Integer page, Model model, Pageable pageable) {
         String board = "region";
-        List<Post> posts = postService.글목록보기(board);
+        PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+
+        Page<Post> posts = postService.글목록보기(board, pr);
         List<RegionPostRespDto> regionPostRespDtoList = new ArrayList<RegionPostRespDto>();
 
         for (Post postList : posts) {
@@ -198,17 +220,31 @@ public class PostController {
             regionPostRespDtoList.add(postRespDto);
         }
 
-        // System.out.println("======" + posts);
-        // System.out.println("======**" + posts.get(0).getUser().getUsername());
+        List<Integer> pageList = new ArrayList<>();
+        for (int i = 0; i < posts.getTotalPages(); i++) {
+            pageList.add(i);
+        }
+
+        PageRespDto pageRespDto = new PageRespDto();
+        pageRespDto.setTotal(pageList);
+        pageRespDto.setHasNext(posts.hasNext());
+        pageRespDto.setHasPrevious(posts.hasPrevious());
+
         model.addAttribute("posts", regionPostRespDtoList);
+        model.addAttribute("pages", pageRespDto);
+        model.addAttribute("prevPage", page - 1);
+        model.addAttribute("nextPage", page + 1);
         return "blog/regionboard";
     }
 
     // 자유게시판
     @GetMapping("/blog/free")
-    public String freePage(Model model) {
+    public String freePage(@RequestParam(defaultValue = "0") Integer page, Model model, Pageable pageable) {
         String board = "free";
-        List<Post> posts = postService.글목록보기(board);
+        PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+
+        Page<Post> posts = postService.글목록보기(board, pr);
+
         List<FreePostRespDto> freePostRespDtoList = new ArrayList<FreePostRespDto>();
 
         for (Post postList : posts) {
@@ -223,9 +259,20 @@ public class PostController {
             freePostRespDtoList.add(postRespDto);
         }
 
-        // System.out.println("======" + posts);
-        // System.out.println("======**" + posts.get(0).getUser().getUsername());
+        List<Integer> pageList = new ArrayList<>();
+        for (int i = 0; i < posts.getTotalPages(); i++) {
+            pageList.add(i);
+        }
+
+        PageRespDto pageRespDto = new PageRespDto();
+        pageRespDto.setTotal(pageList);
+        pageRespDto.setHasNext(posts.hasNext());
+        pageRespDto.setHasPrevious(posts.hasPrevious());
+
         model.addAttribute("posts", freePostRespDtoList);
+        model.addAttribute("pages", pageRespDto);
+        model.addAttribute("prevPage", page - 1);
+        model.addAttribute("nextPage", page + 1);
         return "blog/freeboard";
     }
 

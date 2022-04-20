@@ -35,8 +35,7 @@ public class PostApiController {
     // 추천수 증감
     @PostMapping("/s/post/{id}")
     public ResponseDto<?> updateRec(@RequestBody RecReqDto RecReqDto) {
-        System.out.println("잘들어옴 --> " + RecReqDto);
-
+        System.out.println("컨트롤러 접근 - " + RecReqDto);
         postService.추천수증감(RecReqDto.getRecommended(), RecReqDto.getId());
         return new ResponseDto<>(1, "성공", null);
 

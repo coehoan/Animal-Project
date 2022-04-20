@@ -1,7 +1,10 @@
 package site.metacoding.animalprojectfrontend.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -17,8 +20,8 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public List<Post> 글목록보기(String board) {
-        List<Post> postEntity = postRepository.findByBoard(board);
+    public Page<Post> 글목록보기(String board, Pageable page) {
+        Page<Post> postEntity = postRepository.findByBoard(board, page);
         return postEntity;
     }
 
@@ -41,7 +44,6 @@ public class PostService {
     }
 
     public void 추천수증감(Integer recommended, Integer id) {
-        System.out.println("글 아이디 --> " + id + "추천수 --> " + recommended);
         postRepository.recCount(recommended, id);
     }
 }
