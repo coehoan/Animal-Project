@@ -230,7 +230,7 @@ public class PostController {
     }
 
     // 상세보기
-    @GetMapping("/blog/adoptboard/post/{id}")
+    @GetMapping("/blog/post/{id}")
     public String adoptboardPost(@PathVariable Integer id, Model model) {
 
         Post postOp = postService.글상세보기(id);
@@ -253,7 +253,7 @@ public class PostController {
         model.addAttribute("posts", postDetailRespDto);
         // model.addAttribute("principal", principal.getId());
 
-        return "/blog/post/adoptPost";
+        return "/blog/post/postDetail";
     }
 
 }

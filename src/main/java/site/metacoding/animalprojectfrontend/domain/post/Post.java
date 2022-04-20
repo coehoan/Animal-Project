@@ -67,12 +67,10 @@ public class Post {
     private String category;
 
     // 조회수
-    @ColumnDefault("0")
     @Column(nullable = false)
     private Integer view;
 
     // 추천수
-    @ColumnDefault("0")
     @Column(nullable = false)
     private Integer recommended;
 
@@ -81,7 +79,7 @@ public class Post {
     @LastModifiedDate // insert, update
     private LocalDateTime updateDate;
 
-    @PrePersist
+    @PrePersist // view, recommended의 값이 null이면 0으로 치환해서 가져옴.
     public void prePersist() {
         this.view = this.view == null ? 0 : this.view;
         this.recommended = this.recommended == null ? 0 : this.recommended;
