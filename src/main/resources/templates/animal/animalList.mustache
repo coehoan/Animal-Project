@@ -72,7 +72,7 @@
                     <option></option>
                 </select>
                 <input class="form-control me-2" name="keyword" type="search" placeholder="검색" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit" onchange="toRegion()">Search</button>
+                <button class="btn btn-outline-success" type="submit" onclick="toRegion()">Search</button>
             </form>
         </div>
     </div>
@@ -95,7 +95,7 @@
             </tr>
         </thead>
 
-        {{#animalslist}}
+        {{#regionlist}}
         <tbody id="regionlist" class="m_text_align_center m_div_display_none">
             <!--유기동물 현황 조회 API 사용 시작-->
             <tr>
@@ -135,7 +135,7 @@
                 </td>
             </tr>
         </tbody>
-        {{/animalslist}}
+        {{/regionlist}}
     </table>
 </div>
 <!--검색결과테이블 끝-->
@@ -321,7 +321,7 @@
 
             if (reseponseParse.code == 1) {
                 alert("검색 성공");
-                location.href = "/animals/region"
+                location.href = `/animals/region/${selectedSido}/${selectedSigungu}`
             } else {
                 alert("검색 실패");
             }

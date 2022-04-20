@@ -75,10 +75,10 @@ public class AnimalController {
     }
 
     @CrossOrigin
-    @GetMapping("/animals/region")
-    public String regionList(Model model) {
-
-        return "/animal/animalsRegionList";
+    @GetMapping("/animals/region/{sido}/{sigungu}")
+    public String regionList(@PathVariable(name = "sido") String sido, @PathVariable(name = "sigungu") String sigungu, Model model) {
+        
+        return "/animal/animalList";
     }
 
     @GetMapping("/download")

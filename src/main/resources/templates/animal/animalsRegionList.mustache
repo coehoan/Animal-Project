@@ -304,37 +304,37 @@
 <script>
     // 스프링한테 옵션 선택한 값 오브젝트로 fetch 요청하기
 
-    // async function toRegion() {
-    //     let keywordOfRegion = {
-    //         sido: selectedSido,
-    //         sigungu: selectedSigungu
-    //     }
-    //     console.log(keywordOfRegion);
-    //     if ($("#sido").val() && $("#sigungu").val() != null) {
-    //         let response = await fetch(`/search/animals/region`, {
-    //             method: "POST",
-    //             body: JSON.stringify(keywordOfRegion),
-    //             headers: {
-    //                 "Content-Type": "application/json; charset=utf-8",
-    //             },
-    //         });
+    async function toRegion() {
+        let keywordOfRegion = {
+            sido: selectedSido,
+            sigungu: selectedSigungu
+        }
+        console.log(keywordOfRegion);
+        if ($("#sido").val() && $("#sigungu").val() != null) {
+            let response = await fetch(`/search/animals/region`, {
+                method: "POST",
+                body: JSON.stringify(keywordOfRegion),
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+            });
 
-    //         console.log(response);
+            console.log(response);
 
-    //         let reseponseParse = await response.json();
-    //         console.log(reseponseParse);
+            let reseponseParse = await response.json();
+            console.log(reseponseParse);
 
-    //         if (reseponseParse.code == 1) {
-    //             alert("검색 성공");
-    //             location.href = "/animals/region";
-    //         } else {
-    //             alert("검색 실패");
-    //         }
+            if (reseponseParse.code == 1) {
+                alert("검색 성공");
+                location.href = "/animals/region";
+            } else {
+                alert("검색 실패");
+            }
 
-    //         return keywordOfRegion;
-    //     }
+            return keywordOfRegion;
+        }
 
-    // }
+    }
 
 </script>
 
