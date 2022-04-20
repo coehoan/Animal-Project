@@ -1,5 +1,8 @@
 package site.metacoding.animalprojectfrontend.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,4 +26,5 @@ public class UserService {
         User userEntity = userRepository.aLogin(loginDto.getUsername(), loginDto.getPassword());
         return userEntity;
     }
+
 }
