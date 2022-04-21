@@ -30,13 +30,47 @@ public class PostController {
 
     private final PostService postService;
 
+    public void search(Page<Post> posts, Integer page, Model model) {
+        List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
+
+        for (Post postList : posts) {
+            AdoptPostRespDto postRespDto = new AdoptPostRespDto();
+
+            postRespDto.setId(postList.getId());
+            postRespDto.setRegion(postList.getRegion());
+            postRespDto.setType(postList.getType());
+            postRespDto.setTitle(postList.getTitle());
+            postRespDto.setUsername(postList.getUser().getUsername());
+            postRespDto.setCreateDate(postList.getCreateDate());
+            postRespDto.setView(postList.getView());
+            postRespDto.setRecommended(postList.getRecommended());
+            adoptPostRespDtoList.add(postRespDto);
+        }
+
+        List<Integer> pageList = new ArrayList<>();
+        for (int i = 0; i < posts.getTotalPages(); i++) {
+            pageList.add(i);
+        }
+
+        PageRespDto pageRespDto = new PageRespDto();
+        pageRespDto.setTotal(pageList);
+        pageRespDto.setHasNext(posts.hasNext());
+        pageRespDto.setHasPrevious(posts.hasPrevious());
+
+        model.addAttribute("posts", adoptPostRespDtoList);
+        model.addAttribute("pages", pageRespDto);
+        model.addAttribute("prevPage", page - 1);
+        model.addAttribute("nextPage", page + 1);
+    }
+
     // 상세검색
     @GetMapping("/blog/post/search")
     public String search(
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(value = "board") String board,
             @RequestParam(value = "sort", required = false) String sort,
-
+            @RequestParam(value = "searchBy", required = false) String searchBy,
+            @RequestParam(value = "query", required = false) String query,
             String region, String type, Model model,
             Pageable pageable) {
 
@@ -44,194 +78,60 @@ public class PostController {
         PageRequest prView = PageRequest.of(page, 10, Sort.by(Direction.DESC, "view"));
         PageRequest prRec = PageRequest.of(page, 10, Sort.by(Direction.DESC, "recommended"));
 
-        // 최신순
-        if (sort.equals("new")) {
-            String redirect = "redirect:/blog/" + board;
-            return redirect;
+        /** 지역 or 품종 검색 폼 */
+        if (region != null && type != null) {
+            // 지역,품종 요청값 없을 때 redirect
+            if (region.equals("all") && type.equals("all")) {
+                String redirect = "redirect:/blog/" + board;
+                return redirect;
+            }
+            // 입양후기 지역만 선택했을 때
+            else if (region != "all" && type.equals("all")) {
+                Page<Post> posts = postService.지역별보기(board, region, pr);
+                search(posts, page, model);
+                return "blog/adoptboard";
+            }
+            // 입양후기 종류만 선택했을 때
+            else if (region.equals("all") && type != "all") {
+                Page<Post> posts = postService.종류별보기(board, type, pr);
+                search(posts, page, model);
+                return "blog/adoptboard";
+            }
+            // 입양후기 지역, 종류 모두 선택했을 때
+            else if (region != "all" && type != "all") {
+                Page<Post> posts = postService.지역종류별보기(board, region, type, pr);
+                search(posts, page, model);
+                return "blog/adoptboard";
+            }
         }
-        // 조회순
-        else if (sort.equals("view")) {
-            Page<Post> posts = postService.글목록보기(board, prView);
-            List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
 
-            for (Post postList : posts) {
-                AdoptPostRespDto postRespDto = new AdoptPostRespDto();
-
-                postRespDto.setId(postList.getId());
-                postRespDto.setRegion(postList.getRegion());
-                postRespDto.setType(postList.getType());
-                postRespDto.setTitle(postList.getTitle());
-                postRespDto.setUsername(postList.getUser().getUsername());
-                postRespDto.setCreateDate(postList.getCreateDate());
-                postRespDto.setView(postList.getView());
-                postRespDto.setRecommended(postList.getRecommended());
-                adoptPostRespDtoList.add(postRespDto);
+        /** 재정렬 폼 */
+        if (sort != null) {
+            // 최신순
+            if (sort.equals("new")) {
+                String redirect = "redirect:/blog/" + board;
+                return redirect;
             }
-
-            List<Integer> pageList = new ArrayList<>();
-            for (int i = 0; i < posts.getTotalPages(); i++) {
-                pageList.add(i);
+            // 조회순
+            else if (sort.equals("view")) {
+                Page<Post> posts = postService.글목록보기(board, prView);
+                search(posts, page, model);
+                return "blog/adoptboard";
             }
+            // 추천순
+            else if (sort.equals("rec")) {
+                Page<Post> posts = postService.글목록보기(board, prRec);
+                search(posts, page, model);
+                return "blog/adoptboard";
+            }
+        }
 
-            PageRespDto pageRespDto = new PageRespDto();
-            pageRespDto.setTotal(pageList);
-            pageRespDto.setHasNext(posts.hasNext());
-            pageRespDto.setHasPrevious(posts.hasPrevious());
-
-            model.addAttribute("posts", adoptPostRespDtoList);
-            model.addAttribute("pages", pageRespDto);
-            model.addAttribute("prevPage", page - 1);
-            model.addAttribute("nextPage", page + 1);
+        /** 제목 내용 작성자 검색 폼 */
+        if (searchBy != null
+                && (searchBy.equals("title") || searchBy.equals("content") || searchBy.equals("username"))) {
+            Page<Post> posts = postService.게시글검색(board, query, pr, searchBy);
+            search(posts, page, model);
             return "blog/adoptboard";
-
-        }
-        // 추천순
-        else if (sort.equals("rec")) {
-            Page<Post> posts = postService.글목록보기(board, prRec);
-            List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
-
-            for (Post postList : posts) {
-                AdoptPostRespDto postRespDto = new AdoptPostRespDto();
-
-                postRespDto.setId(postList.getId());
-                postRespDto.setRegion(postList.getRegion());
-                postRespDto.setType(postList.getType());
-                postRespDto.setTitle(postList.getTitle());
-                postRespDto.setUsername(postList.getUser().getUsername());
-                postRespDto.setCreateDate(postList.getCreateDate());
-                postRespDto.setView(postList.getView());
-                postRespDto.setRecommended(postList.getRecommended());
-                adoptPostRespDtoList.add(postRespDto);
-            }
-
-            List<Integer> pageList = new ArrayList<>();
-            for (int i = 0; i < posts.getTotalPages(); i++) {
-                pageList.add(i);
-            }
-
-            PageRespDto pageRespDto = new PageRespDto();
-            pageRespDto.setTotal(pageList);
-            pageRespDto.setHasNext(posts.hasNext());
-            pageRespDto.setHasPrevious(posts.hasPrevious());
-
-            model.addAttribute("posts", adoptPostRespDtoList);
-            model.addAttribute("pages", pageRespDto);
-            model.addAttribute("prevPage", page - 1);
-            model.addAttribute("nextPage", page + 1);
-            return "blog/adoptboard";
-        }
-        // 지역,품종 요청값 없을 때 redirect
-        if (region.equals("all") && type.equals("all")) {
-            String redirect = "redirect:/blog/" + board;
-            return redirect;
-        }
-
-        // 입양후기 지역만 선택했을 때
-        if (region != "all" && type.equals("all")) {
-            Page<Post> posts = postService.지역별보기(board, region, pr);
-            List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
-
-            for (Post postList : posts) {
-                AdoptPostRespDto postRespDto = new AdoptPostRespDto();
-
-                postRespDto.setId(postList.getId());
-                postRespDto.setRegion(postList.getRegion());
-                postRespDto.setType(postList.getType());
-                postRespDto.setTitle(postList.getTitle());
-                postRespDto.setUsername(postList.getUser().getUsername());
-                postRespDto.setCreateDate(postList.getCreateDate());
-                postRespDto.setView(postList.getView());
-                postRespDto.setRecommended(postList.getRecommended());
-                adoptPostRespDtoList.add(postRespDto);
-                System.out.println("이름 --> " + postList.getUser().getUsername());
-            }
-            // System.out.println("게시글 최종 리스트 --> " + adoptPostRespDtoList);
-            List<Integer> pageList = new ArrayList<>();
-            for (int i = 0; i < posts.getTotalPages(); i++) {
-                pageList.add(i);
-            }
-
-            PageRespDto pageRespDto = new PageRespDto();
-            pageRespDto.setTotal(pageList);
-            pageRespDto.setHasNext(posts.hasNext());
-            pageRespDto.setHasPrevious(posts.hasPrevious());
-
-            model.addAttribute("posts", adoptPostRespDtoList);
-            model.addAttribute("pages", pageRespDto);
-            model.addAttribute("prevPage", page - 1);
-            model.addAttribute("nextPage", page + 1);
-
-            return "/blog/adoptboard";
-        }
-        // 입양후기 종류만 선택했을 때
-        else if (region.equals("all") && type != "all") {
-            Page<Post> posts = postService.종류별보기(board, type, pr);
-            List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
-
-            for (Post postList : posts) {
-                AdoptPostRespDto postRespDto = new AdoptPostRespDto();
-
-                postRespDto.setId(postList.getId());
-                postRespDto.setRegion(postList.getRegion());
-                postRespDto.setType(postList.getType());
-                postRespDto.setTitle(postList.getTitle());
-                postRespDto.setUsername(postList.getUser().getUsername());
-                postRespDto.setCreateDate(postList.getCreateDate());
-                postRespDto.setView(postList.getView());
-                postRespDto.setRecommended(postList.getRecommended());
-                adoptPostRespDtoList.add(postRespDto);
-            }
-            List<Integer> pageList = new ArrayList<>();
-            for (int i = 0; i < posts.getTotalPages(); i++) {
-                pageList.add(i);
-            }
-
-            PageRespDto pageRespDto = new PageRespDto();
-            pageRespDto.setTotal(pageList);
-            pageRespDto.setHasNext(posts.hasNext());
-            pageRespDto.setHasPrevious(posts.hasPrevious());
-
-            model.addAttribute("posts", adoptPostRespDtoList);
-            model.addAttribute("pages", pageRespDto);
-            model.addAttribute("prevPage", page - 1);
-            model.addAttribute("nextPage", page + 1);
-
-            return "/blog/adoptboard";
-        }
-        // 입양후기 지역, 종류 모두 선택했을 때
-        else if (region != "all" && type != "all") {
-            Page<Post> posts = postService.지역종류별보기(board, region, type, pr);
-            List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
-
-            for (Post postList : posts) {
-                AdoptPostRespDto postRespDto = new AdoptPostRespDto();
-
-                postRespDto.setId(postList.getId());
-                postRespDto.setRegion(postList.getRegion());
-                postRespDto.setType(postList.getType());
-                postRespDto.setTitle(postList.getTitle());
-                postRespDto.setUsername(postList.getUser().getUsername());
-                postRespDto.setCreateDate(postList.getCreateDate());
-                postRespDto.setView(postList.getView());
-                postRespDto.setRecommended(postList.getRecommended());
-                adoptPostRespDtoList.add(postRespDto);
-            }
-            List<Integer> pageList = new ArrayList<>();
-            for (int i = 0; i < posts.getTotalPages(); i++) {
-                pageList.add(i);
-            }
-
-            PageRespDto pageRespDto = new PageRespDto();
-            pageRespDto.setTotal(pageList);
-            pageRespDto.setHasNext(posts.hasNext());
-            pageRespDto.setHasPrevious(posts.hasPrevious());
-
-            model.addAttribute("posts", adoptPostRespDtoList);
-            model.addAttribute("pages", pageRespDto);
-            model.addAttribute("prevPage", page - 1);
-            model.addAttribute("nextPage", page + 1);
-
-            return "/blog/adoptboard";
         }
 
         return null;

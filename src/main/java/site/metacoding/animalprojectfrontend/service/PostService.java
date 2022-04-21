@@ -54,8 +54,17 @@ public class PostService {
         return postEntity;
     }
 
-    public Page<Post> 게시글검색(String board, String searchBy, String query, Pageable page) {
-        Page<Post> postEntity = postRepository.findByBoardSearchBy(board, searchBy, query, page);
+    public Page<Post> 게시글검색(String board, String query, Pageable page, String searchBy) {
+        if (searchBy == null)
+            return null;
+
+        Page<Post> postEntity = null;
+        if (searchBy.equals("title"))
+            postEntity = postRepository.findByBoardSearchByTitle(board, query, page);
+        else if (searchBy.equals("content"))
+            postEntity = postRepository.findByBoardSearchByContent(board, query, page);
+        else if (searchBy.equals("username"))
+            postEntity = postRepository.findByBoardSearchByUsername(board, query, page);
         return postEntity;
     }
 

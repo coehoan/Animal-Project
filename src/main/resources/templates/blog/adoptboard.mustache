@@ -109,27 +109,28 @@
     <ul class="pagination justify-content-center">
       {{#pages.hasPrevious}}
       <li class="page-item">
-        <a class="page-link" href="?page={{prevPage}}">이전</a>
+        <a id="prev" class="page-link" href="javascript:void(0)">이전</a>
       </li>
       {{/pages.hasPrevious}}
       {{^pages.hasPrevious}}
       <li class="page-item disabled">
-        <a class="page-link" href="?page={{prevPage}}">이전</a>
+        <a id="prev" class="page-link" href="javascript:void(0)">이전</a>
       </li>
       {{/pages.hasPrevious}}
 
       {{#pages.total}}
-      <li class="page-item"><a class="page-link" href="?page={{.}}" id="paging">{{.}}</a></li>
+      <li class="page-item"><a id="{{.}}" class="page-link page" href="javascript:void(0)"
+          onclick="pagingClick(this.id)">{{.}}</a></li>
       {{/pages.total}}
 
       {{#pages.hasNext}}
       <li class="page-item">
-        <a class="page-link" href="?page={{nextPage}}">다음</a>
+        <a id="next" class="page-link" href="javascript:void(0)">다음</a>
       </li>
       {{/pages.hasNext}}
       {{^pages.hasNext}}
-      <li class="page-item disabled">
-        <a class="page-link" href="?page={{nextPage}}">다음</a>
+      <li class=" page-item disabled">
+        <a id="next" class="page-link" href="javascript:void(0)">다음</a>
       </li>
       {{/pages.hasNext}}
     </ul>
@@ -180,5 +181,53 @@
 <!-- 게시판 끝 -->
 
 <script>
+  // 페이징 함수 시작
+  // 이전 버튼 클릭시
+  $("#prev").click(() => {
+    let h = location.href; // 현재주소
+    // 이전버튼은 다음버튼을 클릭 했을때만 활성화 되기때문에
+    // 주소에 page=이 붙어있어서 그 앞에서 끊어줌.
+    h = h.substring(0, h.indexOf("page="));
+    location.href = `${h}page={{prevPage}}`;
+  })
+
+  // 다음 버튼 클릭시
+  $("#next").click(() => {
+    let h = location.href; // 현재주소
+    if (h.indexOf("page=") == -1) { // 현재 주소에 page= 이 없으면
+      if (h.indexOf("search") > -1) { // 현재 주소에 search가 있으면
+        h += "&"; // 주소에 & 추가
+      } else {
+        h += "?"; // 주소에 ? 추가
+      }
+    } else {
+      // 현재 주소에 page= 이 계속 붙는걸 방지하기 위해
+      // substr을 이용해서 page= 앞에서 주소를 끊어준다.
+      h = h.substring(0, h.indexOf("page="));
+    }
+    // h 변수에 따라 맞는 페이지로 이동
+    location.href = `${h}page={{nextPage}}`;
+  })
+
+  // 페이지 번호 클릭시 id로 페이지번호를 받아옴
+  function pagingClick(id) {
+    let h = location.href; // 현재주소
+    if (h.indexOf("page=") == -1) { // 현재 주소에 page= 이 없으면
+      if (h.indexOf("search") > -1) { // 현재 주소에 search가 있으면
+        h += "&"; // 주소에 & 추가
+      } else {
+        h += "?"; // 주소에 ? 추가
+      }
+    } else {
+      // 현재 주소에 page= 이 계속 붙는걸 방지하기 위해
+      // substr을 이용해서 page= 앞에서 주소를 끊어준다.
+      h = h.substring(0, h.indexOf("page="));
+    }
+    // h 변수와 id값에 맞춰 페이지 이동
+    location.href = `${h}page=${id}`;
+  }
+
+  // 페이징 함수 끝
+
 
 </script>

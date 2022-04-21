@@ -32,8 +32,15 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     Page<Post> findByBoardAndRegionANDType(@Param("board") String board, @Param("region") String region,
             @Param("type") String type, Pageable page);
 
-    @Query(value = "SELECT * FROM post WHERE board =:board AND searchBy =:searchBy LIKE %query =:query%", nativeQuery = true)
-    Page<Post> findByBoardSearchBy(@Param("board") String board, @Param("searchBy") String searchBy,
+    @Query(value = "SELECT * FROM post WHERE board =:board AND title LIKE %:query%", nativeQuery = true)
+    Page<Post> findByBoardSearchByTitle(@Param("board") String board,
             @Param("query") String query, Pageable page);
 
+    @Query(value = "SELECT * FROM post WHERE board =:board AND content LIKE %:query%", nativeQuery = true)
+    Page<Post> findByBoardSearchByContent(@Param("board") String board,
+            @Param("query") String query, Pageable page);
+
+    @Query(value = "SELECT * FROM post p INNER JOIN user u ON p.userId = u.id WHERE username =:query AND board =:board", nativeQuery = true)
+    Page<Post> findByBoardSearchByUsername(@Param("board") String board,
+            @Param("query") String query, Pageable page);
 }
