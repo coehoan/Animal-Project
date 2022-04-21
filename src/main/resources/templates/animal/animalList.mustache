@@ -95,8 +95,7 @@
             </tr>
         </thead>
 
-        <tbody id="region" class="m_text_align_center m_div_display_none">
-            <!--유기동물 현황 조회 API 사용 시작-->
+        <tbody id="region" class="m_text_align_center">
 
         </tbody>
 
@@ -111,6 +110,10 @@
 <!-- 자세히보기 div 끝 -->
 
 <script>
+    $("#showDetail").click(() => {
+        showDetail();
+    });
+    
     function showDetail() {
         if ($("#detail").css("display") == "none") {
             $("#detail").removeClass("m_div_display_none");
@@ -278,8 +281,12 @@
                 alert("검색 성공");
                 $("#region").empty();
                 for (regionList of reseponseParse.data) { // data 크기만큼
-                    $("#region").append(trRender(regionList)); // append
+                    $("#region").append(mainRender(regionList)); // append
+                    $("#region").append(detailRender(regionList));
                 }
+
+
+
             } else {
                 alert("검색 실패");
             }
@@ -289,44 +296,49 @@
 
     }
 
-    function trRender(regionList) {
+    function mainRender(regionList) {
         console.log(regionList.id);
         return `<tr>
                 <th scope="row" style="vertical-align: middle;">${regionList.id}</th>
                 <td style="vertical-align: middle;">${regionList.kindCd}</td>
-                <td width="110"><img src="/image/dog1.png" width="100" height="100"></td>
+                <td width="110"><img src="${regionList.filename}" width="100" height="100"></td>
                 <td style="vertical-align: middle;">${regionList.happenPlace}</td>
                 <td style="vertical-align: middle;">${regionList.sexCd}</td>
                 <td style="vertical-align: middle;">${regionList.age}</td>
                 <td style="vertical-align: middle;">
                     ${regionList.processState}</td>
                 <td style="vertical-align: middle;" width="100">
-                    <button id="showDetail" class="m_button" onclick="showDetail()">자세히</button>
+                    <button id="showDetail" class="m_button"">자세히</button>
                 </td>
             </tr>`;
-        // return `<tr>
-        //         <td colspan="9" id="detail" class="m_div_display_none">
-        //             <div class="m_sub_content">
-        //                 #체중:${regionList.weight}
-        //                 #색상:${regionList.colorCd}
-        //                 #중성화여부:${regionList.neuterYn}
-        //                 #보호소이름:${regionList.careNm}
-        //                 #보호소전화번호:${regionList.careTel}
-        //                 #보호장소:${regionList.careAddr}
-        //                 #관활기관:${regionList.orgNm}
-        //                 #담당자:${regionList.chargeNm}
-        //                 #담당자연락처:${regionList.officetel}
-        //             </div>
-        //         </td>
-        //     </tr>`;
     }
+
+    function detailRender(regionList) {
+        return `<tr>
+                <td colspan="9" id="detail" class="m_div_display_none">
+                    <div class="m_sub_content">
+                        #체중:${regionList.weight}
+                        #색상:${regionList.colorCd}
+                        #중성화여부:${regionList.neuterYn}
+                        #보호소이름:${regionList.careNm}
+                        #보호소전화번호:${regionList.careTel}
+                        #보호장소:${regionList.careAddr}
+                        #관활기관:${regionList.orgNm}
+                        #담당자:${regionList.chargeNm}
+                        #담당자연락처:${regionList.officetel}
+                    </div>
+                </td>
+            </tr>`;
+    }
+
+
 
     toRegion("");
 
 </script>
 
 <script>
-    
+
 </script>
 
 

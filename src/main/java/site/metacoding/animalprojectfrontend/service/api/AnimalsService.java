@@ -3,9 +3,12 @@ package site.metacoding.animalprojectfrontend.service.api;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -58,12 +61,13 @@ public class AnimalsService {
             Integer totalCount = response.getResponse().getBody().getTotalCount();
 
             Integer result = totalCount / 1000; // totalCount를 1000씩으로 나눔, 최대 요청숫자가 1000이라서...
-
-            for (int i = 0; i < totalCount / 142; i++) {
+            System.out.println(result);
+            for (int i = 0; i < result; i++) {
 
                 if (response.getResponse().getBody().getItems().getItem() != null) {
 
-                    List<Item> itemList = response.getResponse().getBody().getItems().getItem();
+                    List<Item> itemList = response.getResponse().getBody().getItems().getItem().stream().distinct()
+                            .collect(Collectors.toList());
 
                     for (int o = 0; o < itemList.size(); o++) {
                         Animals toAnimals = Animals.builder()
@@ -96,7 +100,7 @@ public class AnimalsService {
 
                         animalsEntity = animalsRepository.saveAllAndFlush(lists);
 
-                        System.out.println("받은 엔티티 =========" + lists);
+                        System.out.println("받은 엔티티 =========" + lists.size());
 
                     }
                 }
@@ -118,7 +122,7 @@ public class AnimalsService {
 
     public List<Animals> 지역검색(String keywordOfSido, String keywordOfSigungu) {
         System.out.println("쿼리스트링 받아졌나?" + keywordOfSido + keywordOfSigungu);
-        
+
         if (animalsRepository.keywordOfRegion(keywordOfSido, keywordOfSigungu) != null) {
             List<Animals> findRegionEntity = animalsRepository.keywordOfRegion(keywordOfSido, keywordOfSigungu);
             System.out.println("서비스 잘 되나?=======" + findRegionEntity);
@@ -127,6 +131,5 @@ public class AnimalsService {
             return null;
         }
 
-        
     }
 }
