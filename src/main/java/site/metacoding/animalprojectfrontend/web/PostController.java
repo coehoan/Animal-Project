@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,17 +32,100 @@ public class PostController {
 
     // 상세검색
     @GetMapping("/blog/post/search")
-    public String search(@RequestParam(defaultValue = "0") Integer page, @RequestParam(value = "board") String board,
+    public String search(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(value = "board") String board,
+            @RequestParam(value = "sort", required = false) String sort,
+
             String region, String type, Model model,
             Pageable pageable) {
 
-        PageRequest pr = PageRequest.of(page, 10);
+        PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+        PageRequest prView = PageRequest.of(page, 10, Sort.by(Direction.DESC, "view"));
+        PageRequest prRec = PageRequest.of(page, 10, Sort.by(Direction.DESC, "recommended"));
 
-        // 요청값 없을 때 redirect
+        // 최신순
+        if (sort.equals("new")) {
+            String redirect = "redirect:/blog/" + board;
+            return redirect;
+        }
+        // 조회순
+        else if (sort.equals("view")) {
+            Page<Post> posts = postService.글목록보기(board, prView);
+            List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
+
+            for (Post postList : posts) {
+                AdoptPostRespDto postRespDto = new AdoptPostRespDto();
+
+                postRespDto.setId(postList.getId());
+                postRespDto.setRegion(postList.getRegion());
+                postRespDto.setType(postList.getType());
+                postRespDto.setTitle(postList.getTitle());
+                postRespDto.setUsername(postList.getUser().getUsername());
+                postRespDto.setCreateDate(postList.getCreateDate());
+                postRespDto.setView(postList.getView());
+                postRespDto.setRecommended(postList.getRecommended());
+                adoptPostRespDtoList.add(postRespDto);
+            }
+
+            List<Integer> pageList = new ArrayList<>();
+            for (int i = 0; i < posts.getTotalPages(); i++) {
+                pageList.add(i);
+            }
+
+            PageRespDto pageRespDto = new PageRespDto();
+            pageRespDto.setTotal(pageList);
+            pageRespDto.setHasNext(posts.hasNext());
+            pageRespDto.setHasPrevious(posts.hasPrevious());
+
+            model.addAttribute("posts", adoptPostRespDtoList);
+            model.addAttribute("pages", pageRespDto);
+            model.addAttribute("prevPage", page - 1);
+            model.addAttribute("nextPage", page + 1);
+            return "blog/adoptboard";
+
+        }
+        // 추천순
+        else if (sort.equals("rec")) {
+            Page<Post> posts = postService.글목록보기(board, prRec);
+            List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
+
+            for (Post postList : posts) {
+                AdoptPostRespDto postRespDto = new AdoptPostRespDto();
+
+                postRespDto.setId(postList.getId());
+                postRespDto.setRegion(postList.getRegion());
+                postRespDto.setType(postList.getType());
+                postRespDto.setTitle(postList.getTitle());
+                postRespDto.setUsername(postList.getUser().getUsername());
+                postRespDto.setCreateDate(postList.getCreateDate());
+                postRespDto.setView(postList.getView());
+                postRespDto.setRecommended(postList.getRecommended());
+                adoptPostRespDtoList.add(postRespDto);
+            }
+
+            List<Integer> pageList = new ArrayList<>();
+            for (int i = 0; i < posts.getTotalPages(); i++) {
+                pageList.add(i);
+            }
+
+            PageRespDto pageRespDto = new PageRespDto();
+            pageRespDto.setTotal(pageList);
+            pageRespDto.setHasNext(posts.hasNext());
+            pageRespDto.setHasPrevious(posts.hasPrevious());
+
+            model.addAttribute("posts", adoptPostRespDtoList);
+            model.addAttribute("pages", pageRespDto);
+            model.addAttribute("prevPage", page - 1);
+            model.addAttribute("nextPage", page + 1);
+            return "blog/adoptboard";
+        }
+        // 지역,품종 요청값 없을 때 redirect
         if (region.equals("all") && type.equals("all")) {
             String redirect = "redirect:/blog/" + board;
             return redirect;
         }
+
         // 입양후기 지역만 선택했을 때
         if (region != "all" && type.equals("all")) {
             Page<Post> posts = postService.지역별보기(board, region, pr);
@@ -194,7 +279,7 @@ public class PostController {
     @GetMapping("/blog/adopt")
     public String adoptPage(@RequestParam(defaultValue = "0") Integer page, Model model, Pageable pageable) {
         String board = "adopt";
-        PageRequest pr = PageRequest.of(page, 10);
+        PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
 
         Page<Post> posts = postService.글목록보기(board, pr);
         List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
@@ -234,7 +319,7 @@ public class PostController {
     @GetMapping("/blog/region")
     public String regionPage(@RequestParam(defaultValue = "0") Integer page, Model model, Pageable pageable) {
         String board = "region";
-        PageRequest pr = PageRequest.of(page, 10);
+        PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
 
         Page<Post> posts = postService.글목록보기(board, pr);
         List<RegionPostRespDto> regionPostRespDtoList = new ArrayList<RegionPostRespDto>();
@@ -274,7 +359,7 @@ public class PostController {
     @GetMapping("/blog/free")
     public String freePage(@RequestParam(defaultValue = "0") Integer page, Model model, Pageable pageable) {
         String board = "free";
-        PageRequest pr = PageRequest.of(page, 10);
+        PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
 
         Page<Post> posts = postService.글목록보기(board, pr);
 

@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
-    @Query(value = "SELECT * FROM post WHERE board =:board ORDER BY id DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM post WHERE board =:board", nativeQuery = true)
     Page<Post> findByBoard(@Param("board") String board, Pageable page);
 
     @Query(value = "SELECT * FROM post WHERE board =:board ORDER BY view DESC LIMIT 3", nativeQuery = true)
@@ -31,4 +31,9 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query(value = "SELECT * FROM post WHERE board =:board AND region =:region AND type =:type ORDER BY id DESC", nativeQuery = true)
     Page<Post> findByBoardAndRegionANDType(@Param("board") String board, @Param("region") String region,
             @Param("type") String type, Pageable page);
+
+    @Query(value = "SELECT * FROM post WHERE board =:board AND searchBy =:searchBy LIKE %query =:query%", nativeQuery = true)
+    Page<Post> findByBoardSearchBy(@Param("board") String board, @Param("searchBy") String searchBy,
+            @Param("query") String query, Pageable page);
+
 }

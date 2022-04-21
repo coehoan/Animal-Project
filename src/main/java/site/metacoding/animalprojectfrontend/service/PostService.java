@@ -54,6 +54,11 @@ public class PostService {
         return postEntity;
     }
 
+    public Page<Post> 게시글검색(String board, String searchBy, String query, Pageable page) {
+        Page<Post> postEntity = postRepository.findByBoardSearchBy(board, searchBy, query, page);
+        return postEntity;
+    }
+
     public void 조회수증가(Integer updateView, Integer id) {
         postRepository.viewCount(updateView, id);
     }
