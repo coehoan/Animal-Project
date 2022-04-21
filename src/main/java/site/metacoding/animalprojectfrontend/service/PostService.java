@@ -39,6 +39,21 @@ public class PostService {
             throw new RuntimeException("게시글이 없습니다.");
     }
 
+    public Page<Post> 지역별보기(String board, String region, Pageable page) {
+        Page<Post> postEntity = postRepository.findByBoardAndRegion(board, region, page);
+        return postEntity;
+    }
+
+    public Page<Post> 종류별보기(String board, String type, Pageable page) {
+        Page<Post> postEntity = postRepository.findByBoardAndType(board, type, page);
+        return postEntity;
+    }
+
+    public Page<Post> 지역종류별보기(String board, String region, String type, Pageable page) {
+        Page<Post> postEntity = postRepository.findByBoardAndRegionANDType(board, region, type, page);
+        return postEntity;
+    }
+
     public void 조회수증가(Integer updateView, Integer id) {
         postRepository.viewCount(updateView, id);
     }

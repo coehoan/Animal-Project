@@ -37,21 +37,6 @@ public class AnimalController {
     // return "/animal/shelterList";
     // }
 
-    @GetMapping("/blog/writeForm")
-    public String writeForm() {
-        return "/blog/writeForm";
-    }
-
-    @GetMapping("/blog/regionboard/post/1")
-    public String regionboardPost() {
-        return "/blog/post/regionPost";
-    }
-
-    @GetMapping("/blog/freeboard/post/1")
-    public String freeboardPost() {
-        return "/blog/post/freePost";
-    }
-
     @GetMapping("/withus/doctor")
     public String withDoctor() {
         return "/withus/doctor";

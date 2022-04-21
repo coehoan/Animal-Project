@@ -9,35 +9,55 @@
   <form class="m_auth_box" novalidate>
     <div class="form-group">
       <label>아이디</label>
-      <input id="username" type="text" class="form-control mt-3" placeholder="username" required>
+      <input id="username" type="text" class="form-control mt-3" required>
     </div>
     <div class="form-group mt-3">
       <label>비밀번호</label>
-      <input id="password" type="password" name="password" class="form-control"  title="password" required>
+      <input id="password" type="password" name="password" class="form-control mt-3" title="password" required>
     </div>
     <div class="form-group mt-3">
       <label>이메일</label>
-      <input id="email" type="email" class="form-control" placeholder="name@example.com" required>
+      <input id="email" type="email" class="form-control mt-3" placeholder="name@example.com" required>
     </div>
     <div class="form-group mt-3">
       <label>성별</label>
       <select id="male" class="form-select mt-3" required>
-        <option selected>성별</option>
+        <option selected disabled>성별</option>
         <option value="male">남자</option>
         <option value="female">여자</option>
         <option value="female">선택안함</option>
       </select>
     </div>
     <div class="form-group mt-3">
-      <label>주소</label>
-      <input id="addr" type="text" class="form-control" min="10" data-v-m="Please enter minimum 10 characters"
-        required>
+      <label>거주지역</label>
+      <select id="region" class="form-select mt-3" required>
+        <option selected disabled>지역선택</option>
+        <option value="서울특별시">서울</option>
+        <option value="경기도">경기</option>
+        <option value="인천광역시">인천</option>
+        <option value="강원도">강원</option>
+        <option value="세종특별자치시">세종</option>
+        <option value="충청북도">충북</option>
+        <option value="충청남도">충남</option>
+        <option value="대전광역시">대전</option>
+        <option value="전라북도">전북</option>
+        <option value="전라남도">전남</option>
+        <option value="인천광역시">광주</option>
+        <option value="경상북도">경북</option>
+        <option value="대구광역시">대구</option>
+        <option value="경상남도">경남</option>
+        <option value="울산광역시">울산</option>
+        <option value="부산광역시">부산</option>
+        <option value="제주특별자치도">제주</option>
+      </select>
+      <div class="form-group mt-5">
+        <input id="btn-join" type="submit" class="btn bg-success text-light" value="회원가입">
+      </div>
     </div>
-        <input id="btn-join" type="button" class="btn btn-primary" value="회원가입">
-    </form>
-    <!-- 회원가입 폼 끝 -->
-
-    <script src="/js/user.js"></script>
+  </form>
+  <!-- 회원가입 폼 끝 -->
 </div>
+
+<script src="/js/user.js"></script>
 <!-- 컨테이너 끝 -->
 {{>/layout/footer}}

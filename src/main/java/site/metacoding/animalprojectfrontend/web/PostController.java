@@ -3,13 +3,9 @@ package site.metacoding.animalprojectfrontend.web;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
-import site.metacoding.animalprojectfrontend.domain.user.User;
 import site.metacoding.animalprojectfrontend.service.PostService;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.FreePostRespDto;
@@ -32,7 +27,130 @@ import site.metacoding.animalprojectfrontend.web.api.dto.post.RegionPostRespDto;
 public class PostController {
 
     private final PostService postService;
-    private final HttpSession session;
+
+    // 상세검색
+    @GetMapping("/blog/post/search")
+    public String search(@RequestParam(defaultValue = "0") Integer page, @RequestParam(value = "board") String board,
+            String region, String type, Model model,
+            Pageable pageable) {
+
+        PageRequest pr = PageRequest.of(page, 10);
+
+        // 요청값 없을 때 redirect
+        if (region.equals("all") && type.equals("all")) {
+            String redirect = "redirect:/blog/" + board;
+            return redirect;
+        }
+        // 입양후기 지역만 선택했을 때
+        if (region != "all" && type.equals("all")) {
+            Page<Post> posts = postService.지역별보기(board, region, pr);
+            List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
+
+            for (Post postList : posts) {
+                AdoptPostRespDto postRespDto = new AdoptPostRespDto();
+
+                postRespDto.setId(postList.getId());
+                postRespDto.setRegion(postList.getRegion());
+                postRespDto.setType(postList.getType());
+                postRespDto.setTitle(postList.getTitle());
+                postRespDto.setUsername(postList.getUser().getUsername());
+                postRespDto.setCreateDate(postList.getCreateDate());
+                postRespDto.setView(postList.getView());
+                postRespDto.setRecommended(postList.getRecommended());
+                adoptPostRespDtoList.add(postRespDto);
+                System.out.println("이름 --> " + postList.getUser().getUsername());
+            }
+            // System.out.println("게시글 최종 리스트 --> " + adoptPostRespDtoList);
+            List<Integer> pageList = new ArrayList<>();
+            for (int i = 0; i < posts.getTotalPages(); i++) {
+                pageList.add(i);
+            }
+
+            PageRespDto pageRespDto = new PageRespDto();
+            pageRespDto.setTotal(pageList);
+            pageRespDto.setHasNext(posts.hasNext());
+            pageRespDto.setHasPrevious(posts.hasPrevious());
+
+            model.addAttribute("posts", adoptPostRespDtoList);
+            model.addAttribute("pages", pageRespDto);
+            model.addAttribute("prevPage", page - 1);
+            model.addAttribute("nextPage", page + 1);
+
+            return "/blog/adoptboard";
+        }
+        // 입양후기 종류만 선택했을 때
+        else if (region.equals("all") && type != "all") {
+            Page<Post> posts = postService.종류별보기(board, type, pr);
+            List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
+
+            for (Post postList : posts) {
+                AdoptPostRespDto postRespDto = new AdoptPostRespDto();
+
+                postRespDto.setId(postList.getId());
+                postRespDto.setRegion(postList.getRegion());
+                postRespDto.setType(postList.getType());
+                postRespDto.setTitle(postList.getTitle());
+                postRespDto.setUsername(postList.getUser().getUsername());
+                postRespDto.setCreateDate(postList.getCreateDate());
+                postRespDto.setView(postList.getView());
+                postRespDto.setRecommended(postList.getRecommended());
+                adoptPostRespDtoList.add(postRespDto);
+            }
+            List<Integer> pageList = new ArrayList<>();
+            for (int i = 0; i < posts.getTotalPages(); i++) {
+                pageList.add(i);
+            }
+
+            PageRespDto pageRespDto = new PageRespDto();
+            pageRespDto.setTotal(pageList);
+            pageRespDto.setHasNext(posts.hasNext());
+            pageRespDto.setHasPrevious(posts.hasPrevious());
+
+            model.addAttribute("posts", adoptPostRespDtoList);
+            model.addAttribute("pages", pageRespDto);
+            model.addAttribute("prevPage", page - 1);
+            model.addAttribute("nextPage", page + 1);
+
+            return "/blog/adoptboard";
+        }
+        // 입양후기 지역, 종류 모두 선택했을 때
+        else if (region != "all" && type != "all") {
+            Page<Post> posts = postService.지역종류별보기(board, region, type, pr);
+            List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
+
+            for (Post postList : posts) {
+                AdoptPostRespDto postRespDto = new AdoptPostRespDto();
+
+                postRespDto.setId(postList.getId());
+                postRespDto.setRegion(postList.getRegion());
+                postRespDto.setType(postList.getType());
+                postRespDto.setTitle(postList.getTitle());
+                postRespDto.setUsername(postList.getUser().getUsername());
+                postRespDto.setCreateDate(postList.getCreateDate());
+                postRespDto.setView(postList.getView());
+                postRespDto.setRecommended(postList.getRecommended());
+                adoptPostRespDtoList.add(postRespDto);
+            }
+            List<Integer> pageList = new ArrayList<>();
+            for (int i = 0; i < posts.getTotalPages(); i++) {
+                pageList.add(i);
+            }
+
+            PageRespDto pageRespDto = new PageRespDto();
+            pageRespDto.setTotal(pageList);
+            pageRespDto.setHasNext(posts.hasNext());
+            pageRespDto.setHasPrevious(posts.hasPrevious());
+
+            model.addAttribute("posts", adoptPostRespDtoList);
+            model.addAttribute("pages", pageRespDto);
+            model.addAttribute("prevPage", page - 1);
+            model.addAttribute("nextPage", page + 1);
+
+            return "/blog/adoptboard";
+        }
+
+        return null;
+    }
 
     // 블로그 메인 게시판
     @GetMapping("/blog")
@@ -68,6 +186,7 @@ public class PostController {
                 }
             }
         }
+
         return "blog/blogMain";
     }
 
@@ -75,60 +194,17 @@ public class PostController {
     @GetMapping("/blog/adopt")
     public String adoptPage(@RequestParam(defaultValue = "0") Integer page, Model model, Pageable pageable) {
         String board = "adopt";
-        PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+        PageRequest pr = PageRequest.of(page, 10);
 
         Page<Post> posts = postService.글목록보기(board, pr);
         List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
 
         for (Post postList : posts) {
             AdoptPostRespDto postRespDto = new AdoptPostRespDto();
-            String region = postList.getRegion();
-            if (region.equals("seoul"))
-                region = "서울";
-            else if (region.equals("gyeonggi"))
-                region = "경기";
-            else if (region.equals("incheon"))
-                region = "인천";
-            else if (region.equals("gangwon"))
-                region = "강원";
-            else if (region.equals("sejong"))
-                region = "세종";
-            else if (region.equals("chungbuk"))
-                region = "충북";
-            else if (region.equals("chungnam"))
-                region = "충남";
-            else if (region.equals("daejeon"))
-                region = "대전";
-            else if (region.equals("jeonbuk"))
-                region = "전북";
-            else if (region.equals("jeonnam"))
-                region = "전남";
-            else if (region.equals("gwangju"))
-                region = "광주";
-            else if (region.equals("gyeongbuk"))
-                region = "경북";
-            else if (region.equals("daegu"))
-                region = "대구";
-            else if (region.equals("gyeongnam"))
-                region = "경남";
-            else if (region.equals("ulsan"))
-                region = "울산";
-            else if (region.equals("busan"))
-                region = "부산";
-            else if (region.equals("jeju"))
-                region = "제주";
-
-            String type = postList.getType();
-            if (type.equals("dog"))
-                type = "강아지";
-            else if (type.equals("cat"))
-                type = "고양이";
-            else if (type.equals("etc"))
-                type = "기타";
 
             postRespDto.setId(postList.getId());
-            postRespDto.setRegion(region);
-            postRespDto.setType(type);
+            postRespDto.setRegion(postList.getRegion());
+            postRespDto.setType(postList.getType());
             postRespDto.setTitle(postList.getTitle());
             postRespDto.setUsername(postList.getUser().getUsername());
             postRespDto.setCreateDate(postList.getCreateDate());
@@ -158,60 +234,17 @@ public class PostController {
     @GetMapping("/blog/region")
     public String regionPage(@RequestParam(defaultValue = "0") Integer page, Model model, Pageable pageable) {
         String board = "region";
-        PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+        PageRequest pr = PageRequest.of(page, 10);
 
         Page<Post> posts = postService.글목록보기(board, pr);
         List<RegionPostRespDto> regionPostRespDtoList = new ArrayList<RegionPostRespDto>();
 
         for (Post postList : posts) {
             RegionPostRespDto postRespDto = new RegionPostRespDto();
-            String region = postList.getRegion();
-            if (region.equals("seoul"))
-                region = "서울";
-            else if (region.equals("gyeonggi"))
-                region = "경기";
-            else if (region.equals("incheon"))
-                region = "인천";
-            else if (region.equals("gangwon"))
-                region = "강원";
-            else if (region.equals("sejong"))
-                region = "세종";
-            else if (region.equals("chungbuk"))
-                region = "충북";
-            else if (region.equals("chungnam"))
-                region = "충남";
-            else if (region.equals("daejeon"))
-                region = "대전";
-            else if (region.equals("jeonbuk"))
-                region = "전북";
-            else if (region.equals("jeonnam"))
-                region = "전남";
-            else if (region.equals("gwangju"))
-                region = "광주";
-            else if (region.equals("gyeongbuk"))
-                region = "경북";
-            else if (region.equals("daegu"))
-                region = "대구";
-            else if (region.equals("gyeongnam"))
-                region = "경남";
-            else if (region.equals("ulsan"))
-                region = "울산";
-            else if (region.equals("busan"))
-                region = "부산";
-            else if (region.equals("jeju"))
-                region = "제주";
-
-            String category = postList.getCategory();
-            if (category.equals("ask"))
-                category = "질문";
-            else if (category.equals("food"))
-                category = "맛집";
-            else if (category.equals("info"))
-                category = "정보";
 
             postRespDto.setId(postList.getId());
-            postRespDto.setRegion(region);
-            postRespDto.setCategory(category);
+            postRespDto.setRegion(postList.getRegion());
+            postRespDto.setCategory(postList.getCategory());
             postRespDto.setTitle(postList.getTitle());
             postRespDto.setUsername(postList.getUser().getUsername());
             postRespDto.setCreateDate(postList.getCreateDate());
@@ -241,7 +274,7 @@ public class PostController {
     @GetMapping("/blog/free")
     public String freePage(@RequestParam(defaultValue = "0") Integer page, Model model, Pageable pageable) {
         String board = "free";
-        PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
+        PageRequest pr = PageRequest.of(page, 10);
 
         Page<Post> posts = postService.글목록보기(board, pr);
 
@@ -301,6 +334,13 @@ public class PostController {
         // model.addAttribute("principal", principal.getId());
 
         return "/blog/post/postDetail";
+    }
+
+    // 글쓰기
+    @GetMapping("/s/blog/writeForm")
+    public String writeForm() {
+
+        return "/blog/writeForm";
     }
 
 }
