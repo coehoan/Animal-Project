@@ -58,3 +58,7 @@
 .m_option_display_none {
     display: none;
 }
+
+.m_border_radious {
+    border-radius: 100px;
+}

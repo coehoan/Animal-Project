@@ -114,10 +114,23 @@ public class AnimalsService {
         return null;
     }
 
-    public List<Animals> 전체검색() {
-        List<Animals> findAllEntity = animalsRepository.findAll();
+    // public List<Animals> 전체검색() {
+    //     List<Animals> findAllEntity = animalsRepository.findAll();
 
-        return findAllEntity;
+    //     return findAllEntity;
+    // }
+
+    public List<Animals> 전체검색(String keywordOfSido, String keywordOfSigungu, String keywordOfkind, String keywordOfkindOf,String keywordOfirstDate, String keywordOflastDate) {
+        System.out.println("쿼리스트링 받아졌나?" + keywordOfSido + keywordOfSigungu);
+
+        if (animalsRepository.keywordOfAll(keywordOfkind, keywordOfkindOf, keywordOfSido, keywordOfSigungu, keywordOfirstDate, keywordOflastDate) != null) {
+            List<Animals> findRegionEntity = animalsRepository.keywordOfAll(keywordOfkind, keywordOfkindOf, keywordOfSido, keywordOfSigungu, keywordOfirstDate, keywordOflastDate);
+            System.out.println("서비스 잘 되나?=======" + findRegionEntity);
+            return findRegionEntity;
+        } else {
+            return null;
+        }
+
     }
 
     public List<Animals> 지역검색(String keywordOfSido, String keywordOfSigungu) {
@@ -132,4 +145,77 @@ public class AnimalsService {
         }
 
     }
+
+    public List<Animals> 지역검색시도(String keywordOfSido) {
+        System.out.println("쿼리스트링 받아졌나?" + keywordOfSido);
+
+        if (animalsRepository.keywordOfRegionSido(keywordOfSido) != null) {
+            List<Animals> findRegionEntity = animalsRepository.keywordOfRegionSido(keywordOfSido);
+            System.out.println("서비스 잘 되나?=======" + findRegionEntity);
+            return findRegionEntity;
+        } else {
+            return null;
+        }
+
+    }
+
+    public List<Animals> 품종검색(String keywordOfkind, String keywordOfkindOf) {
+        System.out.println("쿼리스트링 받아졌나?" + keywordOfkind + keywordOfkindOf);
+
+        if (animalsRepository.keywordOfKind(keywordOfkind, keywordOfkindOf) != null) {
+
+            List<Animals> findKindEntity = animalsRepository.keywordOfKind(keywordOfkind, keywordOfkindOf);
+            System.out.println("서비스 잘 되나?=======" + findKindEntity);
+            return findKindEntity;
+        } else {
+            return null;
+        }
+
+    }
+
+    public List<Animals> 품종검색품종만(String keywordOfkind) {
+        System.out.println("쿼리스트링 받아졌나?" + keywordOfkind);
+
+        if (animalsRepository.keywordOfKindOnly(keywordOfkind) != null) {
+
+            List<Animals> findKindEntity = animalsRepository.keywordOfKindOnly(keywordOfkind);
+            System.out.println("서비스 잘 되나?=======" + findKindEntity);
+            return findKindEntity;
+        } else {
+            return null;
+        }
+
+    }
+
+    public List<Animals> 날짜검색(String keywordOfirstDate, String keywordOflastDate) {
+        System.out.println("쿼리스트링 받아졌나?" + keywordOfirstDate + keywordOflastDate);
+
+        if (animalsRepository.keywordOfDay(keywordOfirstDate, keywordOflastDate) != null) {
+            // String[] firstDate = keywordOfirstDate.split("-");
+            // System.out.println(firstDate);
+            // StringBuilder fDsb = new StringBuilder();
+
+            // fDsb.append(firstDate[0]);
+            // fDsb.append(firstDate[1]);
+            // fDsb.append(firstDate[2]);
+
+            // System.out.println(fDsb.toString());
+
+            // String[] lastDate = keywordOfirstDate.split("-");
+            // StringBuilder lDsb = new StringBuilder();
+            // lDsb.append(lastDate[0]);
+            // lDsb.append(lastDate[1]);
+            // lDsb.append(lastDate[2]);
+            // 컨트롤러에서 해줘서 안 해도 됨!
+
+            List<Animals> findDayEntity = animalsRepository.keywordOfDay(keywordOfirstDate, keywordOflastDate);
+            System.out.println("서비스 잘 되나?=======" + findDayEntity);
+            return findDayEntity;
+        } else {
+            return null;
+        }
+
+    }
+
+    
 }
