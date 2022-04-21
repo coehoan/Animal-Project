@@ -58,32 +58,6 @@ public class AnimalController {
         return "/blog/writeForm";
     }
 
-    @CrossOrigin
-    @PostMapping("/search/animals/region")
-    public @ResponseBody ResponseDto<?> getRegion(@RequestBody PostRegionDto keywordOfRegion, Model model) {
-        System.out.println("타나?");
-        System.out.println("받은 쿼리스트링 ====" + keywordOfRegion.getSido() + keywordOfRegion.getSigungu() + keywordOfRegion);
-        
-        if(animalsService.지역검색(keywordOfRegion.getSido(), keywordOfRegion.getSigungu()) != null) {
-            List<Animals> animalsEntity = animalsService.지역검색(keywordOfRegion.getSido(), keywordOfRegion.getSigungu());
-            model.addAttribute("regionlist", animalsEntity);
-
-            System.out.println("엔티티 컨트롤러에서 받았나?" + animalsEntity);
-
-            model.addAttribute("regionlist", animalsEntity);
-            
-            return new ResponseDto<>(1, "검색 성공", animalsEntity);
-        } else {
-            return new ResponseDto<>(1, "검색 실패", null);
-        }
-    }
-
-    @GetMapping("/animals/region")
-    public String region() {
-
-        return "/animal";
-    }
-
     // @CrossOrigin
     // @GetMapping("/animals/region/{sido}/{sigungu}")
     // public String regionList(@PathVariable(name = "sido") String sido, @PathVariable(name = "sigungu") String sigungu, Model model) {

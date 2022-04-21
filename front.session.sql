@@ -1,1 +1,2 @@
 SELECT * FROM Post;
+SELECT * FROM Animals;

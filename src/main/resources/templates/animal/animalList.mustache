@@ -72,7 +72,7 @@
                     <option></option>
                 </select>
                 <input class="form-control me-2" name="keyword" type="search" placeholder="검색" aria-label="Search">
-                <button class="btn btn-outline-success" type="button" onclick="toRegion()">Search</button>
+                <button id="btn-search" class="btn btn-outline-success" type="button">Search</button>
             </form>
         </div>
     </div>
@@ -95,84 +95,9 @@
             </tr>
         </thead>
 
-
-        <tbody id="regionlist" class="m_text_align_center m_div_display_none">
+        <tbody id="region" class="m_text_align_center m_div_display_none">
             <!--유기동물 현황 조회 API 사용 시작-->
 
-            <tr>
-                {{#regionlist}}
-                <th scope="row" style="vertical-align: middle;">{{#id}}{{id}}{{/id}}{{^id}}없음{{/id}}</th>
-                <!--id-->
-                <td style="vertical-align: middle;">{{#kindCd}}{{kindCd}}{{/kindCd}}{{^kindCd}}없음{{/kindCd}}</td>
-                <!--품종-->
-                <td width="110"><img src="/image/dog1.png" width="100" height="100"></td>
-                <!--썸네일-->
-                <td style="vertical-align: middle;">
-                    {{#happenPlace}}{{happenPlace}}{{/happenPlace}}{{^happenPlace}}없음{{/happenPlace}}</td>
-                <!--발견장소-->
-                <td style="vertical-align: middle;">{{#sexCd}}{{sexCd}}{{/sexCd}}{{^sexCd}}없음{{/sexCd}}</td>
-                <!--성별-->
-                <td style="vertical-align: middle;">{{#age}}{{age}}{{/age}}{{^age}}없음{{/age}}</td>
-                <!--나이-->
-                <td style="vertical-align: middle;">
-                    {{#processState}}{{processState}}{{/processState}}{{^processState}}없음{{/processState}}</td>
-                <!--상태-->
-                <td style="vertical-align: middle;" width="100">
-                    <button id="showDetail" class="m_button" onclick="showDetail()">자세히</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="9" id="detail" class="m_div_display_none">
-                    <div class="m_sub_content">
-                        #체중:{{#weight}}{{weight}}{{/weight}}{{^weight}}없음{{/weight}}
-                        #색상:{{#colorCd}}{{colorCd}}{{/colorCd}}{{^colorCd}}없음{{/colorCd}}
-                        #중성화여부:{{#neuterYn}}{{neuterYn}}{{/neuterYn}}{{^neuterYn}}없음{{/neuterYn}}
-                        #보호소이름:{{#careNm}}{{careNm}}{{/careNm}}{{^careNm}}없음{{/careNm}}
-                        #보호소전화번호:{{#careTel}}{{careTel}}{{/careTel}}{{^careTel}}없음{{/careTel}}
-                        #보호장소:{{#careAddr}}{{careAddr}}{{/careAddr}}{{^careAddr}}없음{{/careAddr}}
-                        #관활기관:{{#orgNm}}{{orgNm}}{{/orgNm}}{{^orgNm}}없음{{/orgNm}}
-                        #담당자:{{#chargeNm}}{{chargeNm}}{{/chargeNm}}{{^chargeNm}}없음{{/chargeNm}}
-                        #담당자연락처:{{#officetel}}{{officetel}}{{/officetel}}{{^officetel}}없음{{/officetel}}
-                    </div>
-                </td>
-                {{/regionlist}}
-                {{^regionlist}}
-                <th scope="row" style="vertical-align: middle;">{{#id}}{{id}}{{/id}}{{^id}}없음{{/id}}</th>
-                <!--id-->
-                <td style="vertical-align: middle;">{{#kindCd}}{{kindCd}}{{/kindCd}}{{^kindCd}}없음{{/kindCd}}</td>
-                <!--품종-->
-                <td width="110"><img src="/image/dog1.png" width="100" height="100"></td>
-                <!--썸네일-->
-                <td style="vertical-align: middle;">
-                    {{#happenPlace}}{{happenPlace}}{{/happenPlace}}{{^happenPlace}}없음{{/happenPlace}}</td>
-                <!--발견장소-->
-                <td style="vertical-align: middle;">{{#sexCd}}{{sexCd}}{{/sexCd}}{{^sexCd}}없음{{/sexCd}}</td>
-                <!--성별-->
-                <td style="vertical-align: middle;">{{#age}}{{age}}{{/age}}{{^age}}없음{{/age}}</td>
-                <!--나이-->
-                <td style="vertical-align: middle;">
-                    {{#processState}}{{processState}}{{/processState}}{{^processState}}없음{{/processState}}</td>
-                <!--상태-->
-                <td style="vertical-align: middle;" width="100">
-                    <button id="showDetail" class="m_button" onclick="showDetail()">자세히</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="9" id="detail" class="m_div_display_none">
-                    <div class="m_sub_content">
-                        #체중:{{#weight}}{{weight}}{{/weight}}{{^weight}}없음{{/weight}}
-                        #색상:{{#colorCd}}{{colorCd}}{{/colorCd}}{{^colorCd}}없음{{/colorCd}}
-                        #중성화여부:{{#neuterYn}}{{neuterYn}}{{/neuterYn}}{{^neuterYn}}없음{{/neuterYn}}
-                        #보호소이름:{{#careNm}}{{careNm}}{{/careNm}}{{^careNm}}없음{{/careNm}}
-                        #보호소전화번호:{{#careTel}}{{careTel}}{{/careTel}}{{^careTel}}없음{{/careTel}}
-                        #보호장소:{{#careAddr}}{{careAddr}}{{/careAddr}}{{^careAddr}}없음{{/careAddr}}
-                        #관활기관:{{#orgNm}}{{orgNm}}{{/orgNm}}{{^orgNm}}없음{{/orgNm}}
-                        #담당자:{{#chargeNm}}{{chargeNm}}{{/chargeNm}}{{^chargeNm}}없음{{/chargeNm}}
-                        #담당자연락처:{{#officetel}}{{officetel}}{{/officetel}}{{^officetel}}없음{{/officetel}}
-                    </div>
-                </td>
-                {{/regionlist}}
-            </tr>
         </tbody>
 
     </table>
@@ -192,10 +117,6 @@
         } else {
             $("#detail").addClass("m_div_display_none");
         }
-    }
-
-    function toResultLocation() {
-        location.href = "/animals";
     }
 </script>
 
@@ -338,41 +259,75 @@
 <script>
     //스프링한테 옵션 선택한 값 오브젝트로 fetch 요청하기
 
-    async function toRegion() {
-        let keywordOfRegion = {
-            sido: selectedSido,
-            sigungu: selectedSigungu
-        }
-        console.log(keywordOfRegion);
-        if ($("#sido").val() && $("#sigungu").val() != null) {
-            let response = await fetch("/search/animals/region", {
-                method: "POST",
-                body: JSON.stringify(keywordOfRegion),
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8",
-                },
-            });
+    $("#btn-search").click(() => {
+        toRegion(selectedSido, selectedSigungu);
 
+    });
+
+    async function toRegion(selectedSido, selectedSigungu) {
+
+        if ($("#sido").val() && $("#sigungu").val() != null) {
+            let response = await fetch(`/search/animals/region?sido=${selectedSido}&sigungu=${selectedSigungu}`);
+            console.log(selectedSido, selectedSigungu);
             console.log(response);
 
             let reseponseParse = await response.json();
             console.log(reseponseParse);
 
             if (reseponseParse.code == 1) {
-                console.log(reseponseParse.data);
                 alert("검색 성공");
-                location.href = `/animals/region`
+                $("#region").empty();
+                for (regionList of reseponseParse.data) { // data 크기만큼
+                    $("#region").append(trRender(regionList)); // append
+                }
             } else {
                 alert("검색 실패");
             }
 
-
-
-            return keywordOfRegion;
+            //return selectedSido, selectedSigungu;
         }
 
     }
 
+    function trRender(regionList) {
+        console.log(regionList.id);
+        return `<tr>
+                <th scope="row" style="vertical-align: middle;">${regionList.id}</th>
+                <td style="vertical-align: middle;">${regionList.kindCd}</td>
+                <td width="110"><img src="/image/dog1.png" width="100" height="100"></td>
+                <td style="vertical-align: middle;">${regionList.happenPlace}</td>
+                <td style="vertical-align: middle;">${regionList.sexCd}</td>
+                <td style="vertical-align: middle;">${regionList.age}</td>
+                <td style="vertical-align: middle;">
+                    ${regionList.processState}</td>
+                <td style="vertical-align: middle;" width="100">
+                    <button id="showDetail" class="m_button" onclick="showDetail()">자세히</button>
+                </td>
+            </tr>`;
+        // return `<tr>
+        //         <td colspan="9" id="detail" class="m_div_display_none">
+        //             <div class="m_sub_content">
+        //                 #체중:${regionList.weight}
+        //                 #색상:${regionList.colorCd}
+        //                 #중성화여부:${regionList.neuterYn}
+        //                 #보호소이름:${regionList.careNm}
+        //                 #보호소전화번호:${regionList.careTel}
+        //                 #보호장소:${regionList.careAddr}
+        //                 #관활기관:${regionList.orgNm}
+        //                 #담당자:${regionList.chargeNm}
+        //                 #담당자연락처:${regionList.officetel}
+        //             </div>
+        //         </td>
+        //     </tr>`;
+    }
+
+    toRegion("");
+
 </script>
+
+<script>
+    
+</script>
+
 
 {{>/layout/footer}}
