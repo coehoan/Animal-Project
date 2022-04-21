@@ -38,4 +38,5 @@ public class UserApiController {
         session.setAttribute("principal", userEntity);
         return new ResponseDto<String>(1, "로그인성공", null);
     }
+
 }

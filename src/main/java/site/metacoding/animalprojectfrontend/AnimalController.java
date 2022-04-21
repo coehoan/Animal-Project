@@ -1,6 +1,10 @@
 package site.metacoding.animalprojectfrontend;
 
+<<<<<<< HEAD
 import java.util.List;
+=======
+import java.util.Optional;
+>>>>>>> 746144799d58886552b390058dddd09e5697cc3c
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +21,12 @@ import site.metacoding.animalprojectfrontend.service.api.AnimalsService;
 import site.metacoding.animalprojectfrontend.web.api.dto.animals.PostRegionDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.animals.ResponseDto;
 
+<<<<<<< HEAD
 @RequiredArgsConstructor
+=======
+import site.metacoding.animalprojectfrontend.domain.post.PostRepository;
+
+>>>>>>> 746144799d58886552b390058dddd09e5697cc3c
 @Controller
 public class AnimalController {
 
@@ -43,6 +52,7 @@ public class AnimalController {
         return "/animal/animalList";
     }
 
+<<<<<<< HEAD
     @GetMapping("/animal/shelterList")
     public String shelterList() {
         return "/animal/shelterList";
@@ -88,6 +98,12 @@ public class AnimalController {
     public String freeboardPost() {
         return "/blog/post/freePost";
     }
+=======
+    // @GetMapping("/animal/shelterList")
+    // public String shelterList() {
+    // return "/animal/shelterList";
+    // }
+>>>>>>> 746144799d58886552b390058dddd09e5697cc3c
 
     @GetMapping("/withus/doctor")
     public String withDoctor() {

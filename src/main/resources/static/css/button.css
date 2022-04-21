@@ -66,3 +66,18 @@
 .form-switch input:checked+i::after {
     transform: translate3d(22px, 2px, 0);
 }
+
+.m_thumbUp_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.m_thumbUp_btn:hover {
+    cursor: pointer;
+}
