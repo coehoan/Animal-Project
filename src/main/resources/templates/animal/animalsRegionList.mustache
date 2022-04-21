@@ -24,18 +24,16 @@
     <div class="mt-5 d-flex">
         <div class="container-fluid">
             <form class="d-flex flex-fill" cenctype="application/x-www-form-urlencoded">
-                <input class="form-control me-2" name="firstdate" type="date" placeholder="날짜" aria-label="Search"
-                    required="false">
+                <input class="form-control me-2" name="firstdate" type="date" placeholder="날짜" aria-label="Search">
                 <i class="me-2">~</i>
-                <input class="form-control me-2" name="lastdate" type="date" placeholder="날짜" aria-label="Search"
-                    required="false">
+                <input class="form-control me-2" name="lastdate" type="date" placeholder="날짜" aria-label="Search">
                 <!--
         https://www.jqueryscript.net/form/Dynamic-jQuery-Cascading-Dropdown-Lists-Plugin.html
         스크립트 사용법 공부 후 지역 Ajax 처리
       -->
                 <div id="example1" class="bs-docs-example d-flex">
                     <select id="sido" name="sido" class="step1 me-2 animallist-select-box"
-                        onchange="sidoSelected(this.value), RegionOptionChange()" required="false">
+                        onchange="sidoSelected(this.value), RegionOptionChange()">
                         <option selected disabled>지역</option>
                         <option id="seoul" value="서울특별시">서울특별시</option>
                         <option id="busan" value="부산광역시">부산광역시</option>
@@ -56,25 +54,24 @@
                         <option id="jeju" value="제주특별자치도">제주특별자치도</option>
                     </select>
                     <select id="sigungu" name="sigungu" class="step2 me-2 animallist-select-box"
-                        onchange="sigunguSelected(this.value)" required="false">
+                        onchange="sigunguSelected(this.value)">
                         <option>시/군/구</option>
                         <option></option>
                     </select>
                 </div>
                 <select id="kind" name="kind" onchange="kindSelected(this.value), kindOprionChange()"
-                    class="me-2 animallist-select-box" required="false">
+                    class="me-2 animallist-select-box">
                     <option>종류</option>
                     <option value="강아지">강아지</option>
                     <option value="고양이">고양이</option>
                     <option value="기타">기타</option>
                 </select>
                 <select id="kind-of" name="kindOf" class="me-2 animallist-select-box"
-                    onchange="kindOfSelected(this.value)" required="false">
+                    onchange="kindOfSelected(this.value)">
                     <option>품종</option>
                     <option></option>
                 </select>
-                <input class="form-control me-2" name="keyword" type="search" placeholder="검색" aria-label="Search"
-                    required="false">
+                <input class="form-control me-2" name="keyword" type="search" placeholder="검색" aria-label="Search">
                 <button onclick="toRegion()" class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
@@ -140,7 +137,7 @@
             </tr>
             {{/regionlist}}
         </tbody>
-        
+
     </table>
 </div>
 <!--검색결과테이블 끝-->
@@ -326,7 +323,7 @@
 
             if (reseponseParse.code == 1) {
                 alert("검색 성공");
-                location.href = "/animals/region";
+                // location.href = "/animals/region";
             } else {
                 alert("검색 실패");
             }

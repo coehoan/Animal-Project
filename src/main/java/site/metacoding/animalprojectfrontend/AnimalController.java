@@ -38,7 +38,7 @@ public class AnimalController {
     // return "/main/loginForm";
     // }
 
-    @GetMapping("/animal/animalList")
+    @GetMapping("/animal")
     public String animal() {
         return "/animal/animalList";
     }
@@ -67,6 +67,10 @@ public class AnimalController {
         if(animalsService.지역검색(keywordOfRegion.getSido(), keywordOfRegion.getSigungu()) != null) {
             List<Animals> animalsEntity = animalsService.지역검색(keywordOfRegion.getSido(), keywordOfRegion.getSigungu());
             model.addAttribute("regionlist", animalsEntity);
+
+            System.out.println("엔티티 컨트롤러에서 받았나?" + animalsEntity);
+
+            model.addAttribute("regionlist", animalsEntity);
             
             return new ResponseDto<>(1, "검색 성공", animalsEntity);
         } else {
@@ -74,12 +78,18 @@ public class AnimalController {
         }
     }
 
-    @CrossOrigin
-    @GetMapping("/animals/region/{sido}/{sigungu}")
-    public String regionList(@PathVariable(name = "sido") String sido, @PathVariable(name = "sigungu") String sigungu, Model model) {
-        
-        return "/animal/animalList";
+    @GetMapping("/animals/region")
+    public String region() {
+
+        return "/animal";
     }
+
+    // @CrossOrigin
+    // @GetMapping("/animals/region/{sido}/{sigungu}")
+    // public String regionList(@PathVariable(name = "sido") String sido, @PathVariable(name = "sigungu") String sigungu, Model model) {
+
+    //     return "/animal/animalList";
+    // }
 
     @GetMapping("/download")
     public String download(Animals animals, Model model) {
