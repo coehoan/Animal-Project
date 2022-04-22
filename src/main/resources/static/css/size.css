@@ -2,6 +2,14 @@
     border-radius: 100px;
 }
 
+.m_all_m {
+    margin: 5%;
+}
+
+.m_all_p {
+    padding: 5%;
+}
+
 .size {
     height: 150px;
 }
