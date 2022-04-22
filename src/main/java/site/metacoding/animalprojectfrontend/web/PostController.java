@@ -41,7 +41,7 @@ public class PostController {
             postRespDto.setType(postList.getType());
             postRespDto.setTitle(postList.getTitle());
             postRespDto.setUsername(postList.getUser().getUsername());
-            postRespDto.setCreateDate(postList.getCreateDate());
+            postRespDto.setCreateDate(postList.yyyymmdd());
             postRespDto.setView(postList.getView());
             postRespDto.setRecommended(postList.getRecommended());
             adoptPostRespDtoList.add(postRespDto);
@@ -155,7 +155,7 @@ public class PostController {
                 postRespDto.setId(postLists.getId());
                 postRespDto.setTitle(postLists.getTitle());
                 postRespDto.setUsername(postLists.getUser().getUsername());
-                postRespDto.setCreateDate(postLists.getCreateDate());
+                postRespDto.setCreateDate(postLists.yyyymmdd());
                 mainPostRespDtoList.add(postRespDto);
             }
             if (mainPostRespDtoList.size() != 3)
@@ -192,7 +192,7 @@ public class PostController {
             postRespDto.setType(postList.getType());
             postRespDto.setTitle(postList.getTitle());
             postRespDto.setUsername(postList.getUser().getUsername());
-            postRespDto.setCreateDate(postList.getCreateDate());
+            postRespDto.setCreateDate(postList.yyyymmdd());
             postRespDto.setView(postList.getView());
             postRespDto.setRecommended(postList.getRecommended());
             adoptPostRespDtoList.add(postRespDto);
@@ -232,7 +232,7 @@ public class PostController {
             postRespDto.setCategory(postList.getCategory());
             postRespDto.setTitle(postList.getTitle());
             postRespDto.setUsername(postList.getUser().getUsername());
-            postRespDto.setCreateDate(postList.getCreateDate());
+            postRespDto.setCreateDate(postList.yyyymmdd());
             postRespDto.setView(postList.getView());
             postRespDto.setRecommended(postList.getRecommended());
             regionPostRespDtoList.add(postRespDto);
@@ -271,7 +271,7 @@ public class PostController {
             postRespDto.setId(postList.getId());
             postRespDto.setTitle(postList.getTitle());
             postRespDto.setUsername(postList.getUser().getUsername());
-            postRespDto.setCreateDate(postList.getCreateDate());
+            postRespDto.setCreateDate(postList.yyyymmdd());
             postRespDto.setView(postList.getView());
             postRespDto.setRecommended(postList.getRecommended());
             freePostRespDtoList.add(postRespDto);
@@ -306,7 +306,7 @@ public class PostController {
         postDetailRespDto.setId(postOp.getId());
         postDetailRespDto.setTitle(postOp.getTitle());
         postDetailRespDto.setContent(postOp.getContent());
-        postDetailRespDto.setCreateDate(postOp.getCreateDate());
+        postDetailRespDto.setCreateDate(postOp.yyyymmddhhmm());
         postDetailRespDto.setUser(postOp.getUser());
         postDetailRespDto.setView(updateView);
         postDetailRespDto.setRecommended(postOp.getRecommended());

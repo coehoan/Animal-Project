@@ -1,7 +1,5 @@
 package site.metacoding.animalprojectfrontend.web.api.dto.post;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,7 @@ public class PostDetailRespDto {
     private Integer id;
     private String title;
     private String content;
-    private LocalDateTime createDate;
+    private String createDate;
     private User user;
     private Integer view;
     private Integer recommended;

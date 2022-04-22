@@ -1,6 +1,7 @@
 package site.metacoding.animalprojectfrontend.domain.post;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -85,6 +86,16 @@ public class Post {
     public void prePersist() {
         this.view = this.view == null ? 0 : this.view;
         this.recommended = this.recommended == null ? 0 : this.recommended;
+    }
+
+    public String yyyymmddhhmm() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH시mm분");
+        return createDate.format(formatter);
+    }
+
+    public String yyyymmdd() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return createDate.format(formatter);
     }
 }
 >>>>>>> 746144799d58886552b390058dddd09e5697cc3c

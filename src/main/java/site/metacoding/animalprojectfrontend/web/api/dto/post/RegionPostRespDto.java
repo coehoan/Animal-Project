@@ -1,6 +1,5 @@
 package site.metacoding.animalprojectfrontend.web.api.dto.post;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class RegionPostRespDto {
     private Integer id;
-    private LocalDateTime createDate;
+    private String createDate;
     private String region;
     private String title;
     private String category;
