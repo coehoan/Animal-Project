@@ -35,8 +35,6 @@ public class PostApiController {
         return new ResponseDto<>(1, "성공", null);
     }
 
-<<<<<<< HEAD
-=======
     // 추천수 증감
     @PostMapping("/s/post/{id}")
     public ResponseDto<?> updateRec(@RequestBody RecReqDto RecReqDto) {
@@ -45,6 +43,4 @@ public class PostApiController {
         return new ResponseDto<>(1, "성공", null);
 
     }
->>>>>>> 746144799d58886552b390058dddd09e5697cc3c
 }
-
