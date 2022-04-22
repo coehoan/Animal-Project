@@ -126,3 +126,25 @@ GROUP BY age,
     sexCd,
     specialMark,
     weight DESC;
+
+id          | int(11)      | NO   | PRI | NULL    | auto_increment |
+| board       | varchar(30)  | NO   |     | NULL    |                |
+| content     | longtext     | NO   |     | NULL    |                |
+| createDate  | datetime(6)  | YES  |     | NULL    |                |
+| region      | varchar(15)  | YES  |     | NULL    |                |
+| title       | varchar(300) | NO   |     | NULL    |                |
+| type        | varchar(15)  | YES  |     | NULL    |                |
+| updateDate  | datetime(6)  | YES  |     | NULL    |                |
+| userId      | int(11)      | YES  | MUL | NULL    |                |
+| category    | varchar(15)  | YES  |     | NULL    |                |
+| recommended | int(11)      | NO   |     | NULL    |                |
+| view
+
+SHOW TABLE Post;
+INSERT INTO Post(board, content, createDate, region, title, type, updateDate, userId, category, recommended, view) VALUES("자유게시판", "냥냥쓰", null, null, "멍멍쓰", null, null, 1, null, 5, 10);
+INSERT INTO Post(board, content, createDate, region, title, type, updateDate, userId, category, recommended, view) VALUES("자유게시판", "무엉무엉", null, null, "냐옹냐옹", null, null, 2, null, 5, 10);
+INSERT INTO Post(board, content, createDate, region, title, type, updateDate, userId, category, recommended, view) VALUES("자유게시판", "미잉미잉", null, null, "우앙우앙", null, null, 1, null, 5, 10);
+
+
+-- 유저 지역에 따라서 일치하는 지역순으로 뿌리기
+SELECT * FROM Animals am 
