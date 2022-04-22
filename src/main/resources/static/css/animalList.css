@@ -22,3 +22,19 @@
     color: white;
     background-color: #198754;
 }
+
+.m_button_delete {
+    display: inline-block;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid red;
+    cursor: pointer;
+    color: red;
+    text-decoration: none;
+    background-color: white;
+}
+
+.m_button_delete:hover {
+    color: white;
+    background-color: red;
+}

@@ -3,6 +3,8 @@ package site.metacoding.animalprojectfrontend.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
+import site.metacoding.animalprojectfrontend.domain.user.User;
 import site.metacoding.animalprojectfrontend.service.PostService;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.FreePostRespDto;
@@ -23,13 +26,16 @@ import site.metacoding.animalprojectfrontend.web.api.dto.post.MainPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.PageRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.PostDetailRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.RegionPostRespDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.UpdateDto;
 
 @RequiredArgsConstructor
 @Controller
 public class PostController {
 
     private final PostService postService;
+    private final HttpSession session;
 
+    // 상세검색 메서드
     public void search(Page<Post> posts, Integer page, Model model) {
         List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
 
@@ -298,12 +304,15 @@ public class PostController {
     @GetMapping("/blog/post/{id}")
     public String adoptboardPost(@PathVariable Integer id, Model model) {
 
+        User principal = (User) session.getAttribute("principal");
+
         Post postOp = postService.글상세보기(id);
 
         Integer updateView = postOp.getView() + 1;
 
         PostDetailRespDto postDetailRespDto = new PostDetailRespDto();
         postDetailRespDto.setId(postOp.getId());
+        postDetailRespDto.setBoard(postOp.getBoard());
         postDetailRespDto.setTitle(postOp.getTitle());
         postDetailRespDto.setContent(postOp.getContent());
         postDetailRespDto.setCreateDate(postOp.yyyymmddhhmm());
@@ -314,8 +323,15 @@ public class PostController {
         postService.조회수증가(updateView, id);
 
         // User principal = (User) session.getAttribute("principal");
-
+        if (principal != null) {
+            if (principal.getId() == postOp.getUser().getId()) {
+                model.addAttribute("principals", true);
+            } else {
+                model.addAttribute("principals", false);
+            }
+        }
         model.addAttribute("posts", postDetailRespDto);
+
         // model.addAttribute("principal", principal.getId());
 
         return "/blog/post/postDetail";
@@ -324,8 +340,20 @@ public class PostController {
     // 글쓰기
     @GetMapping("/s/blog/writeForm")
     public String writeForm() {
-
         return "/blog/writeForm";
+    }
+
+    // 글 수정하기
+    @GetMapping("/s/post/updateForm/{id}")
+    public String updateForm(@PathVariable Integer id, Model model) {
+        Post post = postService.글상세보기(id);
+        UpdateDto updateDto = new UpdateDto();
+        updateDto.setId(post.getId());
+        updateDto.setTitle(post.getTitle());
+        updateDto.setContent(post.getContent());
+        updateDto.setBoard(post.getBoard());
+        model.addAttribute("post", updateDto);
+        return "/blog/updateForm";
     }
 
 }

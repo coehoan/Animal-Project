@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
 import site.metacoding.animalprojectfrontend.domain.post.PostRepository;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.UpdateDto;
 
 @RequiredArgsConstructor
 @Service
@@ -74,5 +75,13 @@ public class PostService {
 
     public void 추천수증감(Integer recommended, Integer id) {
         postRepository.recCount(recommended, id);
+    }
+
+    public void 게시글삭제(Integer id) {
+        postRepository.deleteById(id);
+    }
+
+    public void 게시글수정(Integer id, String title, String content) {
+        postRepository.updateById(id, title, content);
     }
 }

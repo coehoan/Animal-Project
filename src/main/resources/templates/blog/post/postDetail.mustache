@@ -14,13 +14,26 @@
     <div class="m_blog_post_content">
       {{{posts.content}}}
     </div>
-    <!-- 따봉버튼 시작-->
-    <div id="thumb-up" class="d-flex justify-content-center none">
-      <div class="m_thumbUp_btn">
-        <img id="thumb-up-img" src="/image/thumb-up-before.png" width="50px" height="50px">
+    <!-- 따봉, 수정, 삭제 버튼 시작-->
+    <div class="d-flex justify-content-between align-items-end">
+      <div style="width: 100px;"></div>
+      <div id="thumb-up" class="none">
+        <div class="m_thumbUp_btn">
+          <img id="thumb-up-img" src="/image/thumb-up-before.png" width="50px" height="50px">
+        </div>
       </div>
+      {{#principals}}
+      <div class="d-flex me-3">
+        <div class="me-3 m_button" onclick="location.href='/s/post/updateForm/{{posts.id}}'">수정</div>
+        <div class="m_button_delete" id="delete-btn">삭제</div>
+      </div>
+      {{/principals}}
+      {{^principals}}
+      <div style="width: 100px;"></div>
+      {{/principals}}
     </div>
-    <!-- 따봉버튼 끝-->
+    <!-- 따봉, 수정, 삭제 버튼 끝-->
+
   </div>
   <!-- 조회수랑 추천수 받아오기 -->
   <div class="m_div_display_none">
@@ -28,6 +41,7 @@
     <div id="postId">{{posts.id}}</div>
     <div id="recommended">{{posts.recommended}}</div>
     <div id="principal"></div>
+    <div id="board">{{posts.board}}</div>
   </div>
 </div>
 <!-- 게시글 보기 끝 -->
@@ -89,6 +103,25 @@
       alert("추천 기능은 로그인이 필요합니다.");
     }
   }
+
+  // 삭제 버튼 클릭
+  $("#delete-btn").click(() => {
+    deleteById();
+  });
+
+  async function deleteById() {
+    let board = $("#board").text();
+    let id = parseInt($("#postId").text());
+    let response = await fetch("/s/post/delete/" + id, {
+      method: "DELETE"
+    });
+    let responseParse = await response.json();
+    if (responseParse.code == 1) {
+      alert("삭제 완료");
+      location.href = `/blog/${board}`;
+    } else alert("삭제 실패\n관리자에게 문의하십시오.");
+  }
+
 </script>
 
 {{>/layout/footer}}
