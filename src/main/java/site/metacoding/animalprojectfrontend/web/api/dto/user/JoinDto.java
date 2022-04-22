@@ -13,7 +13,8 @@ public class JoinDto {
     private String password;
     private String email;
     private String male;
-    private String addr;
+    private String addrSido;
+    private String addrSigungu;
 
     public User toEntity() {
         User user = new User();
@@ -21,7 +22,8 @@ public class JoinDto {
         user.setPassword(this.password);
         user.setEmail(this.email);
         user.setMale(this.male);
-        user.setAddr(this.addr);
+        user.setAddrSido(this.addrSido);
+        user.setAddrSigungu(this.addrSigungu);
         return user;
     }
 }

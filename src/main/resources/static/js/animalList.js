@@ -146,42 +146,51 @@ function RegionOptionChange() {
 
 };
 
+
+
 //스프링한테 옵션 선택한 값 오브젝트로 fetch 요청하기
-
+// if문 없애면 클릭할 때 메서드 다 실행되니까 조건문 걸어줘야 함!
 $("#btn-search").click(() => {
-    toRegion(selectedSido, selectedSigungu);
+    
+    if (selectedSido + selectedSigungu == selectedSido + selectedSigungu) {
+        toRegion(selectedSido, selectedSigungu);
+        select = true;
+    }
 
+    if (selectedFirstDate + selectedLastDate == selectedFirstDate + selectedLastDate) {
+        toDay(selectedFirstDate, selectedLastDate);
+        clearInterval(toDay);
+    }
+
+    if (selectedKind + selectedKindOf == selectedKind + selectedKindOf) {
+        toKind(selectedKind, selectedKindOf);
+        clearInterval(toDay);
+    }
+
+    if (selectedSido != null) {
+        toRegionSido(selectedSido);
+    } else {
+        alert("검색결과 없음!");
+    }
+
+    if (selectedKind != null) {
+        toKindOnly(selectedKind);
+    } else {
+        alert("검색결과 없음!");
+    }
+
+    if (selectedSido + selectedSigungu + selectedKind + selectedKindOf + selectedFirstDate + selectedLastDate == selectedSido + selectedSigungu + selectedKind + selectedKindOf + selectedFirstDate + selectedLastDate) {
+        toAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
+    } else {
+        alert("검색결과 없음!");
+    }
+
+    if (selectedSido + selectedSigungu + selectedKind + selectedKindOf + selectedFirstDate + selectedLastDate + $("#principal") == selectedSido + selectedSigungu + selectedKind + selectedKindOf + selectedFirstDate + selectedLastDate + $("#principal")) {
+        toForUserAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
+    } else {
+        alert("검색결과 없음!");
+    }
 });
-
-$("#btn-search").click(() => {
-    toDay(selectedFirstDate, selectedLastDate);
-
-});
-
-$("#btn-search").click(() => {
-    toKind(selectedKind, selectedKindOf);
-
-});
-
-$("#btn-search").click(() => {
-    toRegionSido(selectedSido);
-
-});
-
-$("#btn-search").click(() => {
-    toKindOnly(selectedKind);
-
-});
-
-$("#btn-search").click(() => {
-    toDayFirst(selectedFirstDate);
-
-});
-
-
-
-
-
 
 
 // Ajax 함수
@@ -218,6 +227,32 @@ async function toAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf
 
     if ($("#sido").val() && $("sigungu").val() && $("#kind").val() && $("#kind-of").val() && $("#firstdate").val() && $("#last-date").val() != null) {
         let response = await fetch(`/search/animals/all?sido=${selectedSido}&sigungu=${selectedSigungu}&kind=${selectedKind}&kindOf=${selectedKindOf}&firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`);
+        console.log(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
+        console.log(response);
+
+        let reseponseParse = await response.json();
+        console.log(reseponseParse);
+
+        if (reseponseParse.code == 1) {
+            alert("검색 성공");
+            $("#region").empty();
+            for (regionList of reseponseParse.data) { // data 크기만큼
+                $("#region").append(regionRender(regionList)); // append
+                $("#region").append(detailRender(regionList));
+            }
+
+        } else {
+            alert("검색 실패");
+        }
+
+        //return selectedSido, selectedSigungu;
+    }
+}
+
+async function toForUserAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate) { // 지역 검색
+
+    if ($("#sido").val() && $("sigungu").val() && $("#kind").val() && $("#kind-of").val() && $("#firstdate").val() && $("#last-date").val() != null) {
+        let response = await fetch(`/search/animals/for-user/all?sido=${selectedSido}&sigungu=${selectedSigungu}&kind=${selectedKind}&kindOf=${selectedKindOf}&firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`);
         console.log(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
         console.log(response);
 

@@ -2,6 +2,8 @@ package site.metacoding.animalprojectfrontend.web.api;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import site.metacoding.animalprojectfrontend.web.api.dto.animals.ResponseDto;
 public class AnimalApiController {
 
     private final AnimalsService animalsService;
+    private final HttpServletRequest request;
 
     // 해당되는 쿼리스트링만 required true 해주기
     @CrossOrigin
@@ -34,14 +37,13 @@ public class AnimalApiController {
             @RequestParam(name = "keyword", required = false) String keyword,
             @RequestParam(name = "sido", required = true) String keywordOfSido,
             @RequestParam(name = "sigungu", required = true) String keywordOfSigungu, Model model) {
-        System.out.println("타나?");
-        System.out
-                .println("받은 쿼리스트링 ====" + keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate + keywordOfkind + keywordOfkindOf);
+        //System.out.println("타나?");
+        //System.out.println("받은 쿼리스트링 ====" + keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate + keywordOfkind + keywordOfkindOf);
 
-        if (keywordOfSido != null) { // 쿼리스트링이 null이 아니면
+        if (keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate + keywordOfkind + keywordOfkindOf == keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate + keywordOfkind + keywordOfkindOf) { // 쿼리스트링이 null이 아니면
             List<Animals> getAllEntity = animalsService.전체검색(keywordOfSido, keywordOfSigungu, keywordOfkind, keywordOfkindOf, keywordOfirstDate, keywordOflastDate);
 
-            System.out.println("엔티티 컨트롤러에서 받았나?" + getAllEntity);
+            //System.out.println("엔티티 컨트롤러에서 받았나?" + getAllEntity);
 
             return new ResponseDto<>(1, "검색 성공", getAllEntity);
         } else {
@@ -49,6 +51,34 @@ public class AnimalApiController {
         }
 
     }
+
+    @CrossOrigin
+    @GetMapping("/search/animals/for-user/all")
+    public ResponseDto<?> getforUserAll(
+            @RequestParam(name = "firstdate", required = true) String keywordOfirstDate,
+            @RequestParam(name = "lastdate", required = true) String keywordOflastDate,
+            @RequestParam(name = "kind", required = true) String keywordOfkind,
+            @RequestParam(name = "kindOf", required = true) String keywordOfkindOf,
+            @RequestParam(name = "keyword", required = false) String keyword,
+            @RequestParam(name = "sido", required = true) String keywordOfSido,
+            @RequestParam(name = "sigungu", required = true) String keywordOfSigungu) {
+        System.out.println("타나?");
+        System.out
+                .println("받은 쿼리스트링 ====" + keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate + keywordOfkind + keywordOfkindOf);
+
+        if (keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate + keywordOfkind + keywordOfkindOf + request.getSession().getId() == keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate + keywordOfkind + keywordOfkindOf + request.getSession().getId()) { // 쿼리스트링이 null이 아니면
+            List<Animals> getAllEntity = animalsService.유저모두검색(keywordOfkind, keywordOfkindOf, keywordOfSido, keywordOfSigungu, keywordOfirstDate, keywordOflastDate, request.getSession().getId());
+
+            //System.out.println("엔티티 컨트롤러에서 받았나?" + getAllEntity);
+
+            return new ResponseDto<>(1, "검색 성공", getAllEntity);
+        } else {
+            return new ResponseDto<>(-1, "검색 실패", null);
+        }
+
+    }
+
+    
 
     @CrossOrigin
     @GetMapping("/search/animals/region")
@@ -64,10 +94,10 @@ public class AnimalApiController {
         System.out
                 .println("받은 쿼리스트링 ====" + keywordOfSido + keywordOfSigungu);
 
-        if (keywordOfSido != null) { // 쿼리스트링이 null이 아니면
+        if (keywordOfSido + keywordOfSigungu == keywordOfSido + keywordOfSigungu) { // 쿼리스트링이 null이 아니면
             List<Animals> getRegionEntity = animalsService.지역검색(keywordOfSido, keywordOfSigungu);
 
-            System.out.println("엔티티 컨트롤러에서 받았나?" + getRegionEntity);
+            //System.out.println("엔티티 컨트롤러에서 받았나?" + getRegionEntity);
 
             return new ResponseDto<>(1, "검색 성공", getRegionEntity);
         } else {
@@ -93,7 +123,7 @@ public class AnimalApiController {
         if (keywordOfSido != null) { // 쿼리스트링이 null이 아니면
             List<Animals> getRegionEntity = animalsService.지역검색시도(keywordOfSido);
 
-            System.out.println("엔티티 컨트롤러에서 받았나?" + getRegionEntity);
+            //System.out.println("엔티티 컨트롤러에서 받았나?" + getRegionEntity);
 
             return new ResponseDto<>(1, "검색 성공", getRegionEntity);
         } else {
@@ -131,10 +161,10 @@ public class AnimalApiController {
         lDsb.append(lastDate[1]);
         lDsb.append(lastDate[2]);
 
-        if (keywordOfirstDate != null) {
+        if (keywordOfirstDate + keywordOflastDate == keywordOfirstDate + keywordOflastDate) {
             List<Animals> getDayEntity = animalsService.날짜검색(fDsb.toString(), lDsb.toString());
 
-            System.out.println("엔티티 컨트롤러에서 받았나?" + getDayEntity);
+            //System.out.println("엔티티 컨트롤러에서 받았나?" + getDayEntity);
 
             return new ResponseDto<>(1, "검색 성공", getDayEntity);
         } else {
@@ -157,10 +187,10 @@ public class AnimalApiController {
         System.out
                 .println("받은 쿼리스트링 ====" + keywordOfkind + keywordOfkindOf);
 
-        if (keywordOfkind != null) { // 쿼리스트링이 null이 아니면
+        if (keywordOfkind + keywordOfkindOf == keywordOfkind + keywordOfkindOf) { // 쿼리스트링이 null이 아니면
             List<Animals> getKindEntity = animalsService.품종검색(keywordOfkind, keywordOfkindOf);
 
-            System.out.println("엔티티 컨트롤러에서 받았나?" + getKindEntity);
+            //System.out.println("엔티티 컨트롤러에서 받았나?" + getKindEntity);
 
             return new ResponseDto<>(1, "검색 성공", getKindEntity);
         } else {
@@ -186,7 +216,7 @@ public class AnimalApiController {
         if (keywordOfkind != null) { // 쿼리스트링이 null이 아니면
             List<Animals> getKindEntity = animalsService.품종검색품종만(keywordOfkind);
 
-            System.out.println("엔티티 컨트롤러에서 받았나?" + getKindEntity);
+            //System.out.println("엔티티 컨트롤러에서 받았나?" + getKindEntity);
 
             return new ResponseDto<>(1, "검색 성공", getKindEntity);
         } else {

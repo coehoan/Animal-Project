@@ -141,10 +141,71 @@ id          | int(11)      | NO   | PRI | NULL    | auto_increment |
 | view
 
 SHOW TABLE Post;
-INSERT INTO Post(board, content, createDate, region, title, type, updateDate, userId, category, recommended, view) VALUES("자유게시판", "냥냥쓰", null, null, "멍멍쓰", null, null, 1, null, 5, 10);
-INSERT INTO Post(board, content, createDate, region, title, type, updateDate, userId, category, recommended, view) VALUES("자유게시판", "무엉무엉", null, null, "냐옹냐옹", null, null, 2, null, 5, 10);
+INSERT INTO Post(board, content, createDate, region, title, type, updateDate, userId, category, recommended, view) VALUES("입양후기", "냥냥쓰", null, null, "멍멍쓰", null, null, 1, null, 5, 10);
+INSERT INTO Post(board, content, createDate, region, title, type, updateDate, userId, category, recommended, view) VALUES("지역별게시판", "무엉무엉", null, null, "냐옹냐옹", null, null, 2, null, 5, 10);
 INSERT INTO Post(board, content, createDate, region, title, type, updateDate, userId, category, recommended, view) VALUES("자유게시판", "미잉미잉", null, null, "우앙우앙", null, null, 1, null, 5, 10);
 
+INSERT IGNORE INTO `post` (`id`, `board`, `content`, `createDate`, `region`, `title`, `type`, `category`, `updateDate`, `userId`) VALUES
+    (1, 'adopt', '<p>내용</p>', '2022-04-17 20:12:33.050029', 'seoul', '입양후기/서울', 'dog', NULL, '2022-04-17 20:12:33.050029', 1),
+    (2, 'adopt', '<p>내용</p>', '2022-04-17 20:12:44.046224', 'busan', '입양후기/부산', NULL, NULL, '2022-04-17 20:12:44.046224', 1),
+    (3, 'region', '<p>내용</p>', '2022-04-17 20:12:56.316327', 'seoul', '지역/서울', NULL, 'ask', '2022-04-17 20:12:56.316327', 1),
+    (4, 'region', '<p>내용</p>', '2022-04-17 20:13:15.825428', 'busan', '지역/부산', NULL, 'ask', '2022-04-17 20:13:15.825428', 1),
+    (5, 'free', '<p>내용</p>', '2022-04-17 20:13:25.125766', NULL, '자유', NULL, NULL, '2022-04-17 20:13:25.125766', 1),
+    (6, 'adopt', '<p>후기후기</p>', '2022-04-18 14:29:30.429082', 'busan', '입양후기/부산/고양이', 'cat', NULL, '2022-04-18 14:29:30.429082', 1),
+    (8, 'adopt', '<p>입양후기</p>', '2022-04-18 19:47:53.900869', 'busan', '입양후기', 'dog', NULL, '2022-04-18 19:47:53.900869', 1),
+    (9, 'adopt', '<p>입양후기</p>', '2022-04-18 19:48:00.172400', 'daegu', '입양후기', 'cat', NULL, '2022-04-18 19:48:00.172400', 1),
+    (10, 'adopt', '<p>입양후기</p>', '2022-04-18 19:48:07.703189', 'seoul', '입양후기', 'dog', NULL, '2022-04-18 19:48:07.703189', 1);
+
+SELECT addr FROM User;
 
 -- 유저 지역에 따라서 일치하는 지역순으로 뿌리기
-SELECT * FROM Animals am 
+DROP TABLE User;
+DROP TABLE Post;
+
+SELECT * FROM Animals am;
+
+SELECT addrSido, addrSigungu FROM User
+WHERE addrSido AND addrSigungu;
+
+SELECT * FROM User;
+
+SELECT * FROM Animals am WHERE KindCd LIKE %:keywordOfkind% AND KindCd LIKE %:keywordOfkindOf% AND careAddr LIKE %:keywordOfSido% AND careAddr LIKE %:keywordOfSigungu% AND noticeSdt LIKE %:keywordOfirstDate% AND noticeSdt LIKE %:keywordOflastDate% GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd,desertionNo,filename,happenDt,happenPlace,kindCd,neuterYn,noticeComment,noticeEdt,noticeNo,noticeSdt,officetel,orgNm,popfile,processState,sexCd,specialMark,weight DESC
+
+UNION ALL
+
+SELECT *
+FROM Animals am
+WHERE orgNm in (
+    SELECT id AND addrSido + addrSigungu FROM User
+    WHERE id = 1 AND addrSido + addrSigungu = am.orgNm
+)
+GROUP BY age,
+    careAddr,
+    careNm,
+    careTel,
+    chargeNm,
+    colorCd,
+    desertionNo,
+    filename,
+    happenDt,
+    happenPlace,
+    kindCd,
+    neuterYn,
+    noticeComment,
+    noticeEdt,
+    noticeNo,
+    noticeSdt,
+    officetel,
+    orgNm,
+    popfile,
+    processState,
+    sexCd,
+    specialMark,
+    weight
+    DESC;
+
+
+
+SELECT * FROM Animals am WHERE orgNm in (SELECT id AND addrSido + addrSigungu FROM User WHERE id = 1 AND addrSido + addrSigungu = am.orgNm) GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight DESC;
+
+SELECT * FROM Animals am WHERE orgNm in (SELECT id AND addrSido + addrSigungu FROM User WHERE id = 1 AND addrSido + addrSigungu = am.orgNm);
