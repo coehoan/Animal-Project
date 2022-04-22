@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
-    @Query(value = "SELECT * FROM user WHERE username=:username AND password=:password", nativeQuery = true)
+    @Query(value = "SELECT * FROM User WHERE username=:username AND password=:password", nativeQuery = true)
     User aLogin(@Param("username") String username, @Param("password") String password);
 }

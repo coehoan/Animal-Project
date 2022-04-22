@@ -77,6 +77,9 @@ public class Post {
     private LocalDateTime createDate;
     @LastModifiedDate // insert, update
     private LocalDateTime updateDate;
+<<<<<<< HEAD
+}
+=======
 
     @PrePersist // view, recommended의 값이 null이면 0으로 치환해서 가져옴.
     public void prePersist() {
@@ -84,3 +87,4 @@ public class Post {
         this.recommended = this.recommended == null ? 0 : this.recommended;
     }
 }
+>>>>>>> 746144799d58886552b390058dddd09e5697cc3c
