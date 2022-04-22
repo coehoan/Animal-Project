@@ -11,21 +11,6 @@
       </select>
     </div>
     <div id="category-region" class="m_div_display_none">
-<<<<<<< HEAD
-      <select class="m_blog_writeForm_select">
-        <option value="">지역</option>
-        <option id="otp-seoul" value="서울">서울</option>
-        <option id="otp-busan" value="부산">부산</option>
-        <option id="otp-deagu" value="대구">대구</option>
-      </select>
-    </div>
-    <div id="category-adopt" class="m_div_display_none">
-      <select class="m_blog_writeForm_select">
-        <option value="">품종</option>
-        <option id="opt-dog" value="강아지">강아지</option>
-        <option id="opt-cat" value="고양이">고양이</option>
-        <option id="opt-ect" value="기타">기타</option>
-=======
       <select class="m_blog_writeForm_select" onchange="regionSelect(this.value)">
         <option selected disabled>지역</option>
         <option value="서울">서울</option>
@@ -61,7 +46,6 @@
         <option value="질문">질문</option>
         <option value="정보">정보</option>
         <option value="맛집">맛집</option>
->>>>>>> 746144799d58886552b390058dddd09e5697cc3c
       </select>
     </div>
   </div>
@@ -106,130 +90,6 @@
   function boardSelect(value) {
 
     if (value == "adopt") {
-<<<<<<< HEAD
-      console.log("adopt 탐"); // 입양후기 게시판일 때 
-      $("#category-region").removeClass("m_div_display_none"); // 지역별이랑
-      $("#category-adopt").removeClass("m_div_display_none"); // 입양후기 클래스 삭제해서 둘 다 보이게 하기
-    } else if (value == "region") {
-      console.log("region 탐"); // 지역별 게시판일 때
-      $("#category-region").removeClass("m_div_display_none"); // 지역별 선택 보이게 하고
-      $("#category-adopt").addClass("m_div_display_none"); // 입양후기 카테고리 지우기
-    } else { // 자유게시판일 때
-      $("#category-region").addClass("m_div_display_none"); // 지역과 
-      $("#category-adopt").addClass("m_div_display_none"); // 입양후기 카테고리 지우기
-    }
-
-  }
-</script>
-
-<script>
-
-  // fetch로 보낼 게시판의 데이터를 담은 JSON 오브젝트 만들기
-
-  // 입양 게시판 오브젝트
-  // 서울 시작
-  let adouptOfDogAndSeoul = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-seoul").val(),
-    kindOfAnimals: $("#opt-dog").val()
-  }
-
-  let adouptOfCatAndSeoul = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-seoul").val(),
-    kindOfAnimals: $("#opt-cat").val()
-  }
-
-  let adouptOfEctAndSeoul = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-seoul").val(),
-    kindOfAnimals: $("#opt-ect").val()
-  }
-
-  // 부산 시작
-
-  let aduoptOfEctAndBusan = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-busan").val(),
-    kindOfAnimals: $("#opt-ect").val()
-  }
-
-  let aduoptOfDogAndBusan = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-busan").val(),
-    kindOfAnimals: $("#opt-dog").val()
-  }
-
-  let aduoptOfCatAndBusan = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-busan").val(),
-    kindOfAnimals: $("#opt-cat").val()
-  }
-
-  // 대구 시작
-  let aduoptOfEctAndDeagu = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-deagu").val(),
-    kindOfAnimals: $("#opt-ect").val()
-  }
-
-  let aduoptOfDogAndDeagu = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-deagu").val(),
-    kindOfAnimals: $("#opt-dog").val()
-  }
-
-  let aduoptOfCatAndDeagu = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-deagu").val(),
-    kindOfAnimals: $("#opt-cat").val()
-  }
-
-  // 지역별 게시판 오브젝트
-  let regionOfSeoul = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-seoul").val()
-  }
-
-  let regionOfBusan = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-busan").val()
-  }
-
-  let regionOfDeagu = {
-    kind: $("#opt-adopt").val(),
-    local: $("#otp-deagu").val()
-  }
-
-  // 자유게시판 오브젝트
-  let free = {
-    kind: $("#opt-free").val()
-  }
-  
-
-
-  // 입양게시판 로직
-  async function chooseSeoulOfadopt() {
-
-    if (value == "adopt" && value == "서울" && value == "강아지") { // 조건에 맞춰서
-      let chooseKindOfWirte = await fetch("주소", { // JSON 오브젝트로 보내고 DB에 저장하기
-        method: "POST",
-        body: JSON.stringify(adouptOfDogAndSeoul),
-        headers: "",
-      });
-    } else if (value == "adopt" && value == "서울" && value == "고양이") {
-      let chooseKindOfWirte = await fetch("주소", {
-        method: "POST",
-        body: JSON.stringify(adouptOfCatAndSeoul),
-        headers: "",
-      });
-    } else if (value == "adopt" && value == "서울" && value == "기타") {
-      let chooseKindOfWirte = await fetch("주소", {
-        method: "POST",
-        body: JSON.stringify(adouptOfEctAndSeoul),
-        headers: "",
-      });
-=======
       $("#category-region").removeClass("m_div_display_none");
       $("#category-type").removeClass("m_div_display_none");
       $("#category-category").addClass("m_div_display_none");
@@ -250,7 +110,6 @@
       selectedType = null;
       selectedRegion = null;
       selectedCategory = null;
->>>>>>> 746144799d58886552b390058dddd09e5697cc3c
     }
   }
 
@@ -331,17 +190,6 @@
     selectedCategory = value;
   }
 
-<<<<<<< HEAD
-  // 자유 게시판 로직
-  async function chooseFree() {
-
-    if (value == "free" && value == "서울") { // 조건에 맞춰서
-      let chooseKindOfWirte = await fetch("주소", { // JSON 오브젝트로 보내고 DB에 저장하기
-        method: "POST",
-        body: JSON.stringify(free),
-        headers: "",
-      });
-=======
   // 글쓰기 버튼 클릭
   $("#btn-write").click(() => {
     let value = $("#board-select").val();
@@ -364,7 +212,6 @@
       region: selectedRegion,
       type: selectedType,
       category: selectedCategory
->>>>>>> 746144799d58886552b390058dddd09e5697cc3c
     }
 
     let response = await fetch("/s/blog/write", {

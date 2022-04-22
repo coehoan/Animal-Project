@@ -12,11 +12,7 @@ spring:
     expose-session-attributes: true
   datasource: 
 
-<<<<<<< HEAD
       url: jdbc:mariadb://localhost:3306/Shelters
-=======
-      url: jdbc:mariadb://localhost:3306/animaldb
->>>>>>> 18002a88909d913420bcc3df52ccbc943681bd5b
       driver-class-name: org.mariadb.jdbc.Driver
       username: animal
       password: password

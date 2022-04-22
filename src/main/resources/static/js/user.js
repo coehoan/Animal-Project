@@ -67,7 +67,7 @@ async function join() {
 
     if (responseParse.code == 1) {
         alert("회원가입완료");
-        location.href = "loginForm";
+        location.href = "/main/loginForm";
     } else {
         alert('회원가입실패');
     }
