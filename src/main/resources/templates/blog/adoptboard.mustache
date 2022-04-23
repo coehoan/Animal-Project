@@ -11,7 +11,7 @@
         <div class="m_blog_search">
           <div class="d-flex">
             <div class="m_blog_search_detail">
-              <select class="form-select" onchange="regionSelect(this.value)" name="region">
+              <select class="form-select" name="region">
                 <option value="all">지역</option>
                 <option value="서울">서울</option>
                 <option value="경기">경기</option>
@@ -33,7 +33,7 @@
               </select>
             </div>
             <div class="m_blog_search_detail">
-              <select class="form-select" onchange="typeSelect(this.value)" name="type">
+              <select class="form-select" name="type">
                 <option value="all">품종</option>
                 <option value="강아지">강아지</option>
                 <option value="고양이">고양이</option>
@@ -74,14 +74,14 @@
     <table class="table m_text_align_center">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>지역</th>
-          <th>품종</th>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>작성일</th>
-          <th>조회수</th>
-          <th>추천</th>
+          <th style="width: 30px;">No</th>
+          <th style="width: 50px;">지역</th>
+          <th style="width: 50px;">품종</th>
+          <th style="width: 300px;">제목</th>
+          <th style="width: 50px;">작성자</th>
+          <th style="width: 100px;">작성일</th>
+          <th style="width: 50px;">조회수</th>
+          <th style="width: 30px;">추천</th>
         </tr>
       </thead>
       <tbody>
@@ -226,8 +226,6 @@
     // h 변수와 id값에 맞춰 페이지 이동
     location.href = `${h}page=${id}`;
   }
-
   // 페이징 함수 끝
-
 
 </script>

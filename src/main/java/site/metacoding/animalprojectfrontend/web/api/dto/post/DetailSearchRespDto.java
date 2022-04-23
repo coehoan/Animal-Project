@@ -9,15 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AdoptPostRespDto {
+public class DetailSearchRespDto {
     private Integer id;
     private String createDate;
     private String region;
     private String title;
     private String type;
+    private String category;
     private String username;
     private Integer view;
     private Integer recommended;
 
-    private List<AdoptPostRespDto> adoptpostRespDtos;
+    private List<DetailSearchRespDto> detailSearchRespDtos;
 }

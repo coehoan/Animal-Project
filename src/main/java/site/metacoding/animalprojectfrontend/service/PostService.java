@@ -55,6 +55,16 @@ public class PostService {
         return postEntity;
     }
 
+    public Page<Post> 분류별보기(String board, String category, Pageable page) {
+        Page<Post> postEntity = postRepository.findByBoardAndCategory(board, category, page);
+        return postEntity;
+    }
+
+    public Page<Post> 지역분류별보기(String board, String region, String category, Pageable page) {
+        Page<Post> postEntity = postRepository.findByBoardAndRegionANDCategory(board, region, category, page);
+        return postEntity;
+    }
+
     public Page<Post> 게시글검색(String board, String query, Pageable page, String searchBy) {
         if (searchBy == null)
             return null;

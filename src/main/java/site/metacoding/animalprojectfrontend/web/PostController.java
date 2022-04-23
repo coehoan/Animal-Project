@@ -22,7 +22,7 @@ import site.metacoding.animalprojectfrontend.domain.post.Post;
 import site.metacoding.animalprojectfrontend.domain.user.User;
 import site.metacoding.animalprojectfrontend.service.PostService;
 import site.metacoding.animalprojectfrontend.web.api.dto.comment.CommentRespDto;
-import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.DetailSearchRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.FreePostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.MainPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.PageRespDto;
@@ -39,20 +39,21 @@ public class PostController {
 
     // 상세검색 메서드
     public void search(Page<Post> posts, Integer page, Model model) {
-        List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
+        List<DetailSearchRespDto> detailSearchRespDtos = new ArrayList<DetailSearchRespDto>();
 
         for (Post postList : posts) {
-            AdoptPostRespDto postRespDto = new AdoptPostRespDto();
+            DetailSearchRespDto postRespDto = new DetailSearchRespDto();
 
             postRespDto.setId(postList.getId());
             postRespDto.setRegion(postList.getRegion());
             postRespDto.setType(postList.getType());
+            postRespDto.setCategory(postList.getCategory());
             postRespDto.setTitle(postList.getTitle());
             postRespDto.setUsername(postList.getUser().getUsername());
             postRespDto.setCreateDate(postList.yyyymmdd());
             postRespDto.setView(postList.getView());
             postRespDto.setRecommended(postList.getRecommended());
-            adoptPostRespDtoList.add(postRespDto);
+            detailSearchRespDtos.add(postRespDto);
         }
 
         List<Integer> pageList = new ArrayList<>();
@@ -65,7 +66,7 @@ public class PostController {
         pageRespDto.setHasNext(posts.hasNext());
         pageRespDto.setHasPrevious(posts.hasPrevious());
 
-        model.addAttribute("posts", adoptPostRespDtoList);
+        model.addAttribute("posts", detailSearchRespDtos);
         model.addAttribute("pages", pageRespDto);
         model.addAttribute("prevPage", page - 1);
         model.addAttribute("nextPage", page + 1);
@@ -79,8 +80,9 @@ public class PostController {
             @RequestParam(value = "sort", required = false) String sort,
             @RequestParam(value = "searchBy", required = false) String searchBy,
             @RequestParam(value = "query", required = false) String query,
-            String region, String type, Model model,
-            Pageable pageable) {
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "type", required = false) String type,
+            String region, Model model, Pageable pageable) {
 
         PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
         PageRequest prView = PageRequest.of(page, 10, Sort.by(Direction.DESC, "view"));
@@ -113,6 +115,33 @@ public class PostController {
             }
         }
 
+        /** 지역 or 분류 검색 폼 */
+        if (region != null && category != null) {
+            // 지역,품종 요청값 없을 때 redirect
+            if (region.equals("all") && category.equals("all")) {
+                String redirect = "redirect:/blog/" + board;
+                return redirect;
+            }
+            // 입양후기 지역만 선택했을 때
+            else if (region != "all" && category.equals("all")) {
+                Page<Post> posts = postService.지역별보기(board, region, pr);
+                search(posts, page, model);
+                return "blog/regionboard";
+            }
+            // 입양후기 종류만 선택했을 때
+            else if (region.equals("all") && category != "all") {
+                Page<Post> posts = postService.분류별보기(board, category, pr);
+                search(posts, page, model);
+                return "blog/regionboard";
+            }
+            // 입양후기 지역, 종류 모두 선택했을 때
+            else if (region != "all" && category != "all") {
+                Page<Post> posts = postService.지역분류별보기(board, region, category, pr);
+                search(posts, page, model);
+                return "blog/regionboard";
+            }
+        }
+
         /** 재정렬 폼 */
         if (sort != null) {
             // 최신순
@@ -124,13 +153,13 @@ public class PostController {
             else if (sort.equals("view")) {
                 Page<Post> posts = postService.글목록보기(board, prView);
                 search(posts, page, model);
-                return "blog/adoptboard";
+                return "blog/" + board + "board";
             }
             // 추천순
             else if (sort.equals("rec")) {
                 Page<Post> posts = postService.글목록보기(board, prRec);
                 search(posts, page, model);
-                return "blog/adoptboard";
+                return "blog/" + board + "board";
             }
         }
 
@@ -139,7 +168,7 @@ public class PostController {
                 && (searchBy.equals("title") || searchBy.equals("content") || searchBy.equals("username"))) {
             Page<Post> posts = postService.게시글검색(board, query, pr, searchBy);
             search(posts, page, model);
-            return "blog/adoptboard";
+            return "blog/" + board + "board";
         }
 
         return null;
@@ -190,10 +219,10 @@ public class PostController {
         PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
 
         Page<Post> posts = postService.글목록보기(board, pr);
-        List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
+        List<DetailSearchRespDto> adoptPostRespDtoList = new ArrayList<DetailSearchRespDto>();
 
         for (Post postList : posts) {
-            AdoptPostRespDto postRespDto = new AdoptPostRespDto();
+            DetailSearchRespDto postRespDto = new DetailSearchRespDto();
 
             postRespDto.setId(postList.getId());
             postRespDto.setRegion(postList.getRegion());

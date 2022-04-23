@@ -2,37 +2,15 @@
 {{>/blog/layout/blogHeader}}
 <!-- 게시판 시작 -->
 <div class="m_padding_medium">
-  <!-- 검색버튼 시작 -->
-  <div class="m_div_flex_end">
-    <div class="me-3">
-      <form>
-        <select class="form-select">
-          <option>제목</option>
-          <option>내용</option>
-          <option>작성자</option>
-        </select>
-      </form>
-    </div>
-    <div class="m_blog_search_detail_icon">
-      <input type="text" placeholder="검색">
-      <button class="m_search_icon">
-        <svg style="height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-          <path
-            d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
-        </svg>
-      </button>
-    </div>
-  </div>
-  <!-- 검색버튼 끝 -->
-
   <!-- 정렬 시작 -->
-  <div class=" m_blog_btn" style="margin-top: 70px;">
-    <form>
-      <select class="form-select">
-        <option>최신순</option>
-        <option>조회순</option>
-        <option>추천순</option>
+  <div class="m_blog_btn">
+    <form action="/blog/post/search" method="get">
+      <input type="hidden" name="board" value="free">
+      <select class="form-select" name="sort" onchange="this.form.submit()">
+        <option selected disabled>정렬</option>
+        <option value="new">최신순</option>
+        <option value="view">조회순</option>
+        <option value="rec">추천순</option>
       </select>
     </form>
   </div>
@@ -43,12 +21,12 @@
     <table class="table m_text_align_center">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>제목</th>
-          <th>작성자</th>
-          <th>작성일</th>
-          <th>조회수</th>
-          <th>추천</th>
+          <th style="width: 30px;">No</th>
+          <th style="width: 300px;">제목</th>
+          <th style="width: 50px;">작성자</th>
+          <th style="width: 100px;">작성일</th>
+          <th style="width: 50px;">조회수</th>
+          <th style="width: 30px;">추천</th>
         </tr>
       </thead>
       <tbody>
@@ -74,45 +52,122 @@
     <ul class="pagination justify-content-center">
       {{#pages.hasPrevious}}
       <li class="page-item">
-        <a class="page-link" href="?page={{prevPage}}">이전</a>
+        <a id="prev" class="page-link" href="javascript:void(0)">이전</a>
       </li>
       {{/pages.hasPrevious}}
       {{^pages.hasPrevious}}
       <li class="page-item disabled">
-        <a class="page-link" href="?page={{prevPage}}">이전</a>
+        <a id="prev" class="page-link" href="javascript:void(0)">이전</a>
       </li>
       {{/pages.hasPrevious}}
 
       {{#pages.total}}
-      <li class="page-item"><a class="page-link" href="?page={{.}}" id="paging">{{.}}</a></li>
+      <li class="page-item"><a id="{{.}}" class="page-link page" href="javascript:void(0)"
+          onclick="pagingClick(this.id)">{{.}}</a></li>
       {{/pages.total}}
 
       {{#pages.hasNext}}
       <li class="page-item">
-        <a class="page-link" href="?page={{nextPage}}">다음</a>
+        <a id="next" class="page-link" href="javascript:void(0)">다음</a>
       </li>
       {{/pages.hasNext}}
       {{^pages.hasNext}}
-      <li class="page-item disabled">
-        <a class="page-link" href="?page={{nextPage}}">다음</a>
+      <li class=" page-item disabled">
+        <a id="next" class="page-link" href="javascript:void(0)">다음</a>
       </li>
       {{/pages.hasNext}}
     </ul>
   </nav>
   <!-- 페이징 끝 -->
 
-  <!-- 글쓰기버튼 시작 -->
-  <div class="m_blog_btn">
-    <a href="/s/blog/writeForm">
-      <button class="btn bg-success text-light">글쓰기</button>
-    </a>
+  <!-- 게시글 하단부분 시작 -->
+  <div class="m_div_flex_between mt-5">
+    <div style="width: 80px;"></div>
+    <!-- 제목, 내용, 작성자 검색버튼 시작 -->
+    <div class="d-flex">
+      <div class="me-3">
+        <form class="d-flex" action="/blog/post/search" method="get">
+          <input type="hidden" name="board" value="free">
+          <select class="form-select me-3" onchange="titleSelect(this.value)" name="searchBy">
+            <option value="title">제목</option>
+            <option value="content">내용</option>
+            <option value="username">작성자</option>
+          </select>
+          <div class="m_blog_search_detail_icon">
+            <input type="text" placeholder="검색" name="query" required>
+            <button class="m_search_icon" type="submit">
+              <svg style="height: 20px; width: 20px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                <path
+                  d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z" />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <!-- 제목, 내용, 작성자 검색버튼 끝 -->
+
+    <!-- 글쓰기버튼 시작 -->
+    <div class="m_blog_btn">
+      <a href="/s/blog/writeForm">
+        <button class="btn bg-success text-light">글쓰기</button>
+      </a>
+    </div>
+    <!-- 글쓰기버튼 끝 -->
   </div>
-  <!-- 글쓰기버튼 끝 -->
+  <!-- 게시글 하단부분 끝 -->
 
 </div>
 <!-- 게시판 끝 -->
 
 <script>
+  // 페이징 함수 시작
+  // 이전 버튼 클릭시
+  $("#prev").click(() => {
+    let h = location.href; // 현재주소
+    // 이전버튼은 다음버튼을 클릭 했을때만 활성화 되기때문에
+    // 주소에 page=이 붙어있어서 그 앞에서 끊어줌.
+    h = h.substring(0, h.indexOf("page="));
+    location.href = `${h}page={{prevPage}}`;
+  })
 
+  // 다음 버튼 클릭시
+  $("#next").click(() => {
+    let h = location.href; // 현재주소
+    if (h.indexOf("page=") == -1) { // 현재 주소에 page= 이 없으면
+      if (h.indexOf("search") > -1) { // 현재 주소에 search가 있으면
+        h += "&"; // 주소에 & 추가
+      } else {
+        h += "?"; // 주소에 ? 추가
+      }
+    } else {
+      // 현재 주소에 page= 이 계속 붙는걸 방지하기 위해
+      // substr을 이용해서 page= 앞에서 주소를 끊어준다.
+      h = h.substring(0, h.indexOf("page="));
+    }
+    // h 변수에 따라 맞는 페이지로 이동
+    location.href = `${h}page={{nextPage}}`;
+  })
+
+  // 페이지 번호 클릭시 id로 페이지번호를 받아옴
+  function pagingClick(id) {
+    let h = location.href; // 현재주소
+    if (h.indexOf("page=") == -1) { // 현재 주소에 page= 이 없으면
+      if (h.indexOf("search") > -1) { // 현재 주소에 search가 있으면
+        h += "&"; // 주소에 & 추가
+      } else {
+        h += "?"; // 주소에 ? 추가
+      }
+    } else {
+      // 현재 주소에 page= 이 계속 붙는걸 방지하기 위해
+      // substr을 이용해서 page= 앞에서 주소를 끊어준다.
+      h = h.substring(0, h.indexOf("page="));
+    }
+    // h 변수와 id값에 맞춰 페이지 이동
+    location.href = `${h}page=${id}`;
+  }
+  // 페이징 함수 끝
 
 </script>
