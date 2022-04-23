@@ -33,8 +33,44 @@
       {{/principals}}
     </div>
     <!-- 따봉, 수정, 삭제 버튼 끝-->
-
   </div>
+  <br>
+
+  <!-- 댓글 리스트 시작 -->
+  <div class="m_comment_list_box">
+    <div class="mb-3"><b>댓글 리스트</b></div>
+    <ul id="reply-box" class="list-group">
+      {{#comments}}
+      <div class="m_div_display_none" id="commentId">{{content.id}}</div>
+      <li class="m_comment">
+        <div>{{#content.content}}{{{content.content}}}{{/content.content}}{{^content.content}}{{/content.content}}
+        </div>
+        <div class="d-flex" style="align-items: center;">
+          <div class="font-italic">작성자 :
+            {{#content.user.username}}{{content.user.username}}{{/content.user.username}}{{^content.user.username}}{{/content.user.username}}
+            &nbsp;</div>
+          {{#auth}}
+          <button class="btn bg-success text-light" id="comment-delete-btn">삭제</button>
+          {{/auth}}
+          {{^auth}}
+          {{/auth}}
+        </div>
+      </li>
+      {{/comments}}
+    </ul>
+  </div>
+  <!-- 댓글 리스트 끝 -->
+  <!-- 댓글 작성 폼 시작 -->
+  <div class="d-flex">
+    <form action="/s/post/{{posts.id}}/comment" method="post" class="m_comment_box">
+      <textarea name="content" class="m_comment_inputbox" rows="1"></textarea>
+      <div>
+        <button type="submit" class="btn m_sub_submit_btn">등록</button>
+      </div>
+    </form>
+  </div>
+  <!-- 댓글 작성 폼 끝 -->
+
   <!-- 조회수랑 추천수 받아오기 -->
   <div class="m_div_display_none">
     <div>{{posts.view}}</div>
@@ -119,6 +155,25 @@
     if (responseParse.code == 1) {
       alert("삭제 완료");
       location.href = `/blog/${board}`;
+    } else alert("삭제 실패\n관리자에게 문의하십시오.");
+  }
+
+  // 댓글 삭제 버튼 클릭
+  $("#comment-delete-btn").click(() => {
+    deleteComment();
+  });
+
+  async function deleteComment() {
+    let board = $("#board").text();
+    let id = parseInt($("#commentId").text());
+    let postId = parseInt($("#postId").text());
+    let response = await fetch("/s/api/comment/" + id, {
+      method: "DELETE"
+    });
+    let responseParse = await response.json();
+    if (responseParse.code == 1) {
+      alert("삭제 완료");
+      location.href = `/blog/post/${postId}`;
     } else alert("삭제 실패\n관리자에게 문의하십시오.");
   }
 

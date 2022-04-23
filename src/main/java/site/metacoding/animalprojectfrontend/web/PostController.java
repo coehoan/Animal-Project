@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.animalprojectfrontend.domain.comment.Comment;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
 import site.metacoding.animalprojectfrontend.domain.user.User;
 import site.metacoding.animalprojectfrontend.service.PostService;
+import site.metacoding.animalprojectfrontend.web.api.dto.comment.CommentRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.FreePostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.MainPostRespDto;
@@ -306,29 +308,47 @@ public class PostController {
 
         User principal = (User) session.getAttribute("principal");
 
-        Post postOp = postService.글상세보기(id);
+        Post postEntity = postService.글상세보기(id);
 
-        Integer updateView = postOp.getView() + 1;
+        Integer updateView = postEntity.getView() + 1;
 
         PostDetailRespDto postDetailRespDto = new PostDetailRespDto();
-        postDetailRespDto.setId(postOp.getId());
-        postDetailRespDto.setBoard(postOp.getBoard());
-        postDetailRespDto.setTitle(postOp.getTitle());
-        postDetailRespDto.setContent(postOp.getContent());
-        postDetailRespDto.setCreateDate(postOp.yyyymmddhhmm());
-        postDetailRespDto.setUser(postOp.getUser());
+        postDetailRespDto.setId(postEntity.getId());
+        postDetailRespDto.setBoard(postEntity.getBoard());
+        postDetailRespDto.setTitle(postEntity.getTitle());
+        postDetailRespDto.setContent(postEntity.getContent());
+        postDetailRespDto.setCreateDate(postEntity.yyyymmddhhmm());
+        postDetailRespDto.setUser(postEntity.getUser());
         postDetailRespDto.setView(updateView);
-        postDetailRespDto.setRecommended(postOp.getRecommended());
+        postDetailRespDto.setRecommended(postEntity.getRecommended());
 
         postService.조회수증가(updateView, id);
 
-        // User principal = (User) session.getAttribute("principal");
+        List<CommentRespDto> comments = new ArrayList<>();
+        for (Comment comment : postEntity.getComments()) {
+            CommentRespDto dto = new CommentRespDto();
+            dto.setContent(comment);
+            if (principal != null) {
+                if (comment.getUser().getId().equals(principal.getId())) {
+                    dto.setAuth(true);
+                } else {
+                    dto.setAuth(false);
+                }
+            } else {
+                dto.setAuth(false);
+            }
+            comments.add(dto);
+        }
+
         if (principal != null) {
-            if (principal.getId() == postOp.getUser().getId()) {
+            if (principal.getId() == postEntity.getUser().getId()) {
                 model.addAttribute("principals", true);
             } else {
                 model.addAttribute("principals", false);
             }
+        }
+        if (comments.size() != 0) {
+            model.addAttribute("comments", comments);
         }
         model.addAttribute("posts", postDetailRespDto);
 

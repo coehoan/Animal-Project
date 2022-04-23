@@ -2,7 +2,9 @@ package site.metacoding.animalprojectfrontend.domain.post;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -13,7 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.NotFound;
@@ -25,6 +30,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import site.metacoding.animalprojectfrontend.domain.comment.Comment;
 import site.metacoding.animalprojectfrontend.domain.user.User;
 
 @AllArgsConstructor
@@ -49,6 +55,10 @@ public class Post {
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+    @JsonIgnoreProperties({ "post" }) // messageConverter에게 알려주는 어노테이션, post getter는 실행하지마라
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE) // 연관관계의 주인의 변수명, 컬럼생성x 양방향맵핑
+    private List<Comment> comments;
 
     // 게시판
     @Column(length = 30, nullable = false)

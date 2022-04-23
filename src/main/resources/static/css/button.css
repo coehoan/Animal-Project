@@ -81,3 +81,10 @@
 .m_thumbUp_btn:hover {
     cursor: pointer;
 }
+
+.m_sub_submit_btn {
+    background-color: #B4C9C0;
+    color: white;
+    height: 100%;
+    width: 90px;
+}
