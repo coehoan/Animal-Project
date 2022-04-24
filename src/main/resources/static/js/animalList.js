@@ -149,38 +149,35 @@ function RegionOptionChange() {
 //스프링한테 옵션 선택한 값 오브젝트로 fetch 요청하기
 
 $("#btn-search").click(() => {
+
     toRegion(selectedSido, selectedSigungu);
+    clearInterval(toDay);
 
-});
-
-$("#btn-search").click(() => {
     toDay(selectedFirstDate, selectedLastDate);
+    clearInterval(toDay);
 
-});
 
-$("#btn-search").click(() => {
     toKind(selectedKind, selectedKindOf);
+    clearInterval(toDay);
 
-});
-
-$("#btn-search").click(() => {
     toRegionSido(selectedSido);
+    clearInterval(toRegionSido);
 
-});
 
-$("#btn-search").click(() => {
+
     toKindOnly(selectedKind);
+    clearInterval(toKindOnly);
+
+
+
+    toAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
+    clearInterval(toAll);
+
+
+    toForUserAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
+    clearInterval(toForUserAll);
 
 });
-
-$("#btn-search").click(() => {
-    toDayFirst(selectedFirstDate);
-
-});
-
-
-
-
 
 
 
@@ -244,7 +241,7 @@ async function toAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf
 
 async function toRegionSido(selectedSido) { // 지역 시도 검색
 
-    if ($("#sido").val() !== null) {
+    if ($("#sido").val() != null) {
         let response = await fetch(`/search/animals/region-sido?sido=${selectedSido}`);
         console.log(selectedSido);
         console.log(response);

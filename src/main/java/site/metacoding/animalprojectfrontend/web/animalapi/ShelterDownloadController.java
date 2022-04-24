@@ -12,7 +12,7 @@ import site.metacoding.animalprojectfrontend.service.api.ShelterService;
 
 @RequiredArgsConstructor
 @Controller
-public class ShelterController {
+public class ShelterDownloadController {
 
     private final ShelterService shelterService;
 
