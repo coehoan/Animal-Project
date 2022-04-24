@@ -1,8 +1,10 @@
-$("#showDetail").click(()=>{
-    for (animalList of reseponseParse.data) { // data 크기만큼
-        $("#region").append(detailRender(animalList)); // append
+function showDetail() {
+    if ($(".detail").css("display") === "none") {
+        $(".detail").removeClass("m_div_display_none");
+    } else {
+        $(".detail").addClass("m_div_display_none");
     }
-});
+}
 
 let selectedSido;
 let selectedSigungu;
@@ -180,6 +182,7 @@ async function toRegion(selectedSido, selectedSigungu) { // 지역 검색
         $("#region").empty();
         for (animalList of reseponseParse.data) { // data 크기만큼
             $("#region").append(regionRender(animalList)); // append
+            $("#region").append(detailRender(animalList));
 
         }
 
@@ -194,7 +197,7 @@ async function toRegion(selectedSido, selectedSigungu) { // 지역 검색
 
 async function toAll(selectedKind, selectedKindOf, selectedSido, selectedSigungu, selectedFirstDate, selectedLastDate) { // 지역 검색
 
-    let response = await fetch(`/search/animals/all?kind=${selectedKind}&kindOf=${selectedKindOf}&sido=${selectedSido}&sigungu=${selectedSigungu}&firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`);
+    let response = await fetch(`/search/animals/all?&kind=${selectedKind}&kindOf=${selectedKindOf}&sido=${selectedSido}&sigungu=${selectedSigungu}&firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`);
     console.log(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
     console.log(response);
     console.log(response.url.toString);
@@ -207,6 +210,7 @@ async function toAll(selectedKind, selectedKindOf, selectedSido, selectedSigungu
         $("#region").empty();
         for (animalList of reseponseParse.data) { // data 크기만큼
             $("#region").append(regionRender(animalList)); // append
+            $("#region").append(detailRender(animalList));
         }
 
     } else {
@@ -290,6 +294,7 @@ async function toKind(selectedKind, selectedKindOf) { // 품종 검색
         $("#region").empty();
         for (animalList of reseponseParse.data) { // data 크기만큼
             $("#region").append(kindRender(animalList)); // append
+            $("#region").append(detailRender(animalList));
         }
 
 
@@ -318,6 +323,7 @@ async function toKindOnly(selectedKind) { // 품종만 검색
         $("#region").empty();
         for (animalList of reseponseParse.data) { // data 크기만큼
             $("#region").append(kindRender(animalList)); // append
+            $("#region").append(detailRender(animalList));
         }
 
 
@@ -346,6 +352,7 @@ async function toDay(selectedFirstDate, selectedLastDate) { // 날짜 검색
         $("#region").empty();
         for (animalList of reseponseParse.data) { // data 크기만큼
             $("#region").append(dayRender(animalList)); // append
+            $("#region").append(detailRender(animalList));
         }
     } else {
         alert("검색 실패");
@@ -368,6 +375,7 @@ async function toDayFirst(selectedFirstDate) { // 날짜 검색
         $("#region").empty();
         for (animalList of reseponseParse.data) { // data 크기만큼
             $("#region").append(dayRender(animalList)); // append
+            $("#region").append(detailRender(animalList));
         }
     } else {
         alert("검색 실패");
@@ -377,7 +385,7 @@ async function toDayFirst(selectedFirstDate) { // 날짜 검색
 
 function regionRender(animalList) {
     console.log(animalList.id);
-    return `<tr">
+    return `<tr>
                 <th scope="row" style="vertical-align: middle;">${animalList.id}</th>
                 <td style="vertical-align: middle;">${animalList.kindCd}</td>
                 <td width="110"><img src="${animalList.filename}" width="100" height="100"></td>
@@ -386,25 +394,29 @@ function regionRender(animalList) {
                 <td style="vertical-align: middle;">${animalList.age}</td>
                 <td style="vertical-align: middle;">
                     ${animalList.processState}</td>
-                <td id="anitr" style="vertical-align: middle;" width="100">
-                    <button id="showDetail" class="m_button"">자세히</button>
+                <td style="vertical-align: middle;" width="100">
+                    <button id="showDetail" onclick="showDetail()" class="m_button"">자세히</button>
                 </td>
             </tr>`;
 }
 
 function detailRender(animalList) {
-    return `<tr>
-                <td colspan="9" class="">
-                    <div class="m_sub_content">
+    return `<tr class="detail m_div_display_none">
+                <td colspan="10">
+                <div>
+                    <div>
+                    <img src="${animalList.popfile}" width="300" height="300">
+                    </div>
+                    <div class="m_sub_content flex-fill flex-column">
                         #체중:${animalList.weight}
                         #색상:${animalList.colorCd}
                         #중성화여부:${animalList.neuterYn}
                         #보호소이름:${animalList.careNm}
                         #보호소전화번호:${animalList.careTel}
-                        #보호장소:${animalList.careAddr}
                         #관활기관:${animalList.orgNm}
                         #담당자:${animalList.chargeNm}
                         #담당자연락처:${animalList.officetel}
+                    </div>
                     </div>
                 </td>
             </tr>`;

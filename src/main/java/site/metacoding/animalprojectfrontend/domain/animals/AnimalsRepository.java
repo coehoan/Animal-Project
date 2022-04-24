@@ -49,4 +49,8 @@ public interface AnimalsRepository extends JpaRepository<Animals, Integer> {
         @Query(value = "SELECT * FROM Animals am GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight HAVING am.orgNm = :addrSido :addrSigungu UNION ALL SELECT * FROM Animals GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight;", nativeQuery = true)
         List<Animals> forUser(@Param("addrSido") String addrSido, @Param("addrSigungu") String addrSigungu);
 
+        //////////////// 페이징
+        @Query(value = "SELECT * FROM Aniamls LIMIT 0, 15", nativeQuery = true)
+        List<Animals> page();
+
 }
