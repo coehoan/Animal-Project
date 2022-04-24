@@ -57,7 +57,7 @@ function kindOptionChange() {
     let kind = $("#kind").val();
     let kindOf;
 
-    if (kind == "강아지") { // 품종이 강아지면
+    if (kind == "개") { // 품종이 강아지면
         kindOf = kidnOfDog; // 강아지 품종 넣기
     } else if (kind == "고양이") {
         kindOf = kindOfcat;
@@ -151,45 +151,27 @@ function RegionOptionChange() {
 //스프링한테 옵션 선택한 값 오브젝트로 fetch 요청하기
 // if문 없애면 클릭할 때 메서드 다 실행되니까 조건문 걸어줘야 함!
 $("#btn-search").click(() => {
-    
-    if (selectedSido + selectedSigungu == selectedSido + selectedSigungu) {
+
+    if (selectedSido != null && selectedSigungu != null && selectedFirstDate == null && selectedKind == null && selectedKindOf == null && selectedLastDate == null) {
         toRegion(selectedSido, selectedSigungu);
-        select = true;
-    }
-
-    if (selectedFirstDate + selectedLastDate == selectedFirstDate + selectedLastDate) {
+    } else if (selectedFirstDate != null && selectedLastDate != null && selectedKind == null && selectedKindOf == null && selectedSido == null && selectedSigungu == null) {
         toDay(selectedFirstDate, selectedLastDate);
-        clearInterval(toDay);
-    }
-
-    if (selectedKind + selectedKindOf == selectedKind + selectedKindOf) {
+    } else if (selectedKind != null && selectedKindOf != null && selectedFirstDate == null && selectedLastDate == null && selectedSido == null && selectedSigungu == null) {
         toKind(selectedKind, selectedKindOf);
-        clearInterval(toDay);
-    }
-
-    if (selectedSido != null) {
+    } else if (selectedSido != null && selectedFirstDate == null && selectedLastDate == null && selectedSigungu == null && selectedKind == null && selectedKindOf == null) {
         toRegionSido(selectedSido);
-    } else {
-        alert("검색결과 없음!");
-    }
-
-    if (selectedKind != null) {
+    } else if (selectedKind != null && selectedFirstDate == null && selectedLastDate == null && selectedKindOf == null && selectedSido == null && selectedSigungu == null) {
         toKindOnly(selectedKind);
-    } else {
-        alert("검색결과 없음!");
-    }
-
-    if (selectedSido + selectedSigungu + selectedKind + selectedKindOf + selectedFirstDate + selectedLastDate == selectedSido + selectedSigungu + selectedKind + selectedKindOf + selectedFirstDate + selectedLastDate) {
+    } else if (selectedSido != null && selectedSigungu != null && selectedKind != null && selectedKindOf != null && selectedFirstDate != null && selectedLastDate) {
         toAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
+    } else if (selectedSido != null && selectedSigungu != null && selectedKind != null && selectedKindOf != null && selectedFirstDate != null && selectedLastDate && id != null && addrSido != null && addrSigungu != null) {
+        toForUserAll(selectedSido != null && selectedSigungu != null && selectedKind != null && selectedKindOf != null && selectedFirstDate != null && selectedLastDate, id, addrSido, addrSigungu)
+    } else if (selectedSido != null && selectedSigungu != null && id != null && addrSido != null && addrSigungu != null && selectedKind == null && selectedKindOf == null && selectedFirstDate == null && selectedLastDate == null){
+        toForUserRegion(selectedSido, selectedSigungu, id, addrSido, addrSigungu);
     } else {
-        alert("검색결과 없음!");
+        alert("검색 결과가 없습니다.");
     }
 
-    if (selectedSido + selectedSigungu + selectedKind + selectedKindOf + selectedFirstDate + selectedLastDate + $("#principal") == selectedSido + selectedSigungu + selectedKind + selectedKindOf + selectedFirstDate + selectedLastDate + $("#principal")) {
-        toForUserAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
-    } else {
-        alert("검색결과 없음!");
-    }
 });
 
 
@@ -197,213 +179,238 @@ $("#btn-search").click(() => {
 
 async function toRegion(selectedSido, selectedSigungu) { // 지역 검색
 
-    if ($("#sido").val() && $("sigungu").val() != null) {
-        let response = await fetch(`/search/animals/region?sido=${selectedSido}&sigungu=${selectedSigungu}`);
-        console.log(selectedSido, selectedSigungu);
-        console.log(response);
+    let response = await fetch(`/search/animals/region?sido=${selectedSido}&sigungu=${selectedSigungu}`);
+    console.log(selectedSido + selectedSigungu);
+    console.log(response);
 
-        let reseponseParse = await response.json();
-        console.log(reseponseParse);
+    let reseponseParse = await response.json();
+    console.log(reseponseParse);
 
-        if (reseponseParse.code == 1) {
-            alert("검색 성공");
-            $("#region").empty();
-            for (regionList of reseponseParse.data) { // data 크기만큼
-                $("#region").append(regionRender(regionList)); // append
-                $("#region").append(detailRender(regionList));
-            }
-
-
-
-        } else {
-            alert("검색 실패");
+    if (reseponseParse.code == 1) {
+        alert("검색 성공");
+        $("#region").empty();
+        for (regionList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(regionRender(regionList)); // append
+            $("#region").append(detailRender(regionList));
         }
 
-        //return selectedSido, selectedSigungu;
+
+
+    } else {
+        alert("검색 실패");
     }
+
+    //return selectedSido, selectedSigungu;
+
 }
 
-async function toAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate) { // 지역 검색
+async function toAll(selectedKind, selectedKindOf, selectedSido, selectedSigungu, selectedFirstDate, selectedLastDate) { // 지역 검색
 
-    if ($("#sido").val() && $("sigungu").val() && $("#kind").val() && $("#kind-of").val() && $("#firstdate").val() && $("#last-date").val() != null) {
-        let response = await fetch(`/search/animals/all?sido=${selectedSido}&sigungu=${selectedSigungu}&kind=${selectedKind}&kindOf=${selectedKindOf}&firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`);
-        console.log(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
-        console.log(response);
+    let response = await fetch(`/search/animals/all?kind=${selectedKind}&kindOf=${selectedKindOf}&sido=${selectedSido}&sigungu=${selectedSigungu}&firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`);
+    console.log(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
+    console.log(response);
+    console.log(response.url.toString);
 
-        let reseponseParse = await response.json();
-        console.log(reseponseParse);
+    let reseponseParse = await response.json();
+    console.log(reseponseParse);
 
-        if (reseponseParse.code == 1) {
-            alert("검색 성공");
-            $("#region").empty();
-            for (regionList of reseponseParse.data) { // data 크기만큼
-                $("#region").append(regionRender(regionList)); // append
-                $("#region").append(detailRender(regionList));
-            }
-
-        } else {
-            alert("검색 실패");
+    if (reseponseParse.code == 1) {
+        alert("검색 성공");
+        $("#region").empty();
+        for (regionList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(regionRender(regionList)); // append
+            $("#region").append(detailRender(regionList));
         }
 
-        //return selectedSido, selectedSigungu;
+    } else {
+        alert("검색 실패");
     }
+
+    //return selectedSido, selectedSigungu;
+
 }
 
-async function toForUserAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate) { // 지역 검색
+let id = $("#id").val();
+let addrSido = $("#addrSido").val();
+let addrSigungu = $("#addrSigungu").val();
 
-    if ($("#sido").val() && $("sigungu").val() && $("#kind").val() && $("#kind-of").val() && $("#firstdate").val() && $("#last-date").val() != null) {
-        let response = await fetch(`/search/animals/for-user/all?sido=${selectedSido}&sigungu=${selectedSigungu}&kind=${selectedKind}&kindOf=${selectedKindOf}&firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`);
-        console.log(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
-        console.log(response);
+async function toForUserAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate, id, addrSido, addrSigungu) { // 지역 검색
 
-        let reseponseParse = await response.json();
-        console.log(reseponseParse);
+    let response = await fetch(`/search/animals/for-user/all?sido=${selectedSido}&sigungu=${selectedSigungu}&kind=${selectedKind}&kindOf=${selectedKindOf}&firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`);
+    console.log(id, addrSido, addrSigungu);
+    console.log(response);
 
-        if (reseponseParse.code == 1) {
-            alert("검색 성공");
-            $("#region").empty();
-            for (regionList of reseponseParse.data) { // data 크기만큼
-                $("#region").append(regionRender(regionList)); // append
-                $("#region").append(detailRender(regionList));
-            }
+    let reseponseParse = await response.json();
+    console.log(reseponseParse);
 
-        } else {
-            alert("검색 실패");
+    if (reseponseParse.code == 1) {
+        alert("검색 성공");
+        $("#region").empty();
+        for (regionList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(regionRender(regionList)); // append
+            $("#region").append(detailRender(regionList));
         }
 
-        //return selectedSido, selectedSigungu;
+    } else {
+        alert("검색 실패");
     }
+
+    //return selectedSido, selectedSigungu;
+
 }
 
+async function toForUserRegion(selectedSido, selectedSigungu, id, addrSido, addrSigungu) { // 지역 검색
+
+    let response = await fetch(`/search/animals/for-user/region?sido=${selectedSido}&sigungu=${selectedSigungu}&id=${id}&addrSido${addrSido}&addrSigungu=${addrSigungu}`);
+    console.log(id, addrSido, addrSigungu);
+    console.log(response);
+
+    let reseponseParse = await response.json();
+    console.log(reseponseParse);
+
+    if (reseponseParse.code == 1) {
+        alert("검색 성공");
+        $("#region").empty();
+        for (regionList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(regionRender(regionList)); // append
+            $("#region").append(detailRender(regionList));
+        }
+
+    } else {
+        alert("검색 실패");
+    }
+
+    //return selectedSido, selectedSigungu;
+
+}
 
 
 async function toRegionSido(selectedSido) { // 지역 시도 검색
 
-    if ($("#sido").val() !== null) {
-        let response = await fetch(`/search/animals/region-sido?sido=${selectedSido}`);
-        console.log(selectedSido);
-        console.log(response);
+    let response = await fetch(`/search/animals/region-sido?sido=${selectedSido}`);
+    console.log(selectedSido);
+    console.log(response);
 
-        let reseponseParse = await response.json();
-        console.log(reseponseParse);
+    let reseponseParse = await response.json();
+    console.log(reseponseParse);
 
-        if (reseponseParse.code == 1) {
-            alert("검색 성공");
-            $("#region").empty();
-            for (regionList of reseponseParse.data) { // data 크기만큼
-                $("#region").append(regionRender(regionList)); // append
-                $("#region").append(detailRender(regionList));
-            }
-
-
-
-        } else {
-            alert("검색 실패");
+    if (reseponseParse.code == 1) {
+        alert("검색 성공");
+        $("#region").empty();
+        for (regionList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(regionRender(regionList)); // append
+            $("#region").append(detailRender(regionList));
         }
 
-        //return selectedSido, selectedSigungu;
+
+
+    } else {
+        alert("검색 실패");
     }
+
+    //return selectedSido, selectedSigungu;
+
 
 }
 
 async function toKind(selectedKind, selectedKindOf) { // 품종 검색
 
-    if ($("#kind").val() && $("#kind-of").val() != null) {
-        let response = await fetch(`/search/animals/kind?kind=${selectedKind}&kindOf=${selectedKindOf}`);
-        console.log(selectedKind, selectedKindOf);
-        console.log(response);
 
-        let reseponseParse = await response.json();
-        console.log(reseponseParse);
+    let response = await fetch(`/search/animals/kind?kind=${selectedKind}&kindOf=${selectedKindOf}`);
+    console.log(selectedKind + selectedKindOf);
+    console.log(response);
 
-        if (reseponseParse.code == 1) {
-            alert("검색 성공");
-            $("#region").empty();
-            for (kindList of reseponseParse.data) { // data 크기만큼
-                $("#region").append(kindRender(kindList)); // append
-            }
+    let reseponseParse = await response.json();
+    console.log(reseponseParse);
 
-
-
-        } else {
-            alert("검색 실패");
+    if (reseponseParse.code == 1) {
+        alert("검색 성공");
+        $("#region").empty();
+        for (kindList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(kindRender(kindList)); // append
         }
 
-        //return selectedSido, selectedSigungu;
+
+
+    } else {
+        alert("검색 실패");
     }
+
+    //return selectedSido, selectedSigungu;
+
 
 }
 
 async function toKindOnly(selectedKind) { // 품종만 검색
 
-    if ($("#kind").val() != null) {
-        let response = await fetch(`/search/animals/kind-only?kind=${selectedKind}`);
-        console.log(selectedKind);
-        console.log(response);
 
-        let reseponseParse = await response.json();
-        console.log(reseponseParse);
+    let response = await fetch(`/search/animals/kind-only?kind=${selectedKind}`);
+    console.log(selectedKind);
+    console.log(response);
 
-        if (reseponseParse.code == 1) {
-            alert("검색 성공");
-            $("#region").empty();
-            for (kindList of reseponseParse.data) { // data 크기만큼
-                $("#region").append(kindRender(kindList)); // append
-            }
+    let reseponseParse = await response.json();
+    console.log(reseponseParse);
 
-
-
-        } else {
-            alert("검색 실패");
+    if (reseponseParse.code == 1) {
+        alert("검색 성공");
+        $("#region").empty();
+        for (kindList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(kindRender(kindList)); // append
         }
 
-        //return selectedSido, selectedSigungu;
+
+
+    } else {
+        alert("검색 실패");
     }
+
+    //return selectedSido, selectedSigungu;
+
 
 }
 
 async function toDay(selectedFirstDate, selectedLastDate) { // 날짜 검색
 
-    if ($("#first-date").val() && $("#last-date").val() != null) {
-        let response = await fetch(`/search/animals/day?firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`)
-        console.log(selectedFirstDate, selectedLastDate);
-        console.log(response);
 
-        let reseponseParse = await response.json();
-        console.log(reseponseParse);
+    let response = await fetch(`/search/animals/day?firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`)
+    console.log(selectedFirstDate + selectedLastDate);
+    console.log(response);
 
-        if (reseponseParse.code == 1) {
-            alert("검색 성공");
-            $("#region").empty();
-            for (dayList of reseponseParse.data) { // data 크기만큼
-                $("#region").append(dayRender(dayList)); // append
-            }
-        } else {
-            alert("검색 실패");
+    let reseponseParse = await response.json();
+    console.log(reseponseParse);
+
+    if (reseponseParse.code == 1) {
+        alert("검색 성공");
+        $("#region").empty();
+        for (dayList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(dayRender(dayList)); // append
         }
+    } else {
+        alert("검색 실패");
     }
+
 }
 
 async function toDayFirst(selectedFirstDate) { // 날짜 검색
 
-    if ($("#first-date").val() != null) {
-        let response = await fetch(`/search/animals/day?firstdate=${selectedFirstDate}`)
-        console.log(selectedFirstDate);
-        console.log(response);
 
-        let reseponseParse = await response.json();
-        console.log(reseponseParse);
+    let response = await fetch(`/search/animals/day?firstdate=${selectedFirstDate}`)
+    console.log(selectedFirstDate);
+    console.log(response);
 
-        if (reseponseParse.code == 1) {
-            alert("검색 성공");
-            $("#region").empty();
-            for (dayList of reseponseParse.data) { // data 크기만큼
-                $("#region").append(dayRender(dayList)); // append
-            }
-        } else {
-            alert("검색 실패");
+    let reseponseParse = await response.json();
+    console.log(reseponseParse);
+
+    if (reseponseParse.code == 1) {
+        alert("검색 성공");
+        $("#region").empty();
+        for (dayList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(dayRender(dayList)); // append
         }
+    } else {
+        alert("검색 실패");
     }
+
 }
 
 function kindRender(kindList) {

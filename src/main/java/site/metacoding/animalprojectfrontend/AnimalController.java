@@ -1,26 +1,22 @@
 package site.metacoding.animalprojectfrontend;
 
-import java.util.Optional;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectfrontend.domain.animals.Animals;
-import site.metacoding.animalprojectfrontend.service.api.AnimalsService;
-import site.metacoding.animalprojectfrontend.web.api.dto.animals.PostRegionDto;
-import site.metacoding.animalprojectfrontend.web.api.dto.animals.ResponseDto;
+import site.metacoding.animalprojectfrontend.domain.user.User;
+import site.metacoding.animalprojectfrontend.service.UserService;
+import site.metacoding.animalprojectfrontend.web.api.dto.user.JoinDto;
 
-import site.metacoding.animalprojectfrontend.domain.post.PostRepository;
-
+@RequiredArgsConstructor
 @Controller
 public class AnimalController {
+
+    private final UserService userService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
     public String main() {
@@ -39,6 +35,7 @@ public class AnimalController {
 
     @GetMapping("/animal")
     public String animal() {
+       
         return "/animal/animalList";
     }
 

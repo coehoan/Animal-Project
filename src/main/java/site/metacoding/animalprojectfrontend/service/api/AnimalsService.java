@@ -126,183 +126,120 @@ public class AnimalsService {
     // return findAllEntity;
     // }
 
-    public List<Animals> 전체검색(String keywordOfSido, String keywordOfSigungu, String keywordOfkind,
-            String keywordOfkindOf, String keywordOfirstDate, String keywordOflastDate) {
-        System.out.println("쿼리스트링 받아졌나?" + keywordOfSido + keywordOfSigungu);
+    public List<Animals> 전체검색(String keywordOfkind, String keywordOfkindOf, String keywordOfirstDate,
+            String keywordOflastDate, String keywordOfSido, String keywordOfSigungu) {
+        System.out.println("쿼리스트링 받아졌나?" + keywordOfSido + keywordOfSigungu + keywordOfkind + keywordOfkindOf + keywordOfirstDate + keywordOflastDate);
 
-        if (keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate + keywordOfkind
-                + keywordOfkindOf == keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate
-                        + keywordOfkind + keywordOfkindOf) {
-            List<Animals> findRegionEntity = animalsRepository.keywordOfAll(keywordOfkind, keywordOfkindOf,
-                    keywordOfSido, keywordOfSigungu, keywordOfirstDate, keywordOflastDate);
-            // System.out.println("서비스 잘 되나?=======" + findRegionEntity);
-            return findRegionEntity;
-        } else {
-            return null;
-        }
+        List<Animals> findRegionEntity = animalsRepository.keywordOfAll(keywordOfSido, keywordOfSigungu, keywordOfkind, keywordOfkindOf, keywordOfirstDate, keywordOflastDate);
+        // System.out.println("서비스 잘 되나?=======" + findRegionEntity);
+        return findRegionEntity;
 
     }
 
     public List<Animals> 지역검색(String keywordOfSido, String keywordOfSigungu) {
         System.out.println("쿼리스트링 받아졌나?" + keywordOfSido + keywordOfSigungu);
 
-        if (keywordOfSido + keywordOfSigungu == keywordOfSido + keywordOfSigungu) {
-            List<Animals> findRegionEntity = animalsRepository.keywordOfRegion(keywordOfSido, keywordOfSigungu);
-            // System.out.println("서비스 잘 되나?=======" + findRegionEntity);
-            return findRegionEntity;
-        } else {
-            return null;
-        }
+        List<Animals> findRegionEntity = animalsRepository.keywordOfRegion(keywordOfSido, keywordOfSigungu);
+        // System.out.println("서비스 잘 되나?=======" + findRegionEntity);
+        return findRegionEntity;
 
     }
 
     public List<Animals> 지역검색시도(String keywordOfSido) {
         System.out.println("쿼리스트링 받아졌나?" + keywordOfSido);
 
-        if (keywordOfSido != null) {
-            List<Animals> findRegionEntity = animalsRepository.keywordOfRegionSido(keywordOfSido);
-            // System.out.println("서비스 잘 되나?=======" + findRegionEntity);
-            return findRegionEntity;
-        } else {
-            return null;
-        }
+        List<Animals> findRegionEntity = animalsRepository.keywordOfRegionSido(keywordOfSido);
+        // System.out.println("서비스 잘 되나?=======" + findRegionEntity);
+        return findRegionEntity;
 
     }
 
     public List<Animals> 품종검색(String keywordOfkind, String keywordOfkindOf) {
         System.out.println("쿼리스트링 받아졌나?" + keywordOfkind + keywordOfkindOf);
 
-        if (keywordOfkind + keywordOfkindOf == keywordOfkind + keywordOfkindOf) {
-
-            List<Animals> findKindEntity = animalsRepository.keywordOfKind(keywordOfkind, keywordOfkindOf);
-            // System.out.println("서비스 잘 되나?=======" + findKindEntity);
-            return findKindEntity;
-        } else {
-            return null;
-        }
+        List<Animals> findKindEntity = animalsRepository.keywordOfKind(keywordOfkind, keywordOfkindOf);
+        // System.out.println("서비스 잘 되나?=======" + findKindEntity);
+        return findKindEntity;
 
     }
 
     public List<Animals> 품종검색품종만(String keywordOfkind) {
         System.out.println("쿼리스트링 받아졌나?" + keywordOfkind);
 
-        if (keywordOfkind != null) {
-
-            List<Animals> findKindEntity = animalsRepository.keywordOfKindOnly(keywordOfkind);
-            // System.out.println("서비스 잘 되나?=======" + findKindEntity);
-            return findKindEntity;
-        } else {
-            return null;
-        }
+        List<Animals> findKindEntity = animalsRepository.keywordOfKindOnly(keywordOfkind);
+        // System.out.println("서비스 잘 되나?=======" + findKindEntity);
+        return findKindEntity;
 
     }
 
     public List<Animals> 날짜검색(String keywordOfirstDate, String keywordOflastDate) {
         System.out.println("쿼리스트링 받아졌나?" + keywordOfirstDate + keywordOflastDate);
 
-        if (keywordOfirstDate + keywordOflastDate == keywordOfirstDate + keywordOflastDate) {
-            // String[] firstDate = keywordOfirstDate.split("-");
-            // System.out.println(firstDate);
-            // StringBuilder fDsb = new StringBuilder();
+        // String[] firstDate = keywordOfirstDate.split("-");
+        // System.out.println(firstDate);
+        // StringBuilder fDsb = new StringBuilder();
 
-            // fDsb.append(firstDate[0]);
-            // fDsb.append(firstDate[1]);
-            // fDsb.append(firstDate[2]);
+        // fDsb.append(firstDate[0]);
+        // fDsb.append(firstDate[1]);
+        // fDsb.append(firstDate[2]);
 
-            // System.out.println(fDsb.toString());
+        // System.out.println(fDsb.toString());
 
-            // String[] lastDate = keywordOfirstDate.split("-");
-            // StringBuilder lDsb = new StringBuilder();
-            // lDsb.append(lastDate[0]);
-            // lDsb.append(lastDate[1]);
-            // lDsb.append(lastDate[2]);
-            // 컨트롤러에서 해줘서 안 해도 됨!
+        // String[] lastDate = keywordOfirstDate.split("-");
+        // StringBuilder lDsb = new StringBuilder();
+        // lDsb.append(lastDate[0]);
+        // lDsb.append(lastDate[1]);
+        // lDsb.append(lastDate[2]);
+        // 컨트롤러에서 해줘서 안 해도 됨!
 
-            List<Animals> findDayEntity = animalsRepository.keywordOfDay(keywordOfirstDate, keywordOflastDate);
-            // System.out.println("서비스 잘 되나?=======" + findDayEntity);
-            return findDayEntity;
-        } else {
-            return null;
-        }
+        List<Animals> findDayEntity = animalsRepository.keywordOfDay(keywordOfirstDate, keywordOflastDate);
+        // System.out.println("서비스 잘 되나?=======" + findDayEntity);
+        return findDayEntity;
 
     }
 
-    public List<Animals> 유저전체검색() {
-        if (animalsRepository.forUser(request.getSession().getId()) != null) {
+    /////////////////////유저 검색
 
-            List<Animals> forUserEntity = animalsRepository.forUser(request.getSession().getId());
-            return forUserEntity;
-        } else {
-            return null;
-        }
+    public List<Animals> 유저지역검색(String keywordOfSido, String keywordOfSigungu, String id, String addrSido, String addrSigungu) {
+
+        List<Animals> forUserEntity = animalsRepository.forUserRegion(keywordOfSido, keywordOfSigungu, id, addrSido, addrSigungu);
+        return forUserEntity;
 
     }
 
-    public List<Animals> 유저지역검색(String keywordOfSido, String keywordOfSigungu) {
+    public List<Animals> 유저시도검색(String keywordOfSido, String id, String addrSido, String addrSigungu) {
 
-        if (animalsRepository.forUserRegion(keywordOfSido, keywordOfSigungu, request.getSession().getId()) != null) {
-            List<Animals> forUserEntity = animalsRepository.forUserRegion(keywordOfSido, keywordOfSigungu,
-                    request.getSession().getId());
-            return forUserEntity;
-        } else {
-            return null;
-        }
+        List<Animals> forUserEntity = animalsRepository.forUserSido(keywordOfSido, id, addrSido, addrSigungu);
+        return forUserEntity;
 
     }
 
-    public List<Animals> 유저시도검색(String keywordOfSido) {
-        if (animalsRepository.forUserSido(keywordOfSido, request.getSession().getId()) != null) {
-            List<Animals> forUserEntity = animalsRepository.forUserSido(keywordOfSido, request.getSession().getId());
-            return forUserEntity;
-        } else {
-            return null;
-        }
+    public List<Animals> 유저날짜검색(String keywordOfirstDate, String keywordOflastDate, String id, String addrSido, String addrSigungu) {
+
+        List<Animals> forUserEntity = animalsRepository.forUserDay(keywordOfirstDate, keywordOflastDate, id, addrSido, addrSigungu);
+        return forUserEntity;
 
     }
 
-    public List<Animals> 유저날짜검색(String keywordOfirstDate, String keywordOflastDate) {
-        if (animalsRepository.forUserDay(keywordOfirstDate, keywordOflastDate, request.getSession().getId()) != null) {
-            List<Animals> forUserEntity = animalsRepository.forUserDay(keywordOfirstDate, keywordOflastDate,
-                    request.getSession().getId());
-            return forUserEntity;
-        } else {
-            return null;
-        }
+    public List<Animals> 유저품종검색(String keywordOfkind, String keywordOfkindOf, String id, String addrSido, String addrSigungu) {
+
+        List<Animals> forUserEntity = animalsRepository.forUserKind(keywordOfkind, keywordOfkindOf, id, addrSido, addrSigungu);
+        return forUserEntity;
 
     }
 
-    public List<Animals> 유저품종검색(String keywordOfkind, String keywordOfkindOf) {
-        if (animalsRepository.forUserKind(keywordOfkind, keywordOfkindOf, request.getSession().getId()) != null) {
-            List<Animals> forUserEntity = animalsRepository.forUserKind(keywordOfkind, keywordOfkindOf,
-                    request.getSession().getId());
-            return forUserEntity;
-        } else {
-            return null;
-        }
+    public List<Animals> 유저품종만검색(String keywordOfkind, String id, String addrSido, String addrSigungu) {
 
-    }
-
-    public List<Animals> 유저품종만검색(String keywordOfkind) {
-        if (animalsRepository.forUserKindOf(keywordOfkind, request.getSession().getId()) != null) {
-            List<Animals> forUserEntity = animalsRepository.forUserKindOf(keywordOfkind, request.getSession().getId());
-            return forUserEntity;
-        } else {
-            return null;
-        }
+        List<Animals> forUserEntity = animalsRepository.forUserKindOf(keywordOfkind, id, addrSido, addrSigungu);
+        return forUserEntity;
 
     }
 
     public List<Animals> 유저모두검색(String keywordOfkind, String keywordOfkindOf, String keywordOfSido,
-            String keywordOfSigungu, String keywordOfirstDate, String keywordOflastDate, String id) {
-        if (keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate + keywordOfkind + keywordOfkindOf
-                + request.getSession().getId() == keywordOfSido + keywordOfSigungu + keywordOfirstDate
-                        + keywordOflastDate + keywordOfkind + keywordOfkindOf + request.getSession().getId()) {
-            List<Animals> forUserEntity = animalsRepository.forUserAll(keywordOfkind, keywordOfkindOf, keywordOfSido,
-                    keywordOfSigungu, keywordOfirstDate, keywordOflastDate, request.getSession().getId());
-            return forUserEntity;
-        } else {
-            return null;
-        }
+            String keywordOfSigungu, String keywordOfirstDate, String keywordOflastDate, String id, String addrSido, String addrSigungu) {
+
+        List<Animals> forUserEntity = animalsRepository.forUserAll(keywordOfkind, keywordOfkindOf, keywordOfSido, keywordOfSigungu, keywordOfirstDate, keywordOflastDate, id, addrSido, addrSigungu);
+        return forUserEntity;
 
     }
 

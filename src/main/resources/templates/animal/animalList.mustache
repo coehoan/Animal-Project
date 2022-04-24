@@ -24,12 +24,17 @@
                 <div class="d-flex flex-column">
                     <!--지역검색까지 시작-->
                     <div id="example1" class="bs-docs-example d-flex">
+                        {{#principal}}
+                        <input id="id" value="{{id}}" type="text" hidden>
+                        <input id="addrSido" value="{{addrSido}}" type="text" hidden>
+                        <input id="addrSigungu" type="text" value="{{addrSigungu}}" hidden>
+                        {{/principal}}
                         <input id="first-date" onchange="firstDateSelected(this.value)" class="form-control me-2"
                             name="firstdate" type="date" placeholder="날짜" aria-label="Search">
                         <i class="me-2">~</i>
                         <input id="last-date" onchange="lastDateSelected(this.value)" class="form-control me-2"
                             name="lastdate" type="date" placeholder="날짜" aria-label="Search">
-                        <select id="sido" name="sido" class="step1 me-2 animallist-select-box"
+                        <select id="sido" class="step1 me-2 animallist-select-box"
                             onchange="sidoSelected(this.value), RegionOptionChange()">
                             <option selected disabled>지역</option>
                             <option id="seoul" value="서울특별시">서울특별시</option>
@@ -50,7 +55,7 @@
                             <option id="gyeongnam" value="경상남도">경상남도</option>
                             <option id="jeju" value="제주특별자치도">제주특별자치도</option>
                         </select>
-                        <select id="sigungu" name="sigungu" class="step2 me-2 animallist-select-box"
+                        <select id="sigungu" class="step2 me-2 animallist-select-box"
                             onchange="sigunguSelected(this.value)">
                             <option>시/군/구</option>
                             <option></option>
@@ -60,16 +65,16 @@
                     <br>
                     <!--키워드 검색까지 시작-->
                     <div class="bs-docs-example d-flex">
-                        <select id="kind" name="kind" onchange="kindSelected(this.value), kindOptionChange()"
+                        <select id="kind" onchange="kindSelected(this.value), kindOptionChange()"
                             class="me-2 animallist-select-box">
-                            <option>종류</option>
-                            <option value="강아지">강아지</option>
+                            <option value="">종류</option>
+                            <option value="개">개</option>
                             <option value="고양이">고양이</option>
                             <option value="기타">기타</option>
                         </select>
-                        <select id="kind-of" name="kindOf" class="me-2 animallist-select-box"
+                        <select id="kind-of" class="me-2 animallist-select-box"
                             onchange="kindOfSelected(this.value)">
-                            <option>품종</option>
+                            <option value="">품종</option>
                             <option></option>
                         </select>
                         <input class="form-control me-2" name="keyword" type="search" placeholder="검색"
