@@ -218,8 +218,10 @@ SELECT * FROM Animals am WHERE KindCd LIKE "%강아지%" AND KindCd LIKE "%믹�
 
 SELECT * FROM Animals am WHERE KindCd LIKE "%개%" AND KindCd LIKE "%믹스견%" AND careAddr LIKE "%전라북도%" AND careAddr LIKE "%고창군%" AND noticeSdt LIKE "20220421" AND noticeSdt LIKE "20220421" GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd,desertionNo,filename,happenDt,happenPlace,kindCd,neuterYn,noticeComment,noticeEdt,noticeNo,noticeSdt,officetel,orgNm,popfile,processState,sexCd,specialMark,weight DESC;
 
-SELECT * FROM Animals am WHERE careAddr LIKE %:keywordOfSido% AND careAddr LIKE %:keywordOfSigungu% GROUP BY age,careAddr,careNm,careTel,chargeNm,colorCd,desertionNo,filename,happenDt,happenPlace,kindCd,neuterYn,noticeComment,noticeEdt,noticeNo,noticeSdt,officetel,orgNm,popfile,processState,sexCd,specialMark,weight DESC UNION ALL SELECT * FROM Animals am WHERE orgNm in (SELECT id AND addrSido + addrSigungu FROM User WHERE id = :id AND addrSido + addrSigungu = am.orgNm) GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight DESC;
+SELECT * FROM Animals am WHERE orgNm in (SELECT id AND addrSido + addrSigungu FROM User WHERE id = 1 AND addrSido + addrSigungu = am.orgNm) GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight DESC;
 
+
+SELECT * FROM User;
 
 -- 유저 지역검색
 
@@ -227,12 +229,55 @@ SELECT *
 FROM Animals am 
 WHERE orgNm IN
 (
-SELECT id AND addrSido + addrSigungu FROM User
-WHERE id = :id AND addrSido + addrSigungu = am.orgNm
+SELECT id AND addrSido FROM User
+WHERE id = 1 AND addrSido LIKE "서울특별시" = am.orgNm
 )
 GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment,
     noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight
-ORDER BY case when orgNm = ':addrSido + :addrSigungu' then 1
+ORDER BY case when orgNm = '서울특별시' then 1
 ELSE 2 END;
 
-SELECT * FROM Animals am WHERE careAddr LIKE %:keywordOfSido% AND careAddr LIKE %:keywordOfSigungu% UNION ALL SELECT * FROM Animals am WHERE orgNm IN(SELECT id AND addrSido + addrSigungu FROM User WHERE id = :id AND addrSido + addrSigungu = am.orgNm) AND careAddr LIKE %:keywordOfSido% AND careAddr LIKE %:keywordOfSigungu% GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight ORDER BY case when orgNm = ':addrSido + :addrSigungu' then 1 ELSE 2 END;
+SELECT * 
+FROM Animals am 
+WHERE orgNm IN
+(
+SELECT id AND addrSido + addrSigungu FROM User
+WHERE id = 1 AND addrSido + addrSigungu = am.orgNm
+)
+GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment,
+    noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight
+ORDER BY case when am.orgNm = '서울특별시' then 1
+ELSE 2 END;
+
+SELECT * FROM Animals am WHERE orgNm IN (SELECT id AND addrSido + addrSigungu FROM User WHERE id = 1 AND addrSido + addrSigungu = am.orgNm) GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight ORDER BY case when am.orgNm = '서울특별시' + '마포구' then 1 ELSE 1 END;
+
+SELECT id, addrSido, addrSigungu FROM User
+WHERE id = 1 OR addrSido OR addrSigungu;
+
+(
+SELECT addrSido, addrSigungu FROM User
+WHERE id = 1 OR addrSido OR addrSigungu
+) um;
+
+
+SELECT *
+FROM Animals am
+GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment,
+    noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight
+HAVING am.orgNm = "부산광역시 해운대구"
+
+UNION ALL
+
+SELECT * FROM Animals
+GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment,
+    noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight;
+
+FROM Animals
+GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment,
+    noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight;
+ORDER BY case when am.orgNm = "서울특별시 마포구" then 1
+ELSE 2 END;
+
+
+SELECT id AND addrSido + addrSigungu FROM User
+WHERE id = 1 AND addrSido + addrSigungu = 0;

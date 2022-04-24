@@ -195,9 +195,9 @@ public class AnimalApiController {
 
     @CrossOrigin
     @GetMapping("/search/animals/for-user")
-    public ResponseDto<?> getForUser(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "addrSido", required = true) String addrSido, @RequestParam(name = "addrSigungu", required = true) String addrSigungu){
-
-        List<Animals> getUserEntity = animalsService.유저검색(id, addrSido, addrSigungu);
+    public ResponseDto<?> getForUser(@RequestParam(name = "addrSido", required = true) String addrSido, @RequestParam(name = "addrSigungu", required = true) String addrSigungu){
+        System.out.println(addrSido + addrSigungu + "=====쿼리스트링?");
+        List<Animals> getUserEntity = animalsService.유저검색(addrSido, addrSigungu);
 
         return new ResponseDto<>(1, "검색 성공", getUserEntity);
     }

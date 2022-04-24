@@ -200,9 +200,9 @@ public class AnimalsService {
 
     /////////////////////유저 검색
 
-    public List<Animals> 유저검색(String id, String addrSido, String addrSigungu) {
+    public List<Animals> 유저검색(String addrSido, String addrSigungu) {
 
-        List<Animals> forUserEntity = animalsRepository.forUser(id, addrSido, addrSigungu);
+        List<Animals> forUserEntity = animalsRepository.forUser(addrSido, addrSigungu);
         return forUserEntity;
 
     }

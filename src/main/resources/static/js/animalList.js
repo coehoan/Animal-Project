@@ -157,8 +157,8 @@ $("#btn-search").click(() => {
         toKindOnly(selectedKind);
     } else if (selectedSido != null && selectedSigungu != null && selectedKind != null && selectedKindOf != null && selectedFirstDate != null && selectedLastDate) {
         toAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
-    } else if (id != null && addrSido != null && addrSigungu != null) {
-        toForUserAll(id, addrSido, addrSigungu)
+    } else if (addrSido != null && addrSigungu != null) {
+        toForUserAll(addrSido, addrSigungu)
     }
 
 });
@@ -221,10 +221,10 @@ let id = $("#id").val();
 let addrSido = $("#addrSido").val();
 let addrSigungu = $("#addrSigungu").val();
 
-async function toForUserAll(id, addrSido, addrSigungu) { // 지역 검색
+async function toForUserAll(addrSigungu, id) { // 지역 검색
 
-    let response = await fetch(`/search/animals/for-user?id=${id}&addrSido=${addrSido}&addrSigungu=${addrSigungu}`);
-    console.log(id, addrSido, addrSigungu);
+    let response = await fetch(`/search/animals/for-user?addrSido=${addrSigungu}&addrSigungu=${id}`);
+    console.log(addrSigungu, id);
     console.log(response);
 
     let reseponseParse = await response.json();

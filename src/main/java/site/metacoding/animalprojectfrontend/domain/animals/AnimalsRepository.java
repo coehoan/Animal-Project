@@ -46,7 +46,7 @@ public interface AnimalsRepository extends JpaRepository<Animals, Integer> {
         ////////////// 유저에게 지역 우선으로 보여주기
 
         // 전체검색만!!
-        @Query(value = "SELECT * FROM Animals am WHERE orgNm IN(SELECT id AND addrSido + addrSigungu FROM User WHERE id = :id AND addrSido + addrSigungu = am.orgNm) GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight ORDER BY case when orgNm = ':addrSido + :addrSigungu' then 1 ELSE 2 END", nativeQuery = true)
-        List<Animals> forUser(@Param("id") String id, @Param("addrSido") String addrSido, @Param("addrSigungu") String addrSigungu);
+        @Query(value = "SELECT * FROM Animals am GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight HAVING am.orgNm = :addrSido :addrSigungu UNION ALL SELECT * FROM Animals GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight;", nativeQuery = true)
+        List<Animals> forUser(@Param("addrSido") String addrSido, @Param("addrSigungu") String addrSigungu);
 
 }
