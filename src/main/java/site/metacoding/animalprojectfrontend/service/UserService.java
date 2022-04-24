@@ -31,5 +31,4 @@ public class UserService {
         httpSession.setAttribute("principal", userPrincipal);
         return userEntity;
     }
-
 }

@@ -38,12 +38,12 @@ async function login() {
     let responseParse = await response.json();
     console.log(responseParse);
 
-  if (responseParse.code == 1) {
-    //   alert("로그인완료");
-      location.href = "/";
-  } else {
-      alert('아이디 혹은 비밀번호가 틀렸습니다.');
-  }
+    if (responseParse.code == 1) {
+        //   alert("로그인완료");
+        location.href = "/";
+    } else {
+        alert('아이디 혹은 비밀번호가 틀렸습니다.');
+    }
 }
 //회원가입
 async function join() {

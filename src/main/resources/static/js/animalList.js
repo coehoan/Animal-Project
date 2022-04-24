@@ -163,7 +163,8 @@ $("#btn-search").click(() => {
         toForUserAll(addrSido, addrSigungu)
     }
 
-});
+    toKindOnly(selectedKind);
+    clearInterval(toKindOnly);
 
 
 // Ajax 함수
