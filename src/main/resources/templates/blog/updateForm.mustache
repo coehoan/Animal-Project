@@ -1,0 +1,67 @@
+{{>/layout/header}}
+<div class="m_padding_medium">
+  <!-- 제목 시작 -->
+  <div class="m_div_display_none">
+    <div id="postId">{{post.id}}</div>
+    <div id="board">{{post.board}}</div>
+  </div>
+  <div>
+    <input id="title" class="m_blog_writeForm_title" type="text" value="{{post.title}}" required>
+  </div>
+  <!-- 제목 끝 -->
+
+  <!-- 내용 시작 -->
+  <div id="editor" class="mt-3" required>{{{post.content}}}</div>
+  <!-- 내용 끝 -->
+
+  <!-- 글쓰기 버튼 -->
+  <div class="form-group mt-3 m_div_flex_end">
+    <button id="btn-update" class="btn bg-success text-light">수정하기</button>
+  </div>
+  <!-- 글쓰기 버튼 -->
+
+</div>
+
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
+<script>
+  // TOAST UI
+  const Editor = toastui.Editor;
+  const editor = new Editor({
+    el: document.querySelector('#editor'),
+    height: '500px',
+    initialEditType: 'wysiwyg',
+    previewStyle: 'vertical'
+  });
+  editor.getMarkdown();
+
+  // 수정하기 버튼 클릭
+  $("#btn-update").click(() => {
+    update();
+  })
+  async function update() {
+    let board = $("#board").text();
+    let id = parseInt($("#postId").text());
+    let title = $("#title").val();
+    let content = editor.getHTML();
+    let updateDto = {
+      id: id,
+      title: title,
+      content: content
+    }
+    let response = await fetch(`/s/post/update/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(updateDto),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      }
+    });
+    let responseParse = await response.json();
+    if (responseParse.code == 1) {
+      alert("수정 완료");
+      location.href = `/blog/${board}`;
+    } else alert("수정 실패\n관리자에게 문의하십시오.");
+  }
+
+</script>
+{{>/layout/footer}}

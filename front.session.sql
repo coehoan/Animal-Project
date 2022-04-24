@@ -222,9 +222,6 @@ SELECT * FROM Animals am WHERE careAddr LIKE %:keywordOfSido% AND careAddr LIKE 
 
 
 -- 유저 지역검색
-SELECT * FROM Animals am WHERE KindCd LIKE %:keywordOfkind% AND KindCd LIKE %:keywordOfkindOf% AND careAddr LIKE %:keywordOfSido% AND careAddr LIKE %:keywordOfSigungu% AND noticeSdt LIKE %:keywordOfirstDate% AND noticeSdt LIKE %:keywordOflastDate% 
-
-UNION ALL
 
 SELECT *
 FROM Animals am 
@@ -237,3 +234,5 @@ GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filenam
     noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight
 ORDER BY case when orgNm = ':addrSido + :addrSigungu' then 1
 ELSE 2 END;
+
+SELECT * FROM Animals am WHERE careAddr LIKE %:keywordOfSido% AND careAddr LIKE %:keywordOfSigungu% UNION ALL SELECT * FROM Animals am WHERE orgNm IN(SELECT id AND addrSido + addrSigungu FROM User WHERE id = :id AND addrSido + addrSigungu = am.orgNm) AND careAddr LIKE %:keywordOfSido% AND careAddr LIKE %:keywordOfSigungu% GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight ORDER BY case when orgNm = ':addrSido + :addrSigungu' then 1 ELSE 2 END;

@@ -3,6 +3,8 @@ package site.metacoding.animalprojectfrontend.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,36 +17,43 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.animalprojectfrontend.domain.comment.Comment;
 import site.metacoding.animalprojectfrontend.domain.post.Post;
+import site.metacoding.animalprojectfrontend.domain.user.User;
 import site.metacoding.animalprojectfrontend.service.PostService;
-import site.metacoding.animalprojectfrontend.web.api.dto.post.AdoptPostRespDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.comment.CommentRespDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.DetailSearchRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.FreePostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.MainPostRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.PageRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.PostDetailRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.post.RegionPostRespDto;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.UpdateDto;
 
 @RequiredArgsConstructor
 @Controller
 public class PostController {
 
     private final PostService postService;
+    private final HttpSession session;
 
+    // 상세검색 메서드
     public void search(Page<Post> posts, Integer page, Model model) {
-        List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
+        List<DetailSearchRespDto> detailSearchRespDtos = new ArrayList<DetailSearchRespDto>();
 
         for (Post postList : posts) {
-            AdoptPostRespDto postRespDto = new AdoptPostRespDto();
+            DetailSearchRespDto postRespDto = new DetailSearchRespDto();
 
             postRespDto.setId(postList.getId());
             postRespDto.setRegion(postList.getRegion());
             postRespDto.setType(postList.getType());
+            postRespDto.setCategory(postList.getCategory());
             postRespDto.setTitle(postList.getTitle());
             postRespDto.setUsername(postList.getUser().getUsername());
             postRespDto.setCreateDate(postList.yyyymmdd());
             postRespDto.setView(postList.getView());
             postRespDto.setRecommended(postList.getRecommended());
-            adoptPostRespDtoList.add(postRespDto);
+            detailSearchRespDtos.add(postRespDto);
         }
 
         List<Integer> pageList = new ArrayList<>();
@@ -57,7 +66,7 @@ public class PostController {
         pageRespDto.setHasNext(posts.hasNext());
         pageRespDto.setHasPrevious(posts.hasPrevious());
 
-        model.addAttribute("posts", adoptPostRespDtoList);
+        model.addAttribute("posts", detailSearchRespDtos);
         model.addAttribute("pages", pageRespDto);
         model.addAttribute("prevPage", page - 1);
         model.addAttribute("nextPage", page + 1);
@@ -71,8 +80,9 @@ public class PostController {
             @RequestParam(value = "sort", required = false) String sort,
             @RequestParam(value = "searchBy", required = false) String searchBy,
             @RequestParam(value = "query", required = false) String query,
-            String region, String type, Model model,
-            Pageable pageable) {
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "type", required = false) String type,
+            String region, Model model, Pageable pageable) {
 
         PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
         PageRequest prView = PageRequest.of(page, 10, Sort.by(Direction.DESC, "view"));
@@ -105,6 +115,33 @@ public class PostController {
             }
         }
 
+        /** 지역 or 분류 검색 폼 */
+        if (region != null && category != null) {
+            // 지역,품종 요청값 없을 때 redirect
+            if (region.equals("all") && category.equals("all")) {
+                String redirect = "redirect:/blog/" + board;
+                return redirect;
+            }
+            // 입양후기 지역만 선택했을 때
+            else if (region != "all" && category.equals("all")) {
+                Page<Post> posts = postService.지역별보기(board, region, pr);
+                search(posts, page, model);
+                return "blog/regionboard";
+            }
+            // 입양후기 종류만 선택했을 때
+            else if (region.equals("all") && category != "all") {
+                Page<Post> posts = postService.분류별보기(board, category, pr);
+                search(posts, page, model);
+                return "blog/regionboard";
+            }
+            // 입양후기 지역, 종류 모두 선택했을 때
+            else if (region != "all" && category != "all") {
+                Page<Post> posts = postService.지역분류별보기(board, region, category, pr);
+                search(posts, page, model);
+                return "blog/regionboard";
+            }
+        }
+
         /** 재정렬 폼 */
         if (sort != null) {
             // 최신순
@@ -116,13 +153,13 @@ public class PostController {
             else if (sort.equals("view")) {
                 Page<Post> posts = postService.글목록보기(board, prView);
                 search(posts, page, model);
-                return "blog/adoptboard";
+                return "blog/" + board + "board";
             }
             // 추천순
             else if (sort.equals("rec")) {
                 Page<Post> posts = postService.글목록보기(board, prRec);
                 search(posts, page, model);
-                return "blog/adoptboard";
+                return "blog/" + board + "board";
             }
         }
 
@@ -131,7 +168,7 @@ public class PostController {
                 && (searchBy.equals("title") || searchBy.equals("content") || searchBy.equals("username"))) {
             Page<Post> posts = postService.게시글검색(board, query, pr, searchBy);
             search(posts, page, model);
-            return "blog/adoptboard";
+            return "blog/" + board + "board";
         }
 
         return null;
@@ -182,10 +219,10 @@ public class PostController {
         PageRequest pr = PageRequest.of(page, 10, Sort.by(Direction.DESC, "id"));
 
         Page<Post> posts = postService.글목록보기(board, pr);
-        List<AdoptPostRespDto> adoptPostRespDtoList = new ArrayList<AdoptPostRespDto>();
+        List<DetailSearchRespDto> adoptPostRespDtoList = new ArrayList<DetailSearchRespDto>();
 
         for (Post postList : posts) {
-            AdoptPostRespDto postRespDto = new AdoptPostRespDto();
+            DetailSearchRespDto postRespDto = new DetailSearchRespDto();
 
             postRespDto.setId(postList.getId());
             postRespDto.setRegion(postList.getRegion());
@@ -298,24 +335,52 @@ public class PostController {
     @GetMapping("/blog/post/{id}")
     public String adoptboardPost(@PathVariable Integer id, Model model) {
 
-        Post postOp = postService.글상세보기(id);
+        User principal = (User) session.getAttribute("principal");
 
-        Integer updateView = postOp.getView() + 1;
+        Post postEntity = postService.글상세보기(id);
+
+        Integer updateView = postEntity.getView() + 1;
 
         PostDetailRespDto postDetailRespDto = new PostDetailRespDto();
-        postDetailRespDto.setId(postOp.getId());
-        postDetailRespDto.setTitle(postOp.getTitle());
-        postDetailRespDto.setContent(postOp.getContent());
-        postDetailRespDto.setCreateDate(postOp.yyyymmddhhmm());
-        postDetailRespDto.setUser(postOp.getUser());
+        postDetailRespDto.setId(postEntity.getId());
+        postDetailRespDto.setBoard(postEntity.getBoard());
+        postDetailRespDto.setTitle(postEntity.getTitle());
+        postDetailRespDto.setContent(postEntity.getContent());
+        postDetailRespDto.setCreateDate(postEntity.yyyymmddhhmm());
+        postDetailRespDto.setUser(postEntity.getUser());
         postDetailRespDto.setView(updateView);
-        postDetailRespDto.setRecommended(postOp.getRecommended());
+        postDetailRespDto.setRecommended(postEntity.getRecommended());
 
         postService.조회수증가(updateView, id);
 
-        // User principal = (User) session.getAttribute("principal");
+        List<CommentRespDto> comments = new ArrayList<>();
+        for (Comment comment : postEntity.getComments()) {
+            CommentRespDto dto = new CommentRespDto();
+            dto.setContent(comment);
+            if (principal != null) {
+                if (comment.getUser().getId().equals(principal.getId())) {
+                    dto.setAuth(true);
+                } else {
+                    dto.setAuth(false);
+                }
+            } else {
+                dto.setAuth(false);
+            }
+            comments.add(dto);
+        }
 
+        if (principal != null) {
+            if (principal.getId() == postEntity.getUser().getId()) {
+                model.addAttribute("principals", true);
+            } else {
+                model.addAttribute("principals", false);
+            }
+        }
+        if (comments.size() != 0) {
+            model.addAttribute("comments", comments);
+        }
         model.addAttribute("posts", postDetailRespDto);
+
         // model.addAttribute("principal", principal.getId());
 
         return "/blog/post/postDetail";
@@ -324,8 +389,20 @@ public class PostController {
     // 글쓰기
     @GetMapping("/s/blog/writeForm")
     public String writeForm() {
-
         return "/blog/writeForm";
+    }
+
+    // 글 수정하기
+    @GetMapping("/s/post/updateForm/{id}")
+    public String updateForm(@PathVariable Integer id, Model model) {
+        Post post = postService.글상세보기(id);
+        UpdateDto updateDto = new UpdateDto();
+        updateDto.setId(post.getId());
+        updateDto.setTitle(post.getTitle());
+        updateDto.setContent(post.getContent());
+        updateDto.setBoard(post.getBoard());
+        model.addAttribute("post", updateDto);
+        return "/blog/updateForm";
     }
 
 }

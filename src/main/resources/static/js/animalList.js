@@ -1,15 +1,8 @@
-
-$("#showDetail").click(() => {
-    showDetail();
-});
-
-function showDetail() {
-    if ($("#detail").css("display") == "none") {
-        $("#detail").removeClass("m_div_display_none");
-    } else {
-        $("#detail").addClass("m_div_display_none");
+$("#showDetail").click(()=>{
+    for (animalList of reseponseParse.data) { // data 크기만큼
+        $("#region").append(detailRender(animalList)); // append
     }
-}
+});
 
 let selectedSido;
 let selectedSigungu;
@@ -164,12 +157,8 @@ $("#btn-search").click(() => {
         toKindOnly(selectedKind);
     } else if (selectedSido != null && selectedSigungu != null && selectedKind != null && selectedKindOf != null && selectedFirstDate != null && selectedLastDate) {
         toAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate);
-    } else if (selectedSido != null && selectedSigungu != null && selectedKind != null && selectedKindOf != null && selectedFirstDate != null && selectedLastDate && id != null && addrSido != null && addrSigungu != null) {
-        toForUserAll(selectedSido != null && selectedSigungu != null && selectedKind != null && selectedKindOf != null && selectedFirstDate != null && selectedLastDate, id, addrSido, addrSigungu)
-    } else if (selectedSido != null && selectedSigungu != null && id != null && addrSido != null && addrSigungu != null && selectedKind == null && selectedKindOf == null && selectedFirstDate == null && selectedLastDate == null){
-        toForUserRegion(selectedSido, selectedSigungu, id, addrSido, addrSigungu);
-    } else {
-        alert("검색 결과가 없습니다.");
+    } else if (id != null && addrSido != null && addrSigungu != null) {
+        toForUserAll(id, addrSido, addrSigungu)
     }
 
 });
@@ -189,11 +178,10 @@ async function toRegion(selectedSido, selectedSigungu) { // 지역 검색
     if (reseponseParse.code == 1) {
         alert("검색 성공");
         $("#region").empty();
-        for (regionList of reseponseParse.data) { // data 크기만큼
-            $("#region").append(regionRender(regionList)); // append
-            $("#region").append(detailRender(regionList));
-        }
+        for (animalList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(regionRender(animalList)); // append
 
+        }
 
 
     } else {
@@ -217,9 +205,8 @@ async function toAll(selectedKind, selectedKindOf, selectedSido, selectedSigungu
     if (reseponseParse.code == 1) {
         alert("검색 성공");
         $("#region").empty();
-        for (regionList of reseponseParse.data) { // data 크기만큼
-            $("#region").append(regionRender(regionList)); // append
-            $("#region").append(detailRender(regionList));
+        for (animalList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(regionRender(animalList)); // append
         }
 
     } else {
@@ -234,9 +221,9 @@ let id = $("#id").val();
 let addrSido = $("#addrSido").val();
 let addrSigungu = $("#addrSigungu").val();
 
-async function toForUserAll(selectedSido, selectedSigungu, selectedKind, selectedKindOf, selectedFirstDate, selectedLastDate, id, addrSido, addrSigungu) { // 지역 검색
+async function toForUserAll(id, addrSido, addrSigungu) { // 지역 검색
 
-    let response = await fetch(`/search/animals/for-user/all?sido=${selectedSido}&sigungu=${selectedSigungu}&kind=${selectedKind}&kindOf=${selectedKindOf}&firstdate=${selectedFirstDate}&lastdate=${selectedLastDate}`);
+    let response = await fetch(`/search/animals/for-user?id=${id}&addrSido=${addrSido}&addrSigungu=${addrSigungu}`);
     console.log(id, addrSido, addrSigungu);
     console.log(response);
 
@@ -246,34 +233,9 @@ async function toForUserAll(selectedSido, selectedSigungu, selectedKind, selecte
     if (reseponseParse.code == 1) {
         alert("검색 성공");
         $("#region").empty();
-        for (regionList of reseponseParse.data) { // data 크기만큼
-            $("#region").append(regionRender(regionList)); // append
-            $("#region").append(detailRender(regionList));
-        }
-
-    } else {
-        alert("검색 실패");
-    }
-
-    //return selectedSido, selectedSigungu;
-
-}
-
-async function toForUserRegion(selectedSido, selectedSigungu, id, addrSido, addrSigungu) { // 지역 검색
-
-    let response = await fetch(`/search/animals/for-user/region?sido=${selectedSido}&sigungu=${selectedSigungu}&id=${id}&addrSido${addrSido}&addrSigungu=${addrSigungu}`);
-    console.log(id, addrSido, addrSigungu);
-    console.log(response);
-
-    let reseponseParse = await response.json();
-    console.log(reseponseParse);
-
-    if (reseponseParse.code == 1) {
-        alert("검색 성공");
-        $("#region").empty();
-        for (regionList of reseponseParse.data) { // data 크기만큼
-            $("#region").append(regionRender(regionList)); // append
-            $("#region").append(detailRender(regionList));
+        for (animalList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(regionRender(animalList)); // append
+            $("#region").append(detailRender(animalList));
         }
 
     } else {
@@ -297,9 +259,9 @@ async function toRegionSido(selectedSido) { // 지역 시도 검색
     if (reseponseParse.code == 1) {
         alert("검색 성공");
         $("#region").empty();
-        for (regionList of reseponseParse.data) { // data 크기만큼
-            $("#region").append(regionRender(regionList)); // append
-            $("#region").append(detailRender(regionList));
+        for (animalList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(regionRender(animalList)); // append
+            $("#region").append(detailRender(animalList));
         }
 
 
@@ -326,8 +288,8 @@ async function toKind(selectedKind, selectedKindOf) { // 품종 검색
     if (reseponseParse.code == 1) {
         alert("검색 성공");
         $("#region").empty();
-        for (kindList of reseponseParse.data) { // data 크기만큼
-            $("#region").append(kindRender(kindList)); // append
+        for (animalList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(kindRender(animalList)); // append
         }
 
 
@@ -354,8 +316,8 @@ async function toKindOnly(selectedKind) { // 품종만 검색
     if (reseponseParse.code == 1) {
         alert("검색 성공");
         $("#region").empty();
-        for (kindList of reseponseParse.data) { // data 크기만큼
-            $("#region").append(kindRender(kindList)); // append
+        for (animalList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(kindRender(animalList)); // append
         }
 
 
@@ -382,8 +344,8 @@ async function toDay(selectedFirstDate, selectedLastDate) { // 날짜 검색
     if (reseponseParse.code == 1) {
         alert("검색 성공");
         $("#region").empty();
-        for (dayList of reseponseParse.data) { // data 크기만큼
-            $("#region").append(dayRender(dayList)); // append
+        for (animalList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(dayRender(animalList)); // append
         }
     } else {
         alert("검색 실패");
@@ -404,8 +366,8 @@ async function toDayFirst(selectedFirstDate) { // 날짜 검색
     if (reseponseParse.code == 1) {
         alert("검색 성공");
         $("#region").empty();
-        for (dayList of reseponseParse.data) { // data 크기만큼
-            $("#region").append(dayRender(dayList)); // append
+        for (animalList of reseponseParse.data) { // data 크기만큼
+            $("#region").append(dayRender(animalList)); // append
         }
     } else {
         alert("검색 실패");
@@ -413,69 +375,36 @@ async function toDayFirst(selectedFirstDate) { // 날짜 검색
 
 }
 
-function kindRender(kindList) {
-    return `<tr>
-                <th scope="row" style="vertical-align: middle;">${kindList.id}</th>
-                <td style="vertical-align: middle;">${kindList.kindCd}</td>
-                <td width="110"><img src="${kindList.filename}" width="100" height="100"></td>
-                <td style="vertical-align: middle;">${kindList.happenPlace}</td>
-                <td style="vertical-align: middle;">${kindList.sexCd}</td>
-                <td style="vertical-align: middle;">${kindList.age}</td>
+function regionRender(animalList) {
+    console.log(animalList.id);
+    return `<tr">
+                <th scope="row" style="vertical-align: middle;">${animalList.id}</th>
+                <td style="vertical-align: middle;">${animalList.kindCd}</td>
+                <td width="110"><img src="${animalList.filename}" width="100" height="100"></td>
+                <td style="vertical-align: middle;">${animalList.careAddr}</td>
+                <td style="vertical-align: middle;">${animalList.sexCd}</td>
+                <td style="vertical-align: middle;">${animalList.age}</td>
                 <td style="vertical-align: middle;">
-                    ${kindList.processState}</td>
-                <td style="vertical-align: middle;" width="100">
+                    ${animalList.processState}</td>
+                <td id="anitr" style="vertical-align: middle;" width="100">
                     <button id="showDetail" class="m_button"">자세히</button>
                 </td>
             </tr>`;
 }
 
-function dayRender(dayList) {
+function detailRender(animalList) {
     return `<tr>
-                <th scope="row" style="vertical-align: middle;">${dayList.id}</th>
-                <td style="vertical-align: middle;">${dayList.kindCd}</td>
-                <td width="110"><img src="${dayList.filename}" width="100" height="100"></td>
-                <td style="vertical-align: middle;">${dayList.happenPlace}</td>
-                <td style="vertical-align: middle;">${dayList.sexCd}</td>
-                <td style="vertical-align: middle;">${dayList.age}</td>
-                <td style="vertical-align: middle;">
-                    ${dayList.processState}</td>
-                <td style="vertical-align: middle;" width="100">
-                    <button id="showDetail" class="m_button"">자세히</button>
-                </td>
-            </tr>`;
-}
-
-
-function regionRender(regionList) {
-    console.log(regionList.id);
-    return `<tr>
-                <th scope="row" style="vertical-align: middle;">${regionList.id}</th>
-                <td style="vertical-align: middle;">${regionList.kindCd}</td>
-                <td width="110"><img src="${regionList.filename}" width="100" height="100"></td>
-                <td style="vertical-align: middle;">${regionList.happenPlace}</td>
-                <td style="vertical-align: middle;">${regionList.sexCd}</td>
-                <td style="vertical-align: middle;">${regionList.age}</td>
-                <td style="vertical-align: middle;">
-                    ${regionList.processState}</td>
-                <td style="vertical-align: middle;" width="100">
-                    <button id="showDetail" class="m_button"">자세히</button>
-                </td>
-            </tr>`;
-}
-
-function detailRender(regionList) {
-    return `<tr>
-                <td colspan="9" id="detail" class="m_div_display_none">
+                <td colspan="9" class="">
                     <div class="m_sub_content">
-                        #체중:${regionList.weight}
-                        #색상:${regionList.colorCd}
-                        #중성화여부:${regionList.neuterYn}
-                        #보호소이름:${regionList.careNm}
-                        #보호소전화번호:${regionList.careTel}
-                        #보호장소:${regionList.careAddr}
-                        #관활기관:${regionList.orgNm}
-                        #담당자:${regionList.chargeNm}
-                        #담당자연락처:${regionList.officetel}
+                        #체중:${animalList.weight}
+                        #색상:${animalList.colorCd}
+                        #중성화여부:${animalList.neuterYn}
+                        #보호소이름:${animalList.careNm}
+                        #보호소전화번호:${animalList.careTel}
+                        #보호장소:${animalList.careAddr}
+                        #관활기관:${animalList.orgNm}
+                        #담당자:${animalList.chargeNm}
+                        #담당자연락처:${animalList.officetel}
                     </div>
                 </td>
             </tr>`;

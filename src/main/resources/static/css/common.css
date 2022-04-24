@@ -62,3 +62,32 @@
 .m_border_radious {
     border-radius: 100px;
 }
+
+.m_comment_inputbox {
+    display: flex;
+    height: 80px;
+    flex-grow: 1;
+    border: 1px solid #b4c9c04b;
+}
+
+.m_comment_box {
+    display: flex;
+    width: 100%;
+}
+
+.m_comment_list_box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b4c9c04b;
+}
+
+.m_comment {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #b4c9c04b;
+    padding: 10px 5px 10px 0px;
+    margin-top: 3px;
+    align-items: center;
+}

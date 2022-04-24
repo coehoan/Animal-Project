@@ -65,31 +65,6 @@ public class AnimalApiController {
     }
 
     @CrossOrigin
-    @GetMapping("/search/animals/for-user/all")
-    public ResponseDto<?> getforUserAll(
-            @RequestParam(name = "firstdate", required = true) String keywordOfirstDate,
-            @RequestParam(name = "lastdate", required = true) String keywordOflastDate,
-            @RequestParam(name = "kind", required = true) String keywordOfkind,
-            @RequestParam(name = "kindOf", required = true) String keywordOfkindOf,
-            @RequestParam(name = "keyword", required = false) String keyword,
-            @RequestParam(name = "sido", required = true) String keywordOfSido,
-            @RequestParam(name = "sigungu", required = true) String keywordOfSigungu,
-            @RequestParam(name = "userAddrSido", required = true) String userAddrSido,
-            @RequestParam(name = "userAddrSigungu", required = true) String userAddrSigungu, String id, String addrSido, String addrSigungu) {
-        System.out.println("타나?");
-        System.out
-                .println("받은 쿼리스트링 ====" + keywordOfSido + keywordOfSigungu + keywordOfirstDate + keywordOflastDate
-                        + keywordOfkind + keywordOfkindOf);
-
-        List<Animals> getAllEntity = animalsService.유저모두검색(keywordOfkind, keywordOfkindOf, keywordOfSido, keywordOfSigungu, keywordOfirstDate, keywordOflastDate, id, addrSido, addrSigungu);
-
-        // System.out.println("엔티티 컨트롤러에서 받았나?" + getAllEntity);
-
-        return new ResponseDto<>(1, "검색 성공", getAllEntity);
-
-    }
-
-    @CrossOrigin
     @GetMapping("/search/animals/region")
     public ResponseDto<?> getRegion(
             @RequestParam(name = "firstdate", required = false) String keywordOfirstDate,
@@ -104,31 +79,6 @@ public class AnimalApiController {
                 .println("받은 쿼리스트링 ====" + keywordOfSido + keywordOfSigungu);
 
         List<Animals> getRegionEntity = animalsService.지역검색(keywordOfSido, keywordOfSigungu);
-
-        // System.out.println("엔티티 컨트롤러에서 받았나?" + getRegionEntity);
-
-        return new ResponseDto<>(1, "검색 성공", getRegionEntity);
-
-    }
-
-    @CrossOrigin
-    @GetMapping("/search/animals/for-user/region")
-    public ResponseDto<?> getRegionforUser(
-            @RequestParam(name = "firstdate", required = false) String keywordOfirstDate,
-            @RequestParam(name = "lastdate", required = false) String keywordOflastDate,
-            @RequestParam(name = "kind", required = false) String keywordOfkind,
-            @RequestParam(name = "kindOf", required = false) String keywordOfkindOf,
-            @RequestParam(name = "keyword", required = false) String keyword,
-            @RequestParam(name = "sido", required = true) String keywordOfSido,
-            @RequestParam(name = "sigungu", required = true) String keywordOfSigungu,
-            @RequestParam(name = "id", required = true) String id,
-            @RequestParam(name = "addrSido", required = true) String addrSido,
-            @RequestParam(name = "addrSigungu", required = true) String addrSigungu) {
-        System.out.println("타나?");
-        System.out
-                .println("받은 쿼리스트링 ====" + keywordOfSido + keywordOfSigungu);
-
-        List<Animals> getRegionEntity = animalsService.유저지역검색(keywordOfSido, keywordOfSigungu, id, addrSido, addrSigungu);
 
         // System.out.println("엔티티 컨트롤러에서 받았나?" + getRegionEntity);
 
@@ -241,5 +191,14 @@ public class AnimalApiController {
 
         return new ResponseDto<>(1, "검색 성공", getKindEntity);
 
+    }
+
+    @CrossOrigin
+    @GetMapping("/search/animals/for-user")
+    public ResponseDto<?> getForUser(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "addrSido", required = true) String addrSido, @RequestParam(name = "addrSigungu", required = true) String addrSigungu){
+
+        List<Animals> getUserEntity = animalsService.유저검색(id, addrSido, addrSigungu);
+
+        return new ResponseDto<>(1, "검색 성공", getUserEntity);
     }
 }

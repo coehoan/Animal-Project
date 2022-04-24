@@ -200,45 +200,9 @@ public class AnimalsService {
 
     /////////////////////유저 검색
 
-    public List<Animals> 유저지역검색(String keywordOfSido, String keywordOfSigungu, String id, String addrSido, String addrSigungu) {
+    public List<Animals> 유저검색(String id, String addrSido, String addrSigungu) {
 
-        List<Animals> forUserEntity = animalsRepository.forUserRegion(keywordOfSido, keywordOfSigungu, id, addrSido, addrSigungu);
-        return forUserEntity;
-
-    }
-
-    public List<Animals> 유저시도검색(String keywordOfSido, String id, String addrSido, String addrSigungu) {
-
-        List<Animals> forUserEntity = animalsRepository.forUserSido(keywordOfSido, id, addrSido, addrSigungu);
-        return forUserEntity;
-
-    }
-
-    public List<Animals> 유저날짜검색(String keywordOfirstDate, String keywordOflastDate, String id, String addrSido, String addrSigungu) {
-
-        List<Animals> forUserEntity = animalsRepository.forUserDay(keywordOfirstDate, keywordOflastDate, id, addrSido, addrSigungu);
-        return forUserEntity;
-
-    }
-
-    public List<Animals> 유저품종검색(String keywordOfkind, String keywordOfkindOf, String id, String addrSido, String addrSigungu) {
-
-        List<Animals> forUserEntity = animalsRepository.forUserKind(keywordOfkind, keywordOfkindOf, id, addrSido, addrSigungu);
-        return forUserEntity;
-
-    }
-
-    public List<Animals> 유저품종만검색(String keywordOfkind, String id, String addrSido, String addrSigungu) {
-
-        List<Animals> forUserEntity = animalsRepository.forUserKindOf(keywordOfkind, id, addrSido, addrSigungu);
-        return forUserEntity;
-
-    }
-
-    public List<Animals> 유저모두검색(String keywordOfkind, String keywordOfkindOf, String keywordOfSido,
-            String keywordOfSigungu, String keywordOfirstDate, String keywordOflastDate, String id, String addrSido, String addrSigungu) {
-
-        List<Animals> forUserEntity = animalsRepository.forUserAll(keywordOfkind, keywordOfkindOf, keywordOfSido, keywordOfSigungu, keywordOfirstDate, keywordOflastDate, id, addrSido, addrSigungu);
+        List<Animals> forUserEntity = animalsRepository.forUser(id, addrSido, addrSigungu);
         return forUserEntity;
 
     }
