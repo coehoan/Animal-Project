@@ -26,5 +26,4 @@ public class UserService {
         User userEntity = userRepository.aLogin(loginDto.getUsername(), loginDto.getPassword());
         return userEntity;
     }
-
 }
