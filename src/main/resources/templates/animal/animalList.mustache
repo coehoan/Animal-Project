@@ -15,68 +15,75 @@
 
 <!--상세검색버튼 시작-->
 <div class="m_padding_medium">
-  <h2 class="m_sub_title">상세검색</h2>
-  <hr>
-  <div class="mt-5 d-flex">
-    <div class="container-fluid">
-      <form class="d-flex flex-fill" enctype="application/x-www-form-urlencoded">
-        <!--검색박스들 시작-->
-        <div class="d-flex flex-column">
-          <!--지역검색까지 시작-->
-          <div id="example1" class="bs-docs-example d-flex">
-            <input id="first-date" onchange="firstDateSelected(this.value)" class="form-control me-2" name="firstdate"
-              type="date" placeholder="날짜" aria-label="Search">
-            <i class="me-2">~</i>
-            <input id="last-date" onchange="lastDateSelected(this.value)" class="form-control me-2" name="lastdate"
-              type="date" placeholder="날짜" aria-label="Search">
-            <select id="sido" name="sido" class="step1 me-2 animallist-select-box"
-              onchange="sidoSelected(this.value), RegionOptionChange()">
-              <option selected disabled>지역</option>
-              <option id="seoul" value="서울특별시">서울특별시</option>
-              <option id="busan" value="부산광역시">부산광역시</option>
-              <option id="deagu" value="대구광역시">대구광역시</option>
-              <option id="incheon" value="인천광역시">인천광역시</option>
-              <option id="gwangju" value="광주광역시">광주광역시</option>
-              <option id="sejong" value="세종특별자치시">세종특별자치시</option>
-              <option id="deajeon" value="대전광역시">대전광역시</option>
-              <option id="ulsan" value="울산광역시">울산광역시</option>
-              <option id="gyeongi" value="경기도">경기도</option>
-              <option id="gangwon" value="강원도">강원도</option>
-              <option id="choongbook" value="충청북도">충청북도</option>
-              <option id="choognam" value="충청남도">충청남도</option>
-              <option id="jeonam" value="전라남도">전라남도</option>
-              <option id="jeonbook" value="전라북도">전라북도</option>
-              <option id="gyeongbook" value="경상북도">경상북도</option>
-              <option id="gyeongnam" value="경상남도">경상남도</option>
-              <option id="jeju" value="제주특별자치도">제주특별자치도</option>
-            </select>
-            <select id="sigungu" name="sigungu" class="step2 me-2 animallist-select-box"
-              onchange="sigunguSelected(this.value)">
-              <option>시/군/구</option>
-              <option></option>
-            </select>
-          </div>
-          <!--지역검색까지-->
-          <br>
-          <!--키워드 검색까지 시작-->
-          <div class="bs-docs-example d-flex">
-            <select id="kind" name="kind" onchange="kindSelected(this.value), kindOptionChange()"
-              class="me-2 animallist-select-box">
-              <option>종류</option>
-              <option value="강아지">강아지</option>
-              <option value="고양이">고양이</option>
-              <option value="기타">기타</option>
-            </select>
-            <select id="kind-of" name="kindOf" class="me-2 animallist-select-box" onchange="kindOfSelected(this.value)">
-              <option>품종</option>
-              <option></option>
-            </select>
-            <input class="form-control me-2" name="keyword" type="search" placeholder="검색" aria-label="Search">
-          </div>
-          <br>
-          <button id="btn-search" class="me-2 btn btn-outline-success" type="button">Search</button>
-          <!--키워드 검색까지 끝-->
-
+    <h2 class="m_sub_title">상세검색</h2>
+    <hr>
+    <div class="mt-5 d-flex">
+        <div class="container-fluid">
+            <form class="d-flex flex-fill flex-column" enctype="application/x-www-form-urlencoded">
+                <!--검색박스들 시작-->
+                <div class="d-flex flex-column">
+                    <!--지역검색까지 시작-->
+                    <div id="example1" class="bs-docs-example d-flex">
+                        {{#principal}}
+                        <input id="addrSido" value="{{addrSido}}" type="text" hidden>
+                        <input id="addrSigungu" type="text" value="{{addrSigungu}}" hidden>
+                        {{/principal}}
+                        <input id="first-date" onchange="firstDateSelected(this.value)" class="form-control me-2"
+                            name="firstdate" type="date" placeholder="날짜" aria-label="Search">
+                        <i class="me-2">~</i>
+                        <input id="last-date" onchange="lastDateSelected(this.value)" class="form-control me-2"
+                            name="lastdate" type="date" placeholder="날짜" aria-label="Search">
+                        <select id="sido" class="step1 me-2 animallist-select-box"
+                            onchange="sidoSelected(this.value), RegionOptionChange()">
+                            <option selected disabled>지역</option>
+                            <option id="seoul" value="서울특별시">서울특별시</option>
+                            <option id="busan" value="부산광역시">부산광역시</option>
+                            <option id="deagu" value="대구광역시">대구광역시</option>
+                            <option id="incheon" value="인천광역시">인천광역시</option>
+                            <option id="gwangju" value="광주광역시">광주광역시</option>
+                            <option id="sejong" value="세종특별자치시">세종특별자치시</option>
+                            <option id="deajeon" value="대전광역시">대전광역시</option>
+                            <option id="ulsan" value="울산광역시">울산광역시</option>
+                            <option id="gyeongi" value="경기도">경기도</option>
+                            <option id="gangwon" value="강원도">강원도</option>
+                            <option id="choongbook" value="충청북도">충청북도</option>
+                            <option id="choognam" value="충청남도">충청남도</option>
+                            <option id="jeonam" value="전라남도">전라남도</option>
+                            <option id="jeonbook" value="전라북도">전라북도</option>
+                            <option id="gyeongbook" value="경상북도">경상북도</option>
+                            <option id="gyeongnam" value="경상남도">경상남도</option>
+                            <option id="jeju" value="제주특별자치도">제주특별자치도</option>
+                        </select>
+                        <select id="sigungu" class="step2 me-2 animallist-select-box"
+                            onchange="sigunguSelected(this.value)">
+                            <option>시/군/구</option>
+                            <option></option>
+                        </select>
+                    </div>
+                    <!--지역검색까지-->
+                    <br>
+                    <!--키워드 검색까지 시작-->
+                    <div class="bs-docs-example d-flex">
+                        <select id="kind" onchange="kindSelected(this.value), kindOptionChange()"
+                            class="me-2 animallist-select-box">
+                            <option value="">종류</option>
+                            <option value="개">개</option>
+                            <option value="고양이">고양이</option>
+                            <option value="기타">기타</option>
+                        </select>
+                        <select id="kind-of" class="me-2 animallist-select-box"
+                            onchange="kindOfSelected(this.value)">
+                            <option value="">품종</option>
+                            <option></option>
+                        </select>
+                        <input class="form-control me-2" name="keyword" type="search" placeholder="검색"
+                            aria-label="Search">
+                    </div>
+                    <br>
+                    <button id="btn-search" class="me-2 btn btn-outline-success" type="button">Search</button>
+                    <!--키워드 검색까지 끝-->
+                </div>
+            </form>
         </div>
       </form>
     </div>
@@ -86,19 +93,23 @@
 
 <!--검색결과테이블 시작-->
 <div class="m_padding_medium d-flex flex-column">
-  <table class="table">
-    <thead>
-      <tr class="m_text_align_center">
-        <th scope="col">No</th>
-        <th scope="col">품종</th>
-        <th scope="col">사진</th>
-        <th scope="col">발견장소</th>
-        <th scope="col">성별</th>
-        <th scope="col">나이</th>
-        <th scope="col">상태</th>
-        <th scope="col">자세히보기</th>
-      </tr>
-    </thead>
+    {{#principal}}
+    <p id="principal" class="sub_color_text">회원가입에 감사합니다. 회원가입할 때 등록한 지역을 우선으로 검색할 수 있습니다.</p>
+    <p class="sub_color_text">전체 검색만 가능하오니 바로 search 버튼을 눌러주세요.</p>
+    {{/principal}}
+    <table class="table">
+        <thead>
+            <tr class="m_text_align_center">
+                <th scope="col">No</th>
+                <th scope="col">품종</th>
+                <th scope="col">사진</th>
+                <th scope="col">보호소</th>
+                <th scope="col">성별</th>
+                <th scope="col">나이</th>
+                <th scope="col">상태</th>
+                <th scope="col">자세히보기</th>
+            </tr>
+        </thead>
 
     <tbody id="region" class="m_text_align_center">
 
