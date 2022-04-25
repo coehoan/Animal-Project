@@ -37,6 +37,7 @@ public class AnimalController {
 
     @GetMapping("/animal")
     public String animal() {
+
         return "/animal/animalList";
     }
 
