@@ -41,7 +41,10 @@ public class User {
     private String male; // 회원가입 성별
 
     @Column(nullable = false, length = 300)
-    private String addr; // 이건 필요하려나?
+    private String addrSido; // 이건 필요하려나?
+
+    @Column(nullable = false, length = 300)
+    private String addrSigungu; // 이건 필요하려나?
 
     @CreatedDate
     private LocalDateTime createDate;// DB

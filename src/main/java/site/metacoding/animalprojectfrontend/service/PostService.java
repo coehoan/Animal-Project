@@ -17,6 +17,11 @@ import site.metacoding.animalprojectfrontend.web.api.dto.post.UpdateDto;
 public class PostService {
     private final PostRepository postRepository;
 
+    public List<Post> 메인글목록() {
+        List<Post> postEntity = postRepository.findMainPost();
+        return postEntity;
+    }
+
     public void 글쓰기(Post post) {
         postRepository.save(post);
     }

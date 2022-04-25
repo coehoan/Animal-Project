@@ -72,7 +72,7 @@
     <div class="card-body d-flex justify-content-between">
       <div class="m_main_img_box">
         <div>
-          <img src="#" width="260px" height="300px">
+          <img src="/image/cat2.jpeg" width="260px" height="300px">
         </div>
         <div class="m_pt_1">
           <b>제목</b>
@@ -80,7 +80,7 @@
       </div>
       <div class="m_main_img_box">
         <div>
-          <img src="#" width="260px" height="300px">
+          <img src="/image/cat2.jpeg" width="260px" height="300px">
         </div>
         <div class="m_pt_1">
           <b>제목</b>
@@ -88,7 +88,7 @@
       </div>
       <div class="m_main_img_box">
         <div>
-          <img src="#" width="260px" height="300px">
+          <img src="/image/cat2.jpeg" width="260px" height="300px">
         </div>
         <div class="m_pt_1">
           <b>제목</b>
@@ -96,7 +96,7 @@
       </div>
       <div class="m_main_img_box">
         <div>
-          <img src="#" width="260px" height="300px">
+          <img src="/image/cat2.jpeg" width="260px" height="300px">
         </div>
         <div class="m_pt_1">
           <b>제목</b>
@@ -109,42 +109,20 @@
   <!--블로그 메뉴카드 시작-->
   <div class="card mt-3">
     <div class="card-body">
-      <h3 class="card-title">입양후기</h3>
-      <p class="card-text">실제 입양후기를 확인해보세요.</p>
+      <h3 class="card-title">블로그 최신글</h3>
+      <p class="card-text">블로그에서 여러가지 정보를 찾아보세요.</p>
     </div>
     <div class="card-body d-flex justify-content-between">
+      {{#posts}}
       <div class="m_main_img_box">
         <div>
-          <img src="#" width="260px" height="300px">
+          <img src="/image/cat2.jpeg" width="260px" height="300px">
         </div>
         <div class="m_pt_1">
-          <b>제목</b>
+          <b>{{title}}</b>
         </div>
       </div>
-      <div class="m_main_img_box">
-        <div>
-          <img src="#" width="260px" height="300px">
-        </div>
-        <div class="m_pt_1">
-          <b>제목</b>
-        </div>
-      </div>
-      <div class="m_main_img_box">
-        <div>
-          <img src="#" width="260px" height="300px">
-        </div>
-        <div class="m_pt_1">
-          <b>제목</b>
-        </div>
-      </div>
-      <div class="m_main_img_box">
-        <div>
-          <img src="#" width="260px" height="300px">
-        </div>
-        <div class="m_pt_1">
-          <b>제목</b>
-        </div>
-      </div>
+      {{/posts}}
     </div>
   </div>
   <!--블로그 메뉴카드 끝-->

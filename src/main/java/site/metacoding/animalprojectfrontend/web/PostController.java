@@ -184,8 +184,6 @@ public class PostController {
         for (String postList : board) {
             List<MainPostRespDto> mainPostRespDtoList = new ArrayList<MainPostRespDto>();
             List<Post> posts = postService.인기글보기(postList);
-            if (posts.size() != 3)
-                throw new RuntimeException("사이즈 오류");
 
             for (Post postLists : posts) {
                 MainPostRespDto postRespDto = new MainPostRespDto();

@@ -1,9 +1,14 @@
 package site.metacoding.animalprojectfrontend;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
+import site.metacoding.animalprojectfrontend.domain.post.Post;
+import site.metacoding.animalprojectfrontend.service.PostService;
 import site.metacoding.animalprojectfrontend.service.api.AnimalsService;
 
 @RequiredArgsConstructor
@@ -11,9 +16,12 @@ import site.metacoding.animalprojectfrontend.service.api.AnimalsService;
 public class AnimalController {
 
     private final AnimalsService animalsService;
+    private final PostService postService;
 
     @GetMapping("/")
-    public String main() {
+    public String main(Model model) {
+        List<Post> posts = postService.메인글목록();
+        model.addAttribute("posts", posts);
         return "/main/mainForm";
     }
 

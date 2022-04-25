@@ -5,7 +5,7 @@ server:
     encoding:
       charset: utf-8
     session:
-      timeout: 30
+      timeout: 60
 
 spring:
   mustache:
