@@ -1,21 +1,23 @@
 # 유기동물, 보호소 조회 서비스
-### 사이트 소개
-- 전국 약 14만건의 유기동물의 정보를 다운받아 원하는 지역별로 자료를 제공.
-- 전국 약 600여군데의 유기동물 보호소 정보를 제공.
-- 관련 자료를 검색할 수 있고, 별도 블로그를 만들어 입양후기, 지역별로 사용자가 글을 작성할 수 있음.
+### 사이트 소개 🐈‍⬛
+✔️ 전국 약 14만건의 유기동물의 정보를 다운받아 원하는 지역별로 자료를 제공했습니다.
+✔️ 전국 약 600여군데의 유기동물 보호소 정보를 제공했습니다.
+✔️ 관련 자료를 검색할 수 있고, 별도 블로그를 만들어 입양후기, 지역별로 사용자가 글을 작성할 수 있습니다.
+✔️ 블로그 프로그램을 통해 유기동물에 대한 커뮤니티를 구축하고자 했습니다.
+✔️ 검색 기능에서 회원가입을 통해 자신이 살고 있는 지역을 기준으로 데이터 결과를 나타내게 하는 서비스를 제공합니다.
 
 
-### 팀원구성
+### 팀원구성 👥
 
-- 팀장 최명신
--- 프론트엔드 화면 설계, 블로그 서비스 제작
-- 팀원 전가은
--- 백엔드 api 다운, 유기동물 조회 서비스 제작
-- 팀원 김재욱
+1. 팀장 최명신
+- 프론트엔드 화면 설계, 블로그 서비스 제작
+2. 팀원 전가은
+- 백엔드 api 다운, 유기동물 조회 서비스 제작
+3. 팀원 김재욱
 -- 백엔드 api 다운, 보호소 조회 서비스 제작
 <br>
 
-### 사용 기술
+### 사용 기술 ⌨️
 <img src="https://img.shields.io/badge/-Java-007396"/>  <img src="https://img.shields.io/badge/-Spring-6DB33F"/>  <img src="https://img.shields.io/badge/-Apach%20Tomcat-F8DC75"/> <img src="https://img.shields.io/badge/-MariaDB-071D49"/> 
 <img src="https://img.shields.io/badge/-HTML5-E34F26"/> <img src="https://img.shields.io/badge/-CSS-1572B6"/> <img src="https://img.shields.io/badge/-JavaScript-F7DF1E"/> <img src="https://img.shields.io/badge/-JQuery-0769AD"/> 
 <img src="https://img.shields.io/badge/-Github-181717"/> <img src="https://img.shields.io/badge/-Git-F05032"/> <img src="https://img.shields.io/badge/-FontAwesome-528DD7"/> <img src="https://img.shields.io/badge/-BootStrap-7952B3"/> 
@@ -23,7 +25,7 @@
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=coehoan&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 <br>
 
-### 사용 라이브러리
+### 사용 라이브러리 🍎
 ```
 - Spring Boot DevTools
 - Spring Web
@@ -52,6 +54,8 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 ```
 
 ### 데이터 다운로드
+[유기동물 공공데이터](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15098931)
+[유기동물 보호소 공공데이터](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15035887)
 ```
 /sido -> 시도코드 다운로드
 /sigungu -> 시군구코드 다운로드
@@ -67,56 +71,60 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 
 
 ### 화면설계
-1. 메인페이지
+#### 메인페이지
 ![메인페이지](https://user-images.githubusercontent.com/97711652/164985300-1e07a88a-59f4-47ce-a1de-f857b748a7c0.jpg)
-2. 로그인, 회원가입 페이지
+#### 로그인, 회원가입 페이지
 ![image](https://user-images.githubusercontent.com/97711652/164986027-1ea03be6-b175-4114-b8b5-cad8c9601042.png)
 
-3. 블로그
+#### 블로그
 ![블로그메인페이지](https://user-images.githubusercontent.com/97711652/164986070-da9b1a6c-6d10-4e85-abef-a1583268a706.jpg)
 ![입양후기게시판](https://user-images.githubusercontent.com/97711652/164986080-a5a8faea-523c-4737-b2f7-f19876f6174a.jpg)
 ![자유게시판](https://user-images.githubusercontent.com/97711652/164986082-f2c2e830-7213-4e29-990d-955107578686.jpg)
 ![지역별게시판](https://user-images.githubusercontent.com/97711652/164986083-5ae1266e-df12-42c1-9e2f-1d4bf8af45f9.jpg)
 
-4. 유기동물 조회 서비스
+#### 유기동물 조회 서비스
 ![유기동물현황](https://user-images.githubusercontent.com/97711652/164986106-e5ad65a8-4ada-4211-9a12-0f7a40261c81.jpg)
 
-5. 보호소 조회 서비스
+#### 보호소 조회 서비스
 ![보호소조회](https://user-images.githubusercontent.com/97711652/164986108-5995aaaf-d5f4-4a10-810f-3a3c88a4cce8.jpg)
 
-6. 함께하는이들
+#### 함께하는이들
 ![함께하는이들(수의사)](https://user-images.githubusercontent.com/97711652/164986197-ef9d9c0a-58e7-4d9b-9928-a5bcf5369b61.jpg)
 ![함께하는이들(카라)](https://user-images.githubusercontent.com/97711652/164986199-d1e3431b-8724-40a2-a438-fb264954052b.jpg)
 <br>
 
 
 ### 테스트코드
-- 유튜브 영상 소스코드 넣기
+#### 유튜브 영상 소스코드 넣기
 
 [https://github.com/gouthiki90/2022-AnimalProject-youtube-test.git](https://github.com/gouthiki90/2022-AnimalProject-youtube-test.git)
 
-- TOAST UI 사용법
+#### TOAST UI 사용법
 
 [https://github.com/coehoan/Spring-TOASTUI-test.git](https://github.com/coehoan/Spring-TOASTUI-test.git)
+
+#### Springboot RestTeplate 공공데이터 다운로드 테스트
+[https://github.com/gouthiki90/2020-AnimalProject-dataTest.git](https://github.com/gouthiki90/2020-AnimalProject-dataTest.git)
 <br>
 
 ## 페이지별 상세 기능
-1. 블로그
-- 블로그 메인페이지에선 각 게시판별 조회수 Top3를 미리 보여줌.
-- 각 게시판별로 원하는 조건(지역별, 품종별, 종류별)에 따라 상세검색 가능
-- 최신순, 조회순, 추천순으로 게시판 Sort 가능
-- 제목, 내용, 작성자별 검색 가능
+### 블로그
+- 블로그 메인페이지에선 각 게시판별 조회수 Top3를 미리 보여줍니다.
+- 각 게시판별로 원하는 조건(지역별, 품종별, 종류별)에 따라 상세검색이 가능합니다.
+- 최신순, 조회순, 추천순으로 게시판 Sort가 가능합니다.
+- 제목, 내용, 작성자별 검색이 가능합니다.
 
-2. 유기동물 현황
-- 전국 유기동물 현황 조회가능
-- 지역별, 품종별 상세검색 가능
+### 유기동물 현황
+- 전국 유기동물 현황 조회가 가능합니다.
+- 지역별, 상세 품종별, 시도, 품종, 날짜별로 검색이 가능합니다.
+- 
 
-3. 보호소 조회
+### 보호소 조회
 - 주소를 통한 전체검색기능 사용가능
 - 전국 보호소 운영시간, 운영장소 확인 가능
 
 ## 시연영상
-1. 사이트 전체 흐름 및 블로그
+### 사이트 전체 흐름 및 블로그
 [https://youtu.be/vaoJolh4b08](https://youtu.be/vaoJolh4b08)
 
 2. 유기동물 조회 서비스 (로그인 전)
