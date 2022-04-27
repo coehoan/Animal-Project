@@ -10,6 +10,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
+        @Query(value = "SELECT * FROM post ORDER BY createDate DESC LIMIT 4", nativeQuery = true)
+        List<Post> findMainPost();
+
         @Query(value = "SELECT * FROM post WHERE board =:board", nativeQuery = true)
         Page<Post> findByBoard(@Param("board") String board, Pageable page);
 

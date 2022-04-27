@@ -9,6 +9,7 @@ import site.metacoding.animalprojectfrontend.domain.user.User;
 @NoArgsConstructor
 @Data
 public class JoinDto {
+    private Integer id;
     private String username;
     private String password;
     private String email;
@@ -18,6 +19,7 @@ public class JoinDto {
 
     public User toEntity() {
         User user = new User();
+        user.setId(this.id);
         user.setUsername(this.username);
         user.setPassword(this.password);
         user.setEmail(this.email);

@@ -1,22 +1,24 @@
 package site.metacoding.animalprojectfrontend;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectfrontend.domain.user.User;
-import site.metacoding.animalprojectfrontend.service.UserService;
-import site.metacoding.animalprojectfrontend.web.api.dto.user.JoinDto;
+import site.metacoding.animalprojectfrontend.domain.post.Post;
+import site.metacoding.animalprojectfrontend.service.PostService;
 
 @RequiredArgsConstructor
 @Controller
 public class AnimalController {
+    private final PostService postService;
 
     @GetMapping("/")
-    public String main() {
+    public String main(Model model) {
+        List<Post> posts = postService.메인글목록();
+        model.addAttribute("posts", posts);
         return "/main/mainForm";
     }
 

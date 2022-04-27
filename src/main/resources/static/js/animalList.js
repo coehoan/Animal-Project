@@ -202,7 +202,6 @@ async function toRegion(selectedSido, selectedSigungu) { // 지역 검색
 
         }
 
-
     } else {
         alert("검색 실패");
     }
@@ -359,7 +358,7 @@ async function toKindOnly(selectedKind) { // 품종만 검색
 
 
 async function toDay(firstDate, lastDate) { // 날짜 검색
- 
+
     firstDate = splitFirstDay(selectedFirstDate);
     lastDate = splitLastDay(selectedLastDate);
 

@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,21 @@ public class ShelterDeService {
 
     public Page<ShelterDe> 전체보기(PageRequest pr) {
         return shelterDeRepository.findAll(pr);
+    }
+
+    public List<ShelterDe> 지역별보기(String addr) {
+        List<ShelterDe> shelterList = shelterDeRepository.findByAddr(addr);
+        return shelterList;
+    }
+
+    public List<ShelterDe> 종류별보기(String kind) {
+        List<ShelterDe> shelterList = shelterDeRepository.findByKind(kind);
+        return shelterList;
+    }
+
+    public List<ShelterDe> 지역종류별보기(String addr, String kind) {
+        List<ShelterDe> shelterList = shelterDeRepository.findByAddrAndKind(addr, kind);
+        return shelterList;
     }
 
     @Transactional
