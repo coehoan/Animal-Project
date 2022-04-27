@@ -38,10 +38,10 @@
 ```
 <br>
 
-### Github 주소
+### Github 주소 🌳
 [https://github.com/coehoan/Animal-Project](https://github.com/coehoan/Animal-Project)<br>
 
-### MariaDB 세팅
+### MariaDB 세팅 🦭
 ```sql
 -- 모든 IP로 접근 가능한 유저 생성
 CREATE USER 'animal'@'%' IDENTIFIED BY 'password';
@@ -53,7 +53,7 @@ CREATE DATABASE animaldb;
 GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 ```
 
-### 데이터 다운로드
+### 데이터 다운로드 ⏬
 [유기동물 공공데이터](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15098931)
 [유기동물 보호소 공공데이터](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15035887)
 ```
@@ -64,7 +64,7 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 /animals -> 유기동물 데이터 다운로드
 ```
 
-## 설계 과정
+## 설계 과정 🧰
 
 ### ERD
 ![ERD](https://user-images.githubusercontent.com/97711652/164983516-ec17bb22-9e93-4303-80f1-53de5b2563ef.png)
@@ -94,7 +94,7 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 <br>
 
 
-### 테스트코드
+### 테스트코드 🧪
 #### 유튜브 영상 소스코드 넣기
 
 [https://github.com/gouthiki90/2022-AnimalProject-youtube-test.git](https://github.com/gouthiki90/2022-AnimalProject-youtube-test.git)
@@ -107,7 +107,7 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 [https://github.com/gouthiki90/2020-AnimalProject-dataTest.git](https://github.com/gouthiki90/2020-AnimalProject-dataTest.git)
 <br>
 
-## 페이지별 상세 기능
+## 페이지별 상세 기능 📃
 ### 블로그
 - 블로그 메인페이지에선 각 게시판별 조회수 Top3를 미리 보여줍니다.
 - 각 게시판별로 원하는 조건(지역별, 품종별, 종류별)에 따라 상세검색이 가능합니다.
@@ -123,15 +123,15 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 - 주소를 통한 전체검색기능 사용가능
 - 전국 보호소 운영시간, 운영장소 확인 가능
 
-## 시연영상
+## 시연영상 📹
 ### 사이트 전체 흐름 및 블로그
 [https://youtu.be/vaoJolh4b08](https://youtu.be/vaoJolh4b08)
 
-2. 유기동물 조회 서비스 (로그인 전)
-3. 유기동물 조회 서비스 (로그인 후)
+### 유기동물 조회 서비스 (로그인 전)
+### 유기동물 조회 서비스 (로그인 후)
 
 
-## 프로젝트 소감
+## 프로젝트 소감 ✨
 1. 최명신
 - 팀장으로서 인원과 시간분배를 적절히 하지못해 계획했던 기능을 모두 구현하지 못해 아쉬움
 - 클라이언트-웹서버-데이터베이스 간 통신의 원리에 대한 개념을 다시 정리하게됨.
