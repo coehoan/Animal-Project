@@ -1,16 +1,19 @@
 package site.metacoding.animalprojectfrontend;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
-import site.metacoding.animalprojectfrontend.service.api.AnimalsService;
+import site.metacoding.animalprojectfrontend.domain.user.User;
+import site.metacoding.animalprojectfrontend.service.UserService;
+import site.metacoding.animalprojectfrontend.web.api.dto.user.JoinDto;
 
 @RequiredArgsConstructor
 @Controller
 public class AnimalController {
-
-    private final AnimalsService animalsService;
 
     @GetMapping("/")
     public String main() {
@@ -29,6 +32,7 @@ public class AnimalController {
 
     @GetMapping("/animal")
     public String animal() {
+       
         return "/animal/animalList";
     }
 
