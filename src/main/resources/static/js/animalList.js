@@ -160,7 +160,7 @@ $("#btn-search").click(() => {
     } else if (selectedSido != null && selectedSigungu != null && selectedFirstDate == null && selectedKind == null && selectedKindOf == null && selectedLastDate == null) {
         toRegion(selectedSido, selectedSigungu);
     } else if (addrSido != null && addrSigungu != null) {
-        toForUserAll(addrSido, addrSigungu)
+        toForUserAll(addrSido, addrSigungu);
     } else {
         alert("검색 실패");
     }
@@ -243,10 +243,16 @@ async function toAll(selectedKind, selectedKindOf, selectedSido, selectedSigungu
 let addrSido = $("#addrSido").val();
 let addrSigungu = $("#addrSigungu").val();
 
+// function addNull(addrSido, addrSigungu) {
+//     let userRegion = addrSido + "\u00a0" + addrSigungu;
+
+//     return userRegion;
+// }
+
 async function toForUserAll(addrSido, addrSigungu) { // 지역 검색
+    // userRegion = addNull(addrSido, addrSigungu);
 
     let response = await fetch(`/search/animals/for-user?addrSido=${addrSido}&addrSigungu=${addrSigungu}`);
-    console.log(addrSido, addrSigungu);
     console.log(response);
 
     let reseponseParse = await response.json();
@@ -358,7 +364,7 @@ async function toKindOnly(selectedKind) { // 품종만 검색
 
 
 async function toDay(firstDate, lastDate) { // 날짜 검색
- 
+
     firstDate = splitFirstDay(selectedFirstDate);
     lastDate = splitLastDay(selectedLastDate);
 
