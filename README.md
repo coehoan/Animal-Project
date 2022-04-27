@@ -67,7 +67,9 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 ```
 
 ## 설계 과정 🧰
-
+<details>
+<summary>더보기</summary>
+<div markdown="1">
 ### ERD
 ![ERD](https://user-images.githubusercontent.com/97711652/164983516-ec17bb22-9e93-4303-80f1-53de5b2563ef.png)
 
@@ -94,7 +96,9 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 ![함께하는이들(수의사)](https://user-images.githubusercontent.com/97711652/164986197-ef9d9c0a-58e7-4d9b-9928-a5bcf5369b61.jpg)
 ![함께하는이들(카라)](https://user-images.githubusercontent.com/97711652/164986199-d1e3431b-8724-40a2-a438-fb264954052b.jpg)
 <br>
-<hr>
+</div>
+</details>
+
 
 
 ### 테스트코드 🧪
