@@ -134,8 +134,8 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 ## 시연영상 📹
 ### 사이트 전체 흐름 및 블로그
 [https://youtu.be/vaoJolh4b08](https://youtu.be/vaoJolh4b08)
-### 유기동물 조회 서비스 (로그인 전)
-### 유기동물 조회 서비스 (로그인 후)
+### 유기동물 조회 서비스
+[https://youtu.be/tt1wWs_LowE](https://youtu.be/tt1wWs_LowE)
 
 
 ## 프로젝트 소감 ✨
