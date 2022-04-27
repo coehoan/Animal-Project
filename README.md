@@ -70,8 +70,8 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 <details>
 <summary>더보기</summary>
 <div markdown="1">
+  
 ### ERD
-
 ![ERD](https://user-images.githubusercontent.com/97711652/164983516-ec17bb22-9e93-4303-80f1-53de5b2563ef.png)
 
 
