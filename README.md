@@ -40,6 +40,8 @@
 
 ### Github 주소 🌳
 [https://github.com/coehoan/Animal-Project](https://github.com/coehoan/Animal-Project)<br>
+[https://github.com/coehoan/Project-blog-test.git](https://github.com/coehoan/Project-blog-test.git)<br>
+[https://github.com/coehoan/Animal-Project-BackEnd.git](https://github.com/coehoan/Animal-Project-BackEnd.git)<br>
 
 ### MariaDB 세팅 🦭
 ```sql
@@ -54,7 +56,7 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 ```
 
 ### 데이터 다운로드 ⏬
-[유기동물 공공데이터](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15098931)
+[유기동물 공공데이터](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15098931)<br>
 [유기동물 보호소 공공데이터](https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15035887)
 ```
 /sido -> 시도코드 다운로드
