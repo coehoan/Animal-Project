@@ -92,6 +92,7 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 ![함께하는이들(수의사)](https://user-images.githubusercontent.com/97711652/164986197-ef9d9c0a-58e7-4d9b-9928-a5bcf5369b61.jpg)
 ![함께하는이들(카라)](https://user-images.githubusercontent.com/97711652/164986199-d1e3431b-8724-40a2-a438-fb264954052b.jpg)
 <br>
+<hr>
 
 
 ### 테스트코드 🧪
@@ -126,7 +127,6 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 ## 시연영상 📹
 ### 사이트 전체 흐름 및 블로그
 [https://youtu.be/vaoJolh4b08](https://youtu.be/vaoJolh4b08)
-
 ### 유기동물 조회 서비스 (로그인 전)
 ### 유기동물 조회 서비스 (로그인 후)
 
