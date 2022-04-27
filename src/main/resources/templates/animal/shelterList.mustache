@@ -20,53 +20,43 @@
     <h2 class="m_sub_title">상세검색</h2>
     <hr>
     <div class="mt-5 d-flex">
-      <div class="container-fluid">
-        <form class="d-flex flex-fill" enctype="application/x-www-form-urlencoded">
-          <!--
-        https://www.jqueryscript.net/form/Dynamic-jQuery-Cascading-Dropdown-Lists-Plugin.html
-        스크립트 사용법 공부 후 지역 Ajax 처리
-      -->
+      <div class="container-fluid d-flex">
+        <form class="d-flex flex-fill justify-content-center" action="/animal/shelterList/search" method="get">
           <div id="example1" class="bs-docs-example d-flex">
             <select id="sido" name="sido" class="step1 me-2 animallist-select-box"
               onchange="sidoSelected(this.value), RegionOptionChange()" required="false">
-              <option selected disabled>지역</option>
-              <option id="seoul" value="서울특별시">서울특별시</option>
-              <option id="busan" value="부산광역시">부산광역시</option>
-              <option id="deagu" value="대구광역시">대구광역시</option>
-              <option id="incheon" value="인천광역시">인천광역시</option>
-              <option id="gwangju" value="광주광역시">광주광역시</option>
-              <option id="sejong" value="세종특별자치시">세종특별자치시</option>
-              <option id="deajeon" value="대전광역시">대전광역시</option>
-              <option id="ulsan" value="울산광역시">울산광역시</option>
-              <option id="gyeongi" value="경기도">경기도</option>
-              <option id="gangwon" value="강원도">강원도</option>
-              <option id="choongbook" value="충청북도">충청북도</option>
-              <option id="choognam" value="충청남도">충청남도</option>
-              <option id="jeonam" value="전라남도">전라남도</option>
-              <option id="jeonbook" value="전라북도">전라북도</option>
-              <option id="gyeongbook" value="경상북도">경상북도</option>
-              <option id="gyeongnam" value="경상남도">경상남도</option>
-              <option id="jeju" value="제주특별자치도">제주특별자치도</option>
+              <option value="all">지역</option>
+              <option value="서울특별시">서울특별시</option>
+              <option value="부산광역시">부산광역시</option>
+              <option value="대구광역시">대구광역시</option>
+              <option value="인천광역시">인천광역시</option>
+              <option value="광주광역시">광주광역시</option>
+              <option value="세종특별자치시">세종특별자치시</option>
+              <option value="대전광역시">대전광역시</option>
+              <option value="울산광역시">울산광역시</option>
+              <option value="경기도">경기도</option>
+              <option value="강원도">강원도</option>
+              <option value="충청북도">충청북도</option>
+              <option value="충청남도">충청남도</option>
+              <option value="전라남도">전라남도</option>
+              <option value="전라북도">전라북도</option>
+              <option value="경상북도">경상북도</option>
+              <option value="경상남도">경상남도</option>
+              <option value="제주특별자치도">제주특별자치도</option>
             </select>
             <select id="sigungu" name="sigungu" class="step2 me-2 animallist-select-box"
               onchange="sigunguSelected(this.value)" required="false">
-              <option>시/군/구</option>
+              <option value="all">시/군/구</option>
               <option></option>
             </select>
           </div>
           <select id="kind" name="kind" onchange="kindSelected(this.value), kindOprionChange()"
             class="me-2 animallist-select-box" required="false">
-            <option>종류</option>
-            <option value="강아지">강아지</option>
+            <option value="all">종류</option>
+            <option value="개">강아지</option>
             <option value="고양이">고양이</option>
             <option value="기타">기타</option>
           </select>
-          <select id="kind-of" name="kindOf" class="me-2 animallist-select-box" onchange="kindOfSelected(this.value)"
-            required="false">
-            <option>품종</option>
-            <option></option>
-          </select>
-          <input class="form-control me-2" name="keyword" type="search" placeholder="검색" aria-label="Search">
           <button onclick="toRegion()" class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
@@ -84,31 +74,50 @@
           <th scope="col">보호소명</th>
           <th scope="col">주소</th>
           <th scope="col">운영시간</th>
-          <th scope="col">주말운영여부</th>
+          <th scope="col">휴무일</th>
           <th scope="col">전화번호</th>
           <th scope="col">구조대상동물</th>
         </tr>
       </thead>
       <tbody>
-        {{#shelterlistPage.content}}
+        {{#shelterlistPage}}
         <tr>
           <div class="d-flex m_text_align_center">
-            <th scope="row" style="vertical-align: middle;">{{#id}}{{id}}{{/id}}{{^id}}정보없음{{/id}}</th>
-            <td style="vertical-align: middle;">{{#orgNm}}{{orgNm}}{{/orgNm}}{{^orgNm}}정보없음{{/orgNm}}</td>
-            <td style="vertical-align: middle;">{{#careNm}}{{careNm}}{{/careNm}}{{^careNm}}정보없음{{/careNm}}</td>
+            <th scope="row" style="vertical-align: middle;">
+              {{#id}}{{id}}{{/id}}
+              {{^id}}정보없음{{/id}}
+            </th>
+            <td style="vertical-align: middle;">
+              {{#orgNm}}{{orgNm}}{{/orgNm}}
+              {{^orgNm}}정보없음{{/orgNm}}
+            </td>
+            <td style="vertical-align: middle;">
+              {{#careNm}}{{careNm}}{{/careNm}}
+              {{^careNm}}정보없음{{/careNm}}
+            </td>
             <td id="detail-addr" style="vertical-align: middle;">
-              {{#careAddr}}{{careAddr}}{{/careAddr}}{{^careAddr}}정보없음{{/careAddr}}</td>
-            <td style="vertical-align: middle;">
-              {{#weekOprStime}}{{weekOprStime}}~{{weekOprEtime}}{{/weekOprStime}}{{^weekOprStime}}정보없음{{/weekOprStime}}
-            </td>
-            <td style="vertical-align: middle;">{{#closeDay}}{{closeDay}}{{/closeDay}}{{^closeDay}}0{{/closeDay}}</td>
-            <td style="vertical-align: middle;">{{#careTel}}{{careTel}}{{/careTel}}{{^careTel}}***********{{/careTel}}
+              {{#careAddr}}{{careAddr}}{{/careAddr}}
+              {{^careAddr}}정보없음{{/careAddr}}
             </td>
             <td style="vertical-align: middle;">
-              {{#saveTrgtAnimal}}{{saveTrgtAnimal}}{{/saveTrgtAnimal}}{{^saveTrgtAnimal}}정보없음{{/saveTrgtAnimal}}</td>
+              {{#weekOprStime}}{{weekOprStime}}~{{weekOprEtime}}{{/weekOprStime}}
+              {{^weekOprStime}}정보없음{{/weekOprStime}}
+            </td>
+            <td style="vertical-align: middle;">
+              {{#closeDay}}{{closeDay}}{{/closeDay}}
+              {{^closeDay}}0{{/closeDay}}
+            </td>
+            <td style="vertical-align: middle;">
+              {{#careTel}}{{careTel}}{{/careTel}}
+              {{^careTel}}***********{{/careTel}}
+            </td>
+            <td style="vertical-align: middle;">
+              {{#saveTrgtAnimal}}{{saveTrgtAnimal}}{{/saveTrgtAnimal}}
+              {{^saveTrgtAnimal}}정보없음{{/saveTrgtAnimal}}
+            </td>
           </div>
         </tr>
-        {{/shelterlistPage.content}}
+        {{/shelterlistPage}}
       </tbody>
     </table>
   </div>
