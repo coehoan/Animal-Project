@@ -102,16 +102,16 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 
 
 
-### 테스트코드 🧪
-#### 유튜브 영상 소스코드 넣기
+## 테스트코드 🧪
+### 유튜브 영상 소스코드 넣기
 
 [https://github.com/gouthiki90/2022-AnimalProject-youtube-test.git](https://github.com/gouthiki90/2022-AnimalProject-youtube-test.git)
 
-#### TOAST UI 사용법
+### TOAST UI 사용법
 
 [https://github.com/coehoan/Spring-TOASTUI-test.git](https://github.com/coehoan/Spring-TOASTUI-test.git)
 
-#### Springboot RestTeplate 공공데이터 다운로드 테스트
+### Springboot RestTeplate 공공데이터 다운로드 테스트
 [https://github.com/gouthiki90/2020-AnimalProject-dataTest.git](https://github.com/gouthiki90/2020-AnimalProject-dataTest.git)
 <br>
 
