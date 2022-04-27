@@ -31,7 +31,7 @@ public class AnimalsService {
     private final UserRepository userRepository;
     private final HttpServletRequest request;
 
-    public List<Animals> 다운로드(Animals animals) {
+    public List<Animals> 다운로드() {
 
         // 서비스키
         String key = "jDqHGG%2BaNG47ijh6s3XzB%2BuF8fJOeovccnw%2FZtc9wLQUaKJumPo%2Frl1a2ygZ68dv9L0PD7drvpjPAeTnnB9f%2FQ%3D%3D";
@@ -208,7 +208,7 @@ public class AnimalsService {
     ///////////////////// 유저 검색
 
     public List<Animals> 유저검색(String addrSido, String addrSigungu) {
-
+        System.out.println("서비스에 받아지나?" + addrSido + addrSigungu);
         List<Animals> forUserEntity = animalsRepository.forUser(addrSido, addrSigungu);
         return forUserEntity;
 
