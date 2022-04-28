@@ -126,7 +126,7 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 ### 유기동물 현황
 |유저검색|지역검색|
 |---|---|
-|[https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%9C%A0%EC%A0%80%EA%B2%80%EC%83%89.gif?raw=true](https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%9C%A0%EC%A0%80%EA%B2%80%EC%83%89.gif?raw=true)|[https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%A7%80%EC%97%AD%EA%B2%80%EC%83%89.gif?raw=true](https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%A7%80%EC%97%AD%EA%B2%80%EC%83%89.gif?raw=true)|
+|![https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%9C%A0%EC%A0%80%EA%B2%80%EC%83%89.gif?raw=true](https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%9C%A0%EC%A0%80%EA%B2%80%EC%83%89.gif?raw=true)|![https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%A7%80%EC%97%AD%EA%B2%80%EC%83%89.gif?raw=true](https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%A7%80%EC%97%AD%EA%B2%80%EC%83%89.gif?raw=true)|
 
 - 전국 유기동물 현황 조회가 가능합니다.
 - 지역별, 상세 품종별, 시도, 품종, 날짜별로 검색이 가능합니다.
