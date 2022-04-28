@@ -47,6 +47,6 @@ public interface AnimalsRepository extends JpaRepository<Animals, Integer> {
 
         // 전체검색만!!
         @Query(value = "SELECT * FROM Animals GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight DESC ORDER BY orgNm = :userRegion DESC", nativeQuery = true)
-        List<Animals> forUser(@Param("userRegion") String userRegion);
+
 
 }
