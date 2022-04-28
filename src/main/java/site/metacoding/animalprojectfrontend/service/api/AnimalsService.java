@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class AnimalsService {
     private final UserRepository userRepository;
     private final HttpServletRequest request;
 
-    public List<Animals> 다운로드(Animals animals) {
+    public List<Animals> 다운로드() {
 
         // 서비스키
         String key = "jDqHGG%2BaNG47ijh6s3XzB%2BuF8fJOeovccnw%2FZtc9wLQUaKJumPo%2Frl1a2ygZ68dv9L0PD7drvpjPAeTnnB9f%2FQ%3D%3D";
@@ -207,9 +208,9 @@ public class AnimalsService {
 
     ///////////////////// 유저 검색
 
-    public List<Animals> 유저검색(String addrSido, String addrSigungu) {
-
-        List<Animals> forUserEntity = animalsRepository.forUser(addrSido, addrSigungu);
+    public List<Animals> 유저검색(String userRegion) {
+        System.out.println("서비스에 받아지나?" + userRegion);
+        List<Animals> forUserEntity = animalsRepository.forUser(userRegion);
         return forUserEntity;
 
     }
