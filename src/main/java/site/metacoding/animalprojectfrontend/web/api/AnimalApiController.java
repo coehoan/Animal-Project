@@ -40,7 +40,7 @@ public class AnimalApiController {
             @RequestParam(name = "sigungu", required = true) String keywordOfSigungu) {
         System.out.println("타나?");
         System.out.println("받은 쿼리스트링 ====" + keywordOfkind + keywordOfkindOf + keywordOfSido +
-                keywordOfSigungu + keywordOfirstDate + keywordOflastDate);
+        keywordOfSigungu + keywordOfirstDate + keywordOflastDate);
         // String[] firstDate = keywordOfirstDate.split("-"); // 날짜가 정말 아주 못되게 찍혀서 -로
         // 나누어줌
         // System.out.println(firstDate);
@@ -204,13 +204,11 @@ public class AnimalApiController {
 
     @CrossOrigin
     @GetMapping("/search/animals/for-user")
-    public ResponseDto<?> getForUser(@RequestParam(name = "addrSido", required = true) String addrSido, @RequestParam("addrSigungu") String addrSigungu) {
-        //System.out.println(addrSido + addrSigungu + "=====쿼리스트링?");
-        String userRegion = addrSido + " " + addrSigungu;
-        System.out.println(userRegion);
-        List<Animals> userEntity = animalsService.유저검색(userRegion);
-        //System.out.println(userEntity);
+    public ResponseDto<?> getForUser(@RequestParam(name = "addrSido", required = true) String addrSido,
+            @RequestParam(name = "addrSigungu", required = true) String addrSigungu) {
+        System.out.println(addrSido + addrSigungu + "=====쿼리스트링?");
+        List<Animals> getUserEntity = animalsService.유저검색(addrSido, addrSigungu);
 
-        return new ResponseDto<>(1, "검색 성공", userEntity);
+        return new ResponseDto<>(1, "검색 성공", getUserEntity);
     }
 }

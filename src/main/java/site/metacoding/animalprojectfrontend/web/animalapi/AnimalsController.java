@@ -19,7 +19,7 @@ public class AnimalsController {
     @GetMapping("/animals")
     public String download(Animals animals, Model model) {
 
-        List<Animals> animailEntity = animalsService.다운로드();
+        List<Animals> animailEntity = animalsService.다운로드(animals);
 
         model.addAttribute("animalslist", animailEntity);
         return "/api/animalsDownload";

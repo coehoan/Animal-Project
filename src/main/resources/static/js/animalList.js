@@ -147,7 +147,7 @@ function RegionOptionChange() {
 // if문 없애면 클릭할 때 메서드 다 실행되니까 조건문 걸어줘야 함!
 $("#btn-search").click(() => {
 
-    if (selectedSido != null && selectedSigungu != null && selectedKind != null && selectedKindOf != null && selectedFirstDate != null && selectedLastDate != null) {
+    if (selectedSido != null || selectedSigungu != null && selectedKind != null && selectedKindOf != null && selectedFirstDate != null && selectedLastDate != null) {
         toAll(selectedKind, selectedKindOf, selectedSido, selectedSigungu, selectedFirstDate, selectedLastDate);
     } else if (selectedFirstDate != null && selectedLastDate != null && selectedKind == null && selectedKindOf == null && selectedSido == null && selectedSigungu == null) {
         toDay(selectedFirstDate, selectedLastDate);
@@ -157,15 +157,30 @@ $("#btn-search").click(() => {
         toRegionSido(selectedSido);
     } else if (selectedKind != null && selectedFirstDate == null && selectedLastDate == null && selectedKindOf == null && selectedSido == null && selectedSigungu == null) {
         toKindOnly(selectedKind);
-    } else if (selectedSido != null && selectedSigungu != null && selectedFirstDate == null && selectedKind == null && selectedKindOf == null && selectedLastDate == null) {
+    } else if (selectedSido != null || selectedSigungu != null && selectedFirstDate == null && selectedKind == null && selectedKindOf == null && selectedLastDate == null) {
         toRegion(selectedSido, selectedSigungu);
-    } else if (addrSido != null && addrSigungu != null) {
-        toForUserAll(addrSido, addrSigungu);
+    } else if (addrSido != null || addrSigungu != null) {
+        toForUserAll(addrSido, addrSigungu)
     } else {
         alert("검색 실패");
     }
 
 });
+
+// 날짜 받아서 split하는 함수
+function splitFirstDay(selectedFirstDate) {
+    let firstdate = selectedFirstDate.split("-");
+    let splitFirstDate = firstdate[0] + firstdate[1] + firstdate[2];
+
+    return splitFirstDate;
+}
+
+function splitLastDay(selectedLastDate) {
+    let lastdate = selectedLastDate.split("-");
+    let splitLastDate = lastdate[0] + lastdate[1] + lastdate[2];
+
+    return splitLastDate;
+}
 
 // Ajax 함수
 
@@ -187,28 +202,12 @@ async function toRegion(selectedSido, selectedSigungu) { // 지역 검색
 
         }
 
-
     } else {
         alert("검색 실패");
     }
 
     //return selectedSido, selectedSigungu;
 
-}
-
-// 날짜 받아서 split하는 함수
-function splitFirstDay(selectedFirstDate) {
-    let firstdate = selectedFirstDate.split("-");
-    let splitFirstDate = firstdate[0] + firstdate[1] + firstdate[2];
-
-    return splitFirstDate;
-}
-
-function splitLastDay(selectedLastDate) {
-    let lastdate = selectedLastDate.split("-");
-    let splitLastDate = lastdate[0] + lastdate[1] + lastdate[2];
-
-    return splitLastDate;
 }
 
 async function toAll(selectedKind, selectedKindOf, selectedSido, selectedSigungu, firstDate, lastDate) { // 지역 검색
@@ -240,19 +239,14 @@ async function toAll(selectedKind, selectedKindOf, selectedSido, selectedSigungu
 
 }
 
+let id = $("#id").val();
 let addrSido = $("#addrSido").val();
 let addrSigungu = $("#addrSigungu").val();
 
-// function addNull(addrSido, addrSigungu) {
-//     let userRegion = addrSido + "\u00a0" + addrSigungu;
+async function toForUserAll(addrSigungu, id) { // 지역 검색
 
-//     return userRegion;
-// }
-
-async function toForUserAll(addrSido, addrSigungu) { // 지역 검색
-    // userRegion = addNull(addrSido, addrSigungu);
-
-    let response = await fetch(`/search/animals/for-user?addrSido=${addrSido}&addrSigungu=${addrSigungu}`);
+    let response = await fetch(`/search/animals/for-user?addrSido=${addrSigungu}&addrSigungu=${id}`);
+    console.log(addrSigungu, id);
     console.log(response);
 
     let reseponseParse = await response.json();
