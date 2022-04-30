@@ -159,7 +159,7 @@ $("#btn-search").click(() => {
         toKindOnly(selectedKind);
     } else if (selectedSido != null && selectedSigungu != null && selectedFirstDate == null && selectedKind == null && selectedKindOf == null && selectedLastDate == null) {
         toRegion(selectedSido, selectedSigungu);
-    } else if (addrSido != null && addrSigungu != null) {
+    } else if (addrSido != null && addrSigungu != null && selectedSido == null && selectedSigungu == null && selectedKind == null && selectedKindOf == null && selectedFirstDate == null && selectedLastDate == null) {
         toForUserAll(addrSido, addrSigungu);
     } else {
         alert("검색 실패");

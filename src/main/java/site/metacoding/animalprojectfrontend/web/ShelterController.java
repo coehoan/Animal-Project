@@ -84,13 +84,13 @@ public class ShelterController {
         }
 
         // 종류만 선택했을 때
-        if (sido.equals("all") && sigungu.equals("all") && kind != "all") {
+        if (sido.equals("all") && sigungu.equals("all") && !kind.equals("all")) {
             List<ShelterDe> shelterEntity = shelterDeService.종류별보기(kind);
             search(shelterEntity, model);
         }
 
         // 지역, 시군구, 종류 모두 선택했을 때
-        if (sido != "all" && sigungu != "all" && kind != "all") {
+        if (!sido.equals("all") && !sigungu.equals("all") && !kind.equals("all")) {
             String addr = sido + " " + sigungu;
             List<ShelterDe> shelterEntity = shelterDeService.지역종류별보기(addr, kind);
             search(shelterEntity, model);

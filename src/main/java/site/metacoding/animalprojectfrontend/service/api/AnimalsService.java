@@ -59,16 +59,11 @@ public class AnimalsService {
 
             URI uri = new URI(uriSb.toString());
 
-            // System.out.println("요청한 주소 ======= " + uri);
-
             response = restTemplate.getForObject(uri, ResponseDto.class);
-
-            // System.out.println("받은 데이터 ==========" + response);
 
             Integer totalCount = response.getResponse().getBody().getTotalCount();
 
             Integer result = totalCount / 1000; // totalCount를 1000씩으로 나눔, 최대 요청숫자가 1000이라서...
-            System.out.println(result);
             for (int i = 0; i < result; i++) {
 
                 if (response.getResponse().getBody().getItems().getItem() != null) {
@@ -107,8 +102,6 @@ public class AnimalsService {
 
                         animalsEntity = animalsRepository.saveAllAndFlush(lists);
 
-                        System.out.println("받은 엔티티 =========" + lists.size());
-
                     }
                 }
 
@@ -121,65 +114,47 @@ public class AnimalsService {
         return null;
     }
 
-    // public List<Animals> 전체검색() {
-    // List<Animals> findAllEntity = animalsRepository.findAll();
-
-    // return findAllEntity;
-    // }
-
     public List<Animals> 전체검색(String keywordOfkind,
             String keywordOfkindOf, String keywordOfSido,
             String keywordOfSigungu,
             String keywordOfirstDate,
             String keywordOflastDate) {
-        System.out.println("쿼리스트링 받아졌나?" + keywordOfSido + keywordOfSigungu + keywordOfkind + keywordOfkindOf
-                + keywordOfirstDate + keywordOflastDate);
 
         List<Animals> findRegionEntity = animalsRepository.keywordOfAll(keywordOfkind, keywordOfkindOf, keywordOfSido,
                 keywordOfSigungu, keywordOfirstDate, keywordOflastDate);
-        // System.out.println("서비스 잘 되나?=======" + findRegionEntity);
         return findRegionEntity;
 
     }
 
     public List<Animals> 지역검색(String keywordOfSido, String keywordOfSigungu) {
-        System.out.println("쿼리스트링 받아졌나?" + keywordOfSido + keywordOfSigungu);
 
         List<Animals> findRegionEntity = animalsRepository.keywordOfRegion(keywordOfSido, keywordOfSigungu);
-        // System.out.println("서비스 잘 되나?=======" + findRegionEntity);
         return findRegionEntity;
 
     }
 
     public List<Animals> 지역검색시도(String keywordOfSido) {
-        System.out.println("쿼리스트링 받아졌나?" + keywordOfSido);
 
         List<Animals> findRegionEntity = animalsRepository.keywordOfRegionSido(keywordOfSido);
-        // System.out.println("서비스 잘 되나?=======" + findRegionEntity);
         return findRegionEntity;
 
     }
 
     public List<Animals> 품종검색(String keywordOfkind, String keywordOfkindOf) {
-        System.out.println("쿼리스트링 받아졌나?" + keywordOfkind + keywordOfkindOf);
 
         List<Animals> findKindEntity = animalsRepository.keywordOfKind(keywordOfkind, keywordOfkindOf);
-        // System.out.println("서비스 잘 되나?=======" + findKindEntity);
         return findKindEntity;
 
     }
 
     public List<Animals> 품종검색품종만(String keywordOfkind) {
-        System.out.println("쿼리스트링 받아졌나?" + keywordOfkind);
 
         List<Animals> findKindEntity = animalsRepository.keywordOfKindOnly(keywordOfkind);
-        // System.out.println("서비스 잘 되나?=======" + findKindEntity);
         return findKindEntity;
 
     }
 
     public List<Animals> 날짜검색(String keywordOfirstDate, String keywordOflastDate) {
-        System.out.println("쿼리스트링 받아졌나?" + keywordOfirstDate + keywordOflastDate);
 
         // String[] firstDate = keywordOfirstDate.split("-");
         // System.out.println(firstDate);
@@ -198,10 +173,9 @@ public class AnimalsService {
         // lDsb.append(lastDate[1]);
         // lDsb.append(lastDate[2]);
         // System.out.println(lDsb.toString());
-        //컨트롤러에서 해줘서 안 해도 됨!
+        // 컨트롤러에서 해줘서 안 해도 됨!
 
         List<Animals> findDayEntity = animalsRepository.keywordOfDay(keywordOfirstDate, keywordOflastDate);
-        // System.out.println("서비스 잘 되나?=======" + findDayEntity);
         return findDayEntity;
 
     }
@@ -209,7 +183,6 @@ public class AnimalsService {
     ///////////////////// 유저 검색
 
     public List<Animals> 유저검색(String userRegion) {
-        System.out.println("서비스에 받아지나?" + userRegion);
         List<Animals> forUserEntity = animalsRepository.forUser(userRegion);
         return forUserEntity;
 
