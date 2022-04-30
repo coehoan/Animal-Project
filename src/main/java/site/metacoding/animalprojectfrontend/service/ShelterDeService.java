@@ -4,11 +4,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -39,18 +38,18 @@ public class ShelterDeService {
         return shelterEntity;
     }
 
-    public List<ShelterDe> 지역별보기(String addr) {
-        List<ShelterDe> shelterList = shelterDeRepository.findByAddr(addr);
+    public Page<ShelterDe> 지역별보기(String addr, Pageable pr) {
+        Page<ShelterDe> shelterList = shelterDeRepository.findByAddr(addr, pr);
         return shelterList;
     }
 
-    public List<ShelterDe> 종류별보기(String kind) {
-        List<ShelterDe> shelterList = shelterDeRepository.findByKind(kind);
+    public Page<ShelterDe> 종류별보기(String kind, Pageable pr) {
+        Page<ShelterDe> shelterList = shelterDeRepository.findByKind(kind, pr);
         return shelterList;
     }
 
-    public List<ShelterDe> 지역종류별보기(String addr, String kind) {
-        List<ShelterDe> shelterList = shelterDeRepository.findByAddrAndKind(addr, kind);
+    public Page<ShelterDe> 지역종류별보기(String addr, String kind, Pageable pr) {
+        Page<ShelterDe> shelterList = shelterDeRepository.findByAddrAndKind(addr, kind, pr);
         return shelterList;
     }
 

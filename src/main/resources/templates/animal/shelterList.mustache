@@ -158,24 +158,24 @@
     // 페이징 시작
     let page = new Array();
     let pageList = new Array();
-    let size = parseInt($("#page-size").val());
-    //console.log(size);
+    let size = parseInt($("#page-size").val()); // 전체 페이지 사이즈
     for (let i = 1; i <= size; i++) {
-      page.push(i);
+      page.push(i); // 페이지 리스트에 담기 (1~31)
     }
-    //console.log(page);
     let nn = 0;
+    // for문 돌면서 10개씩 끊기
     for (let n = 0; n < Math.ceil(size / 10); n++) {
       let a = page.slice(nn, nn + 10);
       nn += 10;
       pageList.push(a);
     }
-    let pageNo = 0;
+    let pageNo = 0; // 초기페이지 (페이지1~10)
 
     for (let s in pageList[pageNo]) {
       $("#page-box").append(renderBox(pageList[pageNo][s]));
     }
 
+    // 다음 버튼 클릭
     $("#next").click(() => {
       pageNo += 1;
       $("#page-box").empty();
@@ -188,6 +188,7 @@
       }
     });
 
+    // 이전 버튼 클릭
     $("#prev").click(() => {
       pageNo -= 1;
       $("#page-box").empty();
@@ -200,7 +201,7 @@
       }
     });
 
-
+    // 페이지 번호 랜더링
     function renderBox(pageList) {
       return `
       <li id="page-list" class="page-item">
@@ -209,11 +210,21 @@
       `;
     }
 
-
+    // 페이지 번호 눌렀을 때 이동
     function pageClick(id) {
-      let h = "http://localhost:8080/animal/shelterList";
-      let page = id - 1;
-      location.href = h + "?page=" + page;
+      let h = location.href;
+      if (h.includes("search")) {
+        if (h.includes("page")) {
+          h = h.substring(0, h.indexOf("page=") - 1);
+        }
+        let page = id - 1;
+        location.href = h + "&page=" + page;
+      } else {
+        h = h.substring(0, h.indexOf("page=") - 1);
+        let page = id - 1;
+        location.href = h + "?page=" + page;
+      }
+
     }
     // 페이징 끝
 

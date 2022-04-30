@@ -29,11 +29,11 @@ public class ShelterController {
     private final ShelterDeService shelterDeService;
 
     // 검색 공통 메서드
-    public void search(List<ShelterDe> shelterEntity, Model model) {
+    public void search(Page<ShelterDe> sheltersEntity, Integer page, Model model) {
         String REGEX = "[0-9]+";
         List<ShelterRespDto> shelterList = new ArrayList<>();
 
-        for (ShelterDe shelterDe : shelterEntity) {
+        for (ShelterDe shelterDe : sheltersEntity) {
             ShelterRespDto shelterRespDto = new ShelterRespDto();
             shelterRespDto.setId(shelterDe.getId());
             shelterRespDto.setOrgNm(shelterDe.getOrgNm());
@@ -51,6 +51,20 @@ public class ShelterController {
             }
             shelterList.add(shelterRespDto);
         }
+        List<Integer> pageList = new ArrayList<>();
+        for (Integer i = 1; i <= sheltersEntity.getTotalPages(); i++) {
+            pageList.add(i);
+        }
+
+        PageRespDto pageRespDto = new PageRespDto();
+        pageRespDto.setTotal(pageList);
+        pageRespDto.setHasNext(sheltersEntity.hasNext());
+        pageRespDto.setHasPrevious(sheltersEntity.hasPrevious());
+
+        model.addAttribute("pages", pageRespDto);
+        model.addAttribute("shelterlistPage", sheltersEntity);
+        model.addAttribute("prevPage", page - 1);
+        model.addAttribute("nextPage", page + 1);
         model.addAttribute("shelterlistPage", shelterList);
     }
 
@@ -92,6 +106,7 @@ public class ShelterController {
             @RequestParam(value = "sigungu") String sigungu,
             @RequestParam(value = "kind", required = false) String kind,
             @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(defaultValue = "0", required = false) Integer page,
             Model model) {
 
         if (sido.equals("all") && sigungu.equals("all") && kind.equals("all")) {
@@ -101,21 +116,24 @@ public class ShelterController {
         // 지역, 시군구만 선택했을 때
         if (sido != "all" && sigungu != "all" && kind.equals("all")) {
             String addr = sido + " " + sigungu;
-            List<ShelterDe> shelterEntity = shelterDeService.지역별보기(addr);
-            search(shelterEntity, model);
+            PageRequest pr = PageRequest.of(page, 10, Sort.by("id"));
+            Page<ShelterDe> sheltersEntity = shelterDeService.지역별보기(addr, pr);
+            search(sheltersEntity, page, model);
         }
 
         // 종류만 선택했을 때
         if (sido.equals("all") && sigungu.equals("all") && !kind.equals("all")) {
-            List<ShelterDe> shelterEntity = shelterDeService.종류별보기(kind);
-            search(shelterEntity, model);
+            PageRequest pr = PageRequest.of(page, 10, Sort.by("id"));
+            Page<ShelterDe> sheltersEntity = shelterDeService.종류별보기(kind, pr);
+            search(sheltersEntity, page, model);
         }
 
         // 지역, 시군구, 종류 모두 선택했을 때
         if (!sido.equals("all") && !sigungu.equals("all") && !kind.equals("all")) {
             String addr = sido + " " + sigungu;
-            List<ShelterDe> shelterEntity = shelterDeService.지역종류별보기(addr, kind);
-            search(shelterEntity, model);
+            PageRequest pr = PageRequest.of(page, 10, Sort.by("id"));
+            Page<ShelterDe> sheltersEntity = shelterDeService.지역종류별보기(addr, kind, pr);
+            search(sheltersEntity, page, model);
         }
 
         return "/animal/shelterList";
