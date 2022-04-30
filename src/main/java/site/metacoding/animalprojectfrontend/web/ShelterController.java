@@ -1,10 +1,16 @@
 package site.metacoding.animalprojectfrontend.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import com.google.common.collect.Lists;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.RequiredArgsConstructor;
 import site.metacoding.animalprojectfrontend.domain.shelterde.ShelterDe;
 import site.metacoding.animalprojectfrontend.service.ShelterDeService;
+import site.metacoding.animalprojectfrontend.web.api.dto.post.PageRespDto;
 import site.metacoding.animalprojectfrontend.web.api.dto.shelterde.ShelterRespDto;
 
 @RequiredArgsConstructor
@@ -37,7 +44,9 @@ public class ShelterController {
             shelterRespDto.setCloseDay(shelterDe.getCloseDay());
             shelterRespDto.setCareTel(shelterDe.getCareTel());
             shelterRespDto.setSaveTrgtAnimal(shelterDe.getSaveTrgtAnimal());
-            if (shelterDe.getCloseDay().matches(REGEX)) {
+            if (shelterDe.getCloseDay() == null) {
+                shelterRespDto.setCloseDay("정보없음");
+            } else if (shelterDe.getCloseDay().matches(REGEX)) {
                 shelterRespDto.setCloseDay("정보없음");
             }
             shelterList.add(shelterRespDto);
@@ -55,11 +64,24 @@ public class ShelterController {
     }
 
     @GetMapping("/animal/shelterList")
-    public String list(Model model) {
-        PageRequest pr = PageRequest.of(0, 1000);
+    public String list(@RequestParam(defaultValue = "0", required = false) Integer page, Model model) {
+        PageRequest pr = PageRequest.of(page, 10, Sort.by("id"));
         Page<ShelterDe> sheltersEntity = shelterDeService.전체보기(pr);
 
+        List<Integer> pageList = new ArrayList<>();
+        for (Integer i = 1; i <= sheltersEntity.getTotalPages(); i++) {
+            pageList.add(i);
+        }
+
+        PageRespDto pageRespDto = new PageRespDto();
+        pageRespDto.setTotal(pageList);
+        pageRespDto.setHasNext(sheltersEntity.hasNext());
+        pageRespDto.setHasPrevious(sheltersEntity.hasPrevious());
+
+        model.addAttribute("pages", pageRespDto);
         model.addAttribute("shelterlistPage", sheltersEntity);
+        model.addAttribute("prevPage", page - 1);
+        model.addAttribute("nextPage", page + 1);
 
         return "/animal/shelterList";
     }

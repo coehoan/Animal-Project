@@ -121,8 +121,102 @@
       </tbody>
     </table>
   </div>
+
+  <!-- 페이징 시작 -->
+  <div class="mt-3 mb-5">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+
+        <li class="page-prev">
+          <a id="prev" class="page-link m_disabled" href="javascript:void(0)">이전</a>
+        </li>
+
+        <input id="page-size" type="hidden" value="{{pages.total.size}}">
+        <!-- <div id="page-box" style="display: flex;">
+          {{#pages.total}}
+          <li class="page-item m_div_display_none">
+            <a class="page-link pageNo" href="javascript:void(0)" onclick="pageClick(this.id)"></a>
+          </li>
+          {{/pages.total}}
+        </div> -->
+
+        <div id="page-box" style="display: flex;">
+
+        </div>
+
+        <li class="page-next">
+          <a id="next" class="page-link" href="javascript:void(0)">다음</a>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+  <!-- 페이징 끝 -->
+
   <!--검색결과테이블 끝-->
   <script>
+    // 페이징 시작
+    let page = new Array();
+    let pageList = new Array();
+    let size = parseInt($("#page-size").val());
+    //console.log(size);
+    for (let i = 1; i <= size; i++) {
+      page.push(i);
+    }
+    //console.log(page);
+    let nn = 0;
+    for (let n = 0; n < Math.ceil(size / 10); n++) {
+      let a = page.slice(nn, nn + 10);
+      nn += 10;
+      pageList.push(a);
+    }
+    let pageNo = 0;
+
+    for (let s in pageList[pageNo]) {
+      $("#page-box").append(renderBox(pageList[pageNo][s]));
+    }
+
+    $("#next").click(() => {
+      pageNo += 1;
+      $("#page-box").empty();
+      $("#prev").removeClass("m_disabled");
+      for (let s in pageList[pageNo]) {
+        $("#page-box").append(renderBox(pageList[pageNo][s]));
+        if (pageList[pageNo].length < 10) {
+          $("#next").addClass("m_disabled");
+        }
+      }
+    });
+
+    $("#prev").click(() => {
+      pageNo -= 1;
+      $("#page-box").empty();
+      $("#next").removeClass("m_disabled");
+      for (let s in pageList[pageNo]) {
+        $("#page-box").append(renderBox(pageList[pageNo][s]));
+        if (pageNo < 1) {
+          $("#prev").addClass("m_disabled");
+        }
+      }
+    });
+
+
+    function renderBox(pageList) {
+      return `
+      <li id="page-list" class="page-item">
+        <a id="${pageList}" class="page-link pageNo" href="javascript:void(0)" onclick="pageClick(${pageList})">${pageList}</a>
+      </li>
+      `;
+    }
+
+
+    function pageClick(id) {
+      let h = "http://localhost:8080/animal/shelterList";
+      let page = id - 1;
+      location.href = h + "?page=" + page;
+    }
+    // 페이징 끝
+
     // 지도 초기값
     let map = new naver.maps.Map('map', {
       center: new naver.maps.LatLng(37.3595704, 127.105399),

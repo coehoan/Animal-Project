@@ -87,3 +87,8 @@
     margin-top: 3px;
     align-items: center;
 }
+
+.m_disabled {
+    color: gray;
+    pointer-events: none;
+}

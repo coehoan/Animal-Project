@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,7 +25,18 @@ public class ShelterDeService {
     private final ShelterDeRepository shelterDeRepository;
 
     public Page<ShelterDe> 전체보기(PageRequest pr) {
-        return shelterDeRepository.findAll(pr);
+        String REGEX = "[0-9]+";
+        Page<ShelterDe> shelterEntity = shelterDeRepository.findAll(pr);
+        for (ShelterDe shelterDe : shelterEntity) {
+            if (shelterDe.getCloseDay() == null) {
+                shelterDe.setCloseDay("정보없음");
+            } else if (shelterDe.getCloseDay().matches(REGEX)) {
+                shelterDe.setCloseDay("정보없음");
+            } else
+                continue;
+        }
+
+        return shelterEntity;
     }
 
     public List<ShelterDe> 지역별보기(String addr) {
