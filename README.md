@@ -147,6 +147,9 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 ### 유기동물 조회 서비스
 [https://youtu.be/tt1wWs_LowE](https://youtu.be/tt1wWs_LowE)
 
+## 프로젝트 관련 공부 블로그 주소 ✍️
+- 전가은 : [네이버 블로그 주소](https://blog.naver.com/PostList.naver?blogId=jke2358&from=postList&categoryNo=65&parentCategoryNo=65)
+
 
 ## 프로젝트 소감 ✨
 1. 최명신
