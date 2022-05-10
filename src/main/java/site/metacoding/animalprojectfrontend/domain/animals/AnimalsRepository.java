@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import lombok.RequiredArgsConstructor;
-
 public interface AnimalsRepository extends JpaRepository<Animals, Integer> {
 
         // JPA에선 rand() 함수 지원X
@@ -53,12 +51,7 @@ public interface AnimalsRepository extends JpaRepository<Animals, Integer> {
         ////////////// 유저에게 지역 우선으로 보여주기
 
         // 전체검색만!!
-<<<<<<< HEAD
         @Query(value = "SELECT * FROM animals WHERE orgNm = :userRegion GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight DESC", nativeQuery = true)
         List<Animals> forUser(@Param("userRegion") String userRegion);
-=======
-        @Query(value = "SELECT * FROM Animals GROUP BY age, careAddr, careNm, careTel, chargeNm, colorCd, desertionNo, filename, happenDt, happenPlace, kindCd, neuterYn, noticeComment, noticeEdt, noticeNo, noticeSdt, officetel, orgNm, popfile, processState, sexCd, specialMark, weight DESC ORDER BY orgNm = :userRegion DESC", nativeQuery = true)
-
->>>>>>> 851a3b1585c9064b90a12e414a040ac21e11b034
 
 }

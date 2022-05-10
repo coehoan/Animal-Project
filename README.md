@@ -39,7 +39,7 @@
 <br>
 
 ### Github 주소 🌳
-[https://github.com/coehoan/Animal-Project](https://github.com/coehoan/Animal-Project)<br>
+[https://github.com/coehoan/2022-Animal-Project](https://github.com/coehoan/2022-Animal-Project)<br>
 [https://github.com/coehoan/Project-blog-test.git](https://github.com/coehoan/Project-blog-test.git)<br>
 [https://github.com/coehoan/Animal-Project-BackEnd.git](https://github.com/coehoan/Animal-Project-BackEnd.git)<br>
 [https://github.com/gouthiki90/2022-Animals-webProject.git](https://github.com/gouthiki90/2022-Animals-webProject.git)<br>
@@ -105,18 +105,26 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 
 ## 테스트코드 🧪
 ### 유튜브 영상 소스코드 넣기
-
 [https://github.com/gouthiki90/2022-AnimalProject-youtube-test.git](https://github.com/gouthiki90/2022-AnimalProject-youtube-test.git)
 
 ### TOAST UI 사용법
-
 [https://github.com/coehoan/Spring-TOASTUI-test.git](https://github.com/coehoan/Spring-TOASTUI-test.git)
 
 ### Springboot RestTeplate 공공데이터 다운로드 테스트
 [https://github.com/gouthiki90/2020-AnimalProject-dataTest.git](https://github.com/gouthiki90/2020-AnimalProject-dataTest.git)
+
+### JPQL 테스트 코드
+[https://github.com/coehoan/Entity-test](https://github.com/coehoan/Entity-test)
 <br>
 
 ## 페이지별 상세 기능 📃
+
+### 메인페이지
+- 로그인 유무에 따른 헤더 양식 변경
+- 헤더를 position: fixed로 설정해 스크롤을 내려도 항상 페이지 윗부분에 고정
+- 유기동물 데이터를 랜덤으로 4건 뿌려줌(JPQL 사용)
+- 블로그 최신글을 4건 뿌려줌
+
 ### 블로그
 - 블로그 메인페이지에선 각 게시판별 조회수 Top3를 미리 보여줍니다.
 - 각 게시판별로 원하는 조건(지역별, 품종별, 종류별)에 따라 상세검색이 가능합니다.
@@ -148,6 +156,7 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 [https://youtu.be/tt1wWs_LowE](https://youtu.be/tt1wWs_LowE)
 
 ## 프로젝트 관련 공부 블로그 주소 ✍️
+- 최명신 :[네이버 블로그 주소](https://blog.naver.com/PostList.naver?blogId=coehoan&categoryNo=44&from=postList)
 - 전가은 : [네이버 블로그 주소](https://blog.naver.com/PostList.naver?blogId=jke2358&from=postList&categoryNo=65&parentCategoryNo=65)
 
 
