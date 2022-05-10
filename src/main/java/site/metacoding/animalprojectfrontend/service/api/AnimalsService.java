@@ -10,9 +10,7 @@ import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
@@ -20,8 +18,8 @@ import site.metacoding.animalprojectfrontend.domain.animals.Animals;
 import site.metacoding.animalprojectfrontend.domain.animals.AnimalsRepository;
 import site.metacoding.animalprojectfrontend.domain.animals.dto.Item;
 import site.metacoding.animalprojectfrontend.domain.animals.dto.ResponseDto;
-import site.metacoding.animalprojectfrontend.domain.user.User;
 import site.metacoding.animalprojectfrontend.domain.user.UserRepository;
+import site.metacoding.animalprojectfrontend.web.api.dto.animals.MainRespDto;
 
 @RequiredArgsConstructor
 @Service
@@ -31,6 +29,7 @@ public class AnimalsService {
     private final AnimalsRepository animalsRepository;
     private final UserRepository userRepository;
     private final HttpServletRequest request;
+    private final EntityManager em;
 
     public List<Animals> 다운로드() {
 
@@ -112,6 +111,26 @@ public class AnimalsService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<MainRespDto> 메인동물목록() {
+        List<MainRespDto> animalsEntity = new ArrayList<>();
+
+        String sql = "SELECT filename, age, careNm, sexCd FROM Animals ORDER BY RAND()";
+        Query query = em.createQuery(sql).setMaxResults(4);
+
+        List<Object[]> results = (List<Object[]>) query.getResultList();
+
+        for (Object[] result : results) {
+            String filename = (String) result[0];
+            String age = (String) result[1];
+            String careNm = (String) result[2];
+            String sexCd = (String) result[3];
+
+            MainRespDto dto = new MainRespDto(filename, age, careNm, sexCd);
+            animalsEntity.add(dto);
+        }
+        return animalsEntity;
     }
 
     public List<Animals> 전체검색(String keywordOfkind,

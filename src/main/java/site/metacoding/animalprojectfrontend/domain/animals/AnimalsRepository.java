@@ -6,7 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import lombok.RequiredArgsConstructor;
+
 public interface AnimalsRepository extends JpaRepository<Animals, Integer> {
+
+        // JPA에선 rand() 함수 지원X
+        // @Query(value = "SELECT filename, age, careNm, sexCd FROM animals ORDER BY
+        // RAND() LIMIT 4", nativeQuery = true)
+        // List<Animals> findMainAnimals();
 
         // 지역별
         // 지역별 조회

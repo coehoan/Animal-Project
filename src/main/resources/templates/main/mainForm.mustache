@@ -70,38 +70,18 @@
       <p class="card-text">실시간 유기동물 현황을 확인해보세요.</p>
     </div>
     <div class="card-body d-flex justify-content-between">
+      {{#animals}}
       <div class="m_main_img_box">
         <div>
-          <img src="/image/cat2.jpeg" width="260px" height="300px">
+          <img src="{{filename}}" width="260px" height="300px">
         </div>
         <div class="m_pt_1">
-          <b>제목</b>
+          <span>출생 : {{age}}</span>
+          <span>성별 : {{sexCd}}</span>
+          <p>보호소 : {{careNm}}</p>
         </div>
       </div>
-      <div class="m_main_img_box">
-        <div>
-          <img src="/image/cat2.jpeg" width="260px" height="300px">
-        </div>
-        <div class="m_pt_1">
-          <b>제목</b>
-        </div>
-      </div>
-      <div class="m_main_img_box">
-        <div>
-          <img src="/image/cat2.jpeg" width="260px" height="300px">
-        </div>
-        <div class="m_pt_1">
-          <b>제목</b>
-        </div>
-      </div>
-      <div class="m_main_img_box">
-        <div>
-          <img src="/image/cat2.jpeg" width="260px" height="300px">
-        </div>
-        <div class="m_pt_1">
-          <b>제목</b>
-        </div>
-      </div>
+      {{/animals}}
     </div>
   </div>
   <!--현황 메뉴카드 끝-->
@@ -119,7 +99,7 @@
           <img src="/image/cat2.jpeg" width="260px" height="300px">
         </div>
         <div class="m_pt_1">
-          <b>{{title}}</b>
+          <a href="/blog/post/{{id}}" class="m_text_link"><b>{{title}}</b></a>
         </div>
       </div>
       {{/posts}}
