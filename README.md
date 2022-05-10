@@ -39,7 +39,7 @@
 <br>
 
 ### Github 주소 🌳
-[https://github.com/coehoan/2022-Animal-Project](https://github.com/coehoan/2022-Animal-Project)<br>
+[https://github.com/coehoan/Animal-Project](https://github.com/coehoan/Animal-Project)<br>
 [https://github.com/coehoan/Project-blog-test.git](https://github.com/coehoan/Project-blog-test.git)<br>
 [https://github.com/coehoan/Animal-Project-BackEnd.git](https://github.com/coehoan/Animal-Project-BackEnd.git)<br>
 [https://github.com/gouthiki90/2022-Animals-webProject.git](https://github.com/gouthiki90/2022-Animals-webProject.git)<br>
@@ -156,7 +156,7 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 [https://youtu.be/tt1wWs_LowE](https://youtu.be/tt1wWs_LowE)
 
 ## 프로젝트 관련 공부 블로그 주소 ✍️
-- 최명신 :[네이버 블로그 주소](https://blog.naver.com/PostList.naver?blogId=coehoan&categoryNo=44&from=postList)
+- 최명신 : [네이버 블로그 주소](https://blog.naver.com/PostList.naver?blogId=coehoan&categoryNo=44&from=postList)
 - 전가은 : [네이버 블로그 주소](https://blog.naver.com/PostList.naver?blogId=jke2358&from=postList&categoryNo=65&parentCategoryNo=65)
 
 
