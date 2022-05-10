@@ -42,6 +42,7 @@
 [https://github.com/coehoan/Animal-Project](https://github.com/coehoan/Animal-Project)<br>
 [https://github.com/coehoan/Project-blog-test.git](https://github.com/coehoan/Project-blog-test.git)<br>
 [https://github.com/coehoan/Animal-Project-BackEnd.git](https://github.com/coehoan/Animal-Project-BackEnd.git)<br>
+[https://github.com/gouthiki90/2022-Animals-webProject.git](https://github.com/gouthiki90/2022-Animals-webProject.git)<br>
 
 ### MariaDB 세팅 🦭
 ```sql
@@ -123,6 +124,15 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 - 제목, 내용, 작성자별 검색이 가능합니다.
 
 ### 유기동물 현황
+|유저검색|지역검색|
+|:---:|:---:|
+|![https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%9C%A0%EC%A0%80%EA%B2%80%EC%83%89.gif?raw=true](https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%9C%A0%EC%A0%80%EA%B2%80%EC%83%89.gif?raw=true)|![https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%A7%80%EC%97%AD%EA%B2%80%EC%83%89.gif?raw=true](https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%A7%80%EC%97%AD%EA%B2%80%EC%83%89.gif?raw=true)|
+|전체검색|날짜검색|
+|![https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%A0%84%EC%B2%B4%EA%B2%80%EC%83%89.gif?raw=true](https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%A0%84%EC%B2%B4%EA%B2%80%EC%83%89.gif?raw=true)|![https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EB%82%A0%EC%A7%9C%EA%B2%80%EC%83%89.gif?raw=true](https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EB%82%A0%EC%A7%9C%EA%B2%80%EC%83%89.gif?raw=true)|
+|품종과 시도만 검색|품종검색|
+|![https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%A7%80%EC%97%AD%EA%B3%BC%ED%92%88%EC%A2%85%EB%A7%8C%EA%B2%80%EC%83%89.gif?raw=true](https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%EC%A7%80%EC%97%AD%EA%B3%BC%ED%92%88%EC%A2%85%EB%A7%8C%EA%B2%80%EC%83%89.gif?raw=true)|![https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%ED%92%88%EC%A2%85%EA%B2%80%EC%83%89.gif?raw=true](https://github.com/gouthiki90/2022-Animals-webProject/blob/master/%EC%8B%9C%EC%97%B0%EC%98%81%EC%83%81/%ED%92%88%EC%A2%85%EA%B2%80%EC%83%89.gif?raw=true)|
+
+
 - 전국 유기동물 현황 조회가 가능합니다.
 - 지역별, 상세 품종별, 시도, 품종, 날짜별로 검색이 가능합니다.
 - User의 로그인 세션값을 통해서 User의 지역순으로 전체 검색이 가능합니다.
@@ -136,6 +146,9 @@ GRANT ALL PRIVILEGES ON animaldb.* TO 'animal'@'%';
 [https://youtu.be/vaoJolh4b08](https://youtu.be/vaoJolh4b08)
 ### 유기동물 조회 서비스
 [https://youtu.be/tt1wWs_LowE](https://youtu.be/tt1wWs_LowE)
+
+## 프로젝트 관련 공부 블로그 주소 ✍️
+- 전가은 : [네이버 블로그 주소](https://blog.naver.com/PostList.naver?blogId=jke2358&from=postList&categoryNo=65&parentCategoryNo=65)
 
 
 ## 프로젝트 소감 ✨
